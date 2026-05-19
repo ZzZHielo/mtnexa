@@ -1,0 +1,79 @@
+<nav>
+  <a href="index.html" class="nav-logo"><svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg></a>
+  <div class="nav-center" id="navCenter">
+    <div class="nav-pill" id="navPill"></div>
+    <div class="nav-item"><a class="nav-link" href="index.html"><span data-i18n="nav.inicio">Inicio</span></a></div>
+
+    <div class="nav-item" id="serviciosNavItem">
+      <button class="nav-link" id="serviciosBtn" onclick="toggleServicios(event)">
+        <span data-i18n="nav.servicios">Servicios</span><div class="nav-chevron" id="serviciosChevron"></div>
+      </button>
+      <div class="dropdown" id="serviciosDropdown" style="display:none;opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all">
+        <div class="dropdown-grid">
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">language</span></div><div class="dd-text"><h4>Páginas Web</h4><p>Sitios rápidos y optimizados</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">smartphone</span></div><div class="dd-text"><h4>Apps Móviles</h4><p>iOS y Android nativas</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">settings</span></div><div class="dd-text"><h4>Sistemas a Medida</h4><p>ERPs y CRMs personalizados</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">shopping_cart</span></div><div class="dd-text"><h4>E-Commerce</h4><p>Tiendas en línea completas</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">palette</span></div><div class="dd-text"><h4>UI/UX Design</h4><p>Interfaces centradas en el usuario</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">cloud</span></div><div class="dd-text"><h4>Cloud &amp; Soporte</h4><p>Hosting y mantenimiento</p></div></a>
+        </div>
+        <div class="dd-footer">
+          <span class="dd-footer-label" data-i18n="dd.service_count">6 servicios disponibles</span>
+          <a class="dd-footer-link" href="multitech-servicios.html" data-i18n="dd.view_all">Ver todos &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item"><a class="nav-link" href="multitech-plantillas.html"><span data-i18n="nav.plantillas">Plantillas</span></a></div>
+    <div class="nav-item"><a class="nav-link" href="multitech-contacto.html"><span data-i18n="nav.contacto">Contacto</span></a></div>
+    <div class="nav-item" id="adminNavItem" style="display:none">
+      <a class="nav-link nav-link-admin" href="admin-dashboard.html" id="adminNavBtn" onclick="triggerLockAnim(event)">
+        <span class="lock-wrap"><span class="material-symbols-outlined lock-icon">lock</span></span>
+        <span class="admin-label" data-i18n="nav.admin">Admin</span>
+      </a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="user-btn-wrap" id="userBtnWrap">
+      <button class="user-btn" id="userBtn" onclick="handleUserBtn()" title="Mi cuenta">
+        <span class="material-symbols-outlined" id="userBtnIcon">person</span>
+        <span id="userBtnLabel" data-i18n="dd.signup">Crear cuenta</span>
+        <div class="online-dot"></div>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <div id="stateLoggedOut">
+          <div class="udd-login-prompt">
+            <div class="udd-lp-title" data-i18n="dd.welcome">Bienvenido</div>
+            <p class="udd-lp-sub" data-i18n="dd.welcome_sub">Accede a tu cuenta para gestionar proyectos y comunicaciones.</p>
+            <a href="mt-signup.html" class="udd-btn-login"><span class="material-symbols-outlined" style="color:var(--btn-txt)">login</span><span data-i18n="dd.login">Iniciar sesión</span></a>
+            <a href="multitech-contacto.html" class="udd-btn-register" data-i18n="dd.request_access">Solicitar acceso</a>
+          </div>
+        </div>
+        <div id="stateLoggedIn" style="display:none">
+          <div class="udd-profile">
+            <div class="udd-avatar" id="dpAvatar"><span class="material-symbols-outlined" style="color:var(--accent-txt)">person</span></div>
+            <div class="udd-info">
+              <div class="udd-name" id="dpName">Admin</div>
+              <div class="udd-email" id="dpEmail">admin@multitech.com</div>
+              <div class="udd-role-pill"><span class="udd-role-dot"></span><span id="dpRole">Admin</span></div>
+            </div>
+          </div>
+          <div class="udd-section">
+            <div class="udd-section-label" data-i18n="dd.switch_account">Cambiar cuenta</div>
+            <div class="udd-accounts" id="accountList"></div>
+            <button class="udd-item" onclick="MTAuth._openAddAccountModal()"><div class="udd-item-icon"><span class="material-symbols-outlined">add</span></div><span class="udd-item-label" data-i18n="dd.add_account">Agregar cuenta</span></button>
+          </div>
+          <div class="udd-section">
+            <a class="udd-item" href="mt-ajustes.html"><div class="udd-item-icon"><span class="material-symbols-outlined">manage_accounts</span></div><span class="udd-item-label" data-i18n="dd.profile">Perfil y ajustes</span></a>
+            <a class="udd-item" href="mt-ajustes.html#seguridad"><div class="udd-item-icon"><span class="material-symbols-outlined">security</span></div><span class="udd-item-label" data-i18n="dd.security">Seguridad</span></a>
+            <a class="udd-item" href="mt-ajustes.html#notificaciones"><div class="udd-item-icon"><span class="material-symbols-outlined">notifications</span></div><span class="udd-item-label" data-i18n="dd.notifications">Notificaciones</span></a>
+          </div>
+          <div class="udd-section">
+            <button class="udd-item danger" onclick="doLogout()"><div class="udd-item-icon"><span class="material-symbols-outlined">logout</span></div><span class="udd-item-label" data-i18n="dd.logout">Cerrar sesión</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>

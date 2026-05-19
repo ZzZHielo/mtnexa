@@ -1,0 +1,280 @@
+/* ════════════════════════════════════════════════════
+   mt-mobile.css — Mobile & PWA fixes para Multitech
+   ════════════════════════════════════════════════════ */
+
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── NAV MOBILE ── */
+@media (max-width: 900px) {
+  nav {
+    padding: 0 20px !important;
+    height: 68px !important;
+    overflow: visible !important;
+  }
+
+  /* LOGO: keep left */
+  .nav-logo {
+    flex-shrink: 0 !important;
+  }
+
+  /* ── NAV-RIGHT: pegada al hamburguer ── */
+  .nav-right {
+    margin-left: auto !important;
+    gap: 4px !important;
+  }
+  /* Hide CTA from nav-right on mobile (it lives inside .nav-center menu) */
+  .nav-right .nav-cta {
+    display: none !important;
+  }
+  /* User btn: icon only, hide label */
+  .user-btn #userBtnLabel {
+    display: none !important;
+  }
+  .user-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    justify-content: center !important;
+  }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    cursor: pointer !important;
+    background: none !important;
+    border: none !important;
+    padding: 8px 4px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: 4px !important;
+    flex-shrink: 0 !important;
+    z-index: 201 !important;
+    position: relative !important;
+  }
+  .hamburger span {
+    display: block !important;
+    width: 22px !important;
+    height: 1.5px !important;
+    background: var(--text) !important;
+    border-radius: 2px !important;
+    transition: all .28s ease !important;
+    pointer-events: none !important;
+    transform-origin: center !important;
+  }
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg) !important;
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg) !important;
+  }
+
+  /* ── NAV-CENTER: hidden by default on mobile ── */
+  .nav-center {
+    display: none !important;
+  }
+
+  /* ── NAV-CENTER.OPEN ── */
+  .nav-center.open {
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    inset: 68px 0 auto 0 !important;   /* cancela cualquier inset:0 de inline */
+    top: 68px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100vw !important;
+    max-height: calc(100svh - 68px) !important;
+    transform: none !important;          /* cancela translateX(-50%) de desktop */
+    background: var(--bg) !important;
+    border: none !important;
+    border-top: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    padding: 12px 16px 28px !important;
+    gap: 2px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 199 !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12) !important;
+    animation: mtNavIn .18s ease both !important;
+  }
+
+  @keyframes mtNavIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Items full width */
+  .nav-center.open .nav-item {
+    width: 100% !important;
+  }
+
+  /* Links cómodos */
+  .nav-center.open .nav-link {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 14px 16px !important;
+    font-size: .95rem !important;
+    font-weight: 450 !important;
+    min-height: 48px !important;
+    border-radius: 10px !important;
+    color: var(--text-soft) !important;
+    background: transparent !important;
+  }
+  .nav-center.open .nav-link:hover,
+  .nav-center.open .nav-link.active {
+    background: var(--bg2) !important;
+    color: var(--text) !important;
+  }
+
+  /* Botón Cotizar DENTRO del menú */
+  .nav-center.open .nav-cta {
+    width: 100% !important;
+    justify-content: center !important;
+    margin-top: 10px !important;
+    padding: 14px 20px !important;
+    min-height: 48px !important;
+    border-radius: 100px !important;
+    font-size: .9rem !important;
+    font-weight: 550 !important;
+  }
+  .nav-center.open .nav-cta .cta-arrow {
+    display: inline-block !important;
+  }
+
+  /* Dropdown servicios dentro del menú */
+  .nav-center.open .dropdown {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--border) !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    background: var(--bg2) !important;
+    padding: 12px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .nav-center.open .dropdown-grid {
+    grid-template-columns: 1fr !important;
+    gap: 4px !important;
+  }
+  .nav-center.open .dd-item {
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
+  }
+  .nav-center.open .dd-text h4 {
+    font-size: .82rem !important;
+  }
+  .nav-center.open .dd-text p {
+    font-size: .72rem !important;
+  }
+  .nav-center.open .dd-footer {
+    display: none !important;
+  }
+
+  /* Ocultar pill de nav en mobile */
+  .nav-pill {
+    display: none !important;
+  }
+
+  /* Ocultar dropdown y chevron de Servicios en mobile */
+  #serviciosDropdown,
+  #serviciosChevron {
+    display: none !important;
+  }
+  #serviciosBtn {
+    cursor: pointer !important;
+  }
+
+  /* Ocultar pill de nav en mobile */
+  .nav-pill {
+    display: none !important;
+  }
+
+  /* Admin link */
+  .nav-center.open .nav-link-admin {
+    border-radius: 10px !important;
+    justify-content: center !important;
+    min-height: 48px !important;
+  }
+
+  /* User dropdown en mobile */
+  .user-dropdown {
+    right: 0 !important;
+    width: min(300px, calc(100vw - 32px)) !important;
+  }
+
+  /* Theme switcher */
+  .theme-switcher {
+    bottom: calc(16px + var(--safe-bottom)) !important;
+    right: 16px !important;
+  }
+
+  /* Evitar zoom automático en inputs iOS */
+  input, select, textarea,
+  .form-group input, .form-group select, .form-group textarea,
+  .form-input, .form-select {
+    font-size: 16px !important;
+  }
+}
+
+/* ── FOOTER HORIZONTAL EN MOBILE ── */
+@media (max-width: 560px) {
+  footer {
+    padding: 32px 20px calc(16px + var(--safe-bottom)) !important;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+  }
+
+  .footer-top > div:first-child {
+    grid-column: 1 / -1 !important;
+  }
+
+  .footer-bottom {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-col h4 { font-size: .7rem !important; margin-bottom: 8px !important; }
+  .footer-col ul li a { font-size: .78rem !important; }
+  .footer-bottom span { font-size: .71rem !important; }
+}
+
+/* ── PWA standalone safe areas ── */
+@media (display-mode: standalone) {
+  nav {
+    padding-top: var(--safe-top) !important;
+    height: calc(68px + var(--safe-top)) !important;
+  }
+  .nav-center.open {
+    top: calc(68px + var(--safe-top)) !important;
+  }
+  footer {
+    padding-bottom: calc(20px + var(--safe-bottom)) !important;
+  }
+}

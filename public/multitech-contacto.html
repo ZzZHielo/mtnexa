@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="beige">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2c2416">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Multitech">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/assets/iconos/apple-touch-icon.svg">
+<link rel="icon" type="image/svg+xml" href="/assets/iconos/pwa-icon.svg">
+<script>(function(){var l=localStorage.getItem('mt-lang');if(l)document.documentElement.setAttribute('lang',l);})();</script>
+<title>Contacto — Multitech</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+/* ══ THEMES ══ */
+[data-theme="beige"]{--bg:#f5f0e8;--bg2:#ede8de;--bg3:#e6dfcf;--surface:#faf7f2;--border:#d9d1c0;--text:#2c2416;--text-soft:#6b5e47;--text-muted:#a39880;--accent:#7a5c3a;--accent-bg:#e8dfc8;--accent-txt:#3d2e16;--btn-bg:#2c2416;--btn-txt:#faf7f2;--nav-bg:rgba(245,240,232,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="dark"]{--bg:#111010;--bg2:#1a1918;--bg3:#232120;--surface:#1e1c1b;--border:#333;--text:#f0ede8;--text-soft:#a89e92;--text-muted:#6b6259;--accent:#c9a97a;--accent-bg:#2a2318;--accent-txt:#e8d5b0;--btn-bg:#e8d5b0;--btn-txt:#1a1410;--nav-bg:rgba(17,16,16,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="blanc"]{--bg:#fff;--bg2:#f8f8f8;--bg3:#f0f0f0;--surface:#fff;--border:#e5e5e5;--text:#111;--text-soft:#555;--text-muted:#999;--accent:#555;--accent-bg:#f0f0f0;--accent-txt:#222;--btn-bg:#111;--btn-txt:#fff;--nav-bg:rgba(255,255,255,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="slate"]{--bg:#1a2332;--bg2:#1f2a3d;--bg3:#253045;--surface:#202c3f;--border:#2d3d52;--text:#e8eef5;--text-soft:#8fa3bc;--text-muted:#4d6480;--accent:#7eb8f7;--accent-bg:#1a2d44;--accent-txt:#b8d8ff;--btn-bg:#7eb8f7;--btn-txt:#0a1628;--nav-bg:rgba(26,35,50,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="sage"]{--bg:#f2f4ef;--bg2:#e8ebe3;--bg3:#dde2d6;--surface:#f7f8f5;--border:#cdd3c6;--text:#2a3020;--text-soft:#596349;--text-muted:#8a9878;--accent:#4a6741;--accent-bg:#dde8d6;--accent-txt:#2a4022;--btn-bg:#2a3020;--btn-txt:#f2f4ef;--nav-bg:rgba(242,244,239,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-weight:300;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;overflow-x:hidden}
+.material-symbols-outlined{color:var(--text);font-size:1.5rem;vertical-align:middle;transition:color .3s;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
+.ts-icon{font-size:1.1rem !important;color:var(--btn-txt) !important}
+.dd-icon .material-symbols-outlined{font-size:1rem;color:var(--accent)}
+.logo-svg{display:inline-block;height:50px;width:auto;color:var(--text);padding-left:20px;transition:color .3s}
+
+/* ══ THEME SWITCHER ══ */
+.theme-switcher{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.ts-toggle{width:46px;height:46px;border-radius:50%;background:var(--btn-bg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:transform .2s}
+.ts-toggle:hover{transform:scale(1.08)}
+.ts-panel{display:none;flex-direction:column;gap:4px;align-items:stretch;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:0 8px 32px rgba(0,0,0,.13);min-width:170px}
+.ts-panel.open{display:flex}
+.ts-panel-label{font-size:.65rem;font-weight:500;color:var(--text-muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px;padding:0 4px}
+.mt-theme-btn{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:var(--ff-body);font-size:.82rem;color:var(--text-soft);transition:all .2s;text-align:left}
+.mt-theme-btn:hover{background:var(--bg2);color:var(--text)}
+.mt-theme-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500}
+.ts-swatch{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(0,0,0,.14);flex-shrink:0}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:var(--nav-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:5px 6px;gap:2px;transition:background .3s,border-color .3s}
+.nav-pill{position:absolute;background:var(--bg2);border:1px solid var(--border);border-radius:100px;z-index:0;transition:all .25s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.nav-item{position:relative}
+.nav-link{display:flex;align-items:center;gap:5px;padding:7px 16px;border-radius:100px;font-size:.8rem;font-weight:400;color:var(--text-soft);text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap;border:none;background:none;font-family:var(--ff-body);position:relative;z-index:1}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-link.active{font-weight:500}
+.nav-link span{position:relative;z-index:1}
+.nav-chevron{width:12px;height:12px;position:relative;z-index:1;flex-shrink:0;transition:transform .2s}
+.nav-item:hover .nav-chevron{transform:rotate(180deg)}
+.nav-chevron::before,.nav-chevron::after{content:'';position:absolute;width:5px;height:1.5px;background:currentColor;top:5px;border-radius:1px}
+.nav-chevron::before{left:1px;transform:rotate(45deg)}
+.nav-chevron::after{left:4px;transform:rotate(-45deg)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-cta{display:flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--btn-bg);color:var(--btn-txt);font-size:.78rem;font-weight:500;text-decoration:none;cursor:pointer;border:none;font-family:var(--ff-body);transition:opacity .2s,transform .15s}
+.nav-cta:hover{opacity:.85;transform:translateY(-1px)}
+.cta-arrow{display:inline-block;transition:transform .2s}
+.nav-cta:hover .cta-arrow{transform:translateX(3px)}
+
+.dropdown{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-6px);background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;width:420px;box-shadow:0 12px 40px rgba(44,36,22,.1);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:100}
+.nav-item:hover .dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.dropdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dd-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none;transition:background .15s;border:1px solid transparent}
+.dd-item:hover{background:var(--bg2);border-color:var(--border)}
+.dd-icon{width:30px;height:30px;flex-shrink:0;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.dd-text h4{font-size:.78rem;font-weight:500;color:var(--text);margin-bottom:2px}
+.dd-text p{font-size:.69rem;color:var(--text-muted);line-height:1.45}
+.dd-footer{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.dd-footer-label{font-size:.7rem;color:var(--text-muted)}
+.dd-footer-link{font-size:.72rem;font-weight:500;color:var(--accent);text-decoration:none}
+.dd-footer-link:hover{opacity:.75}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all .3s}
+.nav-link-admin{background:var(--btn-bg) !important;color:var(--btn-txt) !important;font-weight:500 !important;border:none !important;overflow:hidden}
+.nav-link-admin:hover{opacity:.85}
+.admin-label{display:inline-block;overflow:hidden;max-width:60px;transition:max-width .3s cubic-bezier(.4,0,.2,1),opacity .25s ease;white-space:nowrap}
+.lock-wrap{position:relative;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.lock-icon{font-size:.9rem !important;color:var(--btn-txt) !important;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;display:flex;align-items:center;justify-content:center;line-height:1}
+.nav-link-admin.hide-text .admin-label{max-width:0;opacity:0}
+.nav-link-admin.hide-text{gap:0 !important}
+@keyframes lockShake{0%{transform:rotate(0)}18%{transform:rotate(-24deg)}42%{transform:rotate(16deg)}62%{transform:rotate(-10deg)}78%{transform:rotate(6deg)}100%{transform:rotate(0)}}
+@keyframes lockOpenMorph{0%{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;transform:rotate(0) scale(1)}35%{font-variation-settings:'FILL' 0,'wght' 700,'GRAD' 0,'opsz' 24;transform:rotate(-18deg) scale(1.1)}100%{font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 24;transform:rotate(0) scale(1)}}
+.nav-link-admin.shaking .lock-icon{animation:lockShake .45s cubic-bezier(.36,.07,.19,.97) forwards}
+.nav-link-admin.unlocked .lock-icon{animation:lockOpenMorph .42s cubic-bezier(.34,1.56,.64,1) forwards}
+
+/* ══ USER BUTTON ══ */
+.user-btn-wrap{position:relative}
+.user-btn{height:36px;border-radius:100px;border:1.5px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;font-family:var(--ff-body);font-size:.78rem;font-weight:500;color:var(--text-soft);transition:border-color .2s,color .2s,transform .15s;white-space:nowrap}
+.user-btn:hover{border-color:var(--text-muted);color:var(--text)}
+.user-btn.logged-in{width:36px;height:36px;border-radius:50%;padding:0;background:var(--accent-bg);border-color:var(--accent-bg);font-family:var(--ff-head);font-size:.75rem;font-weight:700;color:var(--accent-txt);position:relative;overflow:hidden}
+.user-btn.logged-in:hover{border-color:var(--accent);transform:scale(1.06);box-shadow:0 0 0 3px var(--accent-bg)}
+.online-dot{position:absolute;bottom:0;right:0;width:8px;height:8px;border-radius:50%;background:#22c55e;border:2px solid var(--surface);display:none}
+.user-btn.logged-in .online-dot{display:block}
+.user-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:300px;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.14),0 4px 16px rgba(0,0,0,.08);opacity:0;pointer-events:none;transform:translateY(-6px) scale(.97);transform-origin:top right;transition:opacity .18s,transform .18s;z-index:300;overflow:hidden}
+.user-dropdown.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.udd-profile{display:flex;align-items:center;gap:13px;padding:18px 18px 16px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.udd-avatar{width:42px;height:42px;border-radius:50%;background:var(--accent-bg);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--ff-head);font-size:.88rem;font-weight:700;color:var(--accent-txt);border:2px solid var(--border);overflow:hidden;position:relative}
+.udd-info{flex:1;min-width:0}
+.udd-name{font-size:.88rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.udd-email{font-size:.7rem;color:var(--text-muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.udd-role-pill{display:inline-flex;align-items:center;gap:4px;background:var(--accent-bg);color:var(--accent-txt);font-size:.6rem;font-weight:500;padding:2px 8px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase;margin-top:5px}
+.udd-role-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.udd-section{padding:6px 8px}
+.udd-section+.udd-section{border-top:1px solid var(--border)}
+.udd-section-label{font-size:.62rem;font-weight:500;color:var(--text-muted);letter-spacing:.07em;text-transform:uppercase;padding:6px 10px 4px}
+.udd-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:9px;border:none;background:transparent;font-family:var(--ff-body);font-size:.82rem;color:var(--text-soft);cursor:pointer;text-align:left;text-decoration:none;transition:background .13s,color .13s}
+.udd-item:hover{background:var(--bg2);color:var(--text)}
+.udd-item-icon{width:26px;height:26px;border-radius:7px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.udd-item:hover .udd-item-icon{background:var(--bg3)}
+.udd-item-icon .material-symbols-outlined{font-size:.9rem;color:var(--accent)}
+.udd-item-label{flex:1;line-height:1}
+.udd-item-meta{font-size:.68rem;color:var(--text-muted)}
+.udd-item.danger{color:#c0392b}
+.udd-item.danger:hover{background:#fdecea;color:#c0392b}
+.udd-item.danger .udd-item-icon{background:#fdecea}
+.udd-item.danger .udd-item-icon .material-symbols-outlined{color:#c0392b}
+.udd-accounts{display:flex;flex-direction:column;gap:2px;padding:4px 0}
+.acc-row{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border-radius:9px;border:none;background:transparent;font-family:var(--ff-body);cursor:pointer;text-align:left;transition:background .13s}
+.acc-row:hover{background:var(--bg2)}
+.acc-row.active{background:var(--accent-bg)}
+.acc-av{width:30px;height:30px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-family:var(--ff-head);font-size:.68rem;font-weight:700;color:var(--accent-txt);flex-shrink:0;border:1.5px solid transparent;transition:border-color .15s,background .15s;overflow:hidden;position:relative}
+.acc-row.active .acc-av{border-color:var(--accent);background:var(--accent-bg)}
+.acc-body{flex:1;min-width:0}
+.acc-name{font-size:.81rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+.acc-row.active .acc-name{font-weight:500;color:var(--accent-txt)}
+.acc-role-badge{display:inline-flex;align-items:center;font-size:.62rem;color:var(--text-muted);margin-top:2px;gap:4px}
+.acc-role-dot{width:4px;height:4px;border-radius:50%;background:var(--text-muted);flex-shrink:0}
+.acc-row.active .acc-role-dot{background:var(--accent)}
+.acc-row.active .acc-role-badge{color:var(--accent-txt)}
+.acc-check .material-symbols-outlined{font-size:.85rem;color:var(--accent)}
+.acc-online{width:8px;height:8px;border-radius:50%;background:#22c55e;border:1.5px solid var(--surface);margin-left:auto;flex-shrink:0}
+.udd-login-prompt{padding:20px 18px}
+.udd-lp-title{font-family:var(--ff-head);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:5px}
+.udd-lp-sub{font-size:.78rem;color:var(--text-muted);margin-bottom:18px;line-height:1.55}
+.udd-btn-login{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;border-radius:10px;background:var(--btn-bg);color:var(--btn-txt);font-family:var(--ff-body);font-size:.85rem;font-weight:500;border:none;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.udd-btn-login:hover{opacity:.85}
+.udd-btn-register{display:flex;align-items:center;justify-content:center;width:100%;padding:9px;border-radius:10px;background:transparent;color:var(--text-soft);font-family:var(--ff-body);font-size:.82rem;border:1.5px solid var(--border);cursor:pointer;text-decoration:none;margin-top:8px;transition:border-color .15s,color .15s}
+.udd-btn-register:hover{border-color:var(--text-muted);color:var(--text)}
+
+/* ══ PAGE HEADER ══ */
+.page-header{padding:110px 56px 72px;border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .6s .05s ease forwards}
+.breadcrumb{font-size:.75rem;color:var(--text-muted);margin-bottom:18px;display:flex;align-items:center;gap:7px}
+.breadcrumb a{color:var(--text-muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--text)}
+.breadcrumb span{opacity:.5}
+.page-header h1{font-family:var(--ff-head);font-size:clamp(2.6rem,5vw,4.4rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:16px}
+.page-header h1 em{font-style:italic;color:var(--accent)}
+.page-header p{font-size:.96rem;color:var(--text-soft);max-width:480px;line-height:1.78}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ CONTACT MAIN ══ */
+.contact-main{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:60vh}
+
+/* Contact info */
+.contact-info{padding:56px;border-right:1px solid var(--border);transition:border-color .3s}
+.ci-top h2{font-family:var(--ff-head);font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.ci-top h2 em{font-style:italic;color:var(--accent)}
+.ci-top>p{font-size:.88rem;color:var(--text-soft);line-height:1.78;margin-bottom:36px;max-width:380px}
+.contact-methods{display:flex;flex-direction:column;gap:22px;margin-bottom:48px}
+.cm-item{display:flex;align-items:flex-start;gap:14px}
+.cm-icon-wrap{width:38px;height:38px;border-radius:10px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.cm-icon-wrap .material-symbols-outlined{font-size:1.1rem;color:var(--accent)}
+.cm-label{font-size:.72rem;font-weight:500;color:var(--text-muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.cm-val{font-size:.9rem;color:var(--text);margin-bottom:2px}
+.cm-val a{color:var(--text);text-decoration:none;transition:color .2s}
+.cm-val a:hover{color:var(--accent)}
+.cm-note{font-size:.76rem;color:var(--text-muted)}
+.ci-bottom{border-top:1px solid var(--border);padding-top:28px;transition:border-color .3s}
+.hours-title{font-size:.72rem;font-weight:500;color:var(--text-muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hour-day{font-size:.79rem;color:var(--text-soft);margin-bottom:2px}
+.hour-time{font-size:.88rem;font-weight:500;color:var(--text)}
+.hour-time.closed{color:var(--text-muted)}
+
+/* ══ FORM REDESIGN ══ */
+.contact-form-wrap{padding:56px;background:var(--surface);transition:background .3s}
+.cf-title{font-family:var(--ff-head);font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.cf-sub{font-size:.82rem;color:var(--text-muted);margin-bottom:22px}
+.form-tabs{display:flex;gap:2px;background:var(--bg2);border-radius:100px;padding:4px;margin-bottom:24px;width:fit-content;border:1px solid var(--border)}
+.form-tab{padding:7px 16px;border-radius:100px;font-size:.78rem;font-weight:400;color:var(--text-soft);border:none;background:transparent;cursor:pointer;font-family:var(--ff-body);transition:all .2s;white-space:nowrap}
+.form-tab.active{background:var(--surface);color:var(--text);font-weight:500;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{position:relative;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:.74rem;font-weight:500;color:var(--text-soft);letter-spacing:.01em;display:flex;align-items:center;gap:5px}
+.form-group label .label-ico{font-size:.85rem;color:var(--accent);font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20}
+.form-group .field-wrap{position:relative;display:flex;align-items:center}
+.form-group .field-wrap .fi{position:absolute;left:11px;pointer-events:none;display:flex;align-items:center}
+.form-group .field-wrap .fi .material-symbols-outlined{font-size:.95rem;color:var(--text-muted)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 13px 11px 36px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:.85rem;outline:none;transition:border-color .2s,box-shadow .2s,background .2s;-webkit-appearance:none;appearance:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg);background:var(--surface)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-muted)}
+.form-group textarea{min-height:120px;resize:vertical;padding:11px 13px}
+.form-group select{padding-right:32px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6' fill='none' stroke='%23a39880' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:10px 6px;cursor:pointer}
+.form-group select option{background:var(--surface);color:var(--text)}
+.form-group textarea.no-icon{padding-left:13px}
+.func-grid{display:flex;flex-wrap:wrap;gap:6px}
+.func-chip{display:flex;align-items:center;gap:6px;padding:7px 14px;border:1.5px solid var(--border);border-radius:100px;font-size:.79rem;color:var(--text-soft);cursor:pointer;transition:all .18s;background:var(--bg);user-select:none}
+.func-chip:hover{border-color:var(--accent);color:var(--text)}
+.func-chip.selected{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-txt)}
+.func-chip .chip-ico{font-size:.85rem;margin-right:2px;color:var(--text-muted);transition:color .2s}
+.func-chip.selected .chip-ico{color:var(--accent)}
+.btn-submit{width:100%;padding:12px;border-radius:100px;background:var(--btn-bg);color:var(--btn-txt);font-family:var(--ff-body);font-size:.88rem;font-weight:500;border:none;cursor:pointer;transition:opacity .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-submit:hover{opacity:.85;transform:translateY(-1px)}
+.btn-submit.loading{opacity:.6;pointer-events:none}
+.btn-submit.loading::after{content:'';width:14px;height:14px;border:2px solid transparent;border-top-color:currentColor;border-radius:50%;animation:spin .6s linear infinite;margin-left:4px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form-legal{font-size:.71rem;color:var(--text-muted);text-align:center;margin-top:10px}
+.preset-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px}
+.preset-card{position:relative;padding:12px 10px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);cursor:pointer;transition:all .18s;text-align:center}
+.preset-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.preset-card.selected{background:var(--accent-bg);border-color:var(--accent)}
+.preset-card .pc-price{font-family:var(--ff-head);font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+.preset-card.selected .pc-price{color:var(--accent-txt)}
+.preset-card .pc-label{font-size:.7rem;color:var(--text-muted);margin-top:3px}
+.preset-card.selected .pc-label{color:var(--accent)}
+.preset-card .pc-icon{font-size:1.1rem;color:var(--accent);display:block;margin-bottom:4px}
+.preset-extra{display:none;margin-top:8px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.78rem;color:var(--text-soft);line-height:1.6}
+
+/* Success */
+.success-wrap{display:none;text-align:center;padding:60px 24px;animation:fadeUp .5s ease both}
+.success-icon-wrap{width:68px;height:68px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.success-icon-wrap .material-symbols-outlined{font-size:2rem;color:var(--accent);font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48}
+.success-wrap h3{font-family:var(--ff-head);font-size:1.4rem;font-weight:700;margin-bottom:10px}
+.success-wrap p{font-size:.85rem;color:var(--text-soft);line-height:1.7;max-width:300px;margin:0 auto 24px}
+.btn-back{display:inline-block;background:var(--btn-bg);color:var(--btn-txt);padding:10px 24px;border-radius:100px;font-size:.84rem;font-weight:500;text-decoration:none;transition:opacity .2s;cursor:pointer;border:none;font-family:var(--ff-body)}
+.btn-back:hover{opacity:.85}
+
+/* Error message */
+.form-error-msg{font-size:.72rem;color:#c0392b;margin-top:4px;display:none}
+.field-error{border-color:#e74c3c !important;box-shadow:0 0 0 3px rgba(231,76,60,.1) !important}
+
+/* ══ CHAT WIDGET ══ */
+.chat-overlay{position:fixed;bottom:90px;right:24px;width:680px;height:600px;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);display:none;z-index:999;overflow:hidden;animation:chatIn .25s ease}
+.chat-overlay.open{display:flex}
+.chat-layout{display:flex;height:100%;min-height:0;width:100%}
+
+/* ── Sidebar ── */
+.chat-sidebar{width:220px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2)}
+.chat-sidebar-head{padding:14px 14px 8px;font-size:.75rem;font-weight:600;color:var(--text-soft)}
+.chat-sidebar-list{flex:1;overflow-y:auto;min-height:0}
+.chat-sidebar-list::-webkit-scrollbar{width:3px}
+.chat-sidebar-list::-webkit-scrollbar-thumb{background:var(--border-s);border-radius:2px}
+.chat-sb-item{padding:12px 14px;cursor:pointer;transition:background .12s}
+.chat-sb-item:not(:last-child){border-bottom:1px solid var(--border)}
+.chat-sb-item:hover{background:var(--bg3)}
+.chat-sb-item.active{background:var(--accent-bg)}
+.chat-sb-item .sb-name{font-size:.78rem;font-weight:500;color:var(--text);display:flex;align-items:center;justify-content:space-between}
+.chat-sb-item .sb-preview{font-size:.68rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+.chat-sb-item .sb-time{font-size:.6rem;color:var(--text-muted);white-space:nowrap}
+.chat-sb-item .sb-unread{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;border-radius:100px;background:var(--accent);color:var(--accent-txt);font-size:.58rem;font-weight:600;padding:0 5px;margin-left:auto}
+.chat-sb-new{display:flex;align-items:center;gap:6px;padding:12px 14px;border-top:1px solid var(--border);cursor:pointer;font-size:.74rem;color:var(--accent);font-weight:500;transition:background .12s}
+.chat-sb-new:hover{background:var(--bg3)}
+.chat-sb-new .ms{font-size:.95rem}
+
+/* ── Main chat area ── */
+.chat-main{flex:1;display:flex;flex-direction:column;min-width:0;height:100%}
+.chat-head{padding:12px 16px;background:var(--btn-bg);color:var(--btn-txt);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.chat-head .ch-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.chat-head .ch-avatar .material-symbols-outlined{font-size:1.1rem;color:var(--btn-txt);font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 20}
+.chat-head .ch-info{flex:1;min-width:0}
+.chat-head .ch-name{font-size:.82rem;font-weight:600}
+.chat-head .ch-status{font-size:.68rem;opacity:.7}
+
+/* ── Proyecto banner ── */
+.proyecto-banner{flex-shrink:0;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg2);display:flex;flex-direction:column;gap:8px}
+.proyecto-banner .pb-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.proyecto-banner .pb-name{font-size:.78rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proyecto-banner .pb-estado{font-size:.65rem;font-weight:500;padding:2px 10px;border-radius:100px;white-space:nowrap}
+.proyecto-banner .pb-estado.pendiente{background:var(--amber-bg);color:var(--amber-txt)}
+.proyecto-banner .pb-estado.revisado{background:var(--blue-bg);color:var(--blue-txt)}
+.proyecto-banner .pb-estado.desarrollando{background:var(--accent-bg);color:var(--accent-txt)}
+.proyecto-banner .pb-estado.cerrado{background:var(--green-bg);color:var(--green-txt)}
+.proyecto-banner .pb-bar{display:flex;align-items:center;gap:0;position:relative}
+.proyecto-banner .pb-bar::before{content:'';position:absolute;top:50%;left:12px;right:12px;height:2px;background:var(--border);transform:translateY(-50%);border-radius:1px;z-index:0}
+.proyecto-banner .pb-step{flex:1;text-align:center;font-size:.6rem;color:var(--text-muted);padding-top:6px;position:relative;z-index:1;white-space:nowrap}
+.proyecto-banner .pb-step::before{content:'';display:block;width:8px;height:8px;border-radius:50%;background:var(--border);margin:0 auto 4px;transition:all .3s;position:relative;z-index:2}
+.proyecto-banner .pb-step.done{color:var(--text-soft);font-weight:500}
+.proyecto-banner .pb-step.done::before{background:var(--accent);box-shadow:0 0 0 2px var(--accent-bg)}
+.proyecto-banner .pb-step.active{color:var(--accent);font-weight:600}
+.proyecto-banner .pb-step.active::before{background:var(--accent);box-shadow:0 0 0 3px var(--accent-bg);transform:scale(1.2)}
+
+/* ── Chat body ── */
+.chat-body{flex:1;overflow-y:auto;padding:10px 16px;display:flex;flex-direction:column;gap:3px;background:var(--bg)}
+.chat-body .msg-wrap{display:flex;flex-direction:column;max-width:70%}
+.chat-body .msg-wrap.incoming{align-self:flex-start}
+.chat-body .msg-wrap.outgoing{align-self:flex-end}
+.chat-body .msg{padding:7px 12px;font-size:.82rem;line-height:1.45;overflow-wrap:break-word;word-wrap:break-word;white-space:pre-wrap}
+.chat-body .msg.incoming{background:var(--surface);color:var(--text);border-radius:8px 8px 8px 2px;border:1px solid var(--border)}
+.chat-body .msg.outgoing{background:var(--accent);color:var(--accent-txt);border-radius:8px 8px 2px 8px}
+.chat-body .msg .msg-time{font-size:.6rem;opacity:.6;margin-top:2px;display:block;text-align:right;white-space:nowrap}
+.chat-body .msg.incoming .msg-time{color:var(--text-muted)}
+.chat-body .msg.outgoing .msg-time{opacity:.5}
+.chat-body .chat-empty{text-align:center;color:var(--text-muted);font-size:.78rem;margin:auto;padding:30px 20px;display:flex;flex-direction:column;align-items:center;gap:8px}
+
+/* ── Chat foot ── */
+.chat-foot{display:flex;align-items:center;gap:6px;padding:8px 12px;border-top:1px solid var(--border);flex-shrink:0;background:var(--surface)}
+.chat-foot input{flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:24px;background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:.82rem;outline:none;transition:border-color .2s}
+.chat-foot input:focus{border-color:var(--accent)}
+.chat-foot button{width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-txt);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:opacity .2s;flex-shrink:0}
+.chat-foot button .material-symbols-outlined{font-size:1.1rem;font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 20;color:var(--accent-txt)}
+.chat-foot button:hover{opacity:.85}
+.chat-foot button:disabled{opacity:.4;cursor:default}
+.chat-fab{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:var(--btn-bg);color:var(--btn-txt);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.25);z-index:1000;transition:transform .2s,opacity .2s}
+.chat-fab:hover{transform:scale(1.06)}
+.chat-fab .material-symbols-outlined{font-size:1.4rem;filter:drop-shadow(0 1px 2px rgba(0,0,0,.2));font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 20;color:var(--btn-txt);transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .2s}
+.chat-fab.is-open .material-symbols-outlined{transform:rotate(90deg)}
+
+/* ══ TESTIMONIALS ══ */
+#testimonios{padding:88px 56px;background:var(--bg2);transition:background .3s}
+.test-head{margin-bottom:48px}
+.test-head h2{font-family:var(--ff-head);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:700;letter-spacing:-.02em}
+.test-head h2 em{font-style:italic;color:var(--accent)}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.test-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:background .3s,border-color .3s,transform .2s}
+.test-card:hover{transform:translateY(-3px)}
+.test-stars{display:flex;gap:2px;margin-bottom:14px}
+.test-stars .material-symbols-outlined{font-size:.9rem;color:#f59e0b;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 20}
+.test-text{font-size:.87rem;color:var(--text-soft);line-height:1.78;margin-bottom:18px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:10px}
+.test-av{width:36px;height:36px;border-radius:50%;background:var(--btn-bg);color:var(--btn-txt);display:flex;align-items:center;justify-content:center;font-family:var(--ff-head);font-size:.65rem;font-weight:700;flex-shrink:0}
+.test-name{font-size:.82rem;font-weight:500;color:var(--text)}
+.test-role{font-size:.72rem;color:var(--text-muted)}
+
+/* ══ FOOTER ══ */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:52px 56px 26px;transition:background .3s,border-color .3s}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-desc{font-size:.81rem;color:var(--text-soft);line-height:1.7;margin-top:11px;max-width:230px}
+.footer-col h4{font-size:.72rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:13px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul a{font-size:.81rem;color:var(--text-soft);text-decoration:none;transition:color .2s}
+.footer-col ul a:hover{color:var(--text)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between}
+.footer-bottom span{font-size:.73rem;color:var(--text-muted)}
+
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══ SURVEY MODAL ══ */
+.survey-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px}
+.survey-modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;max-width:420px;width:100%;box-shadow:0 12px 48px rgba(0,0,0,.18)}
+.survey-stars{display:flex;gap:6px}
+.star-btn{font-size:2rem;cursor:pointer;color:var(--text-muted);transition:color .15s,transform .15s;line-height:1;user-select:none}
+.star-btn.active,.star-btn:hover{color:#f59e0b;transform:scale(1.12)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-center{display:none}
+  .nav-center.open{display:flex;flex-direction:column;position:fixed;inset:0;top:calc(68px + var(--safe-top, 0px));background:var(--bg);padding:32px 20px;z-index:199;border-radius:0;border:none;align-items:stretch;gap:4px;overflow-y:auto;transform:none}
+  .nav-center.open .nav-item{width:100%}
+  .nav-center.open .nav-link{width:100%;justify-content:center;padding:12px 16px;font-size:.9rem}
+  .nav-center.open .nav-cta{width:100%;justify-content:center}
+  .nav-center.open .dropdown{position:static;transform:none;width:100%;opacity:1;pointer-events:all;box-shadow:none}
+  .nav-center.open .dropdown-grid{grid-template-columns:1fr}
+  .hamburger{display:flex}
+  .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .page-header,.contact-main,#testimonios,footer{padding-left:20px;padding-right:20px}
+  .contact-main{grid-template-columns:1fr}
+  .contact-info{border-right:none;border-bottom:1px solid var(--border);padding:40px 20px}
+  .contact-form-wrap{padding:40px 20px}
+  .test-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .theme-switcher{bottom:16px;right:16px}
+  .user-dropdown{right:-8px;width:280px}
+}
+@media(max-width:560px){
+  .form-row{grid-template-columns:1fr}
+  .hours-grid{grid-template-columns:1fr}
+footer{padding:32px 20px 18px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:20px}
+  .footer-col h4{margin-bottom:8px}
+  .footer-col ul{gap:5px}
+  .footer-desc{max-width:100%;margin-top:8px}
+  .footer-bottom{flex-direction:row;flex-wrap:wrap;justify-content:space-between;gap:6px;padding-top:14px}
+}
+@media(max-width:480px){
+  footer{padding:24px 16px 14px}
+  .footer-top{gap:18px}
+  .footer-col h4{font-size:.9rem}
+  .footer-col ul li a{font-size:.8rem}
+  .footer-bottom span{font-size:.72rem}
+}
+/* Dropdown Servicios — click-toggle */
+#serviciosDropdown {
+  /* Sobreescribir el display:none con animación */
+  transition: opacity .18s, transform .18s !important;
+}
+#serviciosDropdown.open {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(0) !important;
+  pointer-events: all !important;
+}
+/* Quitar el hover automático del CSS anterior para este item */
+#serviciosNavItem:hover .dropdown {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(-6px) !important;
+}
+#serviciosNavItem .dropdown.open {
+  opacity: 1 !important;
+  pointer-events: all !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+#serviciosChevron.open {
+  transform: rotate(180deg);
+}
+.pwa-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;animation:fadeIn .4s ease}
+.pwa-overlay.show{display:flex}
+.pwa-overlay .logo-svg{height:56px;width:auto;color:var(--text);margin-bottom:20px}
+.pwa-overlay h2{font-family:var(--ff-head);font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.pwa-overlay p{font-size:.9rem;color:var(--text-soft);line-height:1.7;max-width:340px;margin-bottom:28px}
+.pwa-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;width:100%;max-width:320px}
+.pwa-step{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:left}
+.pwa-step-num{width:28px;height:28px;border-radius:50%;background:var(--btn-bg);color:var(--btn-txt);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
+.pwa-step-text{font-size:.82rem;color:var(--text-soft);line-height:1.4}
+.pwa-step-text strong{color:var(--text);font-weight:500}
+.pwa-share-icon{display:inline-flex;align-items:center;gap:2px;font-size:.75rem;background:var(--bg2);padding:2px 6px;border-radius:4px;border:1px solid var(--border)}
+.pwa-share-icon .material-symbols-outlined{font-size:.85rem}
+.pwa-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text-muted);background:var(--bg2);padding:6px 14px;border-radius:100px;border:1px solid var(--border)}
+.pwa-badge .material-symbols-outlined{font-size:.85rem;color:var(--accent)}
+</style>
+<link rel="stylesheet" href="/mt-mobile.css">
+</head>
+<body>
+<style>.pwa-desktop-hide{display:none!important}@media(min-width:768px){.pwa-overlay{display:none!important}}</style><div class="pwa-overlay" id="pwaOverlay">
+  <svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg>
+  <h2>Instala Multitech</h2>
+  <p>Para una mejor experiencia, agrega esta aplicación a tu pantalla de inicio.</p>
+  <div class="pwa-steps">
+    <div class="pwa-step">
+      <div class="pwa-step-num">1</div>
+      <div class="pwa-step-text">Toca <span class="pwa-share-icon"><span class="material-symbols-outlined">ios_share</span> Compartir</span> en Safari</div>
+    </div>
+    <div class="pwa-step">
+      <div class="pwa-step-num">2</div>
+      <div class="pwa-step-text">Desplázate y selecciona <strong>Agregar a Inicio</strong></div>
+    </div>
+    <div class="pwa-step">
+      <div class="pwa-step-num">3</div>
+      <div class="pwa-step-text">Toca <strong>Agregar</strong> en la esquina superior derecha</div>
+    </div>
+  </div>
+  <div class="pwa-badge"><span class="material-symbols-outlined">check_circle</span> App lista para instalar</div>
+</div>
+
+<!-- ══ SVG LOGO ══ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="nexalogo" viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid meet">
+    <g><path fill="currentColor" d="M585 238H198Q202 186 231.5 158.5Q261 131 304 131Q368 131 393 185H575Q561 130 524.5 86.0Q488 42 433.0 17.0Q378 -8 310 -8Q228 -8 164.0 27.0Q100 62 64.0 127.0Q28 192 28 279Q28 366 63.5 431.0Q99 496 163.0 531.0Q227 566 310 566Q391 566 454.0 532.0Q517 498 552.5 435.0Q588 372 588 288Q588 264 585 238ZM413 333Q413 377 383.0 403.0Q353 429 308 429Q265 429 235.5 404.0Q206 379 199 333Z" transform="translate(1450.0,1663.0) scale(1.25,-1.25)"/><path fill="currentColor" d="M392 0 285 155 195 0H10L194 285L5 558H197L304 404L394 558H579L392 277L584 0Z" transform="translate(2080.0,1663.0) scale(1.25,-1.25)"/><path fill="currentColor" d="M274 566Q333 566 377.5 542.0Q422 518 446 479V558H617V0H446V79Q421 40 376.5 16.0Q332 -8 273 -8Q205 -8 149.0 27.5Q93 63 60.5 128.5Q28 194 28 280Q28 366 60.5 431.0Q93 496 149.0 531.0Q205 566 274 566ZM324 417Q273 417 237.5 380.5Q202 344 202 280Q202 216 237.5 178.5Q273 141 324 141Q375 141 410.5 178.0Q446 215 446 279Q446 343 410.5 380.0Q375 417 324 417Z" transform="translate(2710.0,1663.0) scale(1.25,-1.25)"/></g>
+    <g transform="matrix(1.246551,0,0,1.246551,568.33377,808.382648)"><g transform="matrix(1.450726,0,0,1.450726,-487.750247,-555.447345)"><path fill="currentColor" d="M292.475,234.098C295.888,235.94 302.91,235.373 305.533,234.043C307.98,234.281 311.145,233.731 326.454,237.674C361.713,246.756 393.857,285.671 408.122,314.687C431.921,363.094 456.029,406.665 466.228,426.64C486.339,466.027 502.144,489.55 498.499,497.499C495.661,503.689 452.718,552.308 449.132,556.162C425.563,581.494 405.015,606.784 400.324,604.863C399.126,604.373 383.559,573.304 381.787,570.341C375.823,560.365 335.645,483.151 326.078,468.778C291.825,417.318 252.958,418.542 250.522,418.275C248.834,416.604 246.826,416.725 242.5,417.031C240.943,417.142 241.641,418.004 241.474,418.193C185.925,423.002 169.268,464.311 170.069,469.663C171.197,477.202 176.76,455.742 212.378,435.28C259.77,408.053 324.253,458.874 326.281,498.516C327.166,515.817 273.482,713.848 273.155,717.478C272.278,727.232 286.557,717.55 287.218,717.093C318.063,695.792 340.372,680.464 374.549,645.548C418.111,601.045 425.843,596.213 448.046,570.099C452.497,564.864 483.296,528.64 503.903,504.851C524.154,481.472 661.178,314.455 672.32,301.347C700.004,268.777 699.838,267.992 709.25,233.43C727.679,165.758 805.524,151.633 839.017,194.893C853.025,212.985 855.131,229.816 856.916,240.461C855.939,242.535 854.769,242.975 857.312,245.515C857.744,252.137 858.187,258.349 856.713,267.535C854.454,281.622 833.878,370.497 829.93,385.608C824.137,407.782 814.278,449.999 812.967,455.61C802.088,502.196 801.093,501.871 790.14,548.419C778.339,598.571 750.634,706.665 747.113,720.404C731.46,781.478 728.934,791.498 718.3,811.398C667.365,906.718 564.559,891.216 515.928,820.22C509.278,810.512 445.449,692.16 430.151,662.687C425.615,653.948 423.909,653.251 428.742,644.644C437.788,628.535 487.33,576.019 507.058,556.066C522.776,540.169 522.798,538.997 524.103,539.995C528.641,543.465 569.688,641.733 618.605,682.376C694.817,745.699 755.582,644.595 754.113,636.596C753.254,631.915 740.57,649.277 737.378,653.404C687.373,718.073 625.019,687.548 609.863,660.293C604.836,651.254 610.075,643.309 627.684,574.543C629.773,566.385 653.449,473.92 653.771,472.561C655.664,464.557 657.894,455.884 658.266,454.437C678.177,376.981 689.541,344.061 682.482,346.453C680.344,347.178 580.353,461.474 571.547,471.541C545.983,500.762 527.098,523.302 520.104,529.002C503.492,542.541 452.673,599.545 424.983,633.884C315.065,770.194 306.856,771.283 238.934,851.883C154.735,951.799 61.798,862.746 74.138,772.434C76.719,753.549 117.888,593.139 121.878,577.594C151.687,461.45 151.418,461.466 154.185,451.421C183.595,344.629 184.725,245.537 292.475,234.098Z"/></g></g>
+  </symbol>
+</svg>
+
+<!-- ══ THEME SWITCHER ══ -->
+<div class="theme-switcher">
+  <div class="ts-panel" id="tsPanel">
+    <span class="ts-panel-label" data-i18n="theme.title">Estilo visual</span>
+    <button class="mt-theme-btn" data-theme="beige" onclick="mtApply('beige')"><span class="ts-swatch" style="background:#f5f0e8"></span><span data-i18n="theme.beige">Beige</span></button>
+    <button class="mt-theme-btn" data-theme="dark"  onclick="mtApply('dark')"><span class="ts-swatch" style="background:#111010;border-color:#444"></span><span data-i18n="theme.dark">Dark</span></button>
+    <button class="mt-theme-btn" data-theme="blanc" onclick="mtApply('blanc')"><span class="ts-swatch" style="background:#fff"></span><span data-i18n="theme.blanc">Blanc</span></button>
+    <button class="mt-theme-btn" data-theme="slate" onclick="mtApply('slate')"><span class="ts-swatch" style="background:#1a2332;border-color:#445"></span><span data-i18n="theme.slate">Slate</span></button>
+    <button class="mt-theme-btn" data-theme="sage"  onclick="mtApply('sage')"><span class="ts-swatch" style="background:#f2f4ef"></span><span data-i18n="theme.sage">Sage</span></button>
+  </div>
+
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="index.html" class="nav-logo"><svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg></a>
+  <div class="nav-center" id="navCenter">
+    <div class="nav-pill" id="navPill"></div>
+    <div class="nav-item"><a class="nav-link" href="index.html"><span data-i18n="nav.inicio">Inicio</span></a></div>
+
+    <div class="nav-item" id="serviciosNavItem">
+      <button class="nav-link" id="serviciosBtn" onclick="toggleServicios(event)">
+        <span data-i18n="nav.servicios">Servicios</span><div class="nav-chevron" id="serviciosChevron"></div>
+      </button>
+      <div class="dropdown" id="serviciosDropdown" style="display:none;opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all">
+        <div class="dropdown-grid">
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">language</span></div><div class="dd-text"><h4>Páginas Web</h4><p>Sitios rápidos y optimizados</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">smartphone</span></div><div class="dd-text"><h4>Apps Móviles</h4><p>iOS y Android nativas</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">settings</span></div><div class="dd-text"><h4>Sistemas a Medida</h4><p>ERPs y CRMs personalizados</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">shopping_cart</span></div><div class="dd-text"><h4>E-Commerce</h4><p>Tiendas en línea completas</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">palette</span></div><div class="dd-text"><h4>UI/UX Design</h4><p>Interfaces centradas en el usuario</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">cloud</span></div><div class="dd-text"><h4>Cloud &amp; Soporte</h4><p>Hosting y mantenimiento</p></div></a>
+        </div>
+        <div class="dd-footer">
+          <span class="dd-footer-label" data-i18n="dd.service_count">6 servicios disponibles</span>
+          <a class="dd-footer-link" href="multitech-servicios.html" data-i18n="dd.view_all">Ver todos &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item"><a class="nav-link" href="multitech-plantillas.html"><span data-i18n="nav.plantillas">Plantillas</span></a></div>
+    <div class="nav-item"><a class="nav-link active" href="multitech-contacto.html"><span data-i18n="nav.contacto">Contacto</span></a></div>
+    <div class="nav-item" id="adminNavItem" style="display:none">
+      <a class="nav-link nav-link-admin" href="admin-dashboard.html" id="adminNavBtn" onclick="triggerLockAnim(event)">
+        <span class="lock-wrap"><span class="material-symbols-outlined lock-icon">lock</span></span>
+        <span class="admin-label" data-i18n="nav.admin">Admin</span>
+      </a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="user-btn-wrap" id="userBtnWrap">
+      <button class="user-btn" id="userBtn" onclick="handleUserBtn()" title="Mi cuenta">
+        <span class="material-symbols-outlined" id="userBtnIcon">person</span>
+        <span id="userBtnLabel" data-i18n="dd.signup">Crear cuenta</span>
+        <div class="online-dot"></div>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <div id="stateLoggedOut">
+          <div class="udd-login-prompt">
+            <div class="udd-lp-title" data-i18n="dd.welcome">Bienvenido</div>
+            <p class="udd-lp-sub" data-i18n="dd.welcome_sub">Accede a tu cuenta para gestionar proyectos y comunicaciones.</p>
+            <a href="mt-signup.html" class="udd-btn-login"><span class="material-symbols-outlined" style="color:var(--btn-txt)">login</span><span data-i18n="dd.login">Iniciar sesión</span></a>
+            <a href="multitech-contacto.html" class="udd-btn-register" data-i18n="dd.request_access">Solicitar acceso</a>
+          </div>
+        </div>
+        <div id="stateLoggedIn" style="display:none">
+          <div class="udd-profile">
+            <div class="udd-avatar" id="dpAvatar"><span class="material-symbols-outlined" style="color:var(--accent-txt)">person</span></div>
+            <div class="udd-info">
+              <div class="udd-name" id="dpName">Admin</div>
+              <div class="udd-email" id="dpEmail">admin@multitech.com</div>
+              <div class="udd-role-pill"><span class="udd-role-dot"></span><span id="dpRole">Admin</span></div>
+            </div>
+          </div>
+          <div class="udd-section">
+            <div class="udd-section-label" data-i18n="dd.switch_account">Cambiar cuenta</div>
+            <div class="udd-accounts" id="accountList"></div>
+            <button class="udd-item" onclick="MTAuth._openAddAccountModal()"><div class="udd-item-icon"><span class="material-symbols-outlined">add</span></div><span class="udd-item-label" data-i18n="dd.add_account">Agregar cuenta</span></button>
+          </div>
+          <div class="udd-section">
+            <a class="udd-item" href="mt-ajustes.html"><div class="udd-item-icon"><span class="material-symbols-outlined">manage_accounts</span></div><span class="udd-item-label" data-i18n="dd.profile">Perfil y ajustes</span></a>
+            <a class="udd-item" href="mt-ajustes.html#seguridad"><div class="udd-item-icon"><span class="material-symbols-outlined">security</span></div><span class="udd-item-label" data-i18n="dd.security">Seguridad</span></a>
+            <a class="udd-item" href="mt-ajustes.html#notificaciones"><div class="udd-item-icon"><span class="material-symbols-outlined">notifications</span></div><span class="udd-item-label" data-i18n="dd.notifications">Notificaciones</span></a>
+          </div>
+          <div class="udd-section">
+            <button class="udd-item danger" onclick="doLogout()"><div class="udd-item-icon"><span class="material-symbols-outlined">logout</span></div><span class="udd-item-label" data-i18n="dd.logout">Cerrar sesión</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span>Contacto</div>
+  <h1>Hablemos de<br>tu <em>proyecto</em></h1>
+  <p>Cuéntanos tu idea y te enviamos una propuesta en menos de 24 horas. La consulta inicial es completamente gratis.</p>
+</div>
+
+<!-- ══ CONTACT MAIN ══ -->
+<div class="contact-main">
+
+  <!-- LEFT: Info -->
+  <div class="contact-info reveal">
+    <div class="ci-top">
+      <h2>Estamos aquí<br>para <em>ayudarte</em></h2>
+      <p>Ya sea que tengas una idea clara o apenas estés explorando opciones, con gusto te orientamos sin ningún compromiso.</p>
+      <div class="contact-methods">
+        <div class="cm-item">
+          <div class="cm-icon-wrap"><span class="material-symbols-outlined">mail</span></div>
+          <div><div class="cm-label">Correo</div><div class="cm-val"><a href="mailto:nexa@multitech.com">nexa@multitech.com</a></div><div class="cm-note">Respondemos en menos de 24h</div></div>
+        </div>
+        <div class="cm-item">
+          <div class="cm-icon-wrap"><span class="material-symbols-outlined">chat</span></div>
+          <div><div class="cm-label">WhatsApp</div><div class="cm-val"><a href="https://wa.me/18098411705">+1 (809) 841-1705</a></div><div class="cm-note">Lun–Vie 9am–6pm</div></div>
+        </div>
+        <div class="cm-item">
+          <div class="cm-icon-wrap"><span class="material-symbols-outlined">location_on</span></div>
+          <div><div class="cm-label">Ubicación</div><div class="cm-val">Santo Domingo, República Dominicana</div><div class="cm-note">Atendemos clientes internacionales</div></div>
+        </div>
+        <div class="cm-item">
+          <div class="cm-icon-wrap"><span class="material-symbols-outlined">videocam</span></div>
+          <div><div class="cm-label">Videollamada</div><div class="cm-val">Zoom / Google Meet</div><div class="cm-note">Agenda una reunión gratuita de 30 min</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ci-bottom">
+      <div class="hours-title">Horario de atención</div>
+      <div class="hours-grid">
+        <div class="hour-item"><div class="hour-day">Lun – Vie</div><div class="hour-time">9:00 am – 6:00 pm</div></div>
+        <div class="hour-item"><div class="hour-day">Sábado</div><div class="hour-time">9:00 am – 1:00 pm</div></div>
+        <div class="hour-item"><div class="hour-day">Domingo</div><div class="hour-time closed">Cerrado</div></div>
+        <div class="hour-item"><div class="hour-day">Soporte técnico</div><div class="hour-time">24 / 7</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Form -->
+  <div class="contact-form-wrap reveal">
+    <div id="formContainer">
+      <div class="cf-title">Solicita tu cotización</div>
+      <p class="cf-sub">Elige cómo quieres contactarnos:</p>
+      <div class="form-tabs">
+        <button class="form-tab active" onclick="setTab(this,'cotizar')">Cotización de proyecto</button>
+        <button class="form-tab" onclick="setTab(this,'consulta')">Consulta general</button>
+      </div>
+
+      <!-- TAB: Cotización -->
+      <div id="tab-cotizar">
+        <div class="form-row">
+          <div class="form-group"><label><span class="material-symbols-outlined label-ico">person</span>Nombre</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">badge</span></div><input type="text" id="cot-nombre" placeholder="Tu nombre"></div></div>
+          <div class="form-group"><label><span class="material-symbols-outlined label-ico">person</span>Apellido</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">badge</span></div><input type="text" id="cot-apellido" placeholder="Tu apellido"></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label><span class="material-symbols-outlined label-ico">mail</span>Correo electrónico *</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">alternate_email</span></div><input type="email" id="cot-correo" placeholder="correo@ejemplo.com"></div></div>
+          <div class="form-group"><label><span class="material-symbols-outlined label-ico">call</span>WhatsApp</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">smartphone</span></div><input type="tel" id="cot-whatsapp" placeholder="+1 809 000 0000"></div></div>
+        </div>
+        <div class="form-group"><label><span class="material-symbols-outlined label-ico">sell</span>Presupuesto estimado</label>
+          <div class="preset-cards">
+            <div class="preset-card" data-presupuesto="Starter ($350 USD)" data-tipo="Página Web" onclick="selectPresupuesto(this)">
+              <span class="material-symbols-outlined pc-icon">language</span>
+              <div class="pc-price">$350</div>
+              <div class="pc-label">Starter · Web</div>
+            </div>
+            <div class="preset-card" data-presupuesto="Business ($900 USD)" data-tipo="Web + App" onclick="selectPresupuesto(this)">
+              <span class="material-symbols-outlined pc-icon">smartphone</span>
+              <div class="pc-price">$900</div>
+              <div class="pc-label">Business · Web + App</div>
+            </div>
+            <div class="preset-card" data-presupuesto="$1,200 – $3,000 USD" data-tipo="Sistema a Medida" onclick="selectPresupuesto(this)">
+              <span class="material-symbols-outlined pc-icon">settings</span>
+              <div class="pc-price">$1,200+</div>
+              <div class="pc-label">Sistema a Medida</div>
+            </div>
+            <div class="preset-card" data-presupuesto="$600 USD" data-tipo="E-Commerce" onclick="selectPresupuesto(this)">
+              <span class="material-symbols-outlined pc-icon">shopping_cart</span>
+              <div class="pc-price">$600</div>
+              <div class="pc-label">E-Commerce</div>
+            </div>
+            <div class="preset-card" data-presupuesto="$200 USD" data-tipo="UI/UX Design" onclick="selectPresupuesto(this)">
+              <span class="material-symbols-outlined pc-icon">palette</span>
+              <div class="pc-price">$200</div>
+              <div class="pc-label">UI/UX Design</div>
+            </div>
+            <div class="preset-card" data-presupuesto="No lo sé aún" data-tipo="" onclick="selectPresupuesto(this)">
+              <span class="material-symbols-outlined pc-icon">help</span>
+              <div class="pc-price">—</div>
+              <div class="pc-label">No lo sé aún</div>
+            </div>
+          </div>
+          <input type="hidden" id="cot-tipo" value="">
+          <select id="cot-presupuesto" style="display:none"><option value="">Selecciona</option><option>Starter ($350 USD)</option><option>Business ($900 USD)</option><option>$1,200 – $3,000 USD</option><option>$600 USD</option><option>$200 USD</option><option>Más de $3,000 USD</option><option>No lo sé aún</option></select>
+        </div>
+        <div class="form-group"><label><span class="material-symbols-outlined label-ico">payments</span>Monto estimado (USD)</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">attach_money</span></div><input type="number" id="cot-monto" placeholder="0.00" step="0.01" min="0"></div></div>
+
+        <div class="form-group"><label><span class="material-symbols-outlined label-ico">widgets</span>Funcionalidades</label>
+          <div class="func-grid" id="cot-funcs">
+            <div class="func-chip" data-func="Panel de administración" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">dashboard</span>Panel admin</div>
+            <div class="func-chip" data-func="Pagos en línea" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">payments</span>Pagos en línea</div>
+            <div class="func-chip" data-func="Login de usuarios" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">login</span>Login de usuarios</div>
+            <div class="func-chip" data-func="Notificaciones" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">notifications</span>Notificaciones</div>
+            <div class="func-chip" data-func="Geolocalización / Mapa" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">map</span>Mapa / GPS</div>
+            <div class="func-chip" data-func="API / Integraciones" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">api</span>API / Integraciones</div>
+            <div class="func-chip" data-func="Chat en vivo" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">chat</span>Chat en vivo</div>
+            <div class="func-chip" data-func="Dashboard / Reportes" onclick="toggleFunc(this)"><span class="material-symbols-outlined chip-ico">analytics</span>Dashboard</div>
+          </div>
+        </div>
+        <div class="form-group"><label><span class="material-symbols-outlined label-ico">description</span>Describe tu proyecto</label><textarea id="cot-desc" class="no-icon" placeholder="Cuéntanos qué quieres construir, para qué sirve, quién lo usará..."></textarea></div>
+        <button class="btn-submit" id="btnCotizar" onclick="submitCotizacion()">
+          <span class="material-symbols-outlined" style="font-size:.95rem;color:var(--btn-txt)">send</span>Enviar solicitud
+        </button>
+        <p class="form-legal">Confidencial · Sin compromisos</p>
+      </div>
+
+      <!-- TAB: Consulta -->
+      <div id="tab-consulta" style="display:none">
+        <div class="form-row">
+          <div class="form-group"><label><span class="material-symbols-outlined label-ico">person</span>Nombre *</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">badge</span></div><input type="text" id="con-nombre" placeholder="Tu nombre"></div></div>
+          <div class="form-group"><label><span class="material-symbols-outlined label-ico">mail</span>Correo electrónico *</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">alternate_email</span></div><input type="email" id="con-correo" placeholder="correo@ejemplo.com"></div></div>
+        </div>
+        <div class="form-group"><label><span class="material-symbols-outlined label-ico">topic</span>Asunto</label><div class="field-wrap"><div class="fi"><span class="material-symbols-outlined">help</span></div><input type="text" id="con-asunto" placeholder="¿En qué podemos ayudarte?"></div></div>
+        <div class="form-group"><label><span class="material-symbols-outlined label-ico">message</span>Mensaje *</label><textarea id="con-mensaje" class="no-icon" style="min-height:130px" placeholder="Escribe tu mensaje aquí..."></textarea></div>
+        <button class="btn-submit" id="btnConsulta" onclick="submitConsulta()">
+          <span class="material-symbols-outlined" style="font-size:.95rem;color:var(--btn-txt)">send</span>Enviar mensaje
+        </button>
+        <p class="form-legal">Respondemos en menos de 24 horas</p>
+      </div>
+    </div>
+
+    <!-- Success -->
+    <div class="success-wrap" id="successWrap">
+      <div class="success-icon-wrap"><span class="material-symbols-outlined">check_circle</span></div>
+      <h3>Mensaje recibido</h3>
+      <p>Gracias por contactarnos. Revisaremos tu solicitud y te responderemos en menos de 24 horas con una propuesta personalizada.</p>
+      <button class="btn-back" id="btnSurvey" onclick="openSurvey()" style="margin-bottom:8px">Calificar este servicio</button>
+      <button class="btn-back" onclick="resetForm()">Enviar otro mensaje</button>
+    </div>
+
+    <!-- Survey Modal -->
+    <div class="survey-overlay" id="surveyOverlay" style="display:none">
+      <div class="survey-modal">
+        <h3 style="font-family:var(--ff-head);font-size:1.15rem;font-weight:700;margin-bottom:4px">¿Qué tal fue tu experiencia?</h3>
+        <p style="font-size:.82rem;color:var(--text-soft);margin-bottom:18px">Tu opinión nos ayuda a mejorar</p>
+        <div style="margin-bottom:16px">
+          <div style="font-size:.82rem;font-weight:500;margin-bottom:6px">Puntuación</div>
+          <div class="survey-stars" id="surveyStars">
+            <span class="star-btn" data-v="1" onclick="pickStar(1)">☆</span>
+            <span class="star-btn" data-v="2" onclick="pickStar(2)">☆</span>
+            <span class="star-btn" data-v="3" onclick="pickStar(3)">☆</span>
+            <span class="star-btn" data-v="4" onclick="pickStar(4)">☆</span>
+            <span class="star-btn" data-v="5" onclick="pickStar(5)">☆</span>
+          </div>
+        </div>
+        <div style="margin-bottom:16px">
+          <div style="font-size:.82rem;font-weight:500;margin-bottom:6px">Comentario (opcional)</div>
+          <textarea id="surveyComment" style="width:100%;padding:10px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:var(--ff-body);font-size:.82rem;resize:vertical;min-height:70px" placeholder="Comparte tu opinión..."></textarea>
+        </div>
+        <div style="margin-bottom:20px">
+          <div style="font-size:.82rem;font-weight:500;margin-bottom:6px">¿Cómo nos conociste?</div>
+          <select id="surveyFuente" style="width:100%;padding:10px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:var(--ff-body);font-size:.82rem">
+            <option value="">Seleccionar...</option>
+            <option value="Web">Web / Google</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Referido">Referido</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Llamada">Llamada telefónica</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn-back" onclick="closeSurvey()" style="font-size:.82rem">Omitir</button>
+          <button class="btn-back" id="btnEnviarSurvey" onclick="submitSurvey()" style="font-size:.82rem;background:var(--btn-bg);color:var(--btn-txt)">Enviar opinión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonios">
+  <div class="test-head reveal"><h2>Clientes que ya <em>confían</em> en nosotros</h2></div>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="test-stars"><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span></div>
+      <p class="test-text">"Multitech transformó completamente nuestra presencia digital. Entregaron en tiempo récord y superaron todas nuestras expectativas."</p>
+      <div class="test-author"><div class="test-av">JM</div><div><div class="test-name">Juan Martínez</div><div class="test-role">CEO — TechStart RD</div></div></div>
+    </div>
+    <div class="test-card reveal">
+      <div class="test-stars"><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span></div>
+      <p class="test-text">"La aplicación móvil que desarrollaron aumentó nuestras ventas un 40% en el primer mes. El equipo siempre estuvo disponible y atento."</p>
+      <div class="test-author"><div class="test-av">SR</div><div><div class="test-name">Sofía Rodríguez</div><div class="test-role">Fundadora — Boutique Digital</div></div></div>
+    </div>
+    <div class="test-card reveal">
+      <div class="test-stars"><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span></div>
+      <p class="test-text">"El sistema ERP automatizó el 70% de nuestros procesos. La inversión se recuperó en menos de 3 meses. Excelente equipo."</p>
+      <div class="test-author"><div class="test-av">CP</div><div><div class="test-name">Carlos Peña</div><div class="test-role">Director — Grupo Empresarial</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="index.html" class="nav-logo"><svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg></a>
+      <p class="footer-desc">Soluciones digitales a medida. República Dominicana.</p>
+    </div>
+    <div class="footer-col"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="multitech-servicios.html">Servicios</a></li><li><a href="multitech-plantillas.html">Plantillas</a></li><li><a href="multitech-contacto.html">Contacto</a></li></ul></div>
+    <div class="footer-col"><h4>Servicios</h4><ul><li><a href="multitech-servicios.html">Páginas Web</a></li><li><a href="multitech-servicios.html">Apps Móviles</a></li><li><a href="multitech-servicios.html">Sistemas</a></li><li><a href="multitech-servicios.html">E-Commerce</a></li></ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul><li><a href="mailto:nexa@multitech.com">nexa@multitech.com</a></li><li><a href="#">+1 (809) 841-1705</a></li><li><a href="#">WhatsApp</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2025 Multitech. Todos los derechos reservados.</span><span>República Dominicana</span></div>
+</footer>
+
+<script>
+/* Añade esto junto al bloque <script src="mt-auth-client.js"> */
+function handleUserBtn(){
+  if(MTAuth.isLogged()){
+    document.getElementById('userDropdown').classList.toggle('open');
+  }else{
+    window.location.href='mt-signup.html';
+  }
+}
+ 
+function doLogout(){
+  MTAuth.logout(); // limpia localStorage + cookie y redirige
+}
+ 
+/* Cerrar dropdown al click fuera */
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('userBtnWrap');
+  if(wrap && !wrap.contains(e.target)){
+    const dd = document.getElementById('userDropdown');
+    if(dd) dd.classList.remove('open');
+  }
+});
+</script>
+
+<script>
+const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
+
+/* ══ THEME ══ */
+function mtApply(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('mt-theme',t);document.querySelectorAll('.mt-theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));}
+(function(){mtApply(localStorage.getItem('mt-theme')||'beige')})();
+
+document.addEventListener('click',e=>{
+  if(!document.querySelector('.theme-switcher').contains(e.target))document.getElementById('tsPanel').classList.remove('open');
+  if(!document.getElementById('userBtnWrap').contains(e.target))document.getElementById('userDropdown').classList.remove('open');
+});
+
+function toggleMenu(){var n=document.getElementById("navCenter"),h=document.getElementById("hamburger");var open=n.classList.toggle("open");h.classList.toggle("open",open);document.body.style.overflow=open?"hidden":""}
+document.addEventListener('click',function(e){var n=document.getElementById('navCenter');if(n.classList.contains('open')&&!n.contains(e.target)&&!document.getElementById('hamburger').contains(e.target)){n.classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow=""}})
+document.querySelectorAll('.nav-center .nav-link:not(#serviciosBtn)').forEach(function(l){l.addEventListener('click',function(){document.getElementById('navCenter').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow=""})})
+
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+function triggerLockAnim(e){
+  const btn=document.getElementById('adminNavBtn');if(btn.dataset.done)return;btn.dataset.done='1';e.preventDefault();
+  btn.classList.add('hide-text');
+  setTimeout(()=>btn.classList.add('shaking'),300);
+  setTimeout(()=>{btn.classList.remove('shaking');btn.classList.add('unlocked');},680);
+  setTimeout(()=>{window.location.href='admin-dashboard.html';},950);
+}
+
+/* ══ USER SYSTEM ══ */
+
+/* ══ TABS ══ */
+function setTab(tab,id){
+  document.querySelectorAll('.form-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('tab-cotizar').style.display=id==='cotizar'?'block':'none';
+  document.getElementById('tab-consulta').style.display=id==='consulta'?'block':'none';
+}
+
+/* ══ FORM HELPERS ══ */
+function getVal(id){return document.getElementById(id)?.value?.trim()||''}
+function setLoading(btnId,loading){
+  const btn=document.getElementById(btnId);
+  btn.classList.toggle('loading',loading);
+  btn.querySelector('span').style.display=loading?'none':'inline-flex';
+  if(!loading)return;
+  const txt=btn.childNodes[btn.childNodes.length-1];
+  if(txt.nodeType===3)txt.textContent='Enviando...';
+}
+function showSuccess(){
+  document.getElementById('formContainer').style.display='none';
+  document.getElementById('successWrap').style.display='block';
+}
+function resetForm(){
+  document.getElementById('formContainer').style.display='block';
+  document.getElementById('successWrap').style.display='none';
+  document.querySelectorAll('.preset-card.selected').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('.func-chip.selected').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('cot-presupuesto').value='';
+  document.getElementById('cot-tipo').value='';
+  document.getElementById('cot-monto').value='';
+}
+
+/* ══ PRESUPUESTO SELECTOR (cards) ══ */
+function selectPresupuesto(card){
+  document.querySelectorAll('.preset-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  document.getElementById('cot-presupuesto').value=card.dataset.presupuesto;
+  document.getElementById('cot-tipo').value=card.dataset.tipo||'';
+  var m=parseFloat(card.dataset.presupuesto.replace(/[^0-9.,]/g,'').replace(',',''));
+  document.getElementById('cot-monto').value=isNaN(m)||!m?'':m;
+}
+/* ══ FUNCIONALIDADES TOGGLE (chips) ══ */
+function toggleFunc(chip){
+  chip.classList.toggle('selected');
+}
+/* ══ SUBMIT COTIZACIÓN → API /api/cotizaciones ══ */
+let lastCotizacionId = null;
+let surveyRating = 0;
+
+async function submitCotizacion(){
+  const correo=getVal('cot-correo');
+  if(!correo||!correo.includes('@')){
+    document.getElementById('cot-correo').classList.add('field-error');
+    setTimeout(()=>document.getElementById('cot-correo').classList.remove('field-error'),2000);
+    return;
+  }
+  const funcionalidades=Array.from(document.querySelectorAll('#cot-funcs .func-chip.selected')).map(c=>c.dataset.func);
+  var monto=parseFloat(document.getElementById('cot-monto')?.value);
+  const payload={
+    nombre:getVal('cot-nombre'),
+    apellido:getVal('cot-apellido'),
+    correo,
+    whatsapp:getVal('cot-whatsapp'),
+    tipo_proyecto:getVal('cot-tipo'),
+    presupuesto:getVal('cot-presupuesto'),
+    monto:isNaN(monto)||!monto?null:monto,
+    moneda:'USD',
+    descripcion:getVal('cot-desc'),
+    funcionalidades
+  };
+  setLoading('btnCotizar',true);
+  try{
+    const r=await fetch(`${API_BASE}/api/cotizaciones`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const data=await r.json();
+    if(data.success){
+      lastCotizacionId = data.id || null;
+      showSuccess();
+      localStorage.setItem('mt-has-cotizacion','1');
+      enableChatBtn();
+    }else{alert('Error al enviar: '+(data.message||'Intenta de nuevo'));}
+  }catch(err){
+    console.error('[cotizacion] fetch error:',err);
+    alert('Error de conexión. Verifica tu internet e intenta de nuevo.');
+  }finally{setLoading('btnCotizar',false);}
+}
+
+function openSurvey() {
+  document.getElementById('surveyOverlay').style.display = 'flex';
+}
+function closeSurvey() {
+  document.getElementById('surveyOverlay').style.display = 'none';
+}
+function pickStar(n) {
+  surveyRating = n;
+  document.querySelectorAll('.star-btn').forEach(el => {
+    const v = parseInt(el.dataset.v);
+    el.classList.toggle('active', v <= n);
+    el.textContent = v <= n ? '★' : '☆';
+  });
+}
+async function submitSurvey() {
+  if (surveyRating < 1) { alert('Selecciona una puntuación'); return; }
+  const btn = document.getElementById('btnEnviarSurvey');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  try {
+    await fetch(`${API_BASE}/api/encuestas`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        referencia_tipo: 'cotizacion',
+        referencia_id: lastCotizacionId || 1,
+        nombre: getVal('cot-nombre') || null,
+        correo: getVal('cot-correo') || null,
+        puntuacion: surveyRating,
+        comentario: document.getElementById('surveyComment').value.trim() || null,
+        como_nos_conociste: document.getElementById('surveyFuente').value || null,
+      })
+    });
+  } catch(e) {}
+  closeSurvey();
+  document.getElementById('btnSurvey').textContent = '¡Gracias por tu opinión!';
+  document.getElementById('btnSurvey').disabled = true;
+}
+
+/* ══ SUBMIT CONSULTA → API /api/consultas ══ */
+async function submitConsulta(){
+  const nombre=getVal('con-nombre');
+  const correo=getVal('con-correo');
+  const mensaje=getVal('con-mensaje');
+  if(!nombre||!correo||!mensaje){
+    [['con-nombre',nombre],['con-correo',correo],['con-mensaje',mensaje]].forEach(([id,v])=>{
+      if(!v)document.getElementById(id).classList.add('field-error');
+    });
+    setTimeout(()=>document.querySelectorAll('.field-error').forEach(el=>el.classList.remove('field-error')),2000);
+    return;
+  }
+  const payload={nombre,correo,asunto:getVal('con-asunto'),mensaje};
+  setLoading('btnConsulta',true);
+  try{
+    const r=await fetch(`${API_BASE}/api/consultas`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const data=await r.json();
+    if(data.success){showSuccess();}
+    else{alert('Error al enviar: '+(data.message||'Intenta de nuevo'));}
+  }catch(err){
+    console.error('[consulta] fetch error:',err);
+    alert('Error de conexión. Verifica tu internet e intenta de nuevo.');
+  }finally{setLoading('btnConsulta',false);}
+}
+
+
+function toggleServicios(e) {
+  e.stopPropagation();
+  if(window.innerWidth<=900||matchMedia('(max-width:900px)').matches){window.location.href='multitech-servicios.html';return}
+  const dd  = document.getElementById('serviciosDropdown');
+  const chv = document.getElementById('serviciosChevron');
+  const isOpen = dd.classList.contains('open');
+ 
+  // Cerrar cualquier otro dropdown abierto (si los hay)
+  document.querySelectorAll('.dropdown.open').forEach(el => {
+    if (el !== dd) {
+      el.classList.remove('open');
+      el.style.display = 'none';
+    }
+  });
+ 
+  if (isOpen) {
+    dd.classList.remove('open');
+    dd.style.display = 'none';
+    chv.classList.remove('open');
+  } else {
+    dd.style.display = 'block';
+    // Forzar reflow para que la transición funcione
+    dd.offsetHeight;
+    dd.classList.add('open');
+    chv.classList.add('open');
+  }
+}
+ 
+/* Cerrar al hacer click fuera del dropdown */
+document.addEventListener('click', function(e) {
+  const dd  = document.getElementById('serviciosDropdown');
+  const btn = document.getElementById('serviciosBtn');
+  const item = document.getElementById('serviciosNavItem');
+  if (!item) return;
+  if (!item.contains(e.target)) {
+    dd.classList.remove('open');
+    dd.style.display = 'none';
+    document.getElementById('serviciosChevron').classList.remove('open');
+  }
+});
+</script>
+<script src="/mt-javascript/mt-auth-client.js"></script>
+<script>
+/* Sync inline admin nav with MTAuth */
+document.addEventListener('mt:userReady', function(e) {
+  if (document.getElementById('adminNavItem')) {
+    document.getElementById('adminNavItem').style.display = (e.detail.rol === 'admin' || e.detail.rol === 'editor') ? '' : 'none';
+  }
+  // Logged-in → hide Cotizar CTA
+  const cta = document.getElementById('navCtaBtn');
+  if (cta) cta.style.display = 'none';
+  // Logged-in → show chat (por cuenta)
+  const fab = document.getElementById('chatFab');
+  if (fab) fab.style.display = 'flex';
+});
+document.addEventListener('mt:userGuest', function() {
+  if (document.getElementById('adminNavItem')) document.getElementById('adminNavItem').style.display = 'none';
+  // Guest → show Cotizar CTA
+  const cta = document.getElementById('navCtaBtn');
+  if (cta) cta.style.display = 'flex';
+  // Guest → check cotización for chat
+  checkUserCotizacion();
+  if(localStorage.getItem('mt-has-cotizacion')!=='1'){
+    const f=document.getElementById('chatFab');
+    if(f){f.style.display='none';f.classList.remove('is-open');const ic=f.querySelector('.material-symbols-outlined');if(ic)ic.textContent='chat';}
+    const ov=document.getElementById('chatOverlay');
+    if(ov) ov.classList.remove('open');
+  }
+});
+/* Auto-fill cotización form from user profile */
+document.addEventListener('mt:userReady', function(e) {
+  const u = e.detail;
+  if (u.nombre)  document.getElementById('cot-nombre')  && (document.getElementById('cot-nombre').value = u.nombre);
+  if (u.apellido) document.getElementById('cot-apellido') && (document.getElementById('cot-apellido').value = u.apellido);
+  if (u.correo)  document.getElementById('cot-correo')  && (document.getElementById('cot-correo').value = u.correo);
+});
+
+/* ══ VERIFICAR SI USUARIO TIENE COTIZACIONES ══ */
+async function checkUserCotizacion(correo){
+  const fab=document.getElementById('chatFab');
+  if(!fab)return;
+  // Fallback: mostrar inmediatamente si localStorage tiene flag
+  if(localStorage.getItem('mt-has-cotizacion')==='1'){
+    fab.style.display='flex';
+  }
+  // Verificar en servidor si tenemos correo
+  if(!correo)return;
+  try{
+    const r=await fetch(`${API_BASE}/api/cotizaciones/check?correo=${encodeURIComponent(correo)}`);
+    const data=await r.json();
+    if(data.exists){
+      localStorage.setItem('mt-has-cotizacion','1');
+      fab.style.display='flex';
+    }else if(!localStorage.getItem('mt-has-cotizacion')){
+      fab.style.display='none';
+    }
+  }catch(e){/* silencioso: localStorage sirve de respaldo */}
+}
+function enableChatBtn(){
+  const fab=document.getElementById('chatFab');
+  if(fab)fab.style.display='flex';
+}
+
+/* ══ CHAT ══ */
+let _chatConvId = null;
+let _chatData = {};
+var _chatInterval = null;
+
+function toggleChat(){
+  const o=document.getElementById('chatOverlay');
+  const f=document.getElementById('chatFab');
+  const ic=f.querySelector('.material-symbols-outlined');
+  if(o.classList.contains('open')){
+    o.classList.remove('open');
+    f.classList.remove('is-open');
+    if(ic)ic.textContent='chat';
+    if(_chatInterval){clearInterval(_chatInterval);_chatInterval=null;}
+  }else{
+    o.classList.add('open');
+    f.classList.add('is-open');
+    if(ic)ic.textContent='close';
+    _chatConvId = null;
+    loadChatConversaciones();
+    resetChatMain();
+    setTimeout(()=>document.getElementById('chatInput')?.focus(),300);
+    if(_chatInterval)clearInterval(_chatInterval);
+    _chatInterval=setInterval(function(){
+      if(_chatConvId)loadChatMessages();
+      loadChatConversaciones();
+    },5000);
+  }
+}
+document.addEventListener('click',function(e){
+  const o=document.getElementById('chatOverlay');
+  const f=document.getElementById('chatFab');
+  if(o&&o.classList.contains('open')&&!o.contains(e.target)&&f&&!f.contains(e.target)){
+    o.classList.remove('open');
+    f.classList.remove('is-open');
+    const ic=f.querySelector('.material-symbols-outlined');
+    if(ic)ic.textContent='chat';
+    if(_chatInterval){clearInterval(_chatInterval);_chatInterval=null;}
+  }
+});
+
+function resetChatMain(){
+  document.getElementById('chatBody').querySelectorAll('.msg-wrap').forEach(m=>m.remove());
+  document.getElementById('chatEmpty').style.display='flex';
+  document.getElementById('chName').textContent='MultiTech Team';
+  document.getElementById('chStatus').textContent='En línea · Respondemos en minutos';
+  document.getElementById('chatInput').disabled=false;
+  const pb=document.getElementById('proyectoBanner');
+  if(pb)pb.style.display='none';
+}
+
+async function loadChatConversaciones(){
+  const list=document.getElementById('chatSidebarList');
+  list.innerHTML='<div style="padding:20px;text-align:center;font-size:.72rem;color:var(--text-muted)">Cargando...</div>';
+  try{
+    const user=window.MTAuth?.getUser?.();
+    const heads={'Content-Type':'application/json'};
+    if(user?.token) heads['Authorization']='Bearer '+user.token;
+    const r=await fetch(`${API_BASE}/api/chat/conversaciones`,{credentials:'include',headers:heads});
+    const j=await r.json();
+    if(!j.success||!j.data?.length){
+      list.innerHTML='<div style="padding:20px;text-align:center;font-size:.72rem;color:var(--text-muted)">Sin conversaciones</div>';
+      return;
+    }
+    list.innerHTML=j.data.map(c=>{
+      _chatData[c.id]=c;
+      return `
+      <div class="chat-sb-item${_chatConvId===c.id?' active':''}" onclick="selectConversacion(${c.id})" id="sb-${c.id}">
+        <div class="sb-name">${c.nombre||'Invitado'} ${c.apellido||''}</div>
+        <div class="sb-preview">${c.ultimo_mensaje||'Sin mensajes'}</div>
+        <div class="sb-time">${c.ultimo_mensaje_at?new Date(c.ultimo_mensaje_at).toLocaleDateString('es-DO',{day:'numeric',month:'short'}):''}</div>
+        ${c.unread_count>0?`<span class="sb-unread">${c.unread_count}</span>`:''}
+      </div>`;
+    }).join('');
+    if(_chatConvId) updateProyectoBanner(_chatConvId);
+  }catch(e){console.error('[chat] load conv error:',e); list.innerHTML='<div style="padding:20px;text-align:center;font-size:.72rem;color:var(--text-muted)">Error al cargar</div>';}
+}
+
+function selectConversacion(id){
+  _chatConvId=id;
+  document.querySelectorAll('.chat-sb-item').forEach(el=>el.classList.remove('active'));
+  const el=document.getElementById('sb-'+id);
+  if(el)el.classList.add('active');
+  updateProyectoBanner(id);
+  loadChatMessages();
+  marcarLeidas(id);
+}
+async function marcarLeidas(convId){
+  try{
+    const user=window.MTAuth?.getUser?.();
+    const heads={'Content-Type':'application/json'};
+    if(user?.token) heads['Authorization']='Bearer '+user.token;
+    await fetch(`${API_BASE}/api/chat/${convId}/leer`,{method:'PATCH',headers:heads});
+    var sb=document.getElementById('sb-'+convId);
+    if(sb){var u=sb.querySelector('.sb-unread');if(u)u.remove();}
+    var c=_chatData[convId];
+    if(c)c.unread_count=0;
+  }catch(e){}
+}
+
+function startNewChat(){
+  _chatConvId=null;
+  document.querySelectorAll('.chat-sb-item').forEach(el=>el.classList.remove('active'));
+  resetChatMain();
+  document.getElementById('chatInput').focus();
+}
+
+function updateProyectoBanner(convId){
+  const c=_chatData[convId];
+  const pb=document.getElementById('proyectoBanner');
+  if(!pb)return;
+  if(!c||!c.proyecto_id||!c.proyecto_estado){
+    pb.style.display='none';
+    return;
+  }
+  pb.style.display='flex';
+  const labels={pendiente:'Recibido',revisado:'En revisión',desarrollando:'Desarrollando',cerrado:'Completado'};
+  document.getElementById('pbName').textContent=c.proyecto_nombre||'Proyecto #'+c.proyecto_id;
+  const pe=document.getElementById('pbEstado');
+  pe.textContent=labels[c.proyecto_estado]||c.proyecto_estado;
+  pe.className='pb-estado '+c.proyecto_estado;
+  const steps=pb.querySelectorAll('.pb-step');
+  const order=['pendiente','revisado','desarrollando','cerrado'];
+  let foundActive=false;
+  steps.forEach(s=>{
+    const step=s.dataset.step;
+    s.classList.remove('done','active');
+    if(!foundActive&&step===c.proyecto_estado){
+      s.classList.add('active');
+      foundActive=true;
+    }else if(!foundActive){
+      s.classList.add('done');
+    }
+  });
+}
+
+async function loadChatMessages(){
+  const body=document.getElementById('chatBody');
+  const empty=document.getElementById('chatEmpty');
+  if(!_chatConvId)return;
+  document.getElementById('chStatus').textContent='Cargando...';
+  try{
+    const user=window.MTAuth?.getUser?.();
+    const heads={'Content-Type':'application/json'};
+    if(user?.token) heads['Authorization']='Bearer '+user.token;
+    const url=_chatConvId?`${API_BASE}/api/chat?conv_id=${_chatConvId}`:`${API_BASE}/api/chat`;
+    const r=await fetch(url,{credentials:'include',headers:heads});
+    const data=await r.json();
+    if(data.success&&data.messages?.length){
+      empty&&(empty.style.display='none');
+      body.querySelectorAll('.msg-wrap').forEach(m=>m.remove());
+      data.messages.forEach(m=>appendMsg(m.texto||m.mensaje,m.direction||(m.tipo==='admin'?'incoming':'outgoing'),m.created_at,m));
+      body.scrollTop=body.scrollHeight;
+      document.getElementById('chStatus').textContent='En línea · Respondemos en minutos';
+    } else {
+      document.getElementById('chStatus').textContent='En línea · Sin mensajes aún';
+    }
+  }catch(e){console.error('[chat] load error:',e); document.getElementById('chStatus').textContent='En línea';}
+}
+function appendMsg(text,direction,time,msgData){
+  const body=document.getElementById('chatBody');
+  const empty=document.getElementById('chatEmpty');
+  if(empty)empty.style.display='none';
+  const w=document.createElement('div');
+  w.className='msg-wrap '+direction;
+  const d=document.createElement('div');
+  d.className='msg '+direction;
+  if(msgData?.archivo_url){
+    const isImg=msgData.archivo_tipo?.startsWith('image/');
+    const wrap=document.createElement('div');
+    wrap.style.marginBottom='4px';
+    if(isImg){
+      const img=document.createElement('img');
+      img.src=msgData.archivo_url; img.alt=msgData.archivo_nombre||'';
+      img.style.maxWidth='180px'; img.style.borderRadius='8px'; img.style.cursor='pointer'; img.style.display='block';
+      img.onclick=()=>window.open(msgData.archivo_url,'_blank');
+      wrap.appendChild(img);
+    } else {
+      const fileDiv=document.createElement('div');
+      fileDiv.style.cssText='display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(0,0,0,.08);border-radius:8px;cursor:pointer;max-width:200px';
+      fileDiv.innerHTML=`<span class="material-symbols-outlined" style="font-size:1.3rem">description</span><span style="font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${msgData.archivo_nombre||'Archivo'}</span><span class="material-symbols-outlined" style="font-size:.9rem;opacity:.6">open_in_new</span>`;
+      fileDiv.onclick=()=>window.open(msgData.archivo_url,'_blank');
+      wrap.appendChild(fileDiv);
+    }
+    d.appendChild(wrap);
+  }
+  if(text){
+    const t=document.createElement('span');
+    t.textContent=text;
+    d.appendChild(t);
+  }
+  const ts=document.createElement('span');
+  ts.className='msg-time';
+  ts.textContent=time?new Date(time).toLocaleString('es-DO',{hour:'2-digit',minute:'2-digit'}):new Date().toLocaleString('es-DO',{hour:'2-digit',minute:'2-digit'});
+  d.appendChild(ts);
+  w.appendChild(d);
+  body.appendChild(w);
+  body.scrollTop=body.scrollHeight;
+}
+async function sendChatMsg(archivo){
+  const inp=document.getElementById('chatInput');
+  const btn=document.getElementById('chatSendBtn');
+  const txt=(inp?.value||'').trim();
+  if(!txt&&!archivo)return;
+  btn.disabled=true;
+  const user=window.MTAuth?.getUser?.();
+  const payload={mensaje:txt||'',nombre:user?.nombre||null};
+  if(_chatConvId) payload.conversacion_id=_chatConvId;
+  if(archivo){
+    payload.archivo_url=archivo.url;
+    payload.archivo_nombre=archivo.nombre;
+    payload.archivo_tipo=archivo.tipo;
+    payload.archivo_tamano=archivo.tamano;
+  }
+  if(txt) appendMsg(txt,'outgoing');
+  if(archivo) appendArchivoMsg(archivo,'outgoing');
+  if(inp) inp.value='';
+  try{
+    const r=await fetch(`${API_BASE}/api/chat`,{
+      method:'POST',
+      headers:Object.assign({'Content-Type':'application/json'}, user?.token ? {'Authorization':'Bearer '+user.token} : {}),
+      credentials:'include',
+      body:JSON.stringify(payload)
+    });
+    const data=await r.json();
+    if(data.success&&data.conversacion_id){
+      _chatConvId=data.conversacion_id;
+      loadChatConversaciones();
+    }
+  }catch(e){console.error('[chat] send error:',e)}
+  finally{btn.disabled=false;setTimeout(()=>document.getElementById('chatInput')?.focus(),100);}
+}
+
+async function uploadChatFile(el){
+  const file=el.files[0];
+  if(!file)return;
+  const maxSize=10*1024*1024;
+  if(file.size>maxSize){alert('El archivo excede 10MB');el.value='';return;}
+  const fd=new FormData();
+  fd.append('file',file);
+  try{
+    const r=await fetch(API_BASE+'/api/upload',{method:'POST',body:fd});
+    const j=await r.json();
+    if(!j.success)throw new Error(j.message);
+    await sendChatMsg(j);
+  }catch(e){console.error('[chat] upload error:',e)}
+  el.value='';
+}
+
+function appendArchivoMsg(a,dir){
+  const body=document.getElementById('chatBody');
+  const empty=document.getElementById('chatEmpty');
+  if(empty)empty.style.display='none';
+  if(!body)return;
+  const isImg=a.tipo?.startsWith('image/');
+  const time=new Date().toLocaleTimeString('es-DO',{hour:'2-digit',minute:'2-digit'});
+  const w=document.createElement('div');
+  w.className='msg-wrap '+dir;
+  const d=document.createElement('div');
+  d.className='msg '+dir;
+  const wrap=document.createElement('div');
+  wrap.style.marginBottom='4px';
+  if(isImg){
+    const img=document.createElement('img');
+    img.src=a.url; img.alt=a.nombre||'';
+    img.style.maxWidth='180px'; img.style.borderRadius='8px'; img.style.cursor='pointer'; img.style.display='block';
+    img.onclick=()=>window.open(a.url,'_blank');
+    wrap.appendChild(img);
+  } else {
+    const fileDiv=document.createElement('div');
+    fileDiv.style.cssText='display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(0,0,0,.08);border-radius:8px;cursor:pointer;max-width:200px';
+    fileDiv.innerHTML=`<span class="material-symbols-outlined" style="font-size:1.3rem">description</span><span style="font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${a.nombre||'Archivo'}</span><span class="material-symbols-outlined" style="font-size:.9rem;opacity:.6">open_in_new</span>`;
+    fileDiv.onclick=()=>window.open(a.url,'_blank');
+    wrap.appendChild(fileDiv);
+  }
+  d.appendChild(wrap);
+  const ts=document.createElement('span');
+  ts.className='msg-time';
+  ts.textContent=time;
+  d.appendChild(ts);
+  w.appendChild(d);
+  body.appendChild(w);
+  body.scrollTop=body.scrollHeight;
+}
+</script>
+<script src="/mt-javascript/mt-i18n.js"></script>
+<script>
+(function(){
+  var pill=document.getElementById('navPill');
+  var active=document.querySelector('.nav-link.active');
+  if(!pill||!active)return;
+  function moveTo(el){
+    var pr=pill.parentElement.getBoundingClientRect();
+    var er=el.getBoundingClientRect();
+    pill.style.left=(er.left-pr.left)+'px';
+    pill.style.top=(er.top-pr.top)+'px';
+    pill.style.width=er.width+'px';
+    pill.style.height=er.height+'px';
+  }
+  moveTo(active);
+  document.querySelectorAll('.nav-link:not(.nav-link-admin)').forEach(function(link){
+    link.addEventListener('mouseenter',function(){moveTo(link);});
+    link.addEventListener('mouseleave',function(){moveTo(active);});
+  });
+})();
+</script>
+<!-- ══ CHAT WIDGET ══ -->
+<div class="chat-overlay" id="chatOverlay">
+  <div class="chat-layout">
+    <div class="chat-sidebar" id="chatSidebar">
+      <div class="chat-sidebar-head">Mis chats</div>
+      <div class="chat-sidebar-list" id="chatSidebarList">
+        <div style="padding:20px;text-align:center;font-size:.72rem;color:var(--text-muted)">Cargando...</div>
+      </div>
+    </div>
+    <div class="chat-main">
+      <div class="chat-head">
+        <div class="ch-avatar"><span class="material-symbols-outlined">forum</span></div>
+        <div class="ch-info">
+          <div class="ch-name" id="chName">Nexa Team</div>
+          <div class="ch-status" id="chStatus">Respondemos en menos de 24 horas</div>
+        </div>
+      </div>
+      <div class="proyecto-banner" id="proyectoBanner" style="display:none">
+        <div class="pb-top">
+          <span class="pb-name" id="pbName">—</span>
+          <span class="pb-estado" id="pbEstado"></span>
+        </div>
+        <div class="pb-bar" id="pbBar">
+          <span class="pb-step" data-step="pendiente">Recibido</span>
+          <span class="pb-step" data-step="revisado">Revisado</span>
+          <span class="pb-step" data-step="desarrollando">Desarrollando</span>
+          <span class="pb-step" data-step="cerrado">Completado</span>
+        </div>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-empty" id="chatEmpty">
+          <span class="material-symbols-outlined">sms</span>
+          <div>¡Hola! 👋 ¿En qué podemos ayudarte?<br><span style="font-size:.72rem;opacity:.7">Envía un mensaje y te responderemos a la brevedad.</span></div>
+        </div>
+      </div>
+      <div class="chat-foot" style="display:flex;align-items:center;gap:6px;padding:6px 10px">
+        <button onclick="document.getElementById('chatFileInput').click()" style="background:none;border:none;cursor:pointer;color:var(--text-soft);padding:4px;border-radius:50%;display:flex"><span class="material-symbols-outlined" style="font-size:1.1rem">attach_file</span></button>
+        <input type="file" id="chatFileInput" style="display:none" onchange="uploadChatFile(this)">
+        <input type="text" id="chatInput" placeholder="Escribe un mensaje..." onkeydown="if(event.key==='Enter')sendChatMsg()" style="flex:1">
+        <button onclick="sendChatMsg()" id="chatSendBtn"><span class="material-symbols-outlined" style="font-size:1.05rem">send</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" style="display:none"><span class="material-symbols-outlined">chat</span></button>
+<script>(function(){var o=document.getElementById('pwaOverlay');if(o&&!window.matchMedia('(display-mode:standalone)').matches&&!window.navigator.standalone&&window.innerWidth<768){o.classList.add('show')}})()</script>
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}</script>
+</body>
+</html>

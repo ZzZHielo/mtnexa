@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="beige">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2c2416">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Multitech">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/assets/iconos/apple-touch-icon.svg">
+<link rel="icon" type="image/svg+xml" href="/assets/iconos/pwa-icon.svg">
+<script>(function(){var l=localStorage.getItem('mt-lang');if(l)document.documentElement.setAttribute('lang',l);})();</script>
+<title>Plantillas — Multitech</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+[data-theme="beige"]{--bg:#f5f0e8;--bg2:#ede8de;--bg3:#e6dfcf;--surface:#faf7f2;--border:#d9d1c0;--text:#2c2416;--text-soft:#6b5e47;--text-muted:#a39880;--accent:#7a5c3a;--accent-bg:#e8dfc8;--accent-txt:#3d2e16;--btn-bg:#2c2416;--btn-txt:#faf7f2;--nav-bg:rgba(245,240,232,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="dark"]{--bg:#111010;--bg2:#1a1918;--bg3:#232120;--surface:#1e1c1b;--border:#333;--text:#f0ede8;--text-soft:#a89e92;--text-muted:#6b6259;--accent:#c9a97a;--accent-bg:#2a2318;--accent-txt:#e8d5b0;--btn-bg:#e8d5b0;--btn-txt:#1a1410;--nav-bg:rgba(17,16,16,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="blanc"]{--bg:#fff;--bg2:#f8f8f8;--bg3:#f0f0f0;--surface:#fff;--border:#e5e5e5;--text:#111;--text-soft:#555;--text-muted:#999;--accent:#555;--accent-bg:#f0f0f0;--accent-txt:#222;--btn-bg:#111;--btn-txt:#fff;--nav-bg:rgba(255,255,255,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="slate"]{--bg:#1a2332;--bg2:#1f2a3d;--bg3:#253045;--surface:#202c3f;--border:#2d3d52;--text:#e8eef5;--text-soft:#8fa3bc;--text-muted:#4d6480;--accent:#7eb8f7;--accent-bg:#1a2d44;--accent-txt:#b8d8ff;--btn-bg:#7eb8f7;--btn-txt:#0a1628;--nav-bg:rgba(26,35,50,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="sage"]{--bg:#f2f4ef;--bg2:#e8ebe3;--bg3:#dde2d6;--surface:#f7f8f5;--border:#cdd3c6;--text:#2a3020;--text-soft:#596349;--text-muted:#8a9878;--accent:#4a6741;--accent-bg:#dde8d6;--accent-txt:#2a4022;--btn-bg:#2a3020;--btn-txt:#f2f4ef;--nav-bg:rgba(242,244,239,0.92);--radius:14px;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-weight:300;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;overflow-x:hidden}
+.material-symbols-outlined{color:var(--text);font-size:1.5rem;vertical-align:middle;transition:color .3s;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
+.ts-icon{font-size:1.1rem !important;color:var(--btn-txt) !important}
+.dd-icon .material-symbols-outlined{font-size:1rem;color:var(--accent)}
+.logo-svg{display:inline-block;height:50px;width:auto;color:var(--text);padding-left:20px;transition:color .3s}
+
+.theme-switcher{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.ts-toggle{width:46px;height:46px;border-radius:50%;background:var(--btn-bg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:transform .2s,background .3s}
+.ts-toggle:hover{transform:scale(1.08)}
+.ts-panel{display:none;flex-direction:column;gap:4px;align-items:stretch;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:0 8px 32px rgba(0,0,0,.13);min-width:170px;transition:background .3s,border-color .3s}
+.ts-panel.open{display:flex}
+.ts-panel-label{font-size:.65rem;font-weight:500;color:var(--text-muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px;padding:0 4px}
+.mt-theme-btn{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:var(--ff-body);font-size:.82rem;color:var(--text-soft);transition:all .2s;white-space:nowrap;text-align:left}
+.mt-theme-btn:hover{background:var(--bg2);color:var(--text)}
+.mt-theme-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500}
+.ts-swatch{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(0,0,0,.14);flex-shrink:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:var(--nav-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:5px 6px;gap:2px;transition:background .3s,border-color .3s}
+.nav-pill{position:absolute;background:var(--bg2);border:1px solid var(--border);border-radius:100px;z-index:0;transition:all .25s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.nav-item{position:relative}
+.nav-link{display:flex;align-items:center;gap:5px;padding:7px 16px;border-radius:100px;font-size:.8rem;font-weight:400;color:var(--text-soft);text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap;border:none;background:none;font-family:var(--ff-body);position:relative;z-index:1}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-link.active{font-weight:500}
+.nav-link span{position:relative;z-index:1}
+.nav-chevron{width:12px;height:12px;position:relative;z-index:1;flex-shrink:0;transition:transform .2s}
+.nav-item.dd-open .nav-chevron,.nav-item:hover .nav-chevron{transform:rotate(180deg)}
+.nav-chevron::before,.nav-chevron::after{content:'';position:absolute;width:5px;height:1.5px;background:currentColor;top:5px;border-radius:1px}
+.nav-chevron::before{left:1px;transform:rotate(45deg)}
+.nav-chevron::after{left:4px;transform:rotate(-45deg)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-cta{display:flex;align-items:center;gap:6px;padding:8px 20px;border-radius:100px;background:var(--btn-bg);color:var(--btn-txt);font-size:.78rem;font-weight:500;text-decoration:none;cursor:pointer;border:none;font-family:var(--ff-body);transition:opacity .2s,transform .15s}
+.nav-cta:hover{opacity:.85;transform:translateY(-1px)}
+.cta-arrow{display:inline-block;transition:transform .2s}
+.nav-cta:hover .cta-arrow{transform:translateX(3px)}
+.dropdown{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-6px);background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;width:420px;box-shadow:0 12px 40px rgba(44,36,22,.1);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:100}
+#serviciosDropdown.open{display:block !important;opacity:1 !important;transform:translateX(-50%) translateY(0) !important;pointer-events:all !important}
+.nav-item.dd-open .dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.dropdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dd-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none;transition:background .15s;border:1px solid transparent}
+.dd-item:hover{background:var(--bg2);border-color:var(--border)}
+.dd-icon{width:30px;height:30px;flex-shrink:0;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px}
+.dd-text h4{font-size:.78rem;font-weight:500;color:var(--text);margin-bottom:2px}
+.dd-text p{font-size:.69rem;color:var(--text-muted);line-height:1.45}
+.dd-footer{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.dd-footer-label{font-size:.7rem;color:var(--text-muted)}
+.dd-footer-link{font-size:.72rem;font-weight:500;color:var(--accent);text-decoration:none}
+.dd-footer-link:hover{opacity:.75}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all .3s}
+
+.nav-link-admin{background:var(--btn-bg) !important;color:var(--btn-txt) !important;font-weight:500 !important;border:none !important;overflow:hidden;transition:color .2s,width .35s cubic-bezier(.4,0,.2,1),padding .35s cubic-bezier(.4,0,.2,1) !important}
+.nav-link-admin:hover{opacity:.85}
+.admin-label{display:inline-block;overflow:hidden;max-width:60px;transition:max-width .3s cubic-bezier(.4,0,.2,1),opacity .25s ease;white-space:nowrap}
+.lock-wrap{position:relative;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.lock-icon{font-size:.9rem !important;color:var(--btn-txt) !important;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;display:flex;align-items:center;justify-content:center;line-height:1}
+.nav-link-admin.hide-text .admin-label{max-width:0;opacity:0}
+.nav-link-admin.hide-text{gap:0 !important}
+@keyframes lockShake{0%{transform:rotate(0)}18%{transform:rotate(-24deg)}42%{transform:rotate(16deg)}62%{transform:rotate(-10deg)}78%{transform:rotate(6deg)}100%{transform:rotate(0)}}
+@keyframes lockOpenMorph{0%{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;transform:rotate(0) scale(1)}35%{font-variation-settings:'FILL' 0,'wght' 700,'GRAD' 0,'opsz' 24;transform:rotate(-18deg) scale(1.1)}100%{font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 24;transform:rotate(0) scale(1)}}
+.nav-link-admin.shaking .lock-icon{animation:lockShake .45s cubic-bezier(.36,.07,.19,.97) forwards}
+.nav-link-admin.unlocked .lock-icon{animation:lockOpenMorph .42s cubic-bezier(.34,1.56,.64,1) forwards}
+
+.user-btn-wrap{position:relative}
+.user-btn{height:36px;border-radius:100px;border:1.5px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;font-family:var(--ff-body);font-size:.78rem;font-weight:500;color:var(--text-soft);transition:border-color .2s,color .2s,transform .15s;white-space:nowrap}
+.user-btn:hover{border-color:var(--text-muted);color:var(--text)}
+.user-btn.logged-in{width:36px;height:36px;border-radius:50%;padding:0;background:var(--accent-bg);border-color:var(--accent-bg);font-family:var(--ff-head);font-size:.75rem;font-weight:700;color:var(--accent-txt);position:relative;overflow:hidden}
+.user-btn.logged-in:hover{border-color:var(--accent);transform:scale(1.06);box-shadow:0 0 0 3px var(--accent-bg)}
+.online-dot{position:absolute;bottom:0;right:0;width:8px;height:8px;border-radius:50%;background:#22c55e;border:2px solid var(--surface);display:none}
+.user-btn.logged-in .online-dot{display:block}
+.user-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:300px;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.14),0 4px 16px rgba(0,0,0,.08);opacity:0;pointer-events:none;transform:translateY(-6px) scale(.97);transform-origin:top right;transition:opacity .18s,transform .18s;z-index:300;overflow:hidden}
+.user-dropdown.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.udd-profile{display:flex;align-items:center;gap:13px;padding:18px 18px 16px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.udd-avatar{width:42px;height:42px;border-radius:50%;background:var(--accent-bg);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--ff-head);font-size:.88rem;font-weight:700;color:var(--accent-txt);border:2px solid var(--border);overflow:hidden;position:relative}
+.udd-info{flex:1;min-width:0}
+.udd-name{font-size:.88rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.udd-email{font-size:.7rem;color:var(--text-muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.udd-role-pill{display:inline-flex;align-items:center;gap:4px;background:var(--accent-bg);color:var(--accent-txt);font-size:.6rem;font-weight:500;padding:2px 8px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase;margin-top:5px}
+.udd-role-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.udd-section{padding:6px 8px}
+.udd-section+.udd-section{border-top:1px solid var(--border)}
+.udd-section-label{font-size:.62rem;font-weight:500;color:var(--text-muted);letter-spacing:.07em;text-transform:uppercase;padding:6px 10px 4px}
+.udd-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:9px;border:none;background:transparent;font-family:var(--ff-body);font-size:.82rem;color:var(--text-soft);cursor:pointer;text-align:left;text-decoration:none;transition:background .13s,color .13s}
+.udd-item:hover{background:var(--bg2);color:var(--text)}
+.udd-item-icon{width:26px;height:26px;border-radius:7px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.udd-item:hover .udd-item-icon{background:var(--bg3)}
+.udd-item-icon .material-symbols-outlined{font-size:.9rem;color:var(--accent)}
+.udd-item-label{flex:1;line-height:1}
+.udd-item.danger{color:#c0392b}
+.udd-item.danger:hover{background:#fdecea;color:#c0392b}
+.udd-item.danger .udd-item-icon{background:#fdecea}
+.udd-item.danger .udd-item-icon .material-symbols-outlined{color:#c0392b}
+.udd-accounts{display:flex;flex-direction:column;gap:2px;padding:4px 0}
+.acc-row{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border-radius:9px;border:none;background:transparent;font-family:var(--ff-body);cursor:pointer;text-align:left;transition:background .13s}
+.acc-row:hover{background:var(--bg2)}
+.acc-row.active{background:var(--accent-bg)}
+.acc-av{width:30px;height:30px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-family:var(--ff-head);font-size:.68rem;font-weight:700;color:var(--accent-txt);flex-shrink:0;border:1.5px solid transparent;transition:border-color .15s,background .15s;overflow:hidden;position:relative}
+.acc-row.active .acc-av{border-color:var(--accent);background:var(--accent-bg)}
+.acc-body{flex:1;min-width:0}
+.acc-name{font-size:.81rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+.acc-row.active .acc-name{font-weight:500;color:var(--accent-txt)}
+.acc-role-badge{display:inline-flex;align-items:center;font-size:.62rem;color:var(--text-muted);margin-top:2px;gap:4px}
+.acc-role-dot{width:4px;height:4px;border-radius:50%;background:var(--text-muted);flex-shrink:0}
+.acc-row.active .acc-role-dot{background:var(--accent)}
+.acc-check .material-symbols-outlined{font-size:.85rem;color:var(--accent)}
+.acc-online{width:8px;height:8px;border-radius:50%;background:#22c55e;border:1.5px solid var(--surface);margin-left:auto;flex-shrink:0}
+.udd-login-prompt{padding:20px 18px}
+.udd-lp-title{font-family:var(--ff-head);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:5px}
+.udd-lp-sub{font-size:.78rem;color:var(--text-muted);margin-bottom:18px;line-height:1.55}
+.udd-btn-login{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;border-radius:10px;background:var(--btn-bg);color:var(--btn-txt);font-family:var(--ff-body);font-size:.85rem;font-weight:500;border:none;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.udd-btn-login:hover{opacity:.85}
+.udd-btn-register{display:flex;align-items:center;justify-content:center;width:100%;padding:9px;border-radius:10px;background:transparent;color:var(--text-soft);font-family:var(--ff-body);font-size:.82rem;border:1.5px solid var(--border);cursor:pointer;text-decoration:none;margin-top:8px;transition:border-color .15s,color .15s}
+.udd-btn-register:hover{border-color:var(--text-muted);color:var(--text)}
+
+.page-header{padding:110px 56px 72px;border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .6s .05s ease forwards}
+.breadcrumb{font-size:.75rem;color:var(--text-muted);margin-bottom:18px;display:flex;align-items:center;gap:7px}
+.breadcrumb a{color:var(--text-muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--text)}
+.breadcrumb span{opacity:.5}
+.ph-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}
+.ph-grid h1{font-family:var(--ff-head);font-size:clamp(2.6rem,5vw,4.4rem);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.ph-grid h1 em{font-style:italic;color:var(--accent)}
+.ph-right{padding-bottom:6px}
+.ph-right p{font-size:.96rem;color:var(--text-soft);line-height:1.78;margin-bottom:22px}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:500;color:var(--text);text-decoration:none;border-bottom:1px solid var(--text);padding-bottom:2px;transition:gap .2s,opacity .2s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--ff-body)}
+.btn-ghost:hover{gap:14px;opacity:.7}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.filters-bar{display:flex;align-items:center;gap:0;padding:0 56px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters-bar::-webkit-scrollbar{display:none}
+.filter-btn{padding:16px 20px;font-size:.8rem;font-weight:400;color:var(--text-muted);background:none;border:none;cursor:pointer;font-family:var(--ff-body);transition:color .2s,font-weight .15s;white-space:nowrap;position:relative}
+.filter-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--btn-bg);transform:scaleX(0);transition:transform .2s cubic-bezier(.4,0,.2,1)}
+.filter-btn:hover{color:var(--text)}
+.filter-btn.active{color:var(--text);font-weight:500}
+.filter-btn.active::after{transform:scaleX(1)}
+.fsep{width:1px;height:18px;background:var(--border);flex-shrink:0}
+
+.templates-area{padding:56px}
+.templates-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.t-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .2s;cursor:pointer}
+.t-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.1);border-color:var(--border)}
+.t-preview{position:relative;background:var(--bg2);height:180px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);overflow:hidden;transition:background .3s}
+.mini-browser{width:82%;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.08);overflow:hidden;transition:background .3s,border-color .3s}
+.mb-bar{display:flex;align-items:center;gap:4px;padding:6px 10px;border-bottom:1px solid var(--border);background:var(--bg2);transition:background .3s,border-color .3s}
+.mb-dot{width:6px;height:6px;border-radius:50%}
+.mb-body{padding:10px;display:flex;flex-direction:column;gap:5px}
+.mb-h{height:7px;background:var(--border);border-radius:4px;width:75%;transition:background .3s}
+.mb-h.accent{background:var(--accent-bg)}
+.mb-h.sm{width:50%}
+.mb-h.xs{width:30%}
+.mb-row{display:flex;gap:5px;margin-top:3px}
+.mb-col{flex:1;height:26px;background:var(--border);border-radius:4px;transition:background .3s}
+.mb-col.tall{height:40px}
+.t-badge{position:absolute;top:10px;right:10px;font-size:.62rem;font-weight:600;padding:3px 9px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase}
+.badge-pop{background:#fef3c7;color:#92400e}
+.badge-new{background:#dbeafe;color:#1e40af}
+.badge-free{background:#d1fae5;color:#065f46}
+[data-theme="dark"] .badge-pop{background:#3d2a04;color:#fbbf24}
+[data-theme="dark"] .badge-new{background:#0c1e3d;color:#7eb8f7}
+[data-theme="dark"] .badge-free{background:#062217;color:#34d399}
+.t-info{padding:20px 22px}
+.t-name{font-family:var(--ff-head);font-size:1rem;font-weight:600;color:var(--text);margin-bottom:6px}
+.t-desc{font-size:.79rem;color:var(--text-soft);line-height:1.65;margin-bottom:12px}
+.t-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.t-tag{font-size:.67rem;padding:3px 9px;border-radius:100px;background:var(--accent-bg);color:var(--accent-txt);border:1px solid var(--border)}
+.t-actions{display:flex;gap:8px}
+.btn-sm{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 16px;border-radius:100px;font-size:.76rem;font-weight:500;text-decoration:none;cursor:pointer;font-family:var(--ff-body);transition:opacity .15s,transform .15s;border:none}
+.btn-sm:hover{opacity:.82;transform:translateY(-1px)}
+.btn-sm-dark{background:var(--btn-bg);color:var(--btn-txt)}
+.btn-sm-out{background:transparent;color:var(--text);border:1.5px solid var(--border)}
+.btn-sm-out:hover{border-color:var(--text)}
+
+.no-results{grid-column:1/-1;text-align:center;padding:80px 20px}
+.no-results .material-symbols-outlined{font-size:2.4rem;opacity:.2;display:block;margin-bottom:12px;color:var(--text)}
+.no-results p{font-size:.9rem;color:var(--text-muted)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s;backdrop-filter:blur(4px)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;transform:translateY(18px) scale(.97);transition:transform .25s cubic-bezier(.16,1,.3,1);scrollbar-width:thin}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1}
+.modal-head h3{font-family:var(--ff-head);font-size:1.15rem;font-weight:700;color:var(--text)}
+.modal-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.modal-close:hover{background:var(--bg2)}
+.modal-close .material-symbols-outlined{font-size:.9rem;color:var(--text-muted)}
+.modal-preview{background:var(--bg2);padding:28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.modal-preview .mini-browser{width:90%}
+.modal-body{padding:24px}
+.modal-desc{font-size:.87rem;color:var(--text-soft);line-height:1.78;margin-bottom:18px}
+.modal-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.mm-item{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.mm-label{font-size:.65rem;font-weight:500;color:var(--text-muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.mm-val{font-size:.83rem;color:var(--text);font-weight:500}
+.modal-features{margin-bottom:22px}
+.modal-features h4{font-size:.75rem;font-weight:500;color:var(--text-muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.feat-list{display:flex;flex-wrap:wrap;gap:6px}
+.feat-chip{font-size:.74rem;padding:4px 11px;border-radius:100px;background:var(--accent-bg);color:var(--accent-txt);border:1px solid var(--border)}
+.modal-actions{display:flex;gap:10px}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:1;padding:12px 20px;border-radius:100px;background:var(--btn-bg);color:var(--btn-txt);font-size:.85rem;font-weight:500;border:none;cursor:pointer;font-family:var(--ff-body);text-decoration:none;transition:opacity .2s,transform .15s}
+.btn-primary:hover{opacity:.86;transform:translateY(-1px)}
+.btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 20px;border-radius:100px;background:transparent;color:var(--text);font-size:.85rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;font-family:var(--ff-body);transition:border-color .15s}
+.btn-outline:hover{border-color:var(--text)}
+
+/* ══ PERSONALIZADOR ══ */
+.personalizador-new{padding:88px 56px;border-top:1px solid var(--border);background:var(--bg2);transition:background .3s,border-color .3s}
+.pers-wrap{position:relative;width:100%;min-height:520px;overflow:hidden;border-radius:var(--radius);display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center}
+.pers-bg-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.pers-left{position:relative;z-index:10;padding:3rem 2.5rem}
+.pers-left h2{font-family:var(--ff-head);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:700;letter-spacing:-.025em;margin-bottom:14px;line-height:1.1}
+.pers-left h2 em{font-style:italic;color:var(--accent)}
+.pers-left>p{font-size:.9rem;color:var(--text-soft);line-height:1.78;margin-bottom:32px}
+.pers-steps{display:flex;flex-direction:column;gap:20px}
+.ps{display:flex;align-items:flex-start;gap:14px}
+.ps-n{width:28px;height:28px;border-radius:50%;background:var(--btn-bg);color:var(--btn-txt);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;flex-shrink:0;margin-top:2px}
+.ps-b h4{font-size:.85rem;font-weight:500;color:var(--text);margin-bottom:4px}
+.ps-b p{font-size:.79rem;color:var(--text-soft);line-height:1.6}
+.pers-right{position:relative;z-index:10;height:380px}
+#sphereCanvas{display:block;width:100%;height:100%;cursor:grab}
+#sphereCanvas:active{cursor:grabbing}
+
+/* ══ SECCIÓN TRANSFORMAMOS ══ */
+.sec-transformamos{background:var(--bg);font-family:var(--ff-body);padding:100px 56px;border-top:1px solid var(--border);transition:background .3s,border-color .3s}
+.sec-transformamos .sec-inner{max-width:1100px;margin:0 auto}
+.st-top-label{font-size:.67rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:56px;display:flex;align-items:center;gap:10px}
+.st-top-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.st-hero-row{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:80px}
+.st-hero-h{font-family:var(--ff-head);font-size:clamp(2.4rem,4vw,3.6rem);font-weight:700;letter-spacing:-.035em;line-height:1.05;color:var(--text)}
+.st-hero-h em{font-style:italic;color:var(--accent)}
+.st-hero-right{padding-bottom:6px}
+.st-hero-lead{font-size:.95rem;color:var(--text-soft);line-height:1.82;margin-bottom:32px}
+.st-stat-row{display:flex;gap:32px;margin-bottom:32px}
+.st-stat{border-left:2px solid var(--accent-bg);padding-left:14px}
+.st-stat-n{font-family:var(--ff-head);font-size:1.7rem;font-weight:700;color:var(--text);letter-spacing:-.03em;line-height:1}
+.st-stat-l{font-size:.72rem;color:var(--text-muted);margin-top:3px}
+.st-cta-wrap{display:flex;align-items:center;gap:14px}
+.st-btn-fill{display:inline-flex;align-items:center;gap:7px;padding:11px 24px;border-radius:100px;background:var(--btn-bg);color:var(--btn-txt);font-family:var(--ff-body);font-size:.82rem;font-weight:500;border:none;cursor:pointer;text-decoration:none;transition:opacity .2s,transform .15s}
+.st-btn-fill:hover{opacity:.85;transform:translateY(-1px)}
+.st-btn-fill .arr{display:inline-block;transition:transform .2s}
+.st-btn-fill:hover .arr{transform:translateX(4px)}
+.st-btn-ghost{font-size:.82rem;color:var(--text-soft);border-bottom:1px solid var(--border);padding-bottom:1px;text-decoration:none;cursor:pointer;transition:color .2s,border-color .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--ff-body)}
+.st-btn-ghost:hover{color:var(--text);border-color:var(--text-muted)}
+.st-process-track{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.st-process-track::before{content:'';position:absolute;top:20px;left:10%;right:10%;height:1px;background:var(--border);z-index:0}
+.st-proc-step{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;padding:0 8px}
+.st-proc-num{width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--ff-head);font-size:.85rem;font-weight:700;color:var(--text-muted);margin-bottom:16px;transition:all .25s}
+.st-proc-step:hover .st-proc-num{background:var(--btn-bg);color:var(--btn-txt);border-color:var(--btn-bg)}
+.st-proc-title{font-size:.82rem;font-weight:500;color:var(--text);margin-bottom:6px;line-height:1.3}
+.st-proc-desc{font-size:.74rem;color:var(--text-muted);line-height:1.6}
+.st-divider{width:100%;height:1px;background:var(--border);margin:64px 0}
+.st-perks-strip{display:flex;overflow:hidden;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.st-perk{flex:1;padding:20px 22px;border-right:1px solid var(--border);transition:background .15s}
+.st-perk:last-child{border-right:none}
+.st-perk:hover{background:var(--bg2)}
+.st-perk-num{font-family:var(--ff-head);font-size:.75rem;font-weight:700;color:var(--text-muted);margin-bottom:8px;letter-spacing:.05em}
+.st-perk-title{font-size:.83rem;font-weight:500;color:var(--text);margin-bottom:4px}
+.st-perk-body{font-size:.72rem;color:var(--text-soft);line-height:1.6}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:52px 56px 26px;transition:background .3s,border-color .3s}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-desc{font-size:.81rem;color:var(--text-soft);line-height:1.7;margin-top:11px;max-width:230px}
+.footer-col h4{font-size:.72rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:13px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul a{font-size:.81rem;color:var(--text-soft);text-decoration:none;transition:color .2s}
+.footer-col ul a:hover{color:var(--text)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between}
+.footer-bottom span{font-size:.73rem;color:var(--text-muted)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:1024px){.templates-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-center{display:none}
+  .nav-center.open{display:flex;flex-direction:column;position:fixed;inset:0;top:calc(68px + var(--safe-top, 0px));background:var(--bg);padding:32px 20px;z-index:199;border-radius:0;border:none;align-items:stretch;gap:4px;overflow-y:auto;transform:none}
+  .nav-center.open .nav-item{width:100%}
+  .nav-center.open .nav-link{width:100%;justify-content:center;padding:12px 16px;font-size:.9rem}
+  .nav-center.open .nav-cta{width:100%;justify-content:center}
+  .nav-center.open .dropdown{position:static;transform:none;width:100%;opacity:1;pointer-events:all;box-shadow:none}
+  .nav-center.open .dropdown-grid{grid-template-columns:1fr}
+  .hamburger{display:flex}
+  .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .page-header,.filters-bar,.templates-area,.personalizador-new,.sec-transformamos,footer{padding-left:20px;padding-right:20px}
+  .ph-grid{grid-template-columns:1fr}
+  .pers-wrap{grid-template-columns:1fr}
+  .pers-right{height:280px}
+  .st-hero-row{grid-template-columns:1fr;gap:36px}
+  .st-process-track{grid-template-columns:1fr 1fr;gap:32px}
+  .st-process-track::before{display:none}
+  .st-perks-strip{flex-direction:column}
+  .st-perk{border-right:none;border-bottom:1px solid var(--border)}
+  .st-perk:last-child{border-bottom:none}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .theme-switcher{bottom:16px;right:16px}
+  .user-dropdown{right:-8px;width:280px}
+}
+@media(max-width:600px){
+  .templates-grid{grid-template-columns:1fr}
+footer{padding:32px 20px 18px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:20px}
+  .footer-col h4{margin-bottom:8px}
+  .footer-col ul{gap:5px}
+  .footer-desc{max-width:100%;margin-top:8px}
+  .footer-bottom{flex-direction:row;flex-wrap:wrap;justify-content:space-between;gap:6px;padding-top:14px}
+  .modal-meta{grid-template-columns:1fr}
+  .st-stat-row{gap:18px}
+  .st-process-track{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  footer{padding:24px 16px 14px}
+  .footer-top{gap:18px}
+  .footer-col h4{font-size:.9rem}
+  .footer-col ul li a{font-size:.8rem}
+  .footer-bottom span{font-size:.72rem}
+}
+.pwa-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;animation:fadeIn .4s ease}
+.pwa-overlay.show{display:flex}
+.pwa-overlay .logo-svg{height:56px;width:auto;color:var(--text);margin-bottom:20px}
+.pwa-overlay h2{font-family:var(--ff-head);font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.pwa-overlay p{font-size:.9rem;color:var(--text-soft);line-height:1.7;max-width:340px;margin-bottom:28px}
+.pwa-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;width:100%;max-width:320px}
+.pwa-step{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:left}
+.pwa-step-num{width:28px;height:28px;border-radius:50%;background:var(--btn-bg);color:var(--btn-txt);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
+.pwa-step-text{font-size:.82rem;color:var(--text-soft);line-height:1.4}
+.pwa-step-text strong{color:var(--text);font-weight:500}
+.pwa-share-icon{display:inline-flex;align-items:center;gap:2px;font-size:.75rem;background:var(--bg2);padding:2px 6px;border-radius:4px;border:1px solid var(--border)}
+.pwa-share-icon .material-symbols-outlined{font-size:.85rem}
+.pwa-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text-muted);background:var(--bg2);padding:6px 14px;border-radius:100px;border:1px solid var(--border)}
+.pwa-badge .material-symbols-outlined{font-size:.85rem;color:var(--accent)}
+</style>
+<link rel="stylesheet" href="/mt-mobile.css">
+</head>
+<body>
+<style>.pwa-desktop-hide{display:none!important}@media(min-width:768px){.pwa-overlay{display:none!important}}</style><div class="pwa-overlay" id="pwaOverlay">
+  <svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg>
+  <h2>Instala Multitech</h2>
+  <p>Para una mejor experiencia, agrega esta aplicación a tu pantalla de inicio.</p>
+  <div class="pwa-steps">
+    <div class="pwa-step">
+      <div class="pwa-step-num">1</div>
+      <div class="pwa-step-text">Toca <span class="pwa-share-icon"><span class="material-symbols-outlined">ios_share</span> Compartir</span> en Safari</div>
+    </div>
+    <div class="pwa-step">
+      <div class="pwa-step-num">2</div>
+      <div class="pwa-step-text">Desplázate y selecciona <strong>Agregar a Inicio</strong></div>
+    </div>
+    <div class="pwa-step">
+      <div class="pwa-step-num">3</div>
+      <div class="pwa-step-text">Toca <strong>Agregar</strong> en la esquina superior derecha</div>
+    </div>
+  </div>
+  <div class="pwa-badge"><span class="material-symbols-outlined">check_circle</span> App lista para instalar</div>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="nexalogo" viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid meet">
+    <g>
+      <path fill="currentColor" d="M585 238H198Q202 186 231.5 158.5Q261 131 304 131Q368 131 393 185H575Q561 130 524.5 86.0Q488 42 433.0 17.0Q378 -8 310 -8Q228 -8 164.0 27.0Q100 62 64.0 127.0Q28 192 28 279Q28 366 63.5 431.0Q99 496 163.0 531.0Q227 566 310 566Q391 566 454.0 532.0Q517 498 552.5 435.0Q588 372 588 288Q588 264 585 238ZM413 333Q413 377 383.0 403.0Q353 429 308 429Q265 429 235.5 404.0Q206 379 199 333Z" transform="translate(1450.0,1663.0) scale(1.25,-1.25)"/>
+      <path fill="currentColor" d="M392 0 285 155 195 0H10L194 285L5 558H197L304 404L394 558H579L392 277L584 0Z" transform="translate(2080.0,1663.0) scale(1.25,-1.25)"/>
+      <path fill="currentColor" d="M274 566Q333 566 377.5 542.0Q422 518 446 479V558H617V0H446V79Q421 40 376.5 16.0Q332 -8 273 -8Q205 -8 149.0 27.5Q93 63 60.5 128.5Q28 194 28 280Q28 366 60.5 431.0Q93 496 149.0 531.0Q205 566 274 566ZM324 417Q273 417 237.5 380.5Q202 344 202 280Q202 216 237.5 178.5Q273 141 324 141Q375 141 410.5 178.0Q446 215 446 279Q446 343 410.5 380.0Q375 417 324 417Z" transform="translate(2710.0,1663.0) scale(1.25,-1.25)"/>
+    </g>
+    <g transform="matrix(1.246551,0,0,1.246551,568.33377,808.382648)">
+      <g transform="matrix(1.450726,0,0,1.450726,-487.750247,-555.447345)">
+        <path fill="currentColor" d="M292.475,234.098C295.888,235.94 302.91,235.373 305.533,234.043C307.98,234.281 311.145,233.731 326.454,237.674C361.713,246.756 393.857,285.671 408.122,314.687C431.921,363.094 456.029,406.665 466.228,426.64C486.339,466.027 502.144,489.55 498.499,497.499C495.661,503.689 452.718,552.308 449.132,556.162C425.563,581.494 405.015,606.784 400.324,604.863C399.126,604.373 383.559,573.304 381.787,570.341C375.823,560.365 335.645,483.151 326.078,468.778C291.825,417.318 252.958,418.542 250.522,418.275C248.834,416.604 246.826,416.725 242.5,417.031C240.943,417.142 241.641,418.004 241.474,418.193C185.925,423.002 169.268,464.311 170.069,469.663C171.197,477.202 176.76,455.742 212.378,435.28C259.77,408.053 324.253,458.874 326.281,498.516C327.166,515.817 273.482,713.848 273.155,717.478C272.278,727.232 286.557,717.55 287.218,717.093C318.063,695.792 340.372,680.464 374.549,645.548C418.111,601.045 425.843,596.213 448.046,570.099C452.497,564.864 483.296,528.64 503.903,504.851C524.154,481.472 661.178,314.455 672.32,301.347C700.004,268.777 699.838,267.992 709.25,233.43C727.679,165.758 805.524,151.633 839.017,194.893C853.025,212.985 855.131,229.816 856.916,240.461C855.939,242.535 854.769,242.975 857.312,245.515C857.744,252.137 858.187,258.349 856.713,267.535C854.454,281.622 833.878,370.497 829.93,385.608C824.137,407.782 814.278,449.999 812.967,455.61C802.088,502.196 801.093,501.871 790.14,548.419C778.339,598.571 750.634,706.665 747.113,720.404C731.46,781.478 728.934,791.498 718.3,811.398C667.365,906.718 564.559,891.216 515.928,820.22C509.278,810.512 445.449,692.16 430.151,662.687C425.615,653.948 423.909,653.251 428.742,644.644C437.788,628.535 487.33,576.019 507.058,556.066C522.776,540.169 522.798,538.997 524.103,539.995C528.641,543.465 569.688,641.733 618.605,682.376C694.817,745.699 755.582,644.595 754.113,636.596C753.254,631.915 740.57,649.277 737.378,653.404C687.373,718.073 625.019,687.548 609.863,660.293C604.836,651.254 610.075,643.309 627.684,574.543C629.773,566.385 653.449,473.92 653.771,472.561C655.664,464.557 657.894,455.884 658.266,454.437C678.177,376.981 689.541,344.061 682.482,346.453C680.344,347.178 580.353,461.474 571.547,471.541C545.983,500.762 527.098,523.302 520.104,529.002C503.492,542.541 452.673,599.545 424.983,633.884C315.065,770.194 306.856,771.283 238.934,851.883C154.735,951.799 61.798,862.746 74.138,772.434C76.719,753.549 117.888,593.139 121.878,577.594C151.687,461.45 151.418,461.466 154.185,451.421C183.595,344.629 184.725,245.537 292.475,234.098Z"/>
+      </g>
+    </g>
+  </symbol>
+</svg>
+
+<!-- THEME SWITCHER -->
+<div class="theme-switcher">
+  <div class="ts-panel" id="tsPanel">
+    <span class="ts-panel-label" data-i18n="theme.title">Estilo visual</span>
+    <button class="mt-theme-btn" data-theme="beige" onclick="mtApply('beige')"><span class="ts-swatch" style="background:#f5f0e8"></span><span data-i18n="theme.beige">Beige</span></button>
+    <button class="mt-theme-btn" data-theme="dark"  onclick="mtApply('dark')"><span class="ts-swatch" style="background:#111010;border-color:#444"></span><span data-i18n="theme.dark">Dark</span></button>
+    <button class="mt-theme-btn" data-theme="blanc" onclick="mtApply('blanc')"><span class="ts-swatch" style="background:#fff"></span><span data-i18n="theme.blanc">Blanc</span></button>
+    <button class="mt-theme-btn" data-theme="slate" onclick="mtApply('slate')"><span class="ts-swatch" style="background:#1a2332;border-color:#445"></span><span data-i18n="theme.slate">Slate</span></button>
+    <button class="mt-theme-btn" data-theme="sage"  onclick="mtApply('sage')"><span class="ts-swatch" style="background:#f2f4ef"></span><span data-i18n="theme.sage">Sage</span></button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg></a>
+  <div class="nav-center" id="navCenter">
+    <div class="nav-pill" id="navPill"></div>
+    <div class="nav-item"><a class="nav-link" href="index.html"><span data-i18n="nav.inicio">Inicio</span></a></div>
+
+    <div class="nav-item" id="serviciosNavItem">
+      <button class="nav-link" id="serviciosBtn" onclick="toggleServicios(event)">
+        <span data-i18n="nav.servicios">Servicios</span><div class="nav-chevron" id="serviciosChevron"></div>
+      </button>
+      <div class="dropdown" id="serviciosDropdown" style="display:none;opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all">
+        <div class="dropdown-grid">
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">language</span></div><div class="dd-text"><h4>Páginas Web</h4><p>Sitios rápidos y optimizados</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">smartphone</span></div><div class="dd-text"><h4>Apps Móviles</h4><p>iOS y Android nativas</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">settings</span></div><div class="dd-text"><h4>Sistemas a Medida</h4><p>ERPs y CRMs personalizados</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">shopping_cart</span></div><div class="dd-text"><h4>E-Commerce</h4><p>Tiendas en línea completas</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">palette</span></div><div class="dd-text"><h4>UI/UX Design</h4><p>Interfaces centradas en el usuario</p></div></a>
+          <a class="dd-item" href="multitech-servicios.html"><div class="dd-icon"><span class="material-symbols-outlined">cloud</span></div><div class="dd-text"><h4>Cloud &amp; Soporte</h4><p>Hosting y mantenimiento</p></div></a>
+        </div>
+        <div class="dd-footer">
+          <span class="dd-footer-label" data-i18n="dd.service_count">6 servicios disponibles</span>
+          <a class="dd-footer-link" href="multitech-servicios.html" data-i18n="dd.view_all">Ver todos &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item"><a class="nav-link active" href="multitech-plantillas.html"><span data-i18n="nav.plantillas">Plantillas</span></a></div>
+    <div class="nav-item"><a class="nav-link" href="multitech-contacto.html"><span data-i18n="nav.contacto">Contacto</span></a></div>
+    <div class="nav-item" id="adminNavItem" style="display:none">
+      <a class="nav-link nav-link-admin" href="admin-dashboard.html" id="adminNavBtn" onclick="triggerLockAnim(event)">
+        <span class="lock-wrap"><span class="material-symbols-outlined lock-icon">lock</span></span>
+        <span class="admin-label" data-i18n="nav.admin">Admin</span>
+      </a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="user-btn-wrap" id="userBtnWrap">
+      <button class="user-btn" id="userBtn" onclick="handleUserBtn()" title="Mi cuenta">
+        <span class="material-symbols-outlined" id="userBtnIcon">person</span>
+        <span id="userBtnLabel" data-i18n="dd.signup">Crear cuenta</span>
+        <div class="online-dot"></div>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <div id="stateLoggedOut">
+          <div class="udd-login-prompt">
+            <div class="udd-lp-title" data-i18n="dd.welcome">Bienvenido</div>
+            <p class="udd-lp-sub" data-i18n="dd.welcome_sub">Accede a tu cuenta para gestionar proyectos y comunicaciones.</p>
+            <a href="mt-signup.html" class="udd-btn-login"><span class="material-symbols-outlined" style="color:var(--btn-txt)">login</span><span data-i18n="dd.login">Iniciar sesión</span></a>
+            <a href="multitech-contacto.html" class="udd-btn-register" data-i18n="dd.request_access">Solicitar acceso</a>
+          </div>
+        </div>
+        <div id="stateLoggedIn" style="display:none">
+          <div class="udd-profile">
+            <div class="udd-avatar" id="dpAvatar"><span class="material-symbols-outlined" style="color:var(--accent-txt)">person</span></div>
+            <div class="udd-info">
+              <div class="udd-name" id="dpName">Admin</div>
+              <div class="udd-email" id="dpEmail">admin@multitech.com</div>
+              <div class="udd-role-pill"><span class="udd-role-dot"></span><span id="dpRole">Admin</span></div>
+            </div>
+          </div>
+          <div class="udd-section">
+            <div class="udd-section-label" data-i18n="dd.switch_account">Cambiar cuenta</div>
+            <div class="udd-accounts" id="accountList"></div>
+            <button class="udd-item" onclick="MTAuth._openAddAccountModal()"><div class="udd-item-icon"><span class="material-symbols-outlined">add</span></div><span class="udd-item-label" data-i18n="dd.add_account">Agregar cuenta</span></button>
+          </div>
+          <div class="udd-section">
+            <a class="udd-item" href="mt-ajustes.html"><div class="udd-item-icon"><span class="material-symbols-outlined">manage_accounts</span></div><span class="udd-item-label" data-i18n="dd.profile">Perfil y ajustes</span></a>
+            <a class="udd-item" href="mt-ajustes.html#seguridad"><div class="udd-item-icon"><span class="material-symbols-outlined">security</span></div><span class="udd-item-label" data-i18n="dd.security">Seguridad</span></a>
+            <a class="udd-item" href="mt-ajustes.html#notificaciones"><div class="udd-item-icon"><span class="material-symbols-outlined">notifications</span></div><span class="udd-item-label" data-i18n="dd.notifications">Notificaciones</span></a>
+          </div>
+          <div class="udd-section">
+            <button class="udd-item danger" onclick="doLogout()"><div class="udd-item-icon"><span class="material-symbols-outlined">logout</span></div><span class="udd-item-label" data-i18n="dd.logout">Cerrar sesión</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span>Plantillas</div>
+  <div class="ph-grid">
+    <h1>Plantillas<br>listas para<br><em>lanzar</em></h1>
+    <div class="ph-right">
+      <p>Elige una base y la personalizamos con tu marca, colores y contenido. O dinos exactamente lo que necesitas y lo construimos desde cero.</p>
+      <button class="btn-ghost" onclick="document.getElementById('sec-transformamos').scrollIntoView({behavior:'smooth'})">Solicitar diseño personalizado &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS BAR -->
+<div class="filters-bar">
+  <button class="filter-btn active" onclick="filterT('all',this)">Todos</button>
+  <div class="fsep"></div>
+  <button class="filter-btn" onclick="filterT('negocio',this)">Negocios</button>
+  <div class="fsep"></div>
+  <button class="filter-btn" onclick="filterT('ecommerce',this)">E-Commerce</button>
+  <div class="fsep"></div>
+  <button class="filter-btn" onclick="filterT('portfolio',this)">Portfolio</button>
+  <div class="fsep"></div>
+  <button class="filter-btn" onclick="filterT('landing',this)">Landing Page</button>
+  <div class="fsep"></div>
+  <button class="filter-btn" onclick="filterT('app',this)">App Landing</button>
+  <div class="fsep"></div>
+  <button class="filter-btn" onclick="filterT('restaurante',this)">Restaurantes</button>
+</div>
+
+<!-- TEMPLATES GRID -->
+<section class="templates-area">
+  <div class="templates-grid" id="tGrid">
+    <div class="t-card" data-cat="negocio" onclick="openModal('corporate-clean')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:55%"></div><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div><span class="t-badge badge-pop">Popular</span></div>
+      <div class="t-info"><div class="t-name">Corporate Clean</div><div class="t-desc">Página corporativa minimalista con hero, servicios, testimonios y contacto.</div><div class="t-tags"><span class="t-tag">Negocios</span><span class="t-tag">5 secciones</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('corporate-clean')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="ecommerce" onclick="openModal('shop-modern')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div></div></div></div><span class="t-badge badge-new">Nuevo</span></div>
+      <div class="t-info"><div class="t-name">Shop Modern</div><div class="t-desc">Tienda en línea con catálogo, carrito y checkout. Diseño limpio centrado en productos.</div><div class="t-tags"><span class="t-tag">E-Commerce</span><span class="t-tag">Pagos</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('shop-modern')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="portfolio" onclick="openModal('portfolio-light')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:40%;margin:4px auto"></div><div class="mb-h sm" style="margin:3px auto"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div></div>
+      <div class="t-info"><div class="t-name">Portfolio Light</div><div class="t-desc">Showroom elegante para creativos, agencias y freelancers con galería de proyectos.</div><div class="t-tags"><span class="t-tag">Portfolio</span><span class="t-tag">Creativo</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('portfolio-light')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="landing" onclick="openModal('saas-launch')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:60%"></div><div class="mb-h sm"></div><div style="margin-top:8px;height:16px;border-radius:8px;background:var(--border);width:38%"></div></div></div></div>
+      <div class="t-info"><div class="t-name">SaaS Launch</div><div class="t-desc">Landing page de alto impacto para productos SaaS. Features, pricing y CTA optimizados.</div><div class="t-tags"><span class="t-tag">Landing</span><span class="t-tag">SaaS</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('saas-launch')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="app" onclick="openModal('app-showcase')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:50%"></div><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall"></div></div></div></div></div>
+      <div class="t-info"><div class="t-name">App Showcase</div><div class="t-desc">Página de lanzamiento para apps móviles. Capturas de pantalla, features y descarga.</div><div class="t-tags"><span class="t-tag">App</span><span class="t-tag">Mobile</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('app-showcase')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="restaurante" onclick="openModal('restaurant-food')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:52%"></div><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div></div>
+      <div class="t-info"><div class="t-name">Restaurant &amp; Food</div><div class="t-desc">Diseño cálido para restaurantes y cafeterías. Menú, reservas y galería de platos.</div><div class="t-tags"><span class="t-tag">Restaurante</span><span class="t-tag">Menú</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('restaurant-food')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="negocio" onclick="openModal('blog-editorial')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall" style="flex:2"></div></div></div></div><span class="t-badge badge-free">Gratis</span></div>
+      <div class="t-info"><div class="t-name">Blog &amp; Editorial</div><div class="t-desc">Plantilla de blog con tipografía editorial elegante. Ideal para marcas de contenido.</div><div class="t-tags"><span class="t-tag">Blog</span><span class="t-tag">Editorial</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('blog-editorial')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="ecommerce" onclick="openModal('boutique-fashion')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-h accent" style="margin-top:6px;width:60%"></div></div></div></div>
+      <div class="t-info"><div class="t-name">Boutique Fashion</div><div class="t-desc">Tienda de moda con grid editorial, lookbook y ficha de producto de alto impacto.</div><div class="t-tags"><span class="t-tag">Moda</span><span class="t-tag">E-Commerce</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('boutique-fashion')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+    <div class="t-card" data-cat="landing" onclick="openModal('agency-pro')">
+      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-h accent" style="width:65%"></div><div class="mb-h sm"></div></div></div></div>
+      <div class="t-info"><div class="t-name">Agency Pro</div><div class="t-desc">Landing para agencias digitales y estudios creativos. Portafolio y casos de éxito.</div><div class="t-tags"><span class="t-tag">Agencia</span><span class="t-tag">Landing</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('agency-pro')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-head">
+      <h3 id="modalTitle">Detalle de plantilla</h3>
+      <button class="modal-close" onclick="closeModal()"><span class="material-symbols-outlined">close</span></button>
+    </div>
+    <div class="modal-preview" id="modalPreview"></div>
+    <div class="modal-body">
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-features">
+        <h4>Funcionalidades incluidas</h4>
+        <div class="feat-list" id="modalFeats"></div>
+      </div>
+      <div class="modal-actions">
+        <a class="btn-primary" href="multitech-contacto.html" id="modalCTA">
+          <span class="material-symbols-outlined" style="font-size:.95rem;color:var(--btn-txt)">send</span>
+          Solicitar esta plantilla
+        </a>
+        <button class="btn-outline" onclick="closeModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PERSONALIZADOR -->
+<section class="personalizador-new reveal">
+  <div class="pers-wrap" id="persWrap">
+    <canvas class="pers-bg-canvas" id="bgCanvas"></canvas>
+    <div class="pers-left">
+      <h2>¿No encuentras<br>lo que buscas?<br><em>Lo hacemos.</em></h2>
+      <p>No importa si tienes una idea vaga o especificaciones detalladas. Construimos exactamente lo que tu negocio necesita, desde cero.</p>
+      <div class="pers-steps">
+        <div class="ps"><div class="ps-n">1</div><div class="ps-b"><h4>Cuéntanos tu idea</h4><p>No necesitas saber de tecnología. Solo dinos qué necesitas.</p></div></div>
+        <div class="ps"><div class="ps-n">2</div><div class="ps-b"><h4>Recibe una propuesta en 24h</h4><p>Diseño, funcionalidades y precio. Sin compromisos.</p></div></div>
+        <div class="ps"><div class="ps-n">3</div><div class="ps-b"><h4>Nosotros lo construimos</h4><p>Entregamos listo para lanzar, con soporte incluido.</p></div></div>
+      </div>
+    </div>
+    <div class="pers-right">
+      <canvas id="sphereCanvas"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN TRANSFORMAMOS -->
+<section class="sec-transformamos reveal" id="sec-transformamos">
+  <div class="sec-inner">
+
+    <div class="st-top-label">Lo que construimos para ti</div>
+
+    <div class="st-hero-row">
+      <h2 class="st-hero-h">Transformamos<br>tus ideas en<br><em>realidad.</em></h2>
+      <div class="st-hero-right">
+        <p class="st-hero-lead">No importa si tienes una idea vaga o especificaciones detalladas. Escuchamos, proponemos y construimos exactamente lo que tu negocio necesita — sin rodeos, sin letra chica.</p>
+        <div class="st-stat-row">
+          <div class="st-stat"><div class="st-stat-n">24h</div><div class="st-stat-l">Primera propuesta</div></div>
+          <div class="st-stat"><div class="st-stat-n">100%</div><div class="st-stat-l">Soporte en español</div></div>
+          <div class="st-stat"><div class="st-stat-n">$0</div><div class="st-stat-l">Consulta inicial</div></div>
+        </div>
+        <div class="st-cta-wrap">
+          <a class="st-btn-fill" href="multitech-contacto.html">Solicitar mi proyecto <span class="arr">→</span></a>
+          <a class="st-btn-ghost" href="multitech-servicios.html">Ver servicios</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="st-process-track">
+      <div class="st-proc-step">
+        <div class="st-proc-num">01</div>
+        <div class="st-proc-title">Cuéntanos tu idea</div>
+        <div class="st-proc-desc">Sin tecnicismos. Solo dinos qué necesitas lograr.</div>
+      </div>
+      <div class="st-proc-step">
+        <div class="st-proc-num">02</div>
+        <div class="st-proc-title">Recibe una propuesta</div>
+        <div class="st-proc-desc">Diseño, alcance y precio en menos de 24 horas.</div>
+      </div>
+      <div class="st-proc-step">
+        <div class="st-proc-num">03</div>
+        <div class="st-proc-title">Aprobamos juntos</div>
+        <div class="st-proc-desc">Ajustamos hasta que todo esté perfecto para ti.</div>
+      </div>
+      <div class="st-proc-step">
+        <div class="st-proc-num">04</div>
+        <div class="st-proc-title">Lo lanzamos</div>
+        <div class="st-proc-desc">Entregado, probado y con soporte incluido.</div>
+      </div>
+    </div>
+
+    <div class="st-divider"></div>
+
+    <div class="st-perks-strip">
+      <div class="st-perk">
+        <div class="st-perk-num">— 01</div>
+        <div class="st-perk-title">Sin compromiso</div>
+        <div class="st-perk-body">La propuesta es gratis. Solo pagas si decides avanzar.</div>
+      </div>
+      <div class="st-perk">
+        <div class="st-perk-num">— 02</div>
+        <div class="st-perk-title">Confidencialidad</div>
+        <div class="st-perk-body">Tu idea es tuya. Firmamos NDA si lo necesitas.</div>
+      </div>
+      <div class="st-perk">
+        <div class="st-perk-num">— 03</div>
+        <div class="st-perk-title">Precio claro</div>
+        <div class="st-perk-body">Presupuesto cerrado, sin sorpresas al final del proyecto.</div>
+      </div>
+      <div class="st-perk">
+        <div class="st-perk-num">— 04</div>
+        <div class="st-perk-title">Soporte real</div>
+        <div class="st-perk-body">Estamos aquí después del lanzamiento, siempre.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="index.html" class="nav-logo"><svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg></a>
+      <p class="footer-desc">Soluciones digitales a medida para negocios que quieren crecer. República Dominicana.</p>
+    </div>
+    <div class="footer-col"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="multitech-servicios.html">Servicios</a></li><li><a href="multitech-plantillas.html">Plantillas</a></li><li><a href="multitech-contacto.html">Contacto</a></li></ul></div>
+    <div class="footer-col"><h4>Servicios</h4><ul><li><a href="multitech-servicios.html">Páginas Web</a></li><li><a href="multitech-servicios.html">Apps Móviles</a></li><li><a href="multitech-servicios.html">Sistemas</a></li><li><a href="multitech-servicios.html">E-Commerce</a></li></ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul><li><a href="mailto:nexa@multitech.com">nexa@multitech.com</a></li><li><a href="#">+1 (809) 841-1705</a></li><li><a href="multitech-contacto.html">Cotizar</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2025 Multitech. Todos los derechos reservados.</span><span>Hecho con cuidado en República Dominicana</span></div>
+</footer>
+
+<script>
+const TEMPLATES = {
+  'corporate-clean':{name:'Corporate Clean',desc:'Página corporativa minimalista y profesional. Diseñada para empresas que necesitan comunicar credibilidad y confianza. Incluye hero animado, sección de servicios en grid, testimonios con slider, equipo, FAQ y formulario de contacto.',categoria:'Negocios',secciones:'7 secciones',tiempo:'2–3 semanas',precio:'Desde $350 USD',precio_usd:350,badge:'popular',features:['Hero animado','Grid de servicios','Slider de testimonios','Sección de equipo','FAQ interactivo','Formulario de contacto','Blog integrado','SEO optimizado'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:60%"></div><div class="mb-h sm" style="width:40%"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
+  'shop-modern':{name:'Shop Modern',desc:'Tienda en línea completa y moderna. Catálogo de productos con filtros, vista de cuadrícula/lista, carrito lateral deslizante, checkout de un solo paso e integración con pasarelas de pago populares.',categoria:'E-Commerce',secciones:'8 secciones',tiempo:'3–4 semanas',precio:'Desde $600 USD',precio_usd:600,badge:'new',features:['Catálogo con filtros','Carrito lateral','Checkout optimizado','Stripe / PayPal','Gestión de inventario','Panel de órdenes','Cupones y descuentos','Mobile-first'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
+  'portfolio-light':{name:'Portfolio Light',desc:'Showroom elegante para creativos y freelancers. Galería masonry de proyectos con lightbox, sección de habilidades animada, timeline de experiencia y formulario de contacto con mapa.',categoria:'Portfolio',secciones:'6 secciones',tiempo:'1–2 semanas',precio:'Desde $250 USD',precio_usd:250,badge:null,features:['Galería masonry','Lightbox de proyectos','Timeline animado','Habilidades con barras','Formulario + mapa','Blog personal','Dark/Light mode','Animaciones GSAP'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:45%;margin:4px auto"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
+  'saas-launch':{name:'SaaS Launch',desc:'Landing page de alto impacto para productos SaaS. Diseñada para maximizar conversiones con sección de features visuales, pricing con toggle mensual/anual, testimonios y trial gratuito.',categoria:'Landing Page',secciones:'7 secciones',tiempo:'1–2 semanas',precio:'Desde $400 USD',precio_usd:400,badge:null,features:['Hero con demo animada','Grid de features','Pricing con toggle','Testimonios en cards','FAQ accordion','CTA de prueba gratis','Integración Analytics','A/B testing ready'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:65%"></div><div class="mb-h sm"></div><div style="margin-top:8px;height:14px;border-radius:8px;background:var(--border);width:35%"></div></div></div>`},
+  'app-showcase':{name:'App Showcase',desc:'Landing page diseñada para lanzar aplicaciones móviles. Incluye mockups animados de iPhone/Android, sección de características con iconos, ratings de la App Store y botones de descarga.',categoria:'App Landing',secciones:'6 secciones',tiempo:'1–2 semanas',precio:'Desde $350 USD',precio_usd:350,badge:null,features:['Mockups animados','Feature highlights','App Store / Play badges','Rating stars','Screenshots carousel','Descarga directa','Video demo embed','Responsive perfecto'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:55%"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall"></div></div></div></div>`},
+  'restaurant-food':{name:'Restaurant & Food',desc:'Diseño cálido y apetitoso para restaurantes, cafeterías y food trucks. Incluye menú interactivo por categorías, sistema de reservas, galería de platos y sección de chef.',categoria:'Restaurante',secciones:'7 secciones',tiempo:'2–3 semanas',precio:'Desde $300 USD',precio_usd:300,badge:null,features:['Menú por categorías','Sistema de reservas','Galería de platos','Sección del chef','Mapa y horarios','Instagram feed','Reseñas integradas','Modo menú QR'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:52%"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
+  'blog-editorial':{name:'Blog & Editorial',desc:'Plantilla editorial de tipografía refinada para blogs, revistas digitales y portfolios de escritura. Completamente gratuita. Incluye sistema de categorías, búsqueda y newsletter.',categoria:'Negocios / Blog',secciones:'5 secciones',tiempo:'1 semana',precio:'Gratis',precio_usd:0,badge:'free',features:['Tipografía editorial','Sistema de categorías','Búsqueda integrada','Newsletter signup','Tabla de contenidos','Tiempo de lectura','Compartir en redes','Modo lectura limpia'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall" style="flex:2"></div></div></div></div>`},
+  'boutique-fashion':{name:'Boutique Fashion',desc:'Tienda de moda con estética editorial y de lujo. Grid de productos tipo lookbook, páginas de producto inmersivas con zoom, wishlist y recomendaciones personalizadas.',categoria:'E-Commerce / Moda',secciones:'9 secciones',tiempo:'4–5 semanas',precio:'Desde $550 USD',precio_usd:550,badge:null,features:['Grid lookbook editorial','Zoom de producto','Wishlist / favoritos','Recomendaciones AI','Tallas y variantes','Video de producto','Colecciones estacionales','Loyalty program'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-h accent" style="margin-top:6px;width:55%"></div></div></div>`},
+  'agency-pro':{name:'Agency Pro',desc:'Landing para agencias digitales y estudios creativos. Portafolio de casos de éxito con métricas reales, equipo con cards interactivas y calculadora de presupuesto.',categoria:'Landing Page',secciones:'8 secciones',tiempo:'2–3 semanas',precio:'Desde $400 USD',precio_usd:400,badge:null,features:['Portafolio con métricas','Casos de éxito','Team cards interactivas','Calculadora de presupuesto','Proceso animado','Logos de clientes','Contador de stats','Formulario multi-paso'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-h accent" style="width:65%"></div><div class="mb-h sm"></div></div></div>`}
+};
+
+function mtApply(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('mt-theme',t);
+  document.querySelectorAll('.mt-theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));
+}
+(function(){mtApply(localStorage.getItem('mt-theme')||'beige');})();
+
+document.addEventListener('click',e=>{
+  if(!document.querySelector('.theme-switcher').contains(e.target))
+    document.getElementById('tsPanel').classList.remove('open');
+  if(!document.getElementById('userBtnWrap').contains(e.target))
+    document.getElementById('userDropdown').classList.remove('open');
+  const ns=document.getElementById('navServicios');
+  if(ns&&!ns.contains(e.target)) ns.classList.remove('dd-open');
+});
+
+function toggleServicios(e){
+  e.stopPropagation();
+  if(window.innerWidth<=900||matchMedia('(max-width:900px)').matches){window.location.href='multitech-servicios.html';return}
+  const dd=document.getElementById('serviciosDropdown');
+  const chv=dd?.previousElementSibling?.querySelector('.nav-chevron')||document.getElementById('serviciosChevron');
+  if(!dd)return;
+  const isOpen=dd.classList.contains('open');
+  document.querySelectorAll('.dropdown.open').forEach(el=>{el.classList.remove('open');el.closest('.nav-item')?.querySelector('.nav-chevron')?.classList.remove('open');});
+  if(!isOpen){dd.classList.add('open');if(chv)chv.classList.add('open');}
+}
+document.addEventListener('click',()=>{
+  document.querySelectorAll('.dropdown.open').forEach(el=>{el.classList.remove('open');el.closest('.nav-item')?.querySelector('.nav-chevron')?.classList.remove('open');});
+});
+document.querySelectorAll('.dropdown').forEach(dd=>{dd.addEventListener('click',e=>e.stopPropagation());});
+function toggleMenu(){var n=document.getElementById("navCenter"),h=document.getElementById("hamburger");var open=n.classList.toggle("open");h.classList.toggle("open",open);document.body.style.overflow=open?"hidden":""}
+document.addEventListener('click',function(e){var n=document.getElementById('navCenter');if(n.classList.contains('open')&&!n.contains(e.target)&&!document.getElementById('hamburger').contains(e.target)){n.classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow=""}})
+document.querySelectorAll('.nav-center .nav-link:not(#serviciosBtn)').forEach(function(l){l.addEventListener('click',function(){document.getElementById('navCenter').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow=""})})
+
+function triggerLockAnim(e){
+  const btn=document.getElementById('adminNavBtn');
+  if(btn.dataset.done)return;
+  btn.dataset.done='1';e.preventDefault();
+  btn.classList.add('hide-text');
+  setTimeout(()=>btn.classList.add('shaking'),300);
+  setTimeout(()=>{btn.classList.remove('shaking');btn.classList.add('unlocked');},680);
+  setTimeout(()=>{window.location.href='admin-dashboard.html';},950);
+}
+
+function filterT(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let any=false;
+  document.querySelectorAll('.t-card').forEach(c=>{
+    const show=cat==='all'||c.dataset.cat===cat;
+    c.style.display=show?'':'none';
+    if(show)any=true;
+  });
+}
+
+function openModal(slug){
+  const t=TEMPLATES[slug];if(!t)return;
+  document.getElementById('modalTitle').textContent=t.name;
+  document.getElementById('modalPreview').innerHTML=t.preview;
+  document.getElementById('modalDesc').textContent=t.desc;
+  document.getElementById('modalMeta').innerHTML=`
+    <div class="mm-item"><div class="mm-label">Categoría</div><div class="mm-val">${t.categoria}</div></div>
+    <div class="mm-item"><div class="mm-label">Secciones</div><div class="mm-val">${t.secciones}</div></div>
+    <div class="mm-item"><div class="mm-label">Tiempo est.</div><div class="mm-val">${t.tiempo}</div></div>
+    <div class="mm-item"><div class="mm-label">Precio base</div><div class="mm-val">${t.precio_usd>0&&typeof formatPrice==='function'?formatPrice(t.precio_usd):t.precio}</div></div>`;
+  document.getElementById('modalFeats').innerHTML=t.features.map(f=>`<span class="feat-chip">${f}</span>`).join('');
+  document.getElementById('modalCTA').href=`multitech-contacto.html?plantilla=${encodeURIComponent(t.name)}`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* ══ PERSONALIZADOR: palabras flotantes + esfera 3D ══ */
+(function(){
+  const WORDS=['E-Commerce','App móvil','Dashboard','Reservas online','CRM a medida','Portal clientes','Landing page','Pagos integrados','Login seguro','ERP propio','Catálogo','iOS & Android','Inventario','SEO','Reportes','Menú digital','Notificaciones','Checkout','Multi-idioma','API propia','Geolocalización','Tienda online','Blog editorial','Automatizaciones','Formularios','Facturación','Chat en vivo','Gestión de roles'];
+  const bg=document.getElementById('bgCanvas');
+  const sc=document.getElementById('sphereCanvas');
+  if(!bg||!sc)return;
+  const bctx=bg.getContext('2d');
+  const sctx=sc.getContext('2d');
+  const wrap=document.getElementById('persWrap');
+  const N=WORDS.length;
+  let BW,BH,SW,SH,SR,SCX,SCY,sphereCX,sphereCY;
+  let sPoints=[],particles=[];
+  let dragging=false,lastMX=0,lastMY=0,velX=0,velY=0;
+  function isDark(){const t=document.documentElement.getAttribute('data-theme')||'beige';return t==='dark'||t==='slate';}
+  function resizeAll(){
+    const wr=wrap.getBoundingClientRect();
+    BW=wr.width;BH=wr.height;
+    bg.width=BW;bg.height=BH;
+    const dpr=window.devicePixelRatio||1;
+    const sr2=sc.parentElement.getBoundingClientRect();
+    SW=sr2.width;SH=sr2.height;
+    sc.style.width=SW+'px';sc.style.height=SH+'px';
+    sc.width=SW*dpr;sc.height=SH*dpr;
+    sctx.scale(dpr,dpr);
+    SCX=SW/2;SCY=SH/2;
+    SR=Math.min(SW,SH)*0.38;
+    const sr3=sc.parentElement.getBoundingClientRect();
+    const wl2=wrap.getBoundingClientRect();
+    sphereCX=(sr3.left-wl2.left)+SW/2;
+    sphereCY=(sr3.top-wl2.top)+SH/2;
+  }
+  function makeParticle(){
+    const edge=Math.random();let x,y;
+    if(edge<.25){x=Math.random()*BW;y=-24;}
+    else if(edge<.5){x=BW+24;y=Math.random()*BH;}
+    else if(edge<.75){x=Math.random()*BW;y=BH+24;}
+    else{x=-24;y=Math.random()*BH;}
+    return{w:WORDS[Math.floor(Math.random()*WORDS.length)],x,y,size:10+Math.random()*6,speed:0.18+Math.random()*0.22,born:Date.now(),delay:Math.random()*3000,alpha:0,dead:false};
+  }
+  function initParticles(){
+    particles=[];
+    for(let i=0;i<22;i++){const p=makeParticle();p.x=Math.random()*BW;p.y=Math.random()*BH;p.delay=0;p.born=Date.now()-Math.random()*4000;particles.push(p);}
+  }
+  function updateParticles(now){
+    particles.forEach(p=>{
+      if(now-p.born<p.delay)return;
+      p.alpha=Math.min(1,(now-p.born-p.delay)/1000*0.6);
+      const dx=sphereCX-p.x,dy=sphereCY-p.y;
+      const dist=Math.hypot(dx,dy);
+      if(dist<30){p.dead=true;return;}
+      const pull=p.speed*(1+(1-dist/Math.max(BW,BH))*1.2);
+      p.x+=dx/dist*pull;p.y+=dy/dist*pull;
+    });
+    particles=particles.filter(p=>!p.dead);
+    while(particles.length<22)particles.push(makeParticle());
+  }
+  function drawBg(now){
+    bctx.clearRect(0,0,BW,BH);
+    const dark=isDark();
+    particles.forEach(p=>{
+      if(now-p.born<p.delay)return;
+      const dx=sphereCX-p.x,dy=sphereCY-p.y;
+      const dist=Math.hypot(dx,dy);
+      bctx.save();bctx.globalAlpha=p.alpha*0.55;
+      if(dist>0){
+        const tl=Math.min(22,dist*0.18);
+        const nx=dx/dist,ny=dy/dist;
+        const g=bctx.createLinearGradient(p.x-nx*tl,p.y-ny*tl,p.x,p.y);
+        g.addColorStop(0,'transparent');
+        g.addColorStop(1,dark?'rgba(200,190,170,0.18)':'rgba(80,65,40,0.12)');
+        bctx.strokeStyle=g;bctx.lineWidth=p.size*0.55;bctx.lineCap='round';
+        bctx.beginPath();bctx.moveTo(p.x-nx*tl,p.y-ny*tl);bctx.lineTo(p.x,p.y);bctx.stroke();
+      }
+      bctx.font=`${p.size}px 'DM Sans',sans-serif`;
+      bctx.fillStyle=dark?'#e0dcd4':'#4a4235';
+      bctx.textAlign='center';bctx.textBaseline='middle';
+      bctx.fillText(p.w,p.x,p.y);bctx.restore();
+    });
+  }
+  function initSpherePoints(){
+    sPoints=WORDS.map((w,i)=>{
+      const phi=Math.acos(1-2*(i+.5)/N);
+      const theta=Math.PI*(1+Math.sqrt(5))*i;
+      return{w,x:Math.sin(phi)*Math.cos(theta),y:Math.sin(phi)*Math.sin(theta),z:Math.cos(phi)};
+    });
+  }
+  function rotY(a){const c=Math.cos(a),s=Math.sin(a);sPoints.forEach(p=>{const x=p.x*c-p.z*s,z=p.x*s+p.z*c;p.x=x;p.z=z;});}
+  function rotX(a){const c=Math.cos(a),s=Math.sin(a);sPoints.forEach(p=>{const y=p.y*c-p.z*s,z=p.y*s+p.z*c;p.y=y;p.z=z;});}
+  function drawSphere(){
+    sctx.clearRect(0,0,SW,SH);
+    const dark=isDark();
+    [...sPoints].sort((a,b)=>a.z-b.z).forEach(p=>{
+      const t=(p.z+1)/2;
+      sctx.save();sctx.globalAlpha=0.12+t*0.88;
+      sctx.font=`${Math.round(9+t*5)}px 'DM Sans',sans-serif`;
+      const v=dark?Math.round(100+t*140):Math.round(185-t*160);
+      sctx.fillStyle=`rgb(${v},${v},${v})`;
+      sctx.textAlign='center';sctx.textBaseline='middle';
+      sctx.fillText(p.w,SCX+p.x*SR,SCY+p.y*SR);sctx.restore();
+    });
+  }
+  sc.addEventListener('mousedown',e=>{dragging=true;lastMX=e.clientX;lastMY=e.clientY;});
+  window.addEventListener('mouseup',()=>dragging=false);
+  window.addEventListener('mousemove',e=>{
+    if(!dragging)return;
+    const dx=e.clientX-lastMX,dy=e.clientY-lastMY;
+    rotY(dx*.007);rotX(dy*.007);velY=dx*.007;velX=dy*.007;lastMX=e.clientX;lastMY=e.clientY;
+  });
+  sc.addEventListener('touchstart',e=>{dragging=true;lastMX=e.touches[0].clientX;lastMY=e.touches[0].clientY;},{passive:true});
+  window.addEventListener('touchend',()=>dragging=false);
+  window.addEventListener('touchmove',e=>{
+    if(!dragging)return;
+    const dx=e.touches[0].clientX-lastMX,dy=e.touches[0].clientY-lastMY;
+    rotY(dx*.007);rotX(dy*.007);velY=dx*.007;velX=dy*.007;lastMX=e.touches[0].clientX;lastMY=e.touches[0].clientY;
+  },{passive:true});
+  function tick(){
+    const now=Date.now();
+    if(!dragging){rotY(.006+velY*.02);rotX(.003+velX*.02);velX*=.95;velY*=.95;}
+    updateParticles(now);drawBg(now);drawSphere();requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',resizeAll);
+  setTimeout(()=>{resizeAll();initParticles();initSpherePoints();tick();},80);
+})();
+
+/* ══ REVEAL ══ */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+<script src="/mt-javascript/mt-auth-client.js"></script>
+<script>
+function handleUserBtn(){
+  if(MTAuth.isLogged()){document.getElementById('userDropdown').classList.toggle('open');}
+  else{window.location.href='mt-signup.html';}
+}
+function doLogout(){MTAuth.logout();}
+document.addEventListener('click',e=>{
+  const wrap=document.getElementById('userBtnWrap');
+  if(wrap&&!wrap.contains(e.target)){
+    const dd=document.getElementById('userDropdown');
+    if(dd)dd.classList.remove('open');
+  }
+});
+document.addEventListener('mt:userReady',function(e){
+  if(document.getElementById('adminNavItem')){
+    document.getElementById('adminNavItem').style.display=(e.detail.rol==='admin'||e.detail.rol==='editor')?'':'none';
+  }
+});
+document.addEventListener('mt:userGuest',function(){
+  if(document.getElementById('adminNavItem'))document.getElementById('adminNavItem').style.display='none';
+});
+</script>
+<script src="/mt-javascript/mt-i18n.js"></script>
+<script>
+(function(){
+  var pill=document.getElementById('navPill');
+  var active=document.querySelector('.nav-link.active');
+  if(!pill||!active)return;
+  function moveTo(el){
+    var pr=pill.parentElement.getBoundingClientRect();
+    var er=el.getBoundingClientRect();
+    pill.style.left=(er.left-pr.left)+'px';
+    pill.style.top=(er.top-pr.top)+'px';
+    pill.style.width=er.width+'px';
+    pill.style.height=er.height+'px';
+  }
+  moveTo(active);
+  document.querySelectorAll('.nav-link:not(.nav-link-admin)').forEach(function(link){
+    link.addEventListener('mouseenter',function(){moveTo(link);});
+    link.addEventListener('mouseleave',function(){moveTo(active);});
+  });
+})();
+</script>
+<script>(function(){var o=document.getElementById('pwaOverlay');if(o&&!window.matchMedia('(display-mode:standalone)').matches&&!window.navigator.standalone&&window.innerWidth<768){o.classList.add('show')}})()</script>
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}</script>
+</body>
+</html>

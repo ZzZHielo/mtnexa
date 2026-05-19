@@ -1,0 +1,87 @@
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg>
+  </a>
+  <div class="nav-center" id="navCenter">
+    <div class="nav-pill" id="navPill"></div>
+    <div class="nav-item nav-item-admin">
+      <a class="nav-link nav-link-admin" href="index.html">
+        <span class="ms lock-icon">lock_open</span>
+        <span class="admin-label">&nbsp;Admin</span>
+      </a>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link" href="admin-dashboard.html"><span>Dashboard</span></a>
+    </div>
+    <div class="nav-item nav-dd-item" id="modulosNavItem">
+      <button type="button" class="nav-link" onclick="toggleDropdown('modulosDropdown',event)"><span>Módulos</span><div class="nav-chevron" id="modulosChevron"></div></button>
+      <div class="dropdown" id="modulosDropdown">
+        <div class="dd-grid">
+          <a class="dd-item" href="admin-proyectos.html"><div class="dd-ico"><span class="ms">folder_open</span></div><div class="dd-text"><h4>Proyectos</h4><p>Gestión de proyectos activos</p></div></a>
+          <a class="dd-item" href="admin-cotizaciones.html"><div class="dd-ico"><span class="ms">request_quote</span></div><div class="dd-text"><h4>Cotizaciones</h4><p>Solicitudes de cotización</p></div></a>
+          <a class="dd-item" href="admin-consultas.html"><div class="dd-ico"><span class="ms">help</span></div><div class="dd-text"><h4>Consultas</h4><p>Preguntas y consultas</p></div></a>
+          <a class="dd-item" href="admin-usuarios-normal.html"><div class="dd-ico"><span class="ms">group</span></div><div class="dd-text"><h4>Usuarios</h4><p>Base de datos de Usuarios Activados</p></div></a>
+          <a class="dd-item" href="admin-mensajes.html"><div class="dd-ico"><span class="ms">mail</span></div><div class="dd-text"><h4>Mensajes</h4><p>Bandeja de contacto</p></div></a>
+          <a class="dd-item" href="admin-clientes.html"><div class="dd-ico"><span class="ms">group</span></div><div class="dd-text"><h4>Clientes</h4><p>Base de clientes activos</p></div></a>
+          <a class="dd-item" href="admin-finanzas.html"><div class="dd-ico"><span class="ms">payments</span></div><div class="dd-text"><h4>Finanzas</h4><p>Ingresos y pagos</p></div></a>
+          <a class="dd-item" href="admin-encuestas.html"><div class="dd-ico"><span class="ms">poll</span></div><div class="dd-text"><h4>Encuestas</h4><p>Gestión de encuestas</p></div></a>
+        </div>
+        <div class="dd-footer"><span class="dd-footer-lbl">8 módulos disponibles</span></div>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link" href="admin-config.html"><span>Configuración</span></a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="notif-wrap">
+      <button type="button" class="nav-icon-btn" id="notifBtn">
+        <span class="ms" style="font-size:1.1rem">notifications</span>
+        <span class="notif-dot" id="notifDot"></span>
+      </button>
+    </div>
+    <div class="user-btn-wrap" id="userBtnWrap">
+      <button type="button" class="user-btn" id="userBtn" onclick="handleUserBtn()" title="Mi cuenta">
+        <span class="material-symbols-outlined" style="font-size:.9rem;color:var(--text-muted)" id="userBtnIcon">person</span>
+        <span id="userBtnLabel">Crear cuenta</span>
+        <div class="online-dot"></div>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <div id="stateLoggedOut">
+          <div class="udd-login-prompt">
+            <div class="udd-lp-title">Bienvenido</div>
+            <p class="udd-lp-sub">Accede a tu cuenta para gestionar proyectos.</p>
+            <a href="mt-signup.html" class="udd-btn-login"><span class="ms" style="font-size:1rem;color:var(--btn-txt)">login</span>Iniciar sesión</a>
+          </div>
+        </div>
+        <div id="stateLoggedIn" style="display:none">
+          <div class="udd-profile">
+            <div class="udd-avatar" id="dpAvatar"><span class="ms" style="font-size:1.1rem;color:var(--accent-txt)">person</span></div>
+            <div class="udd-info">
+              <div class="udd-name" id="dpName">Admin</div>
+              <div class="udd-email" id="dpEmail">admin@multitech.com</div>
+              <div class="udd-role-pill"><span class="udd-role-dot"></span><span id="dpRole">Admin</span></div>
+            </div>
+          </div>
+          <div class="udd-section">
+            <div class="udd-section-label">Cambiar cuenta</div>
+            <div class="udd-accounts" id="accountList"></div>
+            <button type="button" class="udd-item" style="margin-top:2px" onclick="MTAuth._openAddAccountModal && MTAuth._openAddAccountModal()">
+              <div class="udd-item-icon"><span class="ms">add</span></div>
+              <span class="udd-item-label">Agregar cuenta</span>
+            </button>
+          </div>
+          <div class="udd-section">
+            <a class="udd-item" href="mt-ajustes.html"><div class="udd-item-icon"><span class="ms">manage_accounts</span></div><span class="udd-item-label">Perfil y ajustes</span></a>
+            <a class="udd-item" href="mt-ajustes.html#seguridad"><div class="udd-item-icon"><span class="ms">security</span></div><span class="udd-item-label">Seguridad</span><span class="udd-item-meta" style="margin-left:auto">Contraseña, 2FA</span></a>
+            <a class="udd-item" href="mt-ajustes.html#notificaciones"><div class="udd-item-icon"><span class="ms">notifications</span></div><span class="udd-item-label">Notificaciones</span></a>
+          </div>
+          <div class="udd-section">
+            <button type="button" class="udd-item danger" onclick="doLogout()"><div class="udd-item-icon"><span class="ms">logout</span></div><span class="udd-item-label">Cerrar sesión</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>

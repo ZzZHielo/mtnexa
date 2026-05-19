@@ -1,0 +1,3 @@
+﻿                <a href="admin-proyectos.html" class="qa"><motion class="qa-icon"><span class="ms">add</span></motion><span>Nuevo proyecto</span></a>
+                <a href="admin-cotizaciones.html" class="qa"><div class="qa-icon"><span class="ms">request_quote</span></div><span>Cotizaciones</span></a>
+              </div>

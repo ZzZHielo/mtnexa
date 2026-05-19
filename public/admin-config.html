@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="beige">
+<head>
+
+<script>
+/* ── Admin Gate ── */
+(function(){
+  var ok = false;
+  try {
+    var u = JSON.parse(localStorage.getItem('mt_user'));
+    ok = u && (u.rol === 'admin' || u.rol === 'editor');
+  } catch(e){}
+  if(!ok || window.matchMedia('(max-width:600px)').matches){
+    document.write('');
+    window.location.replace('mt-login.html');
+  }
+})();
+(function(){var l=localStorage.getItem('mt-lang');if(l)document.documentElement.setAttribute('lang',l);})();
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=mt-login.html"></noscript>
+
+<meta charset="UTF-8">
+<style id="admin-layout-guard">html,body{width:100%;max-width:100vw;overflow-x:hidden}body{display:block!important;min-height:100vh}body{padding-top:68px}body .wrap,body .content,body .main{width:100%;max-width:100%;box-sizing:border-box}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2c2416">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Multitech">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/assets/iconos/apple-touch-icon.svg">
+<link rel="icon" type="image/svg+xml" href="/assets/iconos/pwa-icon.svg">
+<title>Configuración — Multitech</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Syne:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link rel="stylesheet" href="/mt-styles/admin-styles.css?v=5">
+<style>
+[data-theme="beige"]{--bg:#f4efe6;--bg2:#ede7da;--bg3:#e4ddd0;--surface:#faf7f2;--border:rgba(44,36,22,.10);--border-s:rgba(44,36,22,.18);--text:#1c1610;--text-soft:#6b5c43;--text-muted:#a0917a;--accent:#7a5c3a;--accent-bg:#eddfc8;--accent-txt:#3d2410;--btn:#1c1610;--btn-bg:#1c1610;--btn-txt:#faf7f2;--nav:rgba(244,239,230,.9);--ff-body:'DM Sans',sans-serif;--ff-head:'Playfair Display',Georgia,serif;--green-bg:#d8f0e0;--green-txt:#165c2e;--blue-bg:#dce8f8;--blue-txt:#1a3d72;--amber-bg:#faecd2;--amber-txt:#6b3d08;--red-bg:#fde8e8;--red-txt:#7a1c1c;}
+[data-theme="dark"]{--bg:#0f0e0d;--bg2:#171512;--bg3:#1e1b17;--surface:#181613;--border:rgba(255,240,210,.08);--border-s:rgba(255,240,210,.16);--text:#f0e8d8;--text-soft:#9b8c75;--text-muted:#5c5040;--accent:#c9a97a;--accent-bg:#2a2016;--accent-txt:#e8d5b0;--btn:#e8d5b0;--btn-bg:#e8d5b0;--btn-txt:#1a1410;--nav:rgba(15,14,13,.93);--ff-body:'DM Sans',sans-serif;--ff-head:'Playfair Display',Georgia,serif;--green-bg:#0d2e18;--green-txt:#6be09a;--blue-bg:#0d1e38;--blue-txt:#7eb8f7;--amber-bg:#2a1a06;--amber-txt:#e8b45a;--red-bg:#2a0d0d;--red-txt:#f77;}
+[data-theme="blanc"]{--bg:#f8f8f7;--bg2:#f0f0ee;--bg3:#e8e8e5;--surface:#ffffff;--border:rgba(0,0,0,.07);--border-s:rgba(0,0,0,.14);--text:#111;--text-soft:#555;--text-muted:#999;--accent:#333;--accent-bg:#eee;--accent-txt:#111;--btn:#111;--btn-bg:#111;--btn-txt:#fff;--nav:rgba(255,255,255,.92);--ff-body:'DM Sans',sans-serif;--ff-head:'Playfair Display',Georgia,serif;--green-bg:#e2f5e8;--green-txt:#1a5c2e;--blue-bg:#e0edf8;--blue-txt:#1a3d72;--amber-bg:#f8f0e0;--amber-txt:#6b3d08;--red-bg:#fce8e8;--red-txt:#7a1c1c;}
+[data-theme="slate"]{--bg:#111d2c;--bg2:#162236;--bg3:#1c2a40;--surface:#152035;--border:rgba(120,180,255,.08);--border-s:rgba(120,180,255,.16);--text:#d8eaf8;--text-soft:#7098c0;--text-muted:#3d5878;--accent:#7eb8f7;--accent-bg:#1a2d44;--accent-txt:#b8d8ff;--btn:#7eb8f7;--btn-bg:#7eb8f7;--btn-txt:#0a1628;--nav:rgba(17,29,44,.93);--ff-body:'DM Sans',sans-serif;--ff-head:'Playfair Display',Georgia,serif;--green-bg:#0d2820;--green-txt:#5dd8a0;--blue-bg:#0d1e38;--blue-txt:#7eb8f7;--amber-bg:#28180a;--amber-txt:#e8b45a;--red-bg:#2a0d1a;--red-txt:#f7a;}
+[data-theme="sage"]{--bg:#eef0eb;--bg2:#e4e8df;--bg3:#dadfd4;--surface:#f5f7f3;--border:rgba(30,50,20,.09);--border-s:rgba(30,50,20,.17);--text:#1e2e14;--text-soft:#4e6340;--text-muted:#8a9a78;--accent:#3d6030;--accent-bg:#d4e8cc;--accent-txt:#1a3610;--btn:#1e2e14;--btn-bg:#1e2e14;--btn-txt:#f5f7f3;--nav:rgba(238,240,235,.92);--ff-body:'DM Sans',sans-serif;--ff-head:'Playfair Display',Georgia,serif;--green-bg:#d0eac8;--green-txt:#1a4e14;--blue-bg:#d8e8f4;--blue-txt:#1a3d72;--amber-bg:#f4e8cc;--amber-txt:#5c3a08;--red-bg:#f0dcd8;--red-txt:#6a1e14;}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;min-height:100vh;}
+.ms{font-family:'Material Symbols Outlined';font-size:1.1rem;vertical-align:middle;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;color:inherit;line-height:1;display:inline-flex;align-items:center;}
+
+/* ── LAYOUT ── */
+.wrap{min-height:100vh;}
+.page-head{padding:36px 56px 28px;opacity:0;transform:translateY(16px);}
+.page-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;}
+.greeting{font-family:'Playfair Display',serif;font-size:1.95rem;font-weight:700;letter-spacing:-.025em;margin-bottom:4px;line-height:1.15;}
+.greeting em{font-style:italic;color:var(--accent);}
+.page-sub{font-size:.82rem;color:var(--text-soft);}
+.date-chip{font-size:.71rem;color:var(--text-muted);background:var(--bg2);border:1px solid var(--border-s);padding:5px 13px;border-radius:100px;white-space:nowrap;}
+.content{padding:32px 56px;}
+
+/* ── CONFIG LAYOUT ── */
+.config-layout{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start;}
+.config-sidebar{background:var(--surface);border-radius:16px;opacity:0;transform:translateX(-16px);position:sticky;top:88px;}
+.config-sidebar-head{padding:14px 16px;}
+.config-sidebar-title{font-size:.62rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+.config-nav{display:flex;flex-direction:column;padding:8px;border:none;outline:none;font-size:0;line-height:0;}
+.config-nav-label{font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:10px 14px 4px;line-height:normal;}
+.config-nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;border:none;outline:none;background:transparent;cursor:pointer;font-family:var(--ff-body);font-size:.85rem;color:var(--text-soft);transition:all .15s;text-align:left;width:100%;text-decoration:none;}
+.config-nav-item:hover{background:var(--bg2);color:var(--text);}
+.config-nav-item.active{background:var(--accent-bg);color:var(--accent-txt);font-weight:500;}
+.config-nav-item .ms{font-size:1.2rem;flex-shrink:0;}
+.config-nav-item.active .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+.config-nav-sep{display:none;}
+
+/* ── PANELS ── */
+.panel{background:var(--surface);border-radius:16px;overflow:hidden;opacity:0;transform:translateY(20px);transition:background .4s;margin-bottom:16px;}
+.panel:last-child{margin-bottom:0;}
+.panel-head{padding:16px 22px;display:flex;align-items:center;justify-content:space-between;}
+.panel-title{font-family:'Playfair Display',serif;font-size:.96rem;font-weight:700;letter-spacing:-.01em;}
+.panel-title em{font-style:italic;color:var(--accent);}
+.panel-body{padding:22px;}
+.panel-section{margin-bottom:0;}
+
+/* ── SECTION ── */
+.section-tab{display:none;}
+.section-tab.active{display:block;}
+
+/* ── SETTING ROW ── */
+.setting-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:12px 0;}
+.setting-row:last-child{border-bottom:none;padding-bottom:0;}
+.setting-row:first-child{padding-top:0;}
+.setting-info{flex:1;}
+.setting-label{font-size:.84rem;font-weight:500;color:var(--text);margin-bottom:3px;}
+.setting-desc{font-size:.74rem;color:var(--text-muted);line-height:1.5;}
+.setting-ctrl{flex-shrink:0;}
+
+/* ── TOGGLE ── */
+.toggle{position:relative;width:38px;height:22px;cursor:pointer;}
+.toggle input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-track{display:block;width:38px;height:22px;border-radius:100px;background:var(--bg3);border:1px solid var(--border-s);transition:background .2s,border-color .2s;}
+.toggle input:checked ~ .toggle-track{background:var(--btn);border-color:var(--btn);}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--text-muted);transition:transform .2s,background .2s;pointer-events:none;}
+.toggle input:checked ~ .toggle-thumb{transform:translateX(16px);background:var(--btn-txt);}
+
+/* ── FORM ELEMENTS ── */
+.form-group{margin-bottom:14px;}
+.form-group:last-child{margin-bottom:0;}
+.form-label{font-size:.68rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px;display:block;}
+.form-input,.form-select,.form-textarea{width:100%;padding:9px 13px;border-radius:10px;border:1.5px solid var(--border);background:var(--bg2);color:var(--text);font-family:var(--ff-body);font-size:.82rem;outline:none;transition:border-color .18s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);}
+.form-textarea{resize:vertical;min-height:72px;line-height:1.55;}
+.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-hint{font-size:.7rem;color:var(--text-muted);margin-top:4px;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:100px;font-family:var(--ff-body);font-size:.8rem;font-weight:500;cursor:pointer;transition:all .18s;border:none;text-decoration:none;}
+.btn-primary{background:var(--btn-bg);color:var(--btn-txt);}
+.btn-primary:hover{opacity:.85;}
+.btn-secondary{background:transparent;color:var(--text-soft);border:1.5px solid var(--border-s);}
+.btn-secondary:hover{background:var(--bg2);color:var(--text);border-color:var(--border-s);}
+.btn-danger{background:var(--red-bg);color:var(--red-txt);border:1.5px solid transparent;}
+.btn-danger:hover{opacity:.85;}
+.btn-sm{padding:6px 13px;font-size:.75rem;}
+.btn-group{display:flex;gap:8px;flex-wrap:wrap;}
+
+/* ── USER TABLE ── */
+.dt{width:100%;border-collapse:collapse;}
+.dt th{font-size:.63rem;font-weight:500;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;padding:11px 20px;text-align:left;border-bottom:1px solid var(--border);}
+.dt td{padding:13px 20px;font-size:.81rem;border-bottom:1px solid var(--border);}
+.dt tbody tr:last-child td{border-bottom:none;}
+.dt tbody tr{opacity:0;transform:translateX(-10px);cursor:pointer;transition:background .15s;}
+.dt tbody tr:hover td{background:var(--bg2);}
+.td-name{font-weight:500;color:var(--text);}
+.td-muted{color:var(--text-muted);}
+.client-av-cell{display:flex;align-items:center;gap:10px;}
+.client-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;font-family:var(--ff-head);flex-shrink:0;color:#fff;}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:500;padding:3px 9px;border-radius:100px;}
+.pill-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.pill-admin{background:var(--accent-bg);color:var(--accent-txt);}
+.pill-editor{background:var(--blue-bg);color:var(--blue-txt);}
+.pill-viewer{background:var(--bg3);color:var(--text-muted);}
+.pill-activo{background:var(--green-bg);color:var(--green-txt);}
+.pill-inactivo{background:var(--bg3);color:var(--text-muted);}
+
+/* ── ICON CIRCLE ── */
+.ico-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-circle .ms{font-size:1.15rem;}
+.ico-blue{background:var(--blue-bg);}.ico-blue .ms{color:var(--blue-txt);}
+.ico-green{background:var(--green-bg);}.ico-green .ms{color:var(--green-txt);}
+.ico-amber{background:var(--amber-bg);}.ico-amber .ms{color:var(--amber-txt);}
+.ico-acc{background:var(--accent-bg);}.ico-acc .ms{color:var(--accent);}
+.ico-red{background:var(--red-bg);}.ico-red .ms{color:var(--red-txt);}
+
+/* ── LOG LIST ── */
+.log-item{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.log-item:last-child{border-bottom:none;}
+.log-body{flex:1;}
+.log-line{font-size:.8rem;color:var(--text);line-height:1.5;}
+.log-line strong{font-weight:500;}
+.log-meta{display:flex;gap:10px;margin-top:3px;flex-wrap:wrap;}
+.log-time{font-size:.67rem;color:var(--text-muted);}
+.log-ip{font-size:.67rem;color:var(--text-muted);font-family:monospace;background:var(--bg2);padding:1px 6px;border-radius:4px;}
+
+/* ── INFO CARD ── */
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+.info-card .ms{font-size:1.1rem;color:var(--accent);}
+.info-card-body{flex:1;}
+.info-card-title{font-size:.78rem;font-weight:500;color:var(--text);}
+.info-card-sub{font-size:.7rem;color:var(--text-muted);margin-top:2px;}
+
+/* ── DANGER ZONE ── */
+.danger-zone{border-color:var(--red-txt)!important;opacity:.6;border-style:dashed;}
+.danger-zone:hover{opacity:1;transition:opacity .2s;}
+.danger-zone .panel-head{border-bottom-color:rgba(0,0,0,.05);}
+.danger-zone .panel-title{color:var(--red-txt);}
+.danger-zone .panel-title em{color:var(--red-txt)!important;}
+
+/* ── STAT MINI ── */
+.stat-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.stat-mini{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:center;}
+.stat-mini-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:600;color:var(--text);letter-spacing:-.03em;}
+.stat-mini-lbl{font-size:.68rem;color:var(--text-muted);margin-top:3px;}
+
+/* ── CONTEXT BANNER ── */
+.context-banner{display:flex;align-items:flex-start;gap:13px;background:var(--blue-bg);border:1px solid rgba(120,180,255,.18);border-radius:12px;padding:14px 16px;margin-bottom:16px;}
+.context-banner .ms{font-size:1.2rem;color:var(--blue-txt);flex-shrink:0;margin-top:1px;}
+.context-banner-title{font-size:.82rem;font-weight:500;color:var(--blue-txt);margin-bottom:3px;}
+.context-banner-desc{font-size:.74rem;color:var(--blue-txt);opacity:.82;line-height:1.55;}
+.context-banner-link{font-size:.74rem;font-weight:500;color:var(--blue-txt);text-decoration:underline;opacity:.9;cursor:pointer;}
+
+/* ── THEME GRID (defaults) ── */
+.def-theme-grid{display:flex;gap:10px;flex-wrap:wrap;padding:4px 0;}
+.def-theme-swatch{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:10px 14px;border-radius:12px;border:1.5px solid var(--border);transition:all .18s;background:transparent;}
+.def-theme-swatch:hover{background:var(--bg2);}
+.def-theme-swatch.active{border-color:var(--accent);background:var(--accent-bg);}
+.def-swatch-circle{width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(0,0,0,.12);}
+.def-theme-swatch span{font-size:.72rem;color:var(--text-muted);}
+.def-theme-swatch.active span{color:var(--accent-txt);font-weight:500;}
+
+/* ── NOTIF ITEMS (defaults) ── */
+.def-notif-item{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border);gap:16px;}
+.def-notif-item:last-child{border-bottom:none;}
+.def-notif-info{flex:1;}
+.def-notif-label{font-size:.83rem;color:var(--text);}
+.def-notif-desc{font-size:.72rem;color:var(--text-muted);margin-top:2px;line-height:1.5;}
+.def-notif-channels{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.channel-tag{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;padding:3px 9px;border-radius:100px;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all .15s;background:transparent;}
+.channel-tag .ms{font-size:.82rem;}
+.channel-tag.active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-txt);}
+.channel-tag.active .ms{color:var(--accent);}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 72px rgba(0,0,0,.18);transform:scale(.96) translateY(12px);transition:transform .22s;}
+.modal-overlay.open .modal{transform:scale(1) translateY(0);}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:2;}
+.modal-head h3{font-family:var(--ff-head);font-size:1.05rem;font-weight:700;}
+.modal-head h3 em{font-style:italic;color:var(--accent);}
+.modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .15s;}
+.modal-close:hover{background:var(--bg3);color:var(--text);}
+.modal-body{padding:22px 24px;}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;}
+
+/* ── THEME SWITCHER ── */
+.ts-wrap{position:fixed;bottom:26px;right:26px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.ts-panel{display:none;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--border-s);border-radius:14px;padding:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);min-width:162px;}
+.ts-panel.open{display:flex;}
+.ts-lbl{font-size:.59rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;padding:0 4px;}
+.ts-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 9px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.79rem;color:var(--text-soft);transition:all .15s;text-align:left;}
+.ts-btn:hover{background:var(--bg2);color:var(--text);}
+.ts-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500;}
+.ts-swatch{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(0,0,0,.12);flex-shrink:0;}
+.ts-fab{width:44px;height:44px;border-radius:50%;background:var(--btn);color:var(--btn-txt);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .18s;}
+.ts-fab:hover{transform:scale(1.08);}
+
+/* ── TOASTS ── */
+.toast-wrap{position:fixed;top:80px;right:22px;z-index:600;display:flex;flex-direction:column;gap:6px;pointer-events:none;}
+.toast{background:var(--surface);border:1px solid var(--border-s);border-radius:12px;padding:11px 14px;box-shadow:0 8px 28px rgba(0,0,0,.12);display:flex;align-items:flex-start;gap:10px;min-width:250px;max-width:310px;pointer-events:all;opacity:0;transform:translateX(36px);}
+.toast-ico{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.toast-ico .ms{font-size:.88rem;}
+.toast-body{flex:1;}
+.toast-title{font-size:.77rem;font-weight:500;color:var(--text);}
+.toast-msg{font-size:.69rem;color:var(--text-muted);margin-top:1px;line-height:1.4;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  .nav-center{display:none;}
+  .nav-center.open{display:flex;flex-direction:column;position:fixed;inset:0;top:68px;background:var(--bg);padding:32px 20px;z-index:199;border-radius:0;border:none;align-items:stretch;gap:4px;overflow-y:auto;transform:none}
+  .nav-center.open .nav-item{width:100%}
+  .nav-center.open .nav-link{width:100%;justify-content:center;padding:12px 16px;font-size:.9rem}
+  .hamburger{display:flex}
+  .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .page-head,.content{padding-left:20px;padding-right:20px;}
+  .config-layout{grid-template-columns:1fr;}
+  .config-sidebar{position:static;}
+}
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr;}
+  .stat-mini-grid{grid-template-columns:1fr 1fr;}
+  .dt th:nth-child(4),.dt td:nth-child(4),.dt th:nth-child(5),.dt td:nth-child(5){display:none;}
+  .user-dropdown{right:-8px;width:280px;}
+}
+/* ══ PWA INSTALL OVERLAY ══ */
+.pwa-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;animation:fadeIn .4s ease}
+.pwa-overlay.show{display:flex}
+.pwa-overlay .logo-svg{height:56px;width:auto;color:var(--text);margin-bottom:20px}
+.pwa-overlay h2{font-family:var(--ff-head);font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.pwa-overlay p{font-size:.9rem;color:var(--text-soft);line-height:1.7;max-width:340px;margin-bottom:28px}
+.pwa-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;width:100%;max-width:320px}
+.pwa-step{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:left}
+.pwa-step-num{width:28px;height:28px;border-radius:50%;background:var(--btn-bg);color:var(--btn-txt);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
+.pwa-step-text{font-size:.82rem;color:var(--text-soft);line-height:1.4}
+.pwa-step-text strong{color:var(--text);font-weight:500}
+.pwa-share-icon{display:inline-flex;align-items:center;gap:2px;font-size:.75rem;background:var(--bg2);padding:2px 6px;border-radius:4px;border:1px solid var(--border)}
+.pwa-share-icon .material-symbols-outlined{font-size:.85rem}
+.pwa-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text-muted);background:var(--bg2);padding:6px 14px;border-radius:100px;border:1px solid var(--border)}
+.pwa-badge .material-symbols-outlined{font-size:.85rem;color:var(--accent)}
+</style>
+</head>
+<body>
+
+<style>.pwa-desktop-hide{display:none!important}@media(min-width:768px){.pwa-overlay{display:none!important}}</style><div class="pwa-overlay" id="pwaOverlay">
+  <svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg>
+  <h2>Instala Multitech</h2>
+  <p>Para una mejor experiencia, agrega esta aplicación a tu pantalla de inicio.</p>
+  <div class="pwa-steps">
+    <div class="pwa-step">
+      <div class="pwa-step-num">1</div>
+      <div class="pwa-step-text">Toca <span class="pwa-share-icon"><span class="material-symbols-outlined">ios_share</span> Compartir</span> en Safari</div>
+    </div>
+    <div class="pwa-step">
+      <div class="pwa-step-num">2</div>
+      <div class="pwa-step-text">Desplázate y selecciona <strong>Agregar a Inicio</strong></div>
+    </div>
+    <div class="pwa-step">
+      <div class="pwa-step-num">3</div>
+      <div class="pwa-step-text">Toca <strong>Agregar</strong> en la esquina superior derecha</div>
+    </div>
+  </div>
+  <div class="pwa-badge"><span class="material-symbols-outlined">check_circle</span> App lista para instalar</div>
+</div>
+
+
+<!-- ── SVG LOGO ── -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="nexalogo" viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid meet">
+    <g><path fill="currentColor" d="M585 238H198Q202 186 231.5 158.5Q261 131 304 131Q368 131 393 185H575Q561 130 524.5 86.0Q488 42 433.0 17.0Q378 -8 310 -8Q228 -8 164.0 27.0Q100 62 64.0 127.0Q28 192 28 279Q28 366 63.5 431.0Q99 496 163.0 531.0Q227 566 310 566Q391 566 454.0 532.0Q517 498 552.5 435.0Q588 372 588 288Q588 264 585 238ZM413 333Q413 377 383.0 403.0Q353 429 308 429Q265 429 235.5 404.0Q206 379 199 333Z" transform="translate(1450.0,1663.0) scale(1.25,-1.25)"/><path fill="currentColor" d="M392 0 285 155 195 0H10L194 285L5 558H197L304 404L394 558H579L392 277L584 0Z" transform="translate(2080.0,1663.0) scale(1.25,-1.25)"/><path fill="currentColor" d="M274 566Q333 566 377.5 542.0Q422 518 446 479V558H617V0H446V79Q421 40 376.5 16.0Q332 -8 273 -8Q205 -8 149.0 27.5Q93 63 60.5 128.5Q28 194 28 280Q28 366 60.5 431.0Q93 496 149.0 531.0Q205 566 274 566ZM324 417Q273 417 237.5 380.5Q202 344 202 280Q202 216 237.5 178.5Q273 141 324 141Q375 141 410.5 178.0Q446 215 446 279Q446 343 410.5 380.0Q375 417 324 417Z" transform="translate(2710.0,1663.0) scale(1.25,-1.25)"/></g>
+    <g transform="matrix(1.246551,0,0,1.246551,568.33377,808.382648)"><g transform="matrix(1.450726,0,0,1.450726,-487.750247,-555.447345)"><path fill="currentColor" d="M292.475,234.098C295.888,235.94 302.91,235.373 305.533,234.043C307.98,234.281 311.145,233.731 326.454,237.674C361.713,246.756 393.857,285.671 408.122,314.687C431.921,363.094 456.029,406.665 466.228,426.64C486.339,466.027 502.144,489.55 498.499,497.499C495.661,503.689 452.718,552.308 449.132,556.162C425.563,581.494 405.015,606.784 400.324,604.863C399.126,604.373 383.559,573.304 381.787,570.341C375.823,560.365 335.645,483.151 326.078,468.778C291.825,417.318 252.958,418.542 250.522,418.275C248.834,416.604 246.826,416.725 242.5,417.031C240.943,417.142 241.641,418.004 241.474,418.193C185.925,423.002 169.268,464.311 170.069,469.663C171.197,477.202 176.76,455.742 212.378,435.28C259.77,408.053 324.253,458.874 326.281,498.516C327.166,515.817 273.482,713.848 273.155,717.478C272.278,727.232 286.557,717.55 287.218,717.093C318.063,695.792 340.372,680.464 374.549,645.548C418.111,601.045 425.843,596.213 448.046,570.099C452.497,564.864 483.296,528.64 503.903,504.851C524.154,481.472 661.178,314.455 672.32,301.347C700.004,268.777 699.838,267.992 709.25,233.43C727.679,165.758 805.524,151.633 839.017,194.893C853.025,212.985 855.131,229.816 856.916,240.461C855.939,242.535 854.769,242.975 857.312,245.515C857.744,252.137 858.187,258.349 856.713,267.535C854.454,281.622 833.878,370.497 829.93,385.608C824.137,407.782 814.278,449.999 812.967,455.61C802.088,502.196 801.093,501.871 790.14,548.419C778.339,598.571 750.634,706.665 747.113,720.404C731.46,781.478 728.934,791.498 718.3,811.398C667.365,906.718 564.559,891.216 515.928,820.22C509.278,810.512 445.449,692.16 430.151,662.687C425.615,653.948 423.909,653.251 428.742,644.644C437.788,628.535 487.33,576.019 507.058,556.066C522.776,540.169 522.798,538.997 524.103,539.995C528.641,543.465 569.688,641.733 618.605,682.376C694.817,745.699 755.582,644.595 754.113,636.596C753.254,631.915 740.57,649.277 737.378,653.404C687.373,718.073 625.019,687.548 609.863,660.293C604.836,651.254 610.075,643.309 627.684,574.543C629.773,566.385 653.449,473.92 653.771,472.561C655.664,464.557 657.894,455.884 658.266,454.437C678.177,376.981 689.541,344.061 682.482,346.453C680.344,347.178 580.353,461.474 571.547,471.541C545.983,500.762 527.098,523.302 520.104,529.002C503.492,542.541 452.673,599.545 424.983,633.884C315.065,770.194 306.856,771.283 238.934,851.883C154.735,951.799 61.798,862.746 74.138,772.434C76.719,753.549 117.888,593.139 121.878,577.594C151.687,461.45 151.418,461.466 154.185,451.421C183.595,344.629 184.725,245.537 292.475,234.098Z"/></g></g>
+  </symbol>
+</svg>
+
+<!-- ── THEME SWITCHER ── -->
+<div class="ts-wrap">
+  <div class="ts-panel" id="tsPanel">
+    <span class="ts-lbl">Estilo visual</span>
+    <button class="ts-btn" data-theme="beige" onclick="applyTheme('beige')"><span class="ts-swatch" style="background:#f4efe6"></span>Beige</button>
+    <button class="ts-btn" data-theme="dark"  onclick="applyTheme('dark')"><span class="ts-swatch" style="background:#111;border-color:#444"></span>Dark</button>
+    <button class="ts-btn" data-theme="blanc" onclick="applyTheme('blanc')"><span class="ts-swatch" style="background:#fff"></span>Blanc</button>
+    <button class="ts-btn" data-theme="slate" onclick="applyTheme('slate')"><span class="ts-swatch" style="background:#111d2c;border-color:#446"></span>Slate</button>
+    <button class="ts-btn" data-theme="sage"  onclick="applyTheme('sage')"><span class="ts-swatch" style="background:#eef0eb"></span>Sage</button>
+  </div>
+  <button class="ts-fab" onclick="document.getElementById('tsPanel').classList.toggle('open')">
+    <span class="ms" style="font-size:1rem;color:var(--btn-txt)">palette</span>
+  </button>
+</div>
+
+<!-- ── TOASTS ── -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ── MODAL USUARIO ── -->
+<div class="modal-overlay" id="modalUsuario">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalUsuarioTitle">Nuevo <em>usuario</em></h3>
+      <button class="modal-close" onclick="closeModal('modalUsuario')"><span class="ms" style="font-size:.9rem">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input class="form-input" id="mu_nombre" type="text" placeholder="Juan">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Apellido</label>
+          <input class="form-input" id="mu_apellido" type="text" placeholder="Pérez">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Correo electrónico</label>
+        <input class="form-input" id="mu_correo" type="email" placeholder="juan@multitech.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Rol</label>
+        <select class="form-select" id="mu_rol">
+          <option value="admin">Administrador</option>
+          <option value="editor" selected>Editor</option>
+        </select>
+      </div>
+      <div class="form-group" id="mu_password_wrap">
+        <label class="form-label">Contraseña temporal</label>
+        <input class="form-input" id="mu_password" type="text" placeholder="Auto-generada">
+        <div class="form-hint">El usuario deberá cambiarla en el primer inicio de sesión.</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modalUsuario')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveUser()"><span class="ms" style="font-size:.9rem;color:var(--btn-txt)">person_add</span>Crear usuario</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="wrap">
+  <div class="page-head" id="pageHead">
+    <div class="page-head-row">
+      <div>
+        <div class="greeting">Configuración del <em>sistema</em></div>
+        <p class="page-sub">Usuarios, permisos, notificaciones y ajustes generales.</p>
+      </div>
+      <div class="date-chip" id="dateBadge"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="config-layout">
+
+      <!-- ── SIDEBAR NAV ── -->
+      <aside class="config-sidebar" id="configSidebar">
+        <div class="config-sidebar-head">
+          <div class="config-sidebar-title">Secciones</div>
+        </div>
+        <nav class="config-nav">
+          <button class="config-nav-item active" onclick="switchTab('general',this)">
+            <span class="ms">tune</span> General
+          </button>
+
+          <div class="config-nav-label">Usuarios</div>
+          <button class="config-nav-item" onclick="switchTab('usuarios',this)">
+            <span class="ms">group</span> Usuarios
+          </button>
+          <button class="config-nav-item" onclick="switchTab('clientes',this)">
+            <span class="ms">handshake</span> Clientes
+          </button>
+          <button class="config-nav-item" onclick="switchTab('defaults',this)">
+            <span class="ms">manage_accounts</span> Defaults usuarios
+          </button>
+
+          <div class="config-nav-label">Comunicaciones</div>
+          <button class="config-nav-item" onclick="switchTab('notificaciones',this)">
+            <span class="ms">notifications</span> Notificaciones
+          </button>
+
+          <div class="config-nav-label">Protección</div>
+          <button class="config-nav-item" onclick="switchTab('seguridad',this)">
+            <span class="ms">shield</span> Seguridad
+          </button>
+          <button class="config-nav-item" onclick="switchTab('integraciones',this)">
+            <span class="ms">hub</span> Integraciones
+          </button>
+          <button class="config-nav-item" onclick="switchTab('logs',this)">
+            <span class="ms">history</span> Registro
+          </button>
+
+          <div class="config-nav-sep"></div>
+          <button class="config-nav-item" onclick="switchTab('peligro',this)" style="color:var(--red-txt)">
+            <span class="ms" style="color:var(--red-txt)">warning</span> Zona crítica
+          </button>
+        </nav>
+      </aside>
+
+      <!-- ── CONTENT PANELS ── -->
+      <main id="tabContent">
+
+        <!-- ══ GENERAL ══ -->
+        <div class="section-tab active" id="tab-general">
+
+          <div class="panel" id="p-empresa">
+            <div class="panel-head">
+              <div class="panel-title">Información de la <em>empresa</em></div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="saveConfigSection('empresa')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Nombre de la empresa</label>
+                  <input class="form-input" id="cfgEmpNombre" type="text" value="Multitech Solutions">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">RNC / Identificación fiscal</label>
+                  <input class="form-input" id="cfgEmpRnc" type="text" value="">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Teléfono principal</label>
+                  <input class="form-input" id="cfgEmpTel" type="tel" value="+1 (809) 555-0100">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Correo corporativo</label>
+                  <input class="form-input" type="email" value="info@multitech.com">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Dirección</label>
+                <input class="form-input" id="cfgEmpDir" type="text" value="">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Descripción / Slogan</label>
+                <textarea class="form-textarea" id="cfgEmpDesc">Soluciones tecnológicas a medida para empresas en República Dominicana.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p-sistema">
+            <div class="panel-head">
+              <div class="panel-title">Preferencias del <em>sistema</em></div>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Moneda predeterminada</div>
+                  <div class="setting-desc">Usada en presupuestos, facturas y reportes financieros.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" id="cfgMoneda" style="width:130px">
+                    <option value="USD">USD ($)</option>
+                    <option value="DOP">DOP (RD$)</option>
+                    <option value="EUR">EUR (€)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Idioma del panel</div>
+                  <div class="setting-desc">Idioma usado en la interfaz de administración.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" id="cfgIdioma" style="width:130px">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Zona horaria</div>
+                  <div class="setting-desc">Afecta fechas y horas en notificaciones y registros.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" id="cfgTimezone" style="width:170px">
+                    <option value="America/Santo_Domingo">America/Santo_Domingo</option>
+                    <option value="America/New_York">America/New_York</option>
+                    <option value="UTC">UTC</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Modo mantenimiento</div>
+                  <div class="setting-desc">Restringe el acceso público mientras se realizan ajustes.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle">
+                    <input type="checkbox" id="togMaint" onchange="toggleChange('togMaint','Modo mantenimiento')">
+                    <span class="toggle-track"></span>
+                    <span class="toggle-thumb"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /tab-general -->
+
+        <!-- ══ USUARIOS ══ -->
+        <div class="section-tab" id="tab-usuarios">
+
+          <div class="panel" id="p-users-head">
+            <div class="panel-head">
+              <div class="panel-title">Usuarios del <em>sistema</em></div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="openNewUserModal()">
+                <span class="ms" style="font-size:.85rem;color:var(--btn-txt)">person_add</span>Nuevo usuario
+              </button>
+            </div>
+            <div style="padding:0">
+              <table class="dt">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Último acceso</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel" id="p-roles">
+            <div class="panel-head">
+              <div class="panel-title">Permisos por <em>rol</em></div>
+            </div>
+            <div class="panel-body">
+              <div class="stat-mini-grid">
+                <div class="stat-mini">
+                  <div class="stat-mini-num" id="statAdmins">0</div>
+                  <div class="stat-mini-lbl">Administradores</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-num" id="statEditors">0</div>
+                  <div class="stat-mini-lbl">Editores</div>
+                </div>
+                <div class="stat-mini">
+                  <div class="stat-mini-num">1</div>
+                  <div class="stat-mini-lbl">Visualizadores</div>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Editores pueden eliminar registros</div>
+                  <div class="setting-desc">Si está activo, los usuarios con rol editor pueden borrar proyectos y clientes.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle">
+                    <input type="checkbox" id="togEditorDel" onchange="toggleChange('togEditorDel','Permiso de eliminación para editores')">
+                    <span class="toggle-track"></span>
+                    <span class="toggle-thumb"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Visualizadores acceden a finanzas</div>
+                  <div class="setting-desc">Permite que los visualizadores vean reportes financieros sin poder editarlos.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle">
+                    <input type="checkbox" id="togViewerFin" checked onchange="toggleChange('togViewerFin','Acceso financiero para visualizadores')">
+                    <span class="toggle-track"></span>
+                    <span class="toggle-thumb"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Invitaciones por correo</div>
+                  <div class="setting-desc">Los administradores pueden invitar nuevos usuarios directamente desde el panel.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle">
+                    <input type="checkbox" id="togInvite" checked onchange="toggleChange('togInvite','Invitaciones por correo')">
+                    <span class="toggle-track"></span>
+                    <span class="toggle-thumb"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /tab-usuarios -->
+
+        <!-- ══ CLIENTES ══ -->
+        <div class="section-tab" id="tab-clientes">
+
+          <div class="panel" id="p-cli-general">
+            <div class="panel-head">
+              <div class="panel-title">Gestión de <em>clientes</em></div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="saveConfigSection('clientes')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Aprobación manual de clientes nuevos</div>
+                  <div class="setting-desc">Requiere que un administrador apruebe cada cliente antes de activarlo en el sistema.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle">
+                    <input type="checkbox" id="togCliAprov" checked onchange="toggleChange('togCliAprov','Aprobación manual de clientes')">
+                    <span class="toggle-track"></span>
+                    <span class="toggle-thumb"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Portal de clientes activo</div>
+                  <div class="setting-desc">Permite que los clientes accedan a su portal personalizado para ver el estado de sus proyectos.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle">
+                    <input type="checkbox" id="togPortal" checked onchange="toggleChange('togPortal','Portal de clientes')">
+                    <span class="toggle-track"></span>
+                    <span class="toggle-thumb"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Etiqueta VIP automática</div>
+                  <div class="setting-desc">Clientes con más de $5,000 en proyectos reciben automáticamente la etiqueta VIP.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle">
+                    <input type="checkbox" id="togVip" checked onchange="toggleChange('togVip','Etiqueta VIP automática')">
+                    <span class="toggle-track"></span>
+                    <span class="toggle-thumb"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Umbral para VIP automático</div>
+                  <div class="setting-desc">Monto acumulado en proyectos para asignar el estatus VIP.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <input class="form-input" id="cfgVipUmbral" type="number" value="5000" style="width:110px;text-align:right">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p-cli-campos">
+            <div class="panel-head">
+              <div class="panel-title">Campos <em>personalizados</em></div>
+              <button class="btn btn-secondary btn-sm" onclick="toast('Campo','Nuevo campo agregado','add_circle','var(--accent-bg)','var(--accent)')"><span class="ms" style="font-size:.85rem">add</span>Agregar campo</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Sector empresarial</div>
+                  <div class="setting-desc">Categoría del negocio del cliente (ej: retail, salud, tecnología).</div>
+                </div>
+                <div class="setting-ctrl"><span class="pill pill-activo"><span class="pill-dot"></span>Activo</span></div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Fuente de referido</div>
+                  <div class="setting-desc">Cómo llegó el cliente (web, referido, redes sociales, etc.).</div>
+                </div>
+                <div class="setting-ctrl"><span class="pill pill-activo"><span class="pill-dot"></span>Activo</span></div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Notas internas</div>
+                  <div class="setting-desc">Campo de texto libre para anotaciones del equipo (solo visible internamente).</div>
+                </div>
+                <div class="setting-ctrl"><span class="pill pill-activo"><span class="pill-dot"></span>Activo</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /tab-clientes -->
+
+        <!-- ══ NOTIFICACIONES ══ -->
+        <div class="section-tab" id="tab-notificaciones">
+          <div class="panel" id="p-notif">
+            <div class="panel-head">
+              <div class="panel-title">Alertas del <em>sistema</em></div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="saveConfigSection('notificaciones')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Nuevo lead recibido</div>
+                  <div class="setting-desc">Notifica al equipo cuando llega un nuevo lead desde el formulario web.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotLead" checked onchange="toggleChange(this.id,'Notif: nuevo lead')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Proyecto marcado como entregado</div>
+                  <div class="setting-desc">Alerta cuando un proyecto cambia su estado a "Entregado".</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotProy" checked onchange="toggleChange(this.id,'Notif: proyecto entregado')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Pago registrado</div>
+                  <div class="setting-desc">Envía confirmación cuando se registra un pago en el módulo de finanzas.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotPago" checked onchange="toggleChange(this.id,'Notif: pago registrado')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Nuevo mensaje de contacto</div>
+                  <div class="setting-desc">Notifica cuando llega un mensaje desde el formulario de contacto del sitio.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotMsg" onchange="toggleChange(this.id,'Notif: mensaje de contacto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Inicio de sesión desde nuevo dispositivo</div>
+                  <div class="setting-desc">Alerta de seguridad cuando un usuario accede desde un dispositivo no reconocido.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotDevice" checked onchange="toggleChange(this.id,'Notif: nuevo dispositivo')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p-notif-canal">
+            <div class="panel-head">
+              <div class="panel-title">Canales de <em>entrega</em></div>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Correo electrónico</div>
+                  <div class="setting-desc">Enviar notificaciones al correo registrado del administrador.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotEmail" checked><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">WhatsApp Business</div>
+                  <div class="setting-desc">Alertas por WhatsApp al número corporativo. Requiere integración activa.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotWa"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Notificaciones en el panel</div>
+                  <div class="setting-desc">Muestra el punto rojo en el ícono de notificaciones del nav.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotPanel" checked><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Correo de destino</div>
+                  <div class="setting-desc">Correo al que se enviarán las alertas del sistema.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <input class="form-input" type="email" id="cfgNotEmail" value="admin@multitech.com" style="width:220px">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /tab-notificaciones -->
+
+        <!-- ══ SEGURIDAD ══ -->
+        <div class="section-tab" id="tab-seguridad">
+          <div class="panel" id="p-seg">
+            <div class="panel-head">
+              <div class="panel-title">Políticas de <em>acceso</em></div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="saveConfigSection('seguridad')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Autenticación de dos factores (2FA)</div>
+                  <div class="setting-desc">Obligatorio para todos los usuarios con acceso al panel de administración.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="tog2fa" onchange="toggleChange('tog2fa','2FA obligatorio')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Tiempo de sesión (minutos)</div>
+                  <div class="setting-desc">Cierre automático de sesión por inactividad.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" id="cfgSesion" style="width:120px">
+                    <option value="30">30 min</option>
+                    <option value="60">60 min</option>
+                    <option value="120">120 min</option>
+                    <option value="0">Sin límite</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Intentos máximos de login</div>
+                  <div class="setting-desc">Bloquea la cuenta temporalmente tras N intentos fallidos.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" id="cfgLoginIntentos" style="width:100px">
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">IP permitidas (whitelist)</div>
+                  <div class="setting-desc">Restricción de acceso al panel solo desde estas IPs. Dejar vacío para acceso libre.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <input class="form-input" id="cfgIpWhitelist" type="text" placeholder="ej: 192.168.1.0/24" style="width:200px">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p-pwd">
+            <div class="panel-head">
+              <div class="panel-title">Contraseñas y <em>autenticación</em></div>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Longitud mínima de contraseña</div>
+                  <div class="setting-desc">Aplica a todos los usuarios al crear o cambiar contraseña.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <input class="form-input" id="cfgPwdMin" type="number" value="8" min="6" max="32" style="width:80px;text-align:center">
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Requerir caracteres especiales</div>
+                  <div class="setting-desc">Contraseñas deben incluir al menos un símbolo (!@#$...).</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togPwdEsp" checked><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Expiración de contraseña</div>
+                  <div class="setting-desc">Los usuarios deberán actualizar su contraseña cada cierto período.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" id="cfgPwdExp" style="width:130px">
+                    <option value="never">Nunca</option>
+                    <option value="30">30 días</option>
+                    <option value="90">90 días</option>
+                    <option value="180">180 días</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /tab-seguridad -->
+
+        <!-- ══ INTEGRACIONES ══ -->
+        <div class="section-tab" id="tab-integraciones">
+          <div class="panel" id="p-integ">
+            <div class="panel-head">
+              <div class="panel-title">Servicios <em>conectados</em></div>
+            </div>
+            <div class="panel-body">
+
+              <div class="setting-row">
+                <div style="display:flex;align-items:center;gap:12px;flex:1">
+                  <div class="ico-circle ico-green"><span class="ms">mail</span></div>
+                  <div class="setting-info" style="margin:0">
+                    <div class="setting-label">SMTP / Correo saliente</div>
+                    <div class="setting-desc">smtp.multitech.com · Puerto 587 · TLS</div>
+                  </div>
+                </div>
+                <div class="setting-ctrl" style="display:flex;align-items:center;gap:10px">
+                  <span class="pill pill-activo"><span class="pill-dot"></span>Conectado</span>
+                  <button class="btn btn-secondary btn-sm" onclick="toast('SMTP','Configuración de correo abierta','mail','var(--blue-bg)','var(--blue-txt)')">Editar</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div style="display:flex;align-items:center;gap:12px;flex:1">
+                  <div class="ico-circle ico-acc"><span class="ms">analytics</span></div>
+                  <div class="setting-info" style="margin:0">
+                    <div class="setting-label">Google Analytics</div>
+                    <div class="setting-desc">Seguimiento de tráfico y conversiones del sitio público.</div>
+                  </div>
+                </div>
+                <div class="setting-ctrl" style="display:flex;align-items:center;gap:10px">
+                  <span class="pill pill-activo"><span class="pill-dot"></span>Conectado</span>
+                  <button class="btn btn-secondary btn-sm" onclick="toast('Analytics','Configuración de Google Analytics abierta','analytics','var(--accent-bg)','var(--accent)')">Editar</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div style="display:flex;align-items:center;gap:12px;flex:1">
+                  <div class="ico-circle ico-amber"><span class="ms">payments</span></div>
+                  <div class="setting-info" style="margin:0">
+                    <div class="setting-label">Pasarela de pagos</div>
+                    <div class="setting-desc">Stripe o PayPal para pagos en línea de clientes.</div>
+                  </div>
+                </div>
+                <div class="setting-ctrl" style="display:flex;align-items:center;gap:10px">
+                  <span class="pill pill-inactivo"><span class="pill-dot"></span>No conectado</span>
+                  <button class="btn btn-primary btn-sm" onclick="toast('Pagos','Conectando pasarela de pagos...','payments','var(--amber-bg)','var(--amber-txt)')">Conectar</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div style="display:flex;align-items:center;gap:12px;flex:1">
+                  <div class="ico-circle ico-blue"><span class="ms">chat</span></div>
+                  <div class="setting-info" style="margin:0">
+                    <div class="setting-label">WhatsApp Business API</div>
+                    <div class="setting-desc">Automatización de mensajes y notificaciones por WhatsApp.</div>
+                  </div>
+                </div>
+                <div class="setting-ctrl" style="display:flex;align-items:center;gap:10px">
+                  <span class="pill pill-inactivo"><span class="pill-dot"></span>No conectado</span>
+                  <button class="btn btn-primary btn-sm" onclick="toast('WhatsApp','Configurando API de WhatsApp...','chat','var(--blue-bg)','var(--blue-txt)')">Conectar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="panel" id="p-api">
+            <div class="panel-head">
+              <div class="panel-title">API & <em>webhooks</em></div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="saveConfigSection('integraciones')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label class="form-label">Clave API activa</label>
+                <div style="display:flex;gap:8px">
+                  <input class="form-input" type="password" value="mt_live_sk_xxxxxxxxxxxxxxxxxxxxxxxx" id="apiKeyInput" style="font-family:monospace;font-size:.78rem">
+                  <button class="btn btn-secondary btn-sm" onclick="toggleApiKey()"><span class="ms" style="font-size:.9rem">visibility</span></button>
+                </div>
+                <div class="form-hint">Úsala solo en entornos de servidor. No la expongas en el cliente.</div>
+              </div>
+              <div class="form-group" style="margin-top:12px">
+                <label class="form-label">URL de webhook</label>
+                <input class="form-input" id="cfgWebhook" type="url" placeholder="https://tuservidor.com/webhook/multitech">
+                <div class="form-hint">Se llamará con POST cuando ocurran eventos críticos del sistema.</div>
+              </div>
+              <div style="margin-top:14px">
+                <button class="btn btn-secondary btn-sm" onclick="toast('Webhook','Prueba enviada con éxito','send','var(--blue-bg)','var(--blue-txt)')"><span class="ms" style="font-size:.85rem">send</span>Probar webhook</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- /tab-integraciones -->
+
+        <!-- ══ REGISTRO / LOGS ══ -->
+        <div class="section-tab" id="tab-logs">
+          <div class="panel" id="p-logs">
+            <div class="panel-head">
+              <div class="panel-title">Registro de <em>actividad</em></div>
+              <button class="btn btn-secondary btn-sm" onclick="exportLogs()"><span class="ms" style="font-size:.85rem">download</span>Exportar</button>
+            </div>
+            <div class="panel-body" style="padding-bottom:0" id="logsBody">
+              <div class="log-item" data-static-placeholder>
+                <div class="ico-circle ico-acc" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">login</span></div>
+                <div class="log-body">
+                  <div class="log-line"><strong>Miguel Ángel</strong> inició sesión en el panel</div>
+                  <div class="log-meta"><span class="log-time">Hoy, 9:42 AM</span><span class="log-ip">192.168.1.10</span></div>
+                </div>
+              </div>
+              <div class="log-item">
+                <div class="ico-circle ico-green" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">person_add</span></div>
+                <div class="log-body">
+                  <div class="log-line"><strong>Laura Reyes</strong> creó el cliente <strong>TechStart RD</strong></div>
+                  <div class="log-meta"><span class="log-time">Ayer, 3:15 PM</span><span class="log-ip">10.0.0.5</span></div>
+                </div>
+              </div>
+              <div class="log-item">
+                <div class="ico-circle ico-blue" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">edit</span></div>
+                <div class="log-body">
+                  <div class="log-line"><strong>Carlos Pujols</strong> actualizó el proyecto <strong>FitPro App</strong></div>
+                  <div class="log-meta"><span class="log-time">Hace 3 días</span><span class="log-ip">10.0.0.8</span></div>
+                </div>
+              </div>
+              <div class="log-item">
+                <div class="ico-circle ico-amber" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">settings</span></div>
+                <div class="log-body">
+                  <div class="log-line"><strong>Miguel Ángel</strong> modificó configuración de <strong>notificaciones</strong></div>
+                  <div class="log-meta"><span class="log-time">Hace 5 días</span><span class="log-ip">192.168.1.10</span></div>
+                </div>
+              </div>
+              <div class="log-item">
+                <div class="ico-circle ico-red" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">lock</span></div>
+                <div class="log-body">
+                  <div class="log-line">Intento de login fallido para <strong>sofia@multitech.com</strong></div>
+                  <div class="log-meta"><span class="log-time">Hace 1 semana</span><span class="log-ip">45.33.12.88</span></div>
+                </div>
+              </div>
+              <div class="log-item">
+                <div class="ico-circle ico-green" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">payments</span></div>
+                <div class="log-body">
+                  <div class="log-line">Pago de <strong>$1,800</strong> registrado para <strong>Boutique Digital</strong></div>
+                  <div class="log-meta"><span class="log-time">Hace 1 semana</span><span class="log-ip">192.168.1.10</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /tab-logs -->
+
+        <!-- ══ DEFAULTS DE USUARIOS ══ -->
+        <div class="section-tab" id="tab-defaults">
+
+          <!-- Banner contextual -->
+          <div class="context-banner">
+            <span class="ms">info</span>
+            <div class="context-banner-body">
+              <div class="context-banner-title">Valores por defecto del sistema</div>
+              <div class="context-banner-desc">Estas configuraciones se aplican automáticamente a todos los usuarios nuevos o a aquellos que no han personalizado sus ajustes en <strong>mt-ajustes</strong>. Cada usuario puede sobrescribir cualquier preferencia desde su propia página de ajustes. Los cambios aquí no sobreescriben configuraciones ya personalizadas.</div>
+            </div>
+          </div>
+
+          <!-- Default: Apariencia -->
+          <div class="panel" id="p-def-apariencia">
+            <div class="panel-head">
+              <div class="panel-title">Apariencia <em>predeterminada</em></div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="saveConfigSection('defaults')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Tema de color por defecto</div>
+                  <div class="setting-desc">El tema que verán los usuarios al ingresar por primera vez o sin preferencia guardada.</div>
+                </div>
+              </div>
+              <div class="def-theme-grid" id="defThemeGrid">
+                <div class="def-theme-swatch active" data-t="beige" onclick="pickDefTheme('beige')"><div class="def-swatch-circle" style="background:#f4efe6"></div><span>Beige</span></div>
+                <div class="def-theme-swatch" data-t="dark" onclick="pickDefTheme('dark')"><div class="def-swatch-circle" style="background:#0f0e0d;border-color:#555"></div><span>Dark</span></div>
+                <div class="def-theme-swatch" data-t="blanc" onclick="pickDefTheme('blanc')"><div class="def-swatch-circle" style="background:#f8f8f7"></div><span>Blanc</span></div>
+                <div class="def-theme-swatch" data-t="slate" onclick="pickDefTheme('slate')"><div class="def-swatch-circle" style="background:#111d2c;border-color:#555"></div><span>Slate</span></div>
+                <div class="def-theme-swatch" data-t="sage" onclick="pickDefTheme('sage')"><div class="def-swatch-circle" style="background:#eef0eb"></div><span>Sage</span></div>
+              </div>
+              <div class="setting-row" style="margin-top:14px">
+                <div class="setting-info">
+                  <div class="setting-label">Permitir a usuarios cambiar su tema</div>
+                  <div class="setting-desc">Si se desactiva, el tema del sistema es fijo para todos y no puede sobrescribirse desde ajustes personales.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Permiso de cambio de tema')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Reducir movimiento por defecto</div>
+                  <div class="setting-desc">Activa animaciones reducidas para todos los usuarios nuevos (afecta transiciones GSAP).</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" onchange="toggleChange(this,'Movimiento reducido por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Default: Idioma y región -->
+          <div class="panel" id="p-def-idioma">
+            <div class="panel-head">
+              <div class="panel-title">Idioma y <em>región</em> por defecto</div>
+              <button class="btn btn-secondary btn-sm" onclick="toast('Guardado','Idioma y región actualizados','check_circle','var(--green-bg)','var(--green-txt)')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Idioma de la interfaz</div>
+                  <div class="setting-desc">Idioma que verán los usuarios sin preferencia personal guardada.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" style="width:180px" onchange="toast('Idioma','Default de idioma actualizado','language','var(--blue-bg)','var(--blue-txt)')">
+                    <option selected>Español (RD)</option>
+                    <option>English (US)</option>
+                    <option>Français</option>
+                    <option>Português (BR)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Zona horaria</div>
+                  <div class="setting-desc">Zona horaria predeterminada para fechas y timestamps.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" style="width:210px">
+                    <option selected>America/Santo_Domingo (AST)</option>
+                    <option>America/New_York (EST/EDT)</option>
+                    <option>America/Los_Angeles (PST)</option>
+                    <option>UTC</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Formato de fecha</div>
+                  <div class="setting-desc">Cómo se muestran las fechas en el panel por defecto.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" style="width:150px">
+                    <option selected>DD/MM/YYYY</option>
+                    <option>MM/DD/YYYY</option>
+                    <option>YYYY-MM-DD</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Formato de hora</div>
+                  <div class="setting-desc">12h o 24h en toda la interfaz.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <select class="form-select" style="width:150px">
+                    <option selected>12 horas (AM/PM)</option>
+                    <option>24 horas</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Permitir a usuarios cambiar idioma</div>
+                  <div class="setting-desc">Si se desactiva, el idioma del sistema es fijo para todos los usuarios.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Permiso de cambio de idioma')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Default: Notificaciones -->
+          <div class="panel" id="p-def-notif">
+            <div class="panel-head">
+              <div class="panel-title">Notificaciones <em>predeterminadas</em></div>
+              <button class="btn btn-secondary btn-sm" onclick="toast('Guardado','Defaults de notificaciones actualizados','check_circle','var(--green-bg)','var(--green-txt)')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <p style="font-size:.76rem;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">Estos son los canales y tipos de notificación que estarán activados para un usuario nuevo. Cada usuario puede ajustar esto desde <em>Ajustes → Notificaciones</em>.</p>
+
+              <!-- Canales por defecto -->
+              <div style="margin-bottom:18px;">
+                <div style="font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Canales activos por defecto</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                  <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
+                  <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push navegador</div>
+                  <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
+                  <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">circle_notifications</span>Panel</div>
+                </div>
+              </div>
+
+              <!-- Tipos por defecto -->
+              <div style="font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Eventos activos por defecto</div>
+
+              <div class="def-notif-item">
+                <div class="def-notif-info">
+                  <div class="def-notif-label">Nueva cotización recibida</div>
+                  <div class="def-notif-desc">Cuando un cliente envía una solicitud desde el sitio.</div>
+                  <div class="def-notif-channels">
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
+                    <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="def-notif-item">
+                <div class="def-notif-info">
+                  <div class="def-notif-label">Nuevo mensaje de contacto</div>
+                  <div class="def-notif-desc">Mensajes del formulario de contacto del sitio público.</div>
+                  <div class="def-notif-channels">
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
+                    <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
+                    <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="def-notif-item">
+                <div class="def-notif-info">
+                  <div class="def-notif-label">Pago registrado</div>
+                  <div class="def-notif-desc">Confirmación cuando se registra un pago en finanzas.</div>
+                  <div class="def-notif-channels">
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="def-notif-item">
+                <div class="def-notif-info">
+                  <div class="def-notif-label">Inicio de sesión desde dispositivo nuevo</div>
+                  <div class="def-notif-desc">Alerta de seguridad cuando el usuario accede desde un equipo no reconocido.</div>
+                  <div class="def-notif-channels">
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
+                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="def-notif-item">
+                <div class="def-notif-info">
+                  <div class="def-notif-label">Modo «No molestar» por defecto</div>
+                  <div class="def-notif-desc">Silencia notificaciones fuera de horario laboral para nuevos usuarios.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotMsg" onchange="toggleChange(this,'No molestar por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+
+              <div class="def-notif-item">
+                <div class="def-notif-info">
+                  <div class="setting-label">Horario laboral (para No molestar)</div>
+                  <div class="setting-desc">Rango en el que las notificaciones están activas por defecto.</div>
+                </div>
+                <div class="setting-ctrl" style="display:flex;align-items:center;gap:6px;white-space:nowrap">
+                  <input class="form-input" type="time" value="08:00" style="width:100px;text-align:center">
+                  <span style="font-size:.75rem;color:var(--text-muted)">a</span>
+                  <input class="form-input" type="time" value="22:00" style="width:100px;text-align:center">
+                </div>
+              </div>
+
+              <div class="def-notif-item">
+                <div class="def-notif-info">
+                  <div class="setting-label">Permitir a usuarios modificar notificaciones</div>
+                  <div class="setting-desc">Si se desactiva, estas preferencias son de solo lectura para los usuarios.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togNotPago" checked onchange="toggleChange(this,'Permiso de edición de notificaciones')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Default: Privacidad -->
+          <div class="panel" id="p-def-privacidad">
+            <div class="panel-head">
+              <div class="panel-title">Privacidad <em>predeterminada</em></div>
+              <button class="btn btn-secondary btn-sm" onclick="toast('Guardado','Defaults de privacidad actualizados','check_circle','var(--green-bg)','var(--green-txt)')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Perfil visible para el equipo</div>
+                  <div class="setting-desc">Por defecto, los nuevos usuarios son visibles para otros miembros del panel.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Visibilidad de perfil por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Mostrar estado «en línea» por defecto</div>
+                  <div class="setting-desc">Indica a otros miembros cuándo el usuario está activo en el panel.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Estado en línea por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Compartir datos de uso anónimos</div>
+                  <div class="setting-desc">Ayuda a mejorar la plataforma. Los usuarios pueden desactivarlo individualmente.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Analytics anónimos por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Cookies de personalización</div>
+                  <div class="setting-desc">Activas por defecto para recordar preferencias de navegación.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Cookies de personalización por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Default: Accesibilidad -->
+          <div class="panel" id="p-def-accesibilidad">
+            <div class="panel-head">
+              <div class="panel-title">Accesibilidad <em>predeterminada</em></div>
+              <button class="btn btn-secondary btn-sm" onclick="toast('Guardado','Defaults de accesibilidad actualizados','check_circle','var(--green-bg)','var(--green-txt)')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Reducir movimiento por sistema</div>
+                  <div class="setting-desc">Respeta la preferencia <code style="font-size:.72rem;background:var(--bg3);padding:1px 5px;border-radius:4px;">prefers-reduced-motion</code> del sistema operativo del usuario.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Respetar prefers-reduced-motion')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Animaciones de carga (skeletons)</div>
+                  <div class="setting-desc">Muestra animaciones de skeleton mientras los datos cargan.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Animaciones de carga por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Foco visible mejorado</div>
+                  <div class="setting-desc">Activa resaltado visible al navegar con teclado en toda la interfaz.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" checked onchange="toggleChange(this,'Foco mejorado por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Restore defaults -->
+          <div class="panel" id="p-def-restore" style="border-style:dashed;opacity:.75" onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=.75">
+            <div class="panel-head">
+              <div class="panel-title" style="color:var(--text-muted)">Restaurar <em>defaults</em> originales</div>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row" style="padding-top:0">
+                <div class="setting-info">
+                  <div class="setting-label">Restaurar todos los valores por defecto</div>
+                  <div class="setting-desc">Regresa todas las configuraciones de esta sección a los valores de fábrica. No afecta ajustes personales de usuarios existentes.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <button class="btn btn-secondary btn-sm" onclick="confirmDanger('restauración de defaults de usuario')"><span class="ms" style="font-size:.85rem">restart_alt</span>Restaurar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /tab-defaults -->
+
+        <!-- ══ ZONA PELIGRO ══ -->
+        <div class="section-tab" id="tab-peligro">
+
+          <div class="info-card" style="margin-bottom:16px">
+            <span class="ms">warning_amber</span>
+            <div class="info-card-body">
+              <div class="info-card-title">Zona crítica</div>
+              <div class="info-card-sub">Las acciones en esta sección son permanentes e irreversibles. Procede con precaución.</div>
+            </div>
+          </div>
+
+          <div class="panel danger-zone" id="p-peligro1">
+            <div class="panel-head">
+              <div class="panel-title">Eliminar datos de <em>prueba</em></div>
+            </div>
+            <div class="panel-body">
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Resetear estadísticas del dashboard</div>
+                  <div class="setting-desc">Borra los contadores y métricas del panel. Los datos reales no se afectan.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <button class="btn btn-danger btn-sm" onclick="confirmDanger('estadísticas del dashboard')">Resetear</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel danger-zone" id="p-peligro2" style="margin-top:16px">
+            <div class="panel-head">
+              <div class="panel-title">Acciones <em>críticas</em></div>
+            </div>
+            <div class="panel-body">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Exportar toda la base de datos</div>
+                  <div class="setting-desc">Descarga un respaldo completo en formato JSON de todos los datos del sistema.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="exportFullDatabase()"><span class="ms" style="font-size:.85rem">download</span>Exportar</button>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-label">Desactivar el sistema</div>
+                  <div class="setting-desc">Deja el panel inaccesible para todos los usuarios, incluido el administrador.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <button type="button" class="btn btn-danger btn-sm" onclick="enableMaintenanceAll()">Activar mantenimiento</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /tab-peligro -->
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="/mt-javascript/mt-auth-client.js"></script>
+<script src="/mt-javascript/admin-shared.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+
+/* ── Theme ── */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('mt-theme',t);
+  document.querySelectorAll('.ts-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));
+}
+applyTheme(localStorage.getItem('mt-theme')||'beige');
+document.addEventListener('click',e=>{if(!e.target.closest('.ts-wrap'))document.getElementById('tsPanel').classList.remove('open');});
+
+/* ── Date ── */
+(function(){
+  const el=document.getElementById('dateBadge');
+  if(!el)return;
+  if(typeof formatDateInTZ==='function'){el.textContent=formatDateInTZ(null,'long');return;}
+  const d=new Date();
+  const s=d.toLocaleDateString('es-DO',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  el.textContent=s.charAt(0).toUpperCase()+s.slice(1);
+})();
+
+/* ── Animations ── */
+const mm=gsap.matchMedia();
+mm.add('(prefers-reduced-motion: no-preference)',()=>{
+  gsap.to('#pageHead',{autoAlpha:1,y:0,duration:.55,ease:'power3.out',delay:.05});
+  gsap.to('#configSidebar',{autoAlpha:1,x:0,duration:.5,ease:'power3.out',delay:.15});
+  gsap.to('.panel',{autoAlpha:1,y:0,duration:.5,stagger:.1,ease:'power3.out',delay:.25});
+  gsap.to('#tableBody tr',{autoAlpha:1,x:0,duration:.4,stagger:.065,ease:'power2.out',delay:.5});
+
+});
+mm.add('(prefers-reduced-motion: reduce)',()=>{
+  gsap.set(['#pageHead','#configSidebar','.panel','#tableBody tr'],{autoAlpha:1,y:0,x:0});
+});
+
+/* ── Tab switching ── */
+function switchTab(name, btn) {
+  document.querySelectorAll('.section-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.config-nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  // Re-animate panels in new tab
+  gsap.fromTo('.section-tab.active .panel',{autoAlpha:0,y:14},{autoAlpha:1,y:0,duration:.38,stagger:.08,ease:'power3.out'});
+  gsap.fromTo('.section-tab.active #tableBody tr',{autoAlpha:0,x:-10},{autoAlpha:1,x:0,duration:.32,stagger:.055,ease:'power2.out',delay:.15});
+}
+
+/* ── Toast ── */
+function toast(title, msg, icon, bg, tc) {
+  const w=document.getElementById('toastWrap');
+  const t=document.createElement('div');t.className='toast';
+  t.innerHTML=`<div class="toast-ico" style="background:${bg}"><span class="ms" style="font-size:.88rem;color:${tc}">${icon}</span></div><div class="toast-body"><div class="toast-title">${title}</div><div class="toast-msg">${msg}</div></div>`;
+  w.appendChild(t);
+  gsap.to(t,{autoAlpha:1,x:0,duration:.4,ease:'back.out(1.4)'});
+  gsap.to(t,{autoAlpha:0,x:36,duration:.3,ease:'power2.in',delay:4,onComplete:()=>t.remove()});
+}
+
+/* ── Toggle change feedback ── */
+function toggleChange(id, label) {
+  const el = typeof id === 'string' ? document.getElementById(id) : id;
+  const state = el ? el.checked : true;
+  toast(label, state ? 'Activado correctamente' : 'Desactivado', state ? 'check_circle' : 'cancel', state ? 'var(--green-bg)' : 'var(--bg3)', state ? 'var(--green-txt)' : 'var(--text-muted)');
+}
+
+/* ── Danger confirm ── */
+function confirmDanger(action) {
+  if(confirm(`¿Estás seguro de que deseas proceder con: ${action}? Esta acción no puede revertirse.`)) {
+    toast('Acción completada', `${action.charAt(0).toUpperCase()+action.slice(1)} ejecutado.`, 'warning', 'var(--red-bg)', 'var(--red-txt)');
+  }
+}
+
+/* ── Modals ── */
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); });
+});
+
+/* ── API Key toggle ── */
+function toggleApiKey() {
+  const inp = document.getElementById('apiKeyInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+/* pickDefTheme — usado por defaults de apariencia */
+function pickDefTheme(t) {
+  document.querySelectorAll('.def-theme-swatch').forEach(s => s.classList.toggle('active', s.dataset.t === t));
+}
+
+
+
+/* ── Hamburger ── */
+function toggleMenu(){var n=document.getElementById('navCenter'),h=document.getElementById('hamburger');n.classList.toggle('open');h.classList.toggle('open')}
+document.addEventListener('click',function(e){var n=document.getElementById('navCenter');if(n.classList.contains('open')&&!n.contains(e.target)&&!document.getElementById('hamburger').contains(e.target)){n.classList.remove('open');document.getElementById('hamburger').classList.remove('open')}})
+document.querySelectorAll('.nav-center .nav-link,.nav-center .nav-cta').forEach(function(l){l.addEventListener('click',function(){document.getElementById('navCenter').classList.remove('open');document.getElementById('hamburger').classList.remove('open')})})
+
+/* ── Dropdowns ── */
+function toggleDropdown(id, e) {
+  e.stopPropagation();
+  const dd = document.getElementById(id);
+  const item = dd.closest('.nav-dd-item');
+  const chv = item.querySelector('.nav-chevron');
+  const isOpen = dd.classList.contains('open');
+  document.querySelectorAll('.dropdown.open').forEach(el => {
+    if (el !== dd) { el.classList.remove('open'); const c=el.closest('.nav-dd-item')?.querySelector('.nav-chevron'); if(c)c.classList.remove('open'); }
+  });
+  if (isOpen) { dd.classList.remove('open'); if(chv)chv.classList.remove('open'); }
+  else { dd.classList.add('open'); if(chv)chv.classList.add('open'); }
+}
+document.addEventListener('click', function(ev) {
+  document.querySelectorAll('.dropdown.open').forEach(dd => {
+    const item = dd.closest('.nav-dd-item');
+    if (!item || !item.contains(ev.target)) {
+      dd.classList.remove('open');
+      const chv = item?.querySelector('.nav-chevron');
+      if (chv) chv.classList.remove('open');
+    }
+  });
+});
+
+/* ── User button ── */
+function handleUserBtn() {
+  if (typeof MTAuth !== 'undefined' && MTAuth.isLogged()) {
+    document.getElementById('userDropdown').classList.toggle('open');
+  } else {
+    window.location.href = 'mt-signup.html';
+  }
+}
+function doLogout() { if(typeof MTAuth !== 'undefined') MTAuth.logout(); }
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('userBtnWrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const dd = document.getElementById('userDropdown');
+    if (dd) dd.classList.remove('open');
+  }
+});
+
+function onDataLoaded() {}
+</script>
+<script src="/mt-javascript/mt-i18n.js"></script>
+<script>(function(){var o=document.getElementById('pwaOverlay');if(o&&!window.matchMedia('(display-mode:standalone)').matches&&!window.navigator.standalone&&window.innerWidth<768){o.classList.add('show')}})()</script>
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}</script>
+<script src="/mt-javascript/admin-config-app.js"></script>
+<script src="/mt-javascript/admin-nav.js"></script>
+</body>
+</html>
+
+
+
+

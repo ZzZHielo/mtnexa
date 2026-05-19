@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="beige">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2c2416">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Multitech">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/assets/iconos/apple-touch-icon.svg">
+<link rel="icon" type="image/svg+xml" href="/assets/iconos/pwa-icon.svg">
+<script>(function(){var l=localStorage.getItem('mt-lang');if(l)document.documentElement.setAttribute('lang',l);})();</script>
+<title>Iniciar sesión — Multitech</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+/* ══ THEMES ══ */
+[data-theme="beige"]{--bg:#f5f0e8;--bg2:#ede8de;--bg3:#e6dfcf;--surface:#faf7f2;--border:#d9d1c0;--text:#2c2416;--text-soft:#6b5e47;--text-muted:#a39880;--accent:#7a5c3a;--accent-bg:#e8dfc8;--accent-txt:#3d2e16;--btn-bg:#2c2416;--btn-txt:#faf7f2;--page-bg:#eee8dc;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="dark"]{--bg:#111010;--bg2:#1a1918;--bg3:#232120;--surface:#1e1c1b;--border:#2e2c2a;--text:#f0ede8;--text-soft:#a89e92;--text-muted:#6b6259;--accent:#c9a97a;--accent-bg:#2a2318;--accent-txt:#e8d5b0;--btn-bg:#e8d5b0;--btn-txt:#1a1410;--page-bg:#0d0c0b;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="blanc"]{--bg:#fff;--bg2:#f8f8f8;--bg3:#f0f0f0;--surface:#fff;--border:#e5e5e5;--text:#111;--text-soft:#555;--text-muted:#999;--accent:#333;--accent-bg:#f0f0f0;--accent-txt:#222;--btn-bg:#111;--btn-txt:#fff;--page-bg:#f4f4f4;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="slate"]{--bg:#1a2332;--bg2:#1f2a3d;--bg3:#253045;--surface:#202c3f;--border:#2d3d52;--text:#e8eef5;--text-soft:#8fa3bc;--text-muted:#4d6480;--accent:#7eb8f7;--accent-bg:#1a2d44;--accent-txt:#b8d8ff;--btn-bg:#7eb8f7;--btn-txt:#0a1628;--page-bg:#111820;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+[data-theme="sage"]{--bg:#f2f4ef;--bg2:#e8ebe3;--bg3:#dde2d6;--surface:#f7f8f5;--border:#cdd3c6;--text:#2a3020;--text-soft:#596349;--text-muted:#8a9878;--accent:#4a6741;--accent-bg:#dde8d6;--accent-txt:#2a4022;--btn-bg:#2a3020;--btn-txt:#f2f4ef;--page-bg:#e8ebe3;--ff-head:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--page-bg);
+  color:var(--text);
+  font-family:var(--ff-body);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 16px;
+  transition:background .4s, color .4s;
+  position:relative;
+  overflow-x:hidden;
+}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;vertical-align:middle;line-height:1}
+
+/* ── subtle dot grid bg ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size:30px 30px;
+  opacity:.5;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── LOGO ── */
+.login-logo{
+  position:relative;z-index:1;
+  margin-bottom:24px;
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-svg{height:48px;width:auto;color:var(--text);transition:color .3s}
+
+/* ── CARD ── */
+.card{
+  position:relative;z-index:1;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:32px;
+  width:100%;
+  max-width:368px;
+  box-shadow:0 4px 24px rgba(0,0,0,.07);
+  transition:background .3s, border-color .3s;
+  animation:cardIn .48s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(14px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.card-heading{
+  font-family:var(--ff-head);
+  font-size:1.22rem;
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:-.02em;
+  margin-bottom:6px;
+  text-align:center;
+}
+.card-sub{
+  font-size:.78rem;
+  color:var(--text-muted);
+  text-align:center;
+  margin-bottom:22px;
+  line-height:1.5;
+}
+
+/* ── SOCIAL BTNS ── */
+.btn-social{
+  width:100%;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:9px 14px;
+  border-radius:9px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  font-family:var(--ff-body);font-size:.83rem;
+  color:var(--text-soft);
+  cursor:pointer;
+  transition:background .15s,border-color .15s,color .15s;
+  text-decoration:none;
+  margin-bottom:9px;
+}
+.btn-social:last-of-type{margin-bottom:0}
+.btn-social:hover{background:var(--bg2);border-color:var(--text-muted);color:var(--text)}
+
+/* ── DIVIDER ── */
+.divider{
+  display:flex;align-items:center;gap:10px;
+  margin:18px 0;
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.divider span{font-size:.7rem;color:var(--text-muted);white-space:nowrap}
+
+/* ── FORM ── */
+.form-group{margin-bottom:13px}
+.form-label{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.775rem;font-weight:500;
+  color:var(--text-soft);
+  margin-bottom:6px;
+}
+.form-label a{
+  font-size:.72rem;font-weight:400;
+  color:var(--accent);text-decoration:none;
+  transition:opacity .2s;
+}
+.form-label a:hover{opacity:.7}
+
+.input-wrap{position:relative;display:flex;align-items:center}
+.input-icon{
+  position:absolute;left:11px;
+  pointer-events:none;
+  display:flex;align-items:center;
+}
+.input-icon .material-symbols-outlined{font-size:.9rem;color:var(--text-muted)}
+.form-input{
+  width:100%;
+  padding:9px 13px 9px 36px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--ff-body);font-size:.85rem;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.form-input::placeholder{color:var(--text-muted)}
+.form-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-bg);
+  background:var(--surface);
+}
+.input-eye{
+  position:absolute;right:10px;
+  background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;
+  padding:3px;top:50%;transform:translateY(-50%);
+}
+.input-eye .material-symbols-outlined{font-size:.9rem;color:var(--text-muted);transition:color .2s}
+.input-eye:hover .material-symbols-outlined{color:var(--text)}
+
+/* errors */
+.form-error{
+  font-size:.7rem;color:#c0392b;
+  margin-top:5px;display:none;
+  align-items:center;gap:4px;
+}
+.form-error.show{display:flex}
+.form-group.has-error .form-input{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.09)}
+
+/* ── SUBMIT ── */
+.btn-submit{
+  width:100%;
+  padding:10px;
+  border-radius:9px;
+  background:var(--btn-bg);
+  color:var(--btn-txt);
+  font-family:var(--ff-body);font-size:.85rem;font-weight:500;
+  border:none;cursor:pointer;
+  transition:opacity .2s,transform .15s;
+  margin-top:6px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-submit:hover{opacity:.86;transform:translateY(-1px)}
+.btn-submit:active{transform:translateY(0)}
+.btn-submit.loading{opacity:.6;pointer-events:none}
+.btn-submit.loading::after{
+  content:'';
+  width:13px;height:13px;
+  border:2px solid transparent;
+  border-top-color:currentColor;
+  border-radius:50%;
+  animation:spin .6s linear infinite;
+  margin-left:4px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── FOOTER LINK ── */
+.card-footer{
+  text-align:center;
+  font-size:.77rem;
+  color:var(--text-muted);
+  border-top:1px solid var(--border);
+  padding-top:16px;
+  margin-top:4px;
+}
+.card-footer a{color:var(--accent);font-weight:500;text-decoration:none}
+.card-footer a:hover{opacity:.75}
+
+/* ── BOTTOM LINKS ── */
+.bottom-links{
+  position:relative;z-index:1;
+  margin-top:20px;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;
+}
+.bottom-links a{
+  font-size:.71rem;color:var(--text-muted);
+  text-decoration:none;transition:color .2s;
+}
+.bottom-links a:hover{color:var(--text)}
+
+/* ── THEME SWITCHER ── */
+.ts{position:fixed;bottom:22px;right:22px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.ts-toggle{width:42px;height:42px;border-radius:50%;background:var(--btn-bg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .2s}
+.ts-toggle:hover{transform:scale(1.08)}
+.ts-panel{display:none;flex-direction:column;gap:3px;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:12px;box-shadow:0 8px 28px rgba(0,0,0,.13);min-width:160px}
+.ts-panel.open{display:flex}
+.ts-label{font-size:.62rem;font-weight:500;color:var(--text-muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px;padding:0 4px}
+.ts-btn{display:flex;align-items:center;gap:9px;width:100%;padding:7px 10px;border-radius:7px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:var(--ff-body);font-size:.8rem;color:var(--text-soft);transition:all .18s;text-align:left}
+.ts-btn:hover{background:var(--bg2);color:var(--text)}
+.ts-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500}
+.ts-sw{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(0,0,0,.13);flex-shrink:0}
+
+/* ── SHAKE ANIMATION ── */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  15%{transform:translateX(-5px)}
+  35%{transform:translateX(5px)}
+  55%{transform:translateX(-4px)}
+  75%{transform:translateX(4px)}
+  90%{transform:translateX(-2px)}
+}
+.shake{animation:shake .4s cubic-bezier(.36,.07,.19,.97) both}
+
+@media(max-width:600px){
+  .card{padding:28px 20px;border-radius:12px}
+  body{padding:20px 12px}
+  .back-link{top:16px;left:16px;font-size:.75rem}
+}
+@media(max-width:400px){
+  .card{padding:24px 16px}
+  body{padding:16px 8px}
+}
+/* ══ PWA INSTALL OVERLAY ══ */
+.pwa-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;animation:fadeIn .4s ease}
+.pwa-overlay.show{display:flex}
+.pwa-overlay .logo-svg{height:56px;width:auto;color:var(--text);margin-bottom:20px}
+.pwa-overlay h2{font-family:var(--ff-head);font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.pwa-overlay p{font-size:.9rem;color:var(--text-soft);line-height:1.7;max-width:340px;margin-bottom:28px}
+.pwa-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;width:100%;max-width:320px}
+.pwa-step{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:left}
+.pwa-step-num{width:28px;height:28px;border-radius:50%;background:var(--btn-bg);color:var(--btn-txt);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
+.pwa-step-text{font-size:.82rem;color:var(--text-soft);line-height:1.4}
+.pwa-step-text strong{color:var(--text);font-weight:500}
+.pwa-share-icon{display:inline-flex;align-items:center;gap:2px;font-size:.75rem;background:var(--bg2);padding:2px 6px;border-radius:4px;border:1px solid var(--border)}
+.pwa-share-icon .material-symbols-outlined{font-size:.85rem}
+.pwa-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text-muted);background:var(--bg2);padding:6px 14px;border-radius:100px;border:1px solid var(--border)}
+.pwa-badge .material-symbols-outlined{font-size:.85rem;color:var(--accent)}
+</style>
+<link rel="stylesheet" href="/mt-mobile.css">
+</head>
+<body>
+
+
+<!-- SVG LOGO SYMBOL -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="nexalogo" viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid meet">
+    <g>
+      <path fill="currentColor" d="M585 238H198Q202 186 231.5 158.5Q261 131 304 131Q368 131 393 185H575Q561 130 524.5 86.0Q488 42 433.0 17.0Q378 -8 310 -8Q228 -8 164.0 27.0Q100 62 64.0 127.0Q28 192 28 279Q28 366 63.5 431.0Q99 496 163.0 531.0Q227 566 310 566Q391 566 454.0 532.0Q517 498 552.5 435.0Q588 372 588 288Q588 264 585 238ZM413 333Q413 377 383.0 403.0Q353 429 308 429Q265 429 235.5 404.0Q206 379 199 333Z" transform="translate(1450.0,1663.0) scale(1.25,-1.25)"/>
+      <path fill="currentColor" d="M392 0 285 155 195 0H10L194 285L5 558H197L304 404L394 558H579L392 277L584 0Z" transform="translate(2080.0,1663.0) scale(1.25,-1.25)"/>
+      <path fill="currentColor" d="M274 566Q333 566 377.5 542.0Q422 518 446 479V558H617V0H446V79Q421 40 376.5 16.0Q332 -8 273 -8Q205 -8 149.0 27.5Q93 63 60.5 128.5Q28 194 28 280Q28 366 60.5 431.0Q93 496 149.0 531.0Q205 566 274 566ZM324 417Q273 417 237.5 380.5Q202 344 202 280Q202 216 237.5 178.5Q273 141 324 141Q375 141 410.5 178.0Q446 215 446 279Q446 343 410.5 380.0Q375 417 324 417Z" transform="translate(2710.0,1663.0) scale(1.25,-1.25)"/>
+    </g>
+    <g transform="matrix(1.246551,0,0,1.246551,568.33377,808.382648)">
+      <g transform="matrix(1.450726,0,0,1.450726,-487.750247,-555.447345)">
+        <path fill="currentColor" d="M292.475,234.098C295.888,235.94 302.91,235.373 305.533,234.043C307.98,234.281 311.145,233.731 326.454,237.674C361.713,246.756 393.857,285.671 408.122,314.687C431.921,363.094 456.029,406.665 466.228,426.64C486.339,466.027 502.144,489.55 498.499,497.499C495.661,503.689 452.718,552.308 449.132,556.162C425.563,581.494 405.015,606.784 400.324,604.863C399.126,604.373 383.559,573.304 381.787,570.341C375.823,560.365 335.645,483.151 326.078,468.778C291.825,417.318 252.958,418.542 250.522,418.275C248.834,416.604 246.826,416.725 242.5,417.031C240.943,417.142 241.641,418.004 241.474,418.193C185.925,423.002 169.268,464.311 170.069,469.663C171.197,477.202 176.76,455.742 212.378,435.28C259.77,408.053 324.253,458.874 326.281,498.516C327.166,515.817 273.482,713.848 273.155,717.478C272.278,727.232 286.557,717.55 287.218,717.093C318.063,695.792 340.372,680.464 374.549,645.548C418.111,601.045 425.843,596.213 448.046,570.099C452.497,564.864 483.296,528.64 503.903,504.851C524.154,481.472 661.178,314.455 672.32,301.347C700.004,268.777 699.838,267.992 709.25,233.43C727.679,165.758 805.524,151.633 839.017,194.893C853.025,212.985 855.131,229.816 856.916,240.461C855.939,242.535 854.769,242.975 857.312,245.515C857.744,252.137 858.187,258.349 856.713,267.535C854.454,281.622 833.878,370.497 829.93,385.608C824.137,407.782 814.278,449.999 812.967,455.61C802.088,502.196 801.093,501.871 790.14,548.419C778.339,598.571 750.634,706.665 747.113,720.404C731.46,781.478 728.934,791.498 718.3,811.398C667.365,906.718 564.559,891.216 515.928,820.22C509.278,810.512 445.449,692.16 430.151,662.687C425.615,653.948 423.909,653.251 428.742,644.644C437.788,628.535 487.33,576.019 507.058,556.066C522.776,540.169 522.798,538.997 524.103,539.995C528.641,543.465 569.688,641.733 618.605,682.376C694.817,745.699 755.582,644.595 754.113,636.596C753.254,631.915 740.57,649.277 737.378,653.404C687.373,718.073 625.019,687.548 609.863,660.293C604.836,651.254 610.075,643.309 627.684,574.543C629.773,566.385 653.449,473.92 653.771,472.561C655.664,464.557 657.894,455.884 658.266,454.437C678.177,376.981 689.541,344.061 682.482,346.453C680.344,347.178 580.353,461.474 571.547,471.541C545.983,500.762 527.098,523.302 520.104,529.002C503.492,542.541 452.673,599.545 424.983,633.884C315.065,770.194 306.856,771.283 238.934,851.883C154.735,951.799 61.798,862.746 74.138,772.434C76.719,753.549 117.888,593.139 121.878,577.594C151.687,461.45 151.418,461.466 154.185,451.421C183.595,344.629 184.725,245.537 292.475,234.098Z"/>
+      </g>
+    </g>
+  </symbol>
+</svg>
+
+<!-- THEME SWITCHER -->
+<div class="ts">
+  <div class="ts-panel" id="tsPanel">
+    <span class="ts-label">Estilo visual</span>
+    <button class="ts-btn" data-theme="beige" onclick="applyTheme('beige')"><span class="ts-sw" style="background:#f5f0e8"></span>Beige</button>
+    <button class="ts-btn" data-theme="dark"  onclick="applyTheme('dark')"><span class="ts-sw" style="background:#111010;border-color:#444"></span>Dark</button>
+    <button class="ts-btn" data-theme="blanc" onclick="applyTheme('blanc')"><span class="ts-sw" style="background:#fff"></span>Blanc</button>
+    <button class="ts-btn" data-theme="slate" onclick="applyTheme('slate')"><span class="ts-sw" style="background:#1a2332;border-color:#445"></span>Slate</button>
+    <button class="ts-btn" data-theme="sage"  onclick="applyTheme('sage')"><span class="ts-sw" style="background:#f2f4ef"></span>Sage</button>
+  </div>
+</div>
+
+<!-- LOGO -->
+<div class="login-logo">
+  <svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg>
+</div>
+
+<!-- CARD -->
+<div class="card" id="loginCard">
+
+  <h1 class="card-heading">Iniciar sesión en Nexa</h1>
+  <p class="card-sub">Ingresa tus credenciales para continuar</p>
+
+  <!-- Email -->
+  <div class="form-group" id="grpEmail">
+    <label class="form-label" for="email">Correo electrónico</label>
+    <div class="input-wrap">
+      <div class="input-icon"><span class="material-symbols-outlined">mail</span></div>
+      <input class="form-input" type="email" id="email" placeholder="tu@correo.com" autocomplete="email">
+    </div>
+    <span class="form-error" id="errEmail">
+      <span class="material-symbols-outlined" style="font-size:.8rem">error</span>
+      Introduce un correo válido.
+    </span>
+  </div>
+
+  <!-- Password -->
+  <div class="form-group" id="grpPass">
+    <label class="form-label" for="password">
+      Contraseña
+      <a href="#">¿Olvidaste la contraseña?</a>
+    </label>
+    <div class="input-wrap">
+      <div class="input-icon"><span class="material-symbols-outlined">lock</span></div>
+      <input class="form-input" type="password" id="password" placeholder="••••••••" autocomplete="current-password" style="padding-right:38px">
+      <button class="input-eye" onclick="togglePwd()" type="button" tabindex="-1">
+        <span class="material-symbols-outlined" id="eyeIcon">visibility</span>
+      </button>
+    </div>
+    <span class="form-error" id="errPass">
+      <span class="material-symbols-outlined" style="font-size:.8rem">error</span>
+      Correo o contraseña incorrectos.
+    </span>
+  </div>
+
+  <button class="btn-submit" id="btnLogin" onclick="doLogin()">
+    Iniciar sesión
+  </button>
+
+  <!-- ── 2FA STEP ── -->
+  <div id="step2fa" style="display:none">
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:.82rem;font-weight:500;color:var(--text);margin-bottom:4px" data-i18n="sec.2fa_label">Autenticación de dos factores</div>
+      <div style="font-size:.73rem;color:var(--text-muted)">Ingresa el código de 6 dígitos de tu app autenticadora</div>
+    </div>
+    <div class="form-group" id="grpTotp">
+      <div class="input-wrap" style="justify-content:center">
+        <input class="form-input" type="text" id="totpLogin" placeholder="000000" maxlength="6" inputmode="numeric" pattern="[0-9]*" style="width:150px;text-align:center;font-size:1.2rem;letter-spacing:.2em;padding:10px;font-variant-numeric:tabular-nums">
+      </div>
+      <span class="form-error" id="errTotp">
+        <span class="material-symbols-outlined" style="font-size:.8rem">error</span>
+        Código inválido.
+      </span>
+    </div>
+    <button class="btn-submit" id="btnTotp" onclick="verify2FALogin()">
+      Verificar código
+    </button>
+    <div class="card-footer" style="border:none;padding-top:10px">
+      <a href="#" onclick="cancel2FA();return false">Volver al inicio de sesión</a>
+    </div>
+  </div>
+
+         <div class="divider"><span>o continúa con Google</span></div>
+  
+
+  <!-- Social -->
+  <button class="btn-social" onclick="MTAuth.loginWithGoogle()">
+    <svg width="16" height="16" viewBox="0 0 48 48">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+    </svg>
+    Continuar con Google
+  </button>
+<br>
+    <p class="card-footer">¿No tienes cuenta? <a href="mt-signup.html">Crear una cuenta</a></p>
+
+
+
+
+
+</div>
+
+<!-- BOTTOM LINKS -->
+<div class="bottom-links">
+  <a href="index.html">← Volver al inicio</a>
+  <a href="multitech-contacto.html">Contacto</a>
+  <a href="multitech-servicios.html">Servicios</a>
+  <a href="#">Privacidad</a>
+</div>
+<!-- 
+  ════════════════════════════════════════════════
+  REEMPLAZA el bloque <script> al final de mt-login.html
+  con este contenido (todo el bloque <script>...</script>)
+  ════════════════════════════════════════════════
+-->
+<script src="/mt-javascript/mt-auth-client.js"></script>
+<script>
+/* ── THEME ── */
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('mt-theme', t);
+  document.querySelectorAll('.ts-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === t));
+}
+(function(){ applyTheme(localStorage.getItem('mt-theme') || 'beige'); })();
+document.addEventListener('click', e => {
+  if (!document.querySelector('.ts').contains(e.target))
+    document.getElementById('tsPanel').classList.remove('open');
+});
+
+/* ── Si ya está logueado, redirigir al index ── */
+(function() {
+  if (MTAuth.isLogged()) {
+    window.location.href = 'index.html';
+  }
+})();
+
+/* ── TOGGLE PASSWORD ── */
+function togglePwd() {
+  const i = document.getElementById('password');
+  const ic = document.getElementById('eyeIcon');
+  i.type = i.type === 'password' ? 'text' : 'password';
+  ic.textContent = i.type === 'password' ? 'visibility' : 'visibility_off';
+}
+
+/* ── VALIDATION HELPERS ── */
+function setErr(groupId, errId, show, msg) {
+  document.getElementById(groupId).classList.toggle('has-error', show);
+  const errEl = document.getElementById(errId);
+  errEl.classList.toggle('show', show);
+  if (msg) {
+    // Actualizar texto del error manteniendo el icono
+    const spans = errEl.querySelectorAll('span');
+    if (spans.length > 1) spans[1].textContent = msg;
+    else errEl.lastChild.textContent = ' ' + msg;
+  }
+}
+
+/* ── LOGIN ── */
+async function doLogin() {
+  const correo   = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  let valid = true;
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+  setErr('grpEmail', 'errEmail', !emailOk, 'Introduce un correo válido.');
+  if (!emailOk) valid = false;
+
+  if (!password) {
+    setErr('grpPass', 'errPass', true, 'Ingresa tu contraseña.');
+    valid = false;
+  } else {
+    setErr('grpPass', 'errPass', false);
+  }
+
+  if (!valid) {
+    document.getElementById('loginCard').classList.add('shake');
+    setTimeout(() => document.getElementById('loginCard').classList.remove('shake'), 420);
+    return;
+  }
+
+  const btn = document.getElementById('btnLogin');
+  btn.classList.add('loading');
+  btn.textContent = 'Verificando';
+
+  try {
+    const res = await MTAuth.login({ correo, password });
+
+    if (res.success && res.needs2fa) {
+      // 2FA requerido
+      _tempToken = res.tempToken;
+      document.getElementById('step2fa').style.display = '';
+      document.querySelector('.card-heading').textContent = 'Verificación de dos factores';
+      document.querySelector('.card-sub').textContent = 'Ingresa el código de tu app autenticadora';
+      document.getElementById('email').closest('.form-group').style.display = 'none';
+      document.getElementById('grpPass').closest('.form-group').style.display = 'none';
+      document.getElementById('btnLogin').style.display = 'none';
+      document.getElementById('step2fa').querySelector('.card-footer').style.display = '';
+      btn.classList.remove('loading');
+      btn.textContent = 'Iniciar sesión';
+      document.getElementById('totpLogin').focus();
+    } else if (res.success) {
+      btn.textContent = '✓ Acceso concedido';
+      btn.style.background = '#22c55e';
+      btn.style.color = '#fff';
+      setTimeout(() => { window.location.href = 'index.html'; }, 600);
+    } else {
+      btn.classList.remove('loading');
+      btn.textContent = 'Iniciar sesión';
+      const msg = res.message || 'Correo o contraseña incorrectos';
+      setErr('grpEmail', 'errEmail', false);
+      setErr('grpPass', 'errPass', true, msg);
+      document.getElementById('loginCard').classList.add('shake');
+      setTimeout(() => document.getElementById('loginCard').classList.remove('shake'), 420);
+    }
+  } catch {
+    btn.classList.remove('loading');
+    btn.textContent = 'Iniciar sesión';
+    setErr('grpPass', 'errPass', true, 'Error de conexión. Intenta de nuevo.');
+  }
+}
+
+/* ── 2FA LOGIN ── */
+var _tempToken = null;
+
+async function verify2FALogin() {
+  const code = document.getElementById('totpLogin').value.trim();
+  if (!code || code.length < 6) {
+    setErr('grpTotp', 'errTotp', true, 'Ingresa el código completo de 6 dígitos.');
+    return;
+  }
+  setErr('grpTotp', 'errTotp', false);
+
+  const btn = document.getElementById('btnTotp');
+  btn.classList.add('loading');
+  btn.textContent = 'Verificando';
+
+  try {
+    const res = await MTAuth.apiFetch('/login/2fa', {
+      method: 'POST', body: { tempToken: _tempToken, totpCode: code }
+    });
+
+    if (res.success) {
+      // Guardar usuario y redirigir
+      if (res.user) MTAuth.saveUser(res.user);
+      btn.textContent = '✓ Acceso concedido';
+      btn.style.background = '#22c55e';
+      btn.style.color = '#fff';
+      setTimeout(() => { window.location.href = 'index.html'; }, 600);
+    } else {
+      btn.classList.remove('loading');
+      btn.textContent = 'Verificar código';
+      setErr('grpTotp', 'errTotp', true, res.message || 'Código inválido');
+      document.getElementById('totpLogin').value = '';
+      document.getElementById('totpLogin').focus();
+    }
+  } catch {
+    btn.classList.remove('loading');
+    btn.textContent = 'Verificar código';
+    setErr('grpTotp', 'errTotp', true, 'Error de conexión. Intenta de nuevo.');
+  }
+}
+
+function cancel2FA() {
+  _tempToken = null;
+  document.getElementById('step2fa').style.display = 'none';
+  document.querySelector('.card-heading').textContent = 'Iniciar sesión en Nexa';
+  document.querySelector('.card-sub').textContent = 'Ingresa tus credenciales para continuar';
+  document.getElementById('email').closest('.form-group').style.display = '';
+  document.getElementById('grpPass').closest('.form-group').style.display = '';
+  document.getElementById('btnLogin').style.display = '';
+  document.getElementById('btnLogin').classList.remove('loading');
+  document.getElementById('btnLogin').textContent = 'Iniciar sesión';
+  document.getElementById('btnLogin').style.background = '';
+  document.getElementById('btnLogin').style.color = '';
+  document.getElementById('totpLogin').value = '';
+  setErr('grpTotp', 'errTotp', false);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    if (_tempToken) verify2FALogin(); else doLogin();
+  }
+});
+
+document.getElementById('email').addEventListener('input',    () => setErr('grpEmail','errEmail',false));
+document.getElementById('password').addEventListener('input', () => setErr('grpPass','errPass',false));
+document.getElementById('totpLogin').addEventListener('input', () => setErr('grpTotp','errTotp',false));
+</script>
+<script src="/mt-javascript/mt-i18n.js"></script>
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}</script>
+</body>
+</html>
