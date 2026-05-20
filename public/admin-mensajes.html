@@ -357,16 +357,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .td-muted{color:var(--text-muted);}
 
 /* ── THEME SWITCHER ── */
-.ts-wrap{position:fixed;bottom:26px;right:26px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-.ts-panel{display:none;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--border-s);border-radius:14px;padding:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);min-width:162px;}
-.ts-panel.open{display:flex;}
-.ts-lbl{font-size:.59rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;padding:0 4px;}
-.ts-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 9px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.79rem;color:var(--text-soft);transition:all .15s;text-align:left;}
-.ts-btn:hover{background:var(--bg2);color:var(--text);}
-.ts-btn.active{background:var(--accent-bg);border-color:var(--border);color:#fff;font-weight:500;}
-.ts-swatch{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(0,0,0,.12);flex-shrink:0;}
-.ts-fab{width:44px;height:44px;border-radius:50%;background:var(--btn);color:var(--btn-txt);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .18s;}
-.ts-fab:hover{transform:scale(1.08);}
+
 
 /* ── TOASTS ── */
 .toast-wrap{position:fixed;top:80px;right:22px;z-index:600;display:flex;flex-direction:column;gap:6px;pointer-events:none;}
@@ -514,21 +505,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   </symbol>
 </svg>
 
-<!-- ── THEME SWITCHER ── -->
-<div class="ts-wrap">
-  <div class="ts-panel" id="tsPanel">
-    <span class="ts-lbl">Estilo visual</span>
-    <button class="ts-btn" data-theme="beige" onclick="applyTheme('beige')"><span class="ts-swatch" style="background:#f4efe6"></span>Beige</button>
-    <button class="ts-btn" data-theme="dark"  onclick="applyTheme('dark')"><span class="ts-swatch" style="background:#111;border-color:#444"></span>Dark</button>
-    <button class="ts-btn" data-theme="blanc" onclick="applyTheme('blanc')"><span class="ts-swatch" style="background:#fff"></span>Blanc</button>
-    <button class="ts-btn" data-theme="slate" onclick="applyTheme('slate')"><span class="ts-swatch" style="background:#111d2c;border-color:#446"></span>Slate</button>
-    <button class="ts-btn" data-theme="sage"  onclick="applyTheme('sage')"><span class="ts-swatch" style="background:#eef0eb"></span>Sage</button>
-  </div>
-  <button class="ts-fab" onclick="document.getElementById('tsPanel').classList.toggle('open')">
-    <span class="ms" style="font-size:1rem;color:var(--btn-txt)">palette</span>
-  </button>
-</div>
-
 <!-- ── TOASTS ── -->
 <div class="toast-wrap" id="toastWrap"></div>
 
@@ -646,6 +622,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
               </button>
               <button class="nav-icon-btn" id="unarchiveBtn" title="Desarchivar" onclick="desarchivarChat(activeConvId)" style="display:none">
                 <span class="ms" style="font-size:1rem">unarchive</span>
+              </button>
+              <button class="nav-icon-btn" title="Guardar cotización" onclick="guardarCotizacionFromChat()">
+                <span class="ms" style="font-size:1rem">request_quote</span>
               </button>
               <button class="nav-icon-btn" title="Llamar" onclick="showToast({icon:'call',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Llamada',msg:'Función disponible próximamente'})">
                 <span class="ms" style="font-size:1rem">call</span>
@@ -807,7 +786,7 @@ function applyTheme(t){
   document.querySelectorAll('.ts-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));
 }
 applyTheme(localStorage.getItem('mt-theme')||'beige');
-document.addEventListener('click',e=>{if(!e.target.closest('.ts-wrap'))document.getElementById('tsPanel').classList.remove('open');});
+
 
 /* ══ TOAST ══ */
 function showToast({icon,bg,tc,title,msg}){
@@ -1181,6 +1160,7 @@ function openCotizacionModal(d){
       </div>
     </div>
     <div class="m-field" style="display:flex;gap:6px;flex-wrap:wrap" id="cotAcciones">
+      <button class="m-btn" onclick="guardarCotizacion(${cotId})"><span class="ms">save</span>Guardar cambios</button>
       ${d.cot_estado==='pendiente'?`<button class="m-btn primary" onclick="enviarCotizacion(${cotId})"><span class="ms">send</span>Enviar cotización</button>`:''}
       ${d.cot_estado==='enviada'?`<button class="m-btn primary" onclick="marcarPagada(${cotId})"><span class="ms">check_circle</span>Marcar como pagada</button>`:''}
     </div>
@@ -1193,6 +1173,37 @@ function openCotizacionModal(d){
       <button class="m-btn" onclick="closeModal()" style="margin-left:auto">Cerrar</button>
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
+}
+
+async function guardarCotizacionFromChat(){
+  const c = CONVERSACIONES.find(x=>x.id===activeConvId);
+  if(!c){ showToast({icon:'warning',bg:'var(--amber-bg)',tc:'var(--amber-txt)',title:'Selecciona una conversación',msg:'Primero selecciona un hilo de la lista'}); return; }
+  if(c.cotizacion_id){ showToast({icon:'info',bg:'var(--blue-bg)',tc:'var(--blue-txt)',title:'Ya existe cotización',msg:'Esta conversación ya tiene una cotización vinculada'}); return; }
+  const nombre = c.nombre||'';
+  const apellido = c.apellido||'';
+  if(!nombre){ showToast({icon:'warning',bg:'var(--amber-bg)',tc:'var(--amber-txt)',title:'Nombre requerido',msg:'La conversación no tiene nombre de cliente'}); return; }
+  try {
+    const payload = {
+      nombre,
+      apellido,
+      correo: c.cuenta_correo||'',
+      whatsapp: '',
+      tipo_proyecto: c.servicio||c.cot_tipo||'',
+      presupuesto: '',
+      monto: null,
+      moneda: 'USD',
+      descripcion: c.ultimoMensaje||'',
+      funcionalidades: [],
+    };
+    const r = await fetch(API_BASE+'/api/cotizaciones', {method:'POST', headers:API_H, body:JSON.stringify(payload)});
+    const j = await r.json();
+    if(!j.success) throw new Error(j.message);
+    c.cotizacion_id = j.id;
+    showToast({icon:'check',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Cotización creada',msg:'Cotización #'+j.id+' creada desde la conversación'});
+    renderProyectoPanel(activeConvId);
+  } catch(e){
+    showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo crear la cotización'});
+  }
 }
 
 async function guardarCotizacion(id){

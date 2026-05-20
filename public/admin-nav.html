@@ -34,11 +34,21 @@
     </div>
   </div>
   <div class="nav-right">
-    <div class="notif-wrap">
+    <div class="notif-wrap" id="notifWrap">
       <button type="button" class="nav-icon-btn" id="notifBtn">
         <span class="ms" style="font-size:1.1rem">notifications</span>
         <span class="notif-dot" id="notifDot"></span>
       </button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="nt-head">
+          <span class="nt-head-title">Notificaciones</span>
+          <button class="nt-head-btn" id="ntMarkRead" onclick="marcarTodasLeidas()">Marcar todas leídas</button>
+        </div>
+        <div class="nt-list" id="notifList"></div>
+        <div class="nt-foot">
+          No hay más notificaciones
+        </div>
+      </div>
     </div>
     <div class="user-btn-wrap" id="userBtnWrap">
       <button type="button" class="user-btn" id="userBtn" onclick="handleUserBtn()" title="Mi cuenta">

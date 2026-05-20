@@ -189,16 +189,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .placeholder-state small{font-size:.76rem;display:block;margin-top:5px;}
 
 /* ── THEME SWITCHER ── */
-.ts-wrap{position:fixed;bottom:26px;right:26px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-.ts-panel{display:none;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--border-s);border-radius:14px;padding:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);min-width:162px;}
-.ts-panel.open{display:flex;}
-.ts-lbl{font-size:.59rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;padding:0 4px;}
-.ts-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 9px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.79rem;color:var(--text-soft);transition:all .15s;text-align:left;}
-.ts-btn:hover{background:var(--bg2);color:var(--text);}
-.ts-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500;}
-.ts-swatch{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(0,0,0,.12);flex-shrink:0;}
-.ts-fab{width:44px;height:44px;border-radius:50%;background:var(--btn);color:var(--btn-txt);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .18s;}
-.ts-fab:hover{transform:scale(1.08);}
 
 /* ── USER DROPDOWN (copied from index.html) ── */
 .user-btn-wrap{position:relative}
@@ -331,21 +321,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   </symbol>
 </svg>
 
-<!-- THEME SWITCHER -->
-<div class="ts-wrap">
-  <div class="ts-panel" id="tsPanel">
-    <span class="ts-lbl">Estilo visual</span>
-    <button class="ts-btn" data-theme="beige" onclick="applyTheme('beige')"><span class="ts-swatch" style="background:#f4efe6"></span>Beige</button>
-    <button class="ts-btn" data-theme="dark"  onclick="applyTheme('dark')"><span class="ts-swatch" style="background:#111;border-color:#444"></span>Dark</button>
-    <button class="ts-btn" data-theme="blanc" onclick="applyTheme('blanc')"><span class="ts-swatch" style="background:#fff"></span>Blanc</button>
-    <button class="ts-btn" data-theme="slate" onclick="applyTheme('slate')"><span class="ts-swatch" style="background:#111d2c;border-color:#446"></span>Slate</button>
-    <button class="ts-btn" data-theme="sage"  onclick="applyTheme('sage')"><span class="ts-swatch" style="background:#eef0eb"></span>Sage</button>
-  </div>
-  <button class="ts-fab" onclick="document.getElementById('tsPanel').classList.toggle('open')">
-    <span class="ms" style="font-size:1rem;color:var(--btn-txt)">palette</span>
-  </button>
-</div>
-
 <!-- TOASTS -->
 <div class="toast-wrap" id="toastWrap"></div>
 
@@ -464,7 +439,7 @@ function applyTheme(t){
   document.querySelectorAll('.ts-btn').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));
 }
 applyTheme(localStorage.getItem('mt-theme')||'beige');
-document.addEventListener('click',e=>{if(!e.target.closest('.ts-wrap'))document.getElementById('tsPanel').classList.remove('open');});
+
 
 (function(){
   const el=document.getElementById('dateBadge');

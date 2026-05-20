@@ -51,8 +51,9 @@ const mensajesRouter     = require('./public/mt-javascript/mt-mensajes');
 const finanzasRouter     = require('./public/mt-javascript/mt-finanzas');
 const serviciosRouter    = require('./public/mt-javascript/mt-servicios');
 const chatRouter         = require('./public/mt-javascript/mt-chat');
-const encuestasRouter    = require('./public/mt-javascript/mt-encuestas');
-const uploadRouter       = require('./public/mt-javascript/mt-upload');
+const encuestasRouter       = require('./public/mt-javascript/mt-encuestas');
+const uploadRouter          = require('./public/mt-javascript/mt-upload');
+const notificacionesRouter  = require('./public/mt-javascript/mt-notificaciones');
 
 const PORT      = parseInt(process.env.PORT  || '3001');
 const ADMIN_KEY = process.env.ADMIN_KEY       || 'multitech-admin-2025';
@@ -151,6 +152,7 @@ app.use('/api/servicios',      serviciosRouter);
 app.use('/api/chat',           chatRouter);
 app.use('/api/encuestas',      encuestasRouter);
 app.use('/api/upload',         uploadRouter);
+app.use('/api/notificaciones',  notificacionesRouter);
 
 /* ════════════════════════════════════════
    FALLBACK SPA

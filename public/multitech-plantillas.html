@@ -28,12 +28,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-weig
 .dd-icon .material-symbols-outlined{font-size:1rem;color:var(--accent)}
 .logo-svg{display:inline-block;height:50px;width:auto;color:var(--text);padding-left:20px;transition:color .3s}
 
-.theme-switcher{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.ts-toggle{width:46px;height:46px;border-radius:50%;background:var(--btn-bg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:transform .2s,background .3s}
-.ts-toggle:hover{transform:scale(1.08)}
-.ts-panel{display:none;flex-direction:column;gap:4px;align-items:stretch;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:0 8px 32px rgba(0,0,0,.13);min-width:170px;transition:background .3s,border-color .3s}
-.ts-panel.open{display:flex}
-.ts-panel-label{font-size:.65rem;font-weight:500;color:var(--text-muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px;padding:0 4px}
 .mt-theme-btn{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:var(--ff-body);font-size:.82rem;color:var(--text-soft);transition:all .2s;white-space:nowrap;text-align:left}
 .mt-theme-btn:hover{background:var(--bg2);color:var(--text)}
 .mt-theme-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500}
@@ -160,31 +154,125 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .filter-btn.active::after{transform:scaleX(1)}
 .fsep{width:1px;height:18px;background:var(--border);flex-shrink:0}
 
+/* ══ TEMPLATES GRID ══ */
 .templates-area{padding:56px}
 .templates-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
 .t-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .2s;cursor:pointer}
 .t-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.1);border-color:var(--border)}
-.t-preview{position:relative;background:var(--bg2);height:180px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);overflow:hidden;transition:background .3s}
-.mini-browser{width:82%;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.08);overflow:hidden;transition:background .3s,border-color .3s}
-.mb-bar{display:flex;align-items:center;gap:4px;padding:6px 10px;border-bottom:1px solid var(--border);background:var(--bg2);transition:background .3s,border-color .3s}
-.mb-dot{width:6px;height:6px;border-radius:50%}
-.mb-body{padding:10px;display:flex;flex-direction:column;gap:5px}
-.mb-h{height:7px;background:var(--border);border-radius:4px;width:75%;transition:background .3s}
-.mb-h.accent{background:var(--accent-bg)}
-.mb-h.sm{width:50%}
-.mb-h.xs{width:30%}
-.mb-row{display:flex;gap:5px;margin-top:3px}
-.mb-col{flex:1;height:26px;background:var(--border);border-radius:4px;transition:background .3s}
-.mb-col.tall{height:40px}
-.t-badge{position:absolute;top:10px;right:10px;font-size:.62rem;font-weight:600;padding:3px 9px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase}
-.badge-pop{background:#fef3c7;color:#92400e}
-.badge-new{background:#dbeafe;color:#1e40af}
-.badge-free{background:#d1fae5;color:#065f46}
-[data-theme="dark"] .badge-pop{background:#3d2a04;color:#fbbf24}
-[data-theme="dark"] .badge-new{background:#0c1e3d;color:#7eb8f7}
-[data-theme="dark"] .badge-free{background:#062217;color:#34d399}
+
+/* ── Preview artístico ── */
+.t-preview{position:relative;height:200px;overflow:hidden;border-bottom:1px solid var(--border)}
+.t-prev-inner{position:absolute;inset:0;width:100%;height:100%}
+
+/* Corporate Clean */
+.prev-corp{background:#f0ede6;padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
+.prev-corp .bg-letter{position:absolute;top:-14px;right:8px;font-size:130px;font-weight:700;color:rgba(44,36,22,.06);line-height:1;pointer-events:none;font-family:var(--ff-head);letter-spacing:-.05em}
+.prev-corp .nav-dots{display:flex;gap:6px;align-items:center;margin-bottom:14px}
+.prev-corp .nav-dot{height:3px;border-radius:2px;background:rgba(44,36,22,.15)}
+.prev-corp .nav-dot.a{background:rgba(44,36,22,.45);width:44px}
+.prev-corp .nav-dot:not(.a){width:28px}
+.prev-corp .corp-hed{font-family:var(--ff-head);font-size:28px;font-weight:700;color:#2c2416;letter-spacing:-.03em;line-height:1.1;margin-bottom:8px}
+.prev-corp .corp-hed em{font-style:italic;opacity:.55}
+.prev-corp .corp-lines{display:flex;gap:5px}
+.prev-corp .corp-lines span{height:3px;border-radius:2px;background:rgba(44,36,22,.18)}
+
+/* Shop Modern */
+.prev-shop{background:#fafaf9;padding:14px 14px 10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;align-content:start}
+.prev-shop .pcard{display:flex;flex-direction:column;gap:4px}
+.prev-shop .pimg{height:70px;border-radius:6px}
+.prev-shop .ptxt{height:5px;border-radius:3px;background:#e5e0d8;width:72%}
+.prev-shop .pval{height:5px;border-radius:3px;background:#ece7df;width:44%}
+.prev-shop .cart-bar{grid-column:1/-1;margin-top:4px;background:#2c2416;border-radius:7px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between}
+.prev-shop .cart-label{font-size:10px;font-weight:600;color:#f5f0e8;letter-spacing:.05em;font-family:var(--ff-body)}
+.prev-shop .cart-price{font-size:10px;color:rgba(245,240,232,.5);font-family:var(--ff-body)}
+
+/* Portfolio Light */
+.prev-port{background:#111;padding:14px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px}
+.prev-port .pm{border-radius:7px;background:#1e1e1e;overflow:hidden;position:relative;min-height:44px}
+.prev-port .pm:first-child{grid-row:1/3}
+.prev-port .pm-fill{width:100%;height:100%;background:linear-gradient(140deg,#2a2a2a 0%,#111 100%)}
+.prev-port .pm-tag{position:absolute;bottom:8px;left:10px;font-family:var(--ff-head);font-size:24px;font-weight:700;color:#fff;font-style:italic;line-height:1;opacity:.9}
+
+/* SaaS Launch */
+.prev-saas{background:#0d1117;padding:18px;display:flex;flex-direction:column;gap:7px}
+.prev-saas .saas-hed{font-size:18px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.02em;font-family:var(--ff-head)}
+.prev-saas .saas-hed span{color:#7eb8f7}
+.prev-saas .saas-sub{font-size:10px;color:rgba(255,255,255,.38)}
+.prev-saas .saas-pills{display:flex;gap:5px}
+.prev-saas .saas-pill{font-size:9px;padding:3px 9px;border-radius:100px;border:1px solid rgba(126,184,247,.3);color:#7eb8f7;font-family:var(--ff-body)}
+.prev-saas .saas-cta{display:flex;gap:6px;margin-top:2px}
+.prev-saas .saas-btn{font-size:10px;font-weight:600;padding:6px 13px;border-radius:100px;background:#7eb8f7;color:#0d1117;border:none;font-family:var(--ff-body)}
+.prev-saas .saas-ghost{background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.14)}
+.prev-saas .saas-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:2px}
+.prev-saas .sf{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:6px 7px}
+.prev-saas .sf-i{font-size:12px;margin-bottom:2px}
+.prev-saas .sf-l{font-size:8px;color:rgba(255,255,255,.35);font-family:var(--ff-body)}
+
+/* App Showcase */
+.prev-app{background:#f5eeff;display:flex;align-items:center;justify-content:center;gap:16px;padding:16px}
+.prev-app .phone{width:54px;height:96px;border-radius:11px;background:#fff;border:1.5px solid rgba(0,0,0,.1);display:flex;flex-direction:column;overflow:hidden}
+.prev-app .ph-notch{height:6px;background:#111;border-radius:0 0 6px 6px;width:22px;align-self:center;margin-bottom:5px;flex-shrink:0}
+.prev-app .ph-body{flex:1;padding:4px;display:flex;flex-direction:column;gap:3px}
+.prev-app .ph-h{height:4px;border-radius:2px;background:#e8d8f8}
+.prev-app .ph-row{display:flex;gap:2px}
+.prev-app .ph-b{flex:1;height:14px;border-radius:3px;background:#f0e6fd}
+.prev-app .ph-b2{flex:1;height:22px;border-radius:3px;background:#e8d5fb}
+.prev-app .app-copy{text-align:right}
+.prev-app .app-big{font-family:var(--ff-head);font-size:34px;font-weight:700;color:#5b3fa6;line-height:1;letter-spacing:-.03em}
+.prev-app .app-sub{font-size:10px;color:#8b6cc4;margin-top:4px;font-family:var(--ff-body)}
+.prev-app .app-badges{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.prev-app .app-badge{font-size:8px;padding:3px 8px;border-radius:100px;background:rgba(91,63,166,.1);color:#5b3fa6;font-weight:600;font-family:var(--ff-body)}
+
+/* Restaurant & Food */
+.prev-rest{background:#180f07;padding:16px;display:flex;flex-direction:column;gap:9px}
+.prev-rest .rest-logo{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(212,148,90,.75);font-family:var(--ff-body)}
+.prev-rest .rest-hed{font-family:var(--ff-head);font-size:22px;font-weight:700;color:#fff;line-height:1.1;font-style:italic}
+.prev-rest .rest-menu{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.prev-rest .dish{border-radius:6px;height:46px;display:flex;align-items:flex-end;padding:5px 6px}
+.prev-rest .dish-lbl{font-size:8px;color:rgba(212,148,90,.75);font-weight:600;font-family:var(--ff-body);letter-spacing:.04em}
+.prev-rest .rest-divider{display:flex;align-items:center;gap:6px}
+.prev-rest .rest-dot{width:4px;height:4px;border-radius:50%;background:#d4945a;flex-shrink:0}
+.prev-rest .rest-line{flex:1;height:1px;background:rgba(212,148,90,.18)}
+.prev-rest .rest-cta{font-size:8px;color:rgba(212,148,90,.55);letter-spacing:.1em;font-family:var(--ff-body)}
+
+/* Blog & Editorial */
+.prev-blog{background:#fff;padding:18px 16px}
+[data-theme="dark"] .prev-blog{background:#1e1c1b}
+.prev-blog .blog-cat{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#c4943a;margin-bottom:7px;font-family:var(--ff-body)}
+.prev-blog .blog-drop{float:left;font-family:var(--ff-head);font-size:58px;font-weight:700;color:rgba(200,180,140,.25);line-height:.85;margin:0 5px 0 0}
+.prev-blog .blog-hed{font-family:var(--ff-head);font-size:21px;font-weight:700;color:#111;line-height:1.15;letter-spacing:-.02em;margin-bottom:8px}
+[data-theme="dark"] .prev-blog .blog-hed{color:#f0ede8}
+.prev-blog .blog-hed em{font-style:italic;color:#888}
+.prev-blog .blog-meta{font-size:9px;color:#aaa;margin-bottom:10px;display:flex;gap:8px;font-family:var(--ff-body)}
+.prev-blog .blog-lines{display:flex;flex-direction:column;gap:4px}
+.prev-blog .bl{height:4px;border-radius:2px;background:#f0ede6}
+[data-theme="dark"] .prev-blog .bl{background:rgba(255,255,255,.08)}
+
+/* Boutique Fashion */
+.prev-bout{display:grid;grid-template-columns:1fr 1fr;height:200px}
+.prev-bout .bq{display:flex;align-items:flex-end;padding:10px;position:relative;overflow:hidden}
+.prev-bout .bq-lbl{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(44,36,22,.5);font-family:var(--ff-body)}
+.prev-bout .bq:first-child .bq-season{position:absolute;top:10px;left:0;right:0;text-align:center;font-family:var(--ff-head);font-size:14px;font-weight:700;color:rgba(44,36,22,.5);font-style:italic}
+
+/* Agency Pro */
+.prev-agcy{background:#2c2416;padding:18px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
+.prev-agcy .agcy-bg{position:absolute;top:-10px;right:10px;font-size:80px;font-weight:700;color:rgba(245,240,232,.05);font-family:var(--ff-head);letter-spacing:-.05em;line-height:1;pointer-events:none}
+.prev-agcy .agcy-lbl{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.35);font-family:var(--ff-body)}
+.prev-agcy .agcy-hed{font-family:var(--ff-head);font-size:20px;font-weight:700;color:#f5f0e8;line-height:1.15}
+.prev-agcy .agcy-hed em{font-style:italic;color:rgba(245,240,232,.45)}
+.prev-agcy .agcy-stats{display:flex;gap:18px}
+.prev-agcy .ast-n{font-family:var(--ff-head);font-size:22px;font-weight:700;color:#f5f0e8;line-height:1}
+.prev-agcy .ast-l{font-size:8px;color:rgba(245,240,232,.38);margin-top:2px;font-family:var(--ff-body)}
+.prev-agcy .agcy-chips{display:flex;gap:4px;flex-wrap:wrap}
+.prev-agcy .agcy-chip{font-size:8px;padding:3px 8px;border-radius:100px;border:1px solid rgba(245,240,232,.15);color:rgba(245,240,232,.55);font-family:var(--ff-body)}
+
+/* Card info zone */
 .t-info{padding:20px 22px}
-.t-name{font-family:var(--ff-head);font-size:1rem;font-weight:600;color:var(--text);margin-bottom:6px}
+.t-meta-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;gap:8px}
+.t-name{font-family:var(--ff-head);font-size:1.05rem;font-weight:600;color:var(--text)}
+.t-price{font-size:.72rem;font-weight:500;color:var(--text-muted);white-space:nowrap}
+.t-price.free-price{color:var(--accent)}
 .t-desc{font-size:.79rem;color:var(--text-soft);line-height:1.65;margin-bottom:12px}
 .t-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
 .t-tag{font-size:.67rem;padding:3px 9px;border-radius:100px;background:var(--accent-bg);color:var(--accent-txt);border:1px solid var(--border)}
@@ -199,6 +287,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .no-results .material-symbols-outlined{font-size:2.4rem;opacity:.2;display:block;margin-bottom:12px;color:var(--text)}
 .no-results p{font-size:.9rem;color:var(--text-muted)}
 
+/* ══ MODAL ══ */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s;backdrop-filter:blur(4px)}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;transform:translateY(18px) scale(.97);transition:transform .25s cubic-bezier(.16,1,.3,1);scrollbar-width:thin}
@@ -208,8 +297,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .modal-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .modal-close:hover{background:var(--bg2)}
 .modal-close .material-symbols-outlined{font-size:.9rem;color:var(--text-muted)}
-.modal-preview{background:var(--bg2);padding:28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
-.modal-preview .mini-browser{width:90%}
+.modal-preview{background:var(--bg2);padding:28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;min-height:180px}
 .modal-body{padding:24px}
 .modal-desc{font-size:.87rem;color:var(--text-soft);line-height:1.78;margin-bottom:18px}
 .modal-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
@@ -318,12 +406,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:52px 56px
   .st-perk{border-right:none;border-bottom:1px solid var(--border)}
   .st-perk:last-child{border-bottom:none}
   .footer-top{grid-template-columns:1fr 1fr}
-  .theme-switcher{bottom:16px;right:16px}
   .user-dropdown{right:-8px;width:280px}
 }
 @media(max-width:600px){
   .templates-grid{grid-template-columns:1fr}
-footer{padding:32px 20px 18px}
+  footer{padding:32px 20px 18px}
   .footer-top{grid-template-columns:1fr 1fr;gap:20px}
   .footer-col h4{margin-bottom:8px}
   .footer-col ul{gap:5px}
@@ -358,23 +445,15 @@ footer{padding:32px 20px 18px}
 <link rel="stylesheet" href="/mt-mobile.css">
 </head>
 <body>
-<style>.pwa-desktop-hide{display:none!important}@media(min-width:768px){.pwa-overlay{display:none!important}}</style><div class="pwa-overlay" id="pwaOverlay">
+<style>.pwa-desktop-hide{display:none!important}@media(min-width:768px){.pwa-overlay{display:none!important}}</style>
+<div class="pwa-overlay" id="pwaOverlay">
   <svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg>
   <h2>Instala Multitech</h2>
   <p>Para una mejor experiencia, agrega esta aplicación a tu pantalla de inicio.</p>
   <div class="pwa-steps">
-    <div class="pwa-step">
-      <div class="pwa-step-num">1</div>
-      <div class="pwa-step-text">Toca <span class="pwa-share-icon"><span class="material-symbols-outlined">ios_share</span> Compartir</span> en Safari</div>
-    </div>
-    <div class="pwa-step">
-      <div class="pwa-step-num">2</div>
-      <div class="pwa-step-text">Desplázate y selecciona <strong>Agregar a Inicio</strong></div>
-    </div>
-    <div class="pwa-step">
-      <div class="pwa-step-num">3</div>
-      <div class="pwa-step-text">Toca <strong>Agregar</strong> en la esquina superior derecha</div>
-    </div>
+    <div class="pwa-step"><div class="pwa-step-num">1</div><div class="pwa-step-text">Toca <span class="pwa-share-icon"><span class="material-symbols-outlined">ios_share</span> Compartir</span> en Safari</div></div>
+    <div class="pwa-step"><div class="pwa-step-num">2</div><div class="pwa-step-text">Desplázate y selecciona <strong>Agregar a Inicio</strong></div></div>
+    <div class="pwa-step"><div class="pwa-step-num">3</div><div class="pwa-step-text">Toca <strong>Agregar</strong> en la esquina superior derecha</div></div>
   </div>
   <div class="pwa-badge"><span class="material-symbols-outlined">check_circle</span> App lista para instalar</div>
 </div>
@@ -394,25 +473,12 @@ footer{padding:32px 20px 18px}
   </symbol>
 </svg>
 
-<!-- THEME SWITCHER -->
-<div class="theme-switcher">
-  <div class="ts-panel" id="tsPanel">
-    <span class="ts-panel-label" data-i18n="theme.title">Estilo visual</span>
-    <button class="mt-theme-btn" data-theme="beige" onclick="mtApply('beige')"><span class="ts-swatch" style="background:#f5f0e8"></span><span data-i18n="theme.beige">Beige</span></button>
-    <button class="mt-theme-btn" data-theme="dark"  onclick="mtApply('dark')"><span class="ts-swatch" style="background:#111010;border-color:#444"></span><span data-i18n="theme.dark">Dark</span></button>
-    <button class="mt-theme-btn" data-theme="blanc" onclick="mtApply('blanc')"><span class="ts-swatch" style="background:#fff"></span><span data-i18n="theme.blanc">Blanc</span></button>
-    <button class="mt-theme-btn" data-theme="slate" onclick="mtApply('slate')"><span class="ts-swatch" style="background:#1a2332;border-color:#445"></span><span data-i18n="theme.slate">Slate</span></button>
-    <button class="mt-theme-btn" data-theme="sage"  onclick="mtApply('sage')"><span class="ts-swatch" style="background:#f2f4ef"></span><span data-i18n="theme.sage">Sage</span></button>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo"><svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg></a>
   <div class="nav-center" id="navCenter">
     <div class="nav-pill" id="navPill"></div>
     <div class="nav-item"><a class="nav-link" href="index.html"><span data-i18n="nav.inicio">Inicio</span></a></div>
-
     <div class="nav-item" id="serviciosNavItem">
       <button class="nav-link" id="serviciosBtn" onclick="toggleServicios(event)">
         <span data-i18n="nav.servicios">Servicios</span><div class="nav-chevron" id="serviciosChevron"></div>
@@ -432,7 +498,6 @@ footer{padding:32px 20px 18px}
         </div>
       </div>
     </div>
-
     <div class="nav-item"><a class="nav-link active" href="multitech-plantillas.html"><span data-i18n="nav.plantillas">Plantillas</span></a></div>
     <div class="nav-item"><a class="nav-link" href="multitech-contacto.html"><span data-i18n="nav.contacto">Contacto</span></a></div>
     <div class="nav-item" id="adminNavItem" style="display:none">
@@ -519,42 +584,203 @@ footer{padding:32px 20px 18px}
 <!-- TEMPLATES GRID -->
 <section class="templates-area">
   <div class="templates-grid" id="tGrid">
+
+    <!-- 1 Corporate Clean -->
     <div class="t-card" data-cat="negocio" onclick="openModal('corporate-clean')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:55%"></div><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div><span class="t-badge badge-pop">Popular</span></div>
-      <div class="t-info"><div class="t-name">Corporate Clean</div><div class="t-desc">Página corporativa minimalista con hero, servicios, testimonios y contacto.</div><div class="t-tags"><span class="t-tag">Negocios</span><span class="t-tag">5 secciones</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('corporate-clean')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-corp">
+          <span class="bg-letter">C</span>
+          <div class="nav-dots">
+            <div class="nav-dot a"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div>
+          </div>
+          <div class="corp-hed">Soluciones<br>para <em>crecer.</em></div>
+          <div class="corp-lines">
+            <span style="width:52%"></span><span style="width:28%"></span>
+          </div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">Corporate Clean</span><span class="t-price">Desde $350</span></div>
+        <div class="t-desc">Página corporativa minimalista con hero, servicios, testimonios y contacto.</div>
+        <div class="t-tags"><span class="t-tag">Negocios</span><span class="t-tag">7 secciones</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('corporate-clean')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 2 Shop Modern -->
     <div class="t-card" data-cat="ecommerce" onclick="openModal('shop-modern')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div></div></div></div><span class="t-badge badge-new">Nuevo</span></div>
-      <div class="t-info"><div class="t-name">Shop Modern</div><div class="t-desc">Tienda en línea con catálogo, carrito y checkout. Diseño limpio centrado en productos.</div><div class="t-tags"><span class="t-tag">E-Commerce</span><span class="t-tag">Pagos</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('shop-modern')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-shop">
+          <div class="pcard"><div class="pimg" style="background:#dfd4c8"></div><div class="ptxt"></div><div class="pval"></div></div>
+          <div class="pcard"><div class="pimg" style="background:#e8ddd2"></div><div class="ptxt"></div><div class="pval"></div></div>
+          <div class="pcard"><div class="pimg" style="background:#d4c8bc"></div><div class="ptxt"></div><div class="pval"></div></div>
+          <div class="cart-bar"><span class="cart-label">Carrito · 3 items</span><span class="cart-price">$124.00</span></div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">Shop Modern</span><span class="t-price">Desde $600</span></div>
+        <div class="t-desc">Tienda en línea con catálogo, carrito y checkout. Diseño limpio centrado en productos.</div>
+        <div class="t-tags"><span class="t-tag">E-Commerce</span><span class="t-tag">Pagos</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('shop-modern')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 3 Portfolio Light -->
     <div class="t-card" data-cat="portfolio" onclick="openModal('portfolio-light')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:40%;margin:4px auto"></div><div class="mb-h sm" style="margin:3px auto"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div></div>
-      <div class="t-info"><div class="t-name">Portfolio Light</div><div class="t-desc">Showroom elegante para creativos, agencias y freelancers con galería de proyectos.</div><div class="t-tags"><span class="t-tag">Portfolio</span><span class="t-tag">Creativo</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('portfolio-light')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-port">
+          <div class="pm" style="min-height:88px"><div class="pm-fill"></div><span class="pm-tag">Work.</span></div>
+          <div class="pm"><div class="pm-fill" style="min-height:40px;background:linear-gradient(140deg,#333,#1a1a1a)"></div></div>
+          <div class="pm"><div class="pm-fill" style="min-height:40px;background:linear-gradient(140deg,#2a2a2a,#111)"></div></div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">Portfolio Light</span><span class="t-price">Desde $250</span></div>
+        <div class="t-desc">Showroom elegante para creativos, agencias y freelancers con galería de proyectos.</div>
+        <div class="t-tags"><span class="t-tag">Portfolio</span><span class="t-tag">Creativo</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('portfolio-light')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 4 SaaS Launch -->
     <div class="t-card" data-cat="landing" onclick="openModal('saas-launch')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:60%"></div><div class="mb-h sm"></div><div style="margin-top:8px;height:16px;border-radius:8px;background:var(--border);width:38%"></div></div></div></div>
-      <div class="t-info"><div class="t-name">SaaS Launch</div><div class="t-desc">Landing page de alto impacto para productos SaaS. Features, pricing y CTA optimizados.</div><div class="t-tags"><span class="t-tag">Landing</span><span class="t-tag">SaaS</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('saas-launch')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-saas">
+          <div class="saas-hed">Tu producto.<br><span>Lanzado hoy.</span></div>
+          <div class="saas-sub">Convierte visitas en usuarios desde el primer día</div>
+          <div class="saas-pills"><span class="saas-pill">Features</span><span class="saas-pill">Pricing</span><span class="saas-pill">Demo</span></div>
+          <div class="saas-cta"><button class="saas-btn">Empezar gratis</button><button class="saas-btn saas-ghost">Ver demo</button></div>
+          <div class="saas-feats">
+            <div class="sf"><div class="sf-i">⚡</div><div class="sf-l">Rápido</div></div>
+            <div class="sf"><div class="sf-i">🔒</div><div class="sf-l">Seguro</div></div>
+            <div class="sf"><div class="sf-i">📈</div><div class="sf-l">Escalable</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">SaaS Launch</span><span class="t-price">Desde $400</span></div>
+        <div class="t-desc">Landing page de alto impacto para productos SaaS. Features, pricing y CTA optimizados.</div>
+        <div class="t-tags"><span class="t-tag">Landing</span><span class="t-tag">SaaS</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('saas-launch')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 5 App Showcase -->
     <div class="t-card" data-cat="app" onclick="openModal('app-showcase')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:50%"></div><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall"></div></div></div></div></div>
-      <div class="t-info"><div class="t-name">App Showcase</div><div class="t-desc">Página de lanzamiento para apps móviles. Capturas de pantalla, features y descarga.</div><div class="t-tags"><span class="t-tag">App</span><span class="t-tag">Mobile</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('app-showcase')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-app">
+          <div class="phone">
+            <div class="ph-notch"></div>
+            <div class="ph-body">
+              <div class="ph-h"></div><div class="ph-h" style="width:55%"></div>
+              <div class="ph-row"><div class="ph-b"></div><div class="ph-b"></div></div>
+              <div class="ph-h" style="width:75%;margin-top:2px"></div>
+              <div class="ph-row"><div class="ph-b2"></div></div>
+            </div>
+          </div>
+          <div class="app-copy">
+            <div class="app-big">App</div>
+            <div class="app-sub">iOS &amp; Android</div>
+            <div class="app-badges">
+              <span class="app-badge">App Store</span>
+              <span class="app-badge">Google Play</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">App Showcase</span><span class="t-price">Desde $350</span></div>
+        <div class="t-desc">Página de lanzamiento para apps móviles. Capturas de pantalla, features y descarga.</div>
+        <div class="t-tags"><span class="t-tag">App</span><span class="t-tag">Mobile</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('app-showcase')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 6 Restaurant & Food -->
     <div class="t-card" data-cat="restaurante" onclick="openModal('restaurant-food')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:52%"></div><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div></div>
-      <div class="t-info"><div class="t-name">Restaurant &amp; Food</div><div class="t-desc">Diseño cálido para restaurantes y cafeterías. Menú, reservas y galería de platos.</div><div class="t-tags"><span class="t-tag">Restaurante</span><span class="t-tag">Menú</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('restaurant-food')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-rest">
+          <div class="rest-logo">La Mesa · EST. 2024</div>
+          <div class="rest-hed">Cocina con<br>alma propia.</div>
+          <div class="rest-menu">
+            <div class="dish" style="background:#2d1e12"><span class="dish-lbl">Entrantes</span></div>
+            <div class="dish" style="background:#371f10"><span class="dish-lbl">Principales</span></div>
+            <div class="dish" style="background:#25140a"><span class="dish-lbl">Postres</span></div>
+          </div>
+          <div class="rest-divider"><span class="rest-dot"></span><div class="rest-line"></div><span class="rest-cta">RESERVAR MESA</span><div class="rest-line"></div><span class="rest-dot"></span></div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">Restaurant &amp; Food</span><span class="t-price">Desde $300</span></div>
+        <div class="t-desc">Diseño cálido para restaurantes y cafeterías. Menú, reservas y galería de platos.</div>
+        <div class="t-tags"><span class="t-tag">Restaurante</span><span class="t-tag">Menú QR</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('restaurant-food')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 7 Blog & Editorial -->
     <div class="t-card" data-cat="negocio" onclick="openModal('blog-editorial')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall" style="flex:2"></div></div></div></div><span class="t-badge badge-free">Gratis</span></div>
-      <div class="t-info"><div class="t-name">Blog &amp; Editorial</div><div class="t-desc">Plantilla de blog con tipografía editorial elegante. Ideal para marcas de contenido.</div><div class="t-tags"><span class="t-tag">Blog</span><span class="t-tag">Editorial</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('blog-editorial')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-blog">
+          <div class="blog-cat">Cultura &amp; Diseño</div>
+          <div class="blog-hed"><span class="blog-drop">L</span>as ideas que<br><em>mueven</em> marcas.</div>
+          <div class="blog-meta"><span>12 mayo 2025</span><span>· 5 min lectura</span></div>
+          <div class="blog-lines">
+            <div class="bl"></div><div class="bl"></div><div class="bl" style="width:85%"></div><div class="bl"></div><div class="bl" style="width:62%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">Blog &amp; Editorial</span><span class="t-price free-price">Gratis</span></div>
+        <div class="t-desc">Plantilla de blog con tipografía editorial elegante. Ideal para marcas de contenido.</div>
+        <div class="t-tags"><span class="t-tag">Blog</span><span class="t-tag">Editorial</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('blog-editorial')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 8 Boutique Fashion -->
     <div class="t-card" data-cat="ecommerce" onclick="openModal('boutique-fashion')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-h accent" style="margin-top:6px;width:60%"></div></div></div></div>
-      <div class="t-info"><div class="t-name">Boutique Fashion</div><div class="t-desc">Tienda de moda con grid editorial, lookbook y ficha de producto de alto impacto.</div><div class="t-tags"><span class="t-tag">Moda</span><span class="t-tag">E-Commerce</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('boutique-fashion')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-bout">
+          <div class="bq" style="background:#ecdfd3"><span class="bq-season">SS '25</span><span class="bq-lbl">Nueva col.</span></div>
+          <div class="bq" style="background:#e2d3c7"><span class="bq-lbl">Lookbook</span></div>
+          <div class="bq" style="background:#d9c9bb"><span class="bq-lbl">Accesorios</span></div>
+          <div class="bq" style="background:#cdbfb2"><span class="bq-lbl">Edición ltd.</span></div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">Boutique Fashion</span><span class="t-price">Desde $550</span></div>
+        <div class="t-desc">Tienda de moda con grid editorial, lookbook y ficha de producto de alto impacto.</div>
+        <div class="t-tags"><span class="t-tag">Moda</span><span class="t-tag">E-Commerce</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('boutique-fashion')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
+    <!-- 9 Agency Pro -->
     <div class="t-card" data-cat="landing" onclick="openModal('agency-pro')">
-      <div class="t-preview"><div class="mini-browser"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-h accent" style="width:65%"></div><div class="mb-h sm"></div></div></div></div>
-      <div class="t-info"><div class="t-name">Agency Pro</div><div class="t-desc">Landing para agencias digitales y estudios creativos. Portafolio y casos de éxito.</div><div class="t-tags"><span class="t-tag">Agencia</span><span class="t-tag">Landing</span></div><div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('agency-pro')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div></div>
+      <div class="t-preview">
+        <div class="t-prev-inner prev-agcy">
+          <span class="agcy-bg">AG</span>
+          <div class="agcy-lbl">Agencia Digital</div>
+          <div class="agcy-hed">Creamos lo que<br><em>otros imaginan.</em></div>
+          <div class="agcy-stats">
+            <div><div class="ast-n">+120</div><div class="ast-l">proyectos</div></div>
+            <div><div class="ast-n">98%</div><div class="ast-l">satisfacción</div></div>
+            <div><div class="ast-n">8 años</div><div class="ast-l">experiencia</div></div>
+          </div>
+          <div class="agcy-chips">
+            <span class="agcy-chip">Branding</span><span class="agcy-chip">Web</span><span class="agcy-chip">Apps</span><span class="agcy-chip">Strategy</span>
+          </div>
+        </div>
+      </div>
+      <div class="t-info">
+        <div class="t-meta-row"><span class="t-name">Agency Pro</span><span class="t-price">Desde $400</span></div>
+        <div class="t-desc">Landing para agencias digitales y estudios creativos. Portafolio y casos de éxito.</div>
+        <div class="t-tags"><span class="t-tag">Agencia</span><span class="t-tag">Landing</span></div>
+        <div class="t-actions"><button class="btn-sm btn-sm-dark" onclick="event.stopPropagation();openModal('agency-pro')">Ver detalles</button><a class="btn-sm btn-sm-out" href="multitech-contacto.html" onclick="event.stopPropagation()">Solicitar</a></div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -606,9 +832,7 @@ footer{padding:32px 20px 18px}
 <!-- SECCIÓN TRANSFORMAMOS -->
 <section class="sec-transformamos reveal" id="sec-transformamos">
   <div class="sec-inner">
-
     <div class="st-top-label">Lo que construimos para ti</div>
-
     <div class="st-hero-row">
       <h2 class="st-hero-h">Transformamos<br>tus ideas en<br><em>realidad.</em></h2>
       <div class="st-hero-right">
@@ -624,55 +848,19 @@ footer{padding:32px 20px 18px}
         </div>
       </div>
     </div>
-
     <div class="st-process-track">
-      <div class="st-proc-step">
-        <div class="st-proc-num">01</div>
-        <div class="st-proc-title">Cuéntanos tu idea</div>
-        <div class="st-proc-desc">Sin tecnicismos. Solo dinos qué necesitas lograr.</div>
-      </div>
-      <div class="st-proc-step">
-        <div class="st-proc-num">02</div>
-        <div class="st-proc-title">Recibe una propuesta</div>
-        <div class="st-proc-desc">Diseño, alcance y precio en menos de 24 horas.</div>
-      </div>
-      <div class="st-proc-step">
-        <div class="st-proc-num">03</div>
-        <div class="st-proc-title">Aprobamos juntos</div>
-        <div class="st-proc-desc">Ajustamos hasta que todo esté perfecto para ti.</div>
-      </div>
-      <div class="st-proc-step">
-        <div class="st-proc-num">04</div>
-        <div class="st-proc-title">Lo lanzamos</div>
-        <div class="st-proc-desc">Entregado, probado y con soporte incluido.</div>
-      </div>
+      <div class="st-proc-step"><div class="st-proc-num">01</div><div class="st-proc-title">Cuéntanos tu idea</div><div class="st-proc-desc">Sin tecnicismos. Solo dinos qué necesitas lograr.</div></div>
+      <div class="st-proc-step"><div class="st-proc-num">02</div><div class="st-proc-title">Recibe una propuesta</div><div class="st-proc-desc">Diseño, alcance y precio en menos de 24 horas.</div></div>
+      <div class="st-proc-step"><div class="st-proc-num">03</div><div class="st-proc-title">Aprobamos juntos</div><div class="st-proc-desc">Ajustamos hasta que todo esté perfecto para ti.</div></div>
+      <div class="st-proc-step"><div class="st-proc-num">04</div><div class="st-proc-title">Lo lanzamos</div><div class="st-proc-desc">Entregado, probado y con soporte incluido.</div></div>
     </div>
-
     <div class="st-divider"></div>
-
     <div class="st-perks-strip">
-      <div class="st-perk">
-        <div class="st-perk-num">— 01</div>
-        <div class="st-perk-title">Sin compromiso</div>
-        <div class="st-perk-body">La propuesta es gratis. Solo pagas si decides avanzar.</div>
-      </div>
-      <div class="st-perk">
-        <div class="st-perk-num">— 02</div>
-        <div class="st-perk-title">Confidencialidad</div>
-        <div class="st-perk-body">Tu idea es tuya. Firmamos NDA si lo necesitas.</div>
-      </div>
-      <div class="st-perk">
-        <div class="st-perk-num">— 03</div>
-        <div class="st-perk-title">Precio claro</div>
-        <div class="st-perk-body">Presupuesto cerrado, sin sorpresas al final del proyecto.</div>
-      </div>
-      <div class="st-perk">
-        <div class="st-perk-num">— 04</div>
-        <div class="st-perk-title">Soporte real</div>
-        <div class="st-perk-body">Estamos aquí después del lanzamiento, siempre.</div>
-      </div>
+      <div class="st-perk"><div class="st-perk-num">— 01</div><div class="st-perk-title">Sin compromiso</div><div class="st-perk-body">La propuesta es gratis. Solo pagas si decides avanzar.</div></div>
+      <div class="st-perk"><div class="st-perk-num">— 02</div><div class="st-perk-title">Confidencialidad</div><div class="st-perk-body">Tu idea es tuya. Firmamos NDA si lo necesitas.</div></div>
+      <div class="st-perk"><div class="st-perk-num">— 03</div><div class="st-perk-title">Precio claro</div><div class="st-perk-body">Presupuesto cerrado, sin sorpresas al final del proyecto.</div></div>
+      <div class="st-perk"><div class="st-perk-num">— 04</div><div class="st-perk-title">Soporte real</div><div class="st-perk-body">Estamos aquí después del lanzamiento, siempre.</div></div>
     </div>
-
   </div>
 </section>
 
@@ -692,15 +880,15 @@ footer{padding:32px 20px 18px}
 
 <script>
 const TEMPLATES = {
-  'corporate-clean':{name:'Corporate Clean',desc:'Página corporativa minimalista y profesional. Diseñada para empresas que necesitan comunicar credibilidad y confianza. Incluye hero animado, sección de servicios en grid, testimonios con slider, equipo, FAQ y formulario de contacto.',categoria:'Negocios',secciones:'7 secciones',tiempo:'2–3 semanas',precio:'Desde $350 USD',precio_usd:350,badge:'popular',features:['Hero animado','Grid de servicios','Slider de testimonios','Sección de equipo','FAQ interactivo','Formulario de contacto','Blog integrado','SEO optimizado'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:60%"></div><div class="mb-h sm" style="width:40%"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
-  'shop-modern':{name:'Shop Modern',desc:'Tienda en línea completa y moderna. Catálogo de productos con filtros, vista de cuadrícula/lista, carrito lateral deslizante, checkout de un solo paso e integración con pasarelas de pago populares.',categoria:'E-Commerce',secciones:'8 secciones',tiempo:'3–4 semanas',precio:'Desde $600 USD',precio_usd:600,badge:'new',features:['Catálogo con filtros','Carrito lateral','Checkout optimizado','Stripe / PayPal','Gestión de inventario','Panel de órdenes','Cupones y descuentos','Mobile-first'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
-  'portfolio-light':{name:'Portfolio Light',desc:'Showroom elegante para creativos y freelancers. Galería masonry de proyectos con lightbox, sección de habilidades animada, timeline de experiencia y formulario de contacto con mapa.',categoria:'Portfolio',secciones:'6 secciones',tiempo:'1–2 semanas',precio:'Desde $250 USD',precio_usd:250,badge:null,features:['Galería masonry','Lightbox de proyectos','Timeline animado','Habilidades con barras','Formulario + mapa','Blog personal','Dark/Light mode','Animaciones GSAP'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:45%;margin:4px auto"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
-  'saas-launch':{name:'SaaS Launch',desc:'Landing page de alto impacto para productos SaaS. Diseñada para maximizar conversiones con sección de features visuales, pricing con toggle mensual/anual, testimonios y trial gratuito.',categoria:'Landing Page',secciones:'7 secciones',tiempo:'1–2 semanas',precio:'Desde $400 USD',precio_usd:400,badge:null,features:['Hero con demo animada','Grid de features','Pricing con toggle','Testimonios en cards','FAQ accordion','CTA de prueba gratis','Integración Analytics','A/B testing ready'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:65%"></div><div class="mb-h sm"></div><div style="margin-top:8px;height:14px;border-radius:8px;background:var(--border);width:35%"></div></div></div>`},
-  'app-showcase':{name:'App Showcase',desc:'Landing page diseñada para lanzar aplicaciones móviles. Incluye mockups animados de iPhone/Android, sección de características con iconos, ratings de la App Store y botones de descarga.',categoria:'App Landing',secciones:'6 secciones',tiempo:'1–2 semanas',precio:'Desde $350 USD',precio_usd:350,badge:null,features:['Mockups animados','Feature highlights','App Store / Play badges','Rating stars','Screenshots carousel','Descarga directa','Video demo embed','Responsive perfecto'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:55%"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall"></div></div></div></div>`},
-  'restaurant-food':{name:'Restaurant & Food',desc:'Diseño cálido y apetitoso para restaurantes, cafeterías y food trucks. Incluye menú interactivo por categorías, sistema de reservas, galería de platos y sección de chef.',categoria:'Restaurante',secciones:'7 secciones',tiempo:'2–3 semanas',precio:'Desde $300 USD',precio_usd:300,badge:null,features:['Menú por categorías','Sistema de reservas','Galería de platos','Sección del chef','Mapa y horarios','Instagram feed','Reseñas integradas','Modo menú QR'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h accent" style="width:52%"></div><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div></div></div>`},
-  'blog-editorial':{name:'Blog & Editorial',desc:'Plantilla editorial de tipografía refinada para blogs, revistas digitales y portfolios de escritura. Completamente gratuita. Incluye sistema de categorías, búsqueda y newsletter.',categoria:'Negocios / Blog',secciones:'5 secciones',tiempo:'1 semana',precio:'Gratis',precio_usd:0,badge:'free',features:['Tipografía editorial','Sistema de categorías','Búsqueda integrada','Newsletter signup','Tabla de contenidos','Tiempo de lectura','Compartir en redes','Modo lectura limpia'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-row"><div class="mb-col tall"></div><div class="mb-col tall" style="flex:2"></div></div></div></div>`},
-  'boutique-fashion':{name:'Boutique Fashion',desc:'Tienda de moda con estética editorial y de lujo. Grid de productos tipo lookbook, páginas de producto inmersivas con zoom, wishlist y recomendaciones personalizadas.',categoria:'E-Commerce / Moda',secciones:'9 secciones',tiempo:'4–5 semanas',precio:'Desde $550 USD',precio_usd:550,badge:null,features:['Grid lookbook editorial','Zoom de producto','Wishlist / favoritos','Recomendaciones AI','Tallas y variantes','Video de producto','Colecciones estacionales','Loyalty program'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-row"><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div><div class="mb-col"></div></div><div class="mb-h accent" style="margin-top:6px;width:55%"></div></div></div>`},
-  'agency-pro':{name:'Agency Pro',desc:'Landing para agencias digitales y estudios creativos. Portafolio de casos de éxito con métricas reales, equipo con cards interactivas y calculadora de presupuesto.',categoria:'Landing Page',secciones:'8 secciones',tiempo:'2–3 semanas',precio:'Desde $400 USD',precio_usd:400,badge:null,features:['Portafolio con métricas','Casos de éxito','Team cards interactivas','Calculadora de presupuesto','Proceso animado','Logos de clientes','Contador de stats','Formulario multi-paso'],preview:`<div class="mini-browser" style="width:90%"><div class="mb-bar"><div class="mb-dot" style="background:#f87171"></div><div class="mb-dot" style="background:#fbbf24"></div><div class="mb-dot" style="background:#34d399"></div></div><div class="mb-body"><div class="mb-h sm"></div><div class="mb-h accent" style="width:65%"></div><div class="mb-h sm"></div></div></div>`}
+  'corporate-clean':{name:'Corporate Clean',desc:'Página corporativa minimalista y profesional. Diseñada para empresas que necesitan comunicar credibilidad y confianza. Incluye hero animado, sección de servicios en grid, testimonios con slider, equipo, FAQ y formulario de contacto.',categoria:'Negocios',secciones:'7 secciones',tiempo:'2–3 semanas',precio:'Desde $350 USD',precio_usd:350,features:['Hero animado','Grid de servicios','Slider de testimonios','Sección de equipo','FAQ interactivo','Formulario de contacto','Blog integrado','SEO optimizado']},
+  'shop-modern':{name:'Shop Modern',desc:'Tienda en línea completa y moderna. Catálogo de productos con filtros, vista de cuadrícula/lista, carrito lateral deslizante, checkout de un solo paso e integración con pasarelas de pago populares.',categoria:'E-Commerce',secciones:'8 secciones',tiempo:'3–4 semanas',precio:'Desde $600 USD',precio_usd:600,features:['Catálogo con filtros','Carrito lateral','Checkout optimizado','Stripe / PayPal','Gestión de inventario','Panel de órdenes','Cupones y descuentos','Mobile-first']},
+  'portfolio-light':{name:'Portfolio Light',desc:'Showroom elegante para creativos y freelancers. Galería masonry de proyectos con lightbox, sección de habilidades animada, timeline de experiencia y formulario de contacto con mapa.',categoria:'Portfolio',secciones:'6 secciones',tiempo:'1–2 semanas',precio:'Desde $250 USD',precio_usd:250,features:['Galería masonry','Lightbox de proyectos','Timeline animado','Habilidades con barras','Formulario + mapa','Blog personal','Dark/Light mode','Animaciones GSAP']},
+  'saas-launch':{name:'SaaS Launch',desc:'Landing page de alto impacto para productos SaaS. Diseñada para maximizar conversiones con sección de features visuales, pricing con toggle mensual/anual, testimonios y trial gratuito.',categoria:'Landing Page',secciones:'7 secciones',tiempo:'1–2 semanas',precio:'Desde $400 USD',precio_usd:400,features:['Hero con demo animada','Grid de features','Pricing con toggle','Testimonios en cards','FAQ accordion','CTA de prueba gratis','Integración Analytics','A/B testing ready']},
+  'app-showcase':{name:'App Showcase',desc:'Landing page diseñada para lanzar aplicaciones móviles. Incluye mockups animados de iPhone/Android, sección de características con iconos, ratings de la App Store y botones de descarga.',categoria:'App Landing',secciones:'6 secciones',tiempo:'1–2 semanas',precio:'Desde $350 USD',precio_usd:350,features:['Mockups animados','Feature highlights','App Store / Play badges','Rating stars','Screenshots carousel','Descarga directa','Video demo embed','Responsive perfecto']},
+  'restaurant-food':{name:'Restaurant & Food',desc:'Diseño cálido y apetitoso para restaurantes, cafeterías y food trucks. Incluye menú interactivo por categorías, sistema de reservas, galería de platos y sección de chef.',categoria:'Restaurante',secciones:'7 secciones',tiempo:'2–3 semanas',precio:'Desde $300 USD',precio_usd:300,features:['Menú por categorías','Sistema de reservas','Galería de platos','Sección del chef','Mapa y horarios','Instagram feed','Reseñas integradas','Modo menú QR']},
+  'blog-editorial':{name:'Blog & Editorial',desc:'Plantilla editorial de tipografía refinada para blogs, revistas digitales y portfolios de escritura. Completamente gratuita. Incluye sistema de categorías, búsqueda y newsletter.',categoria:'Negocios / Blog',secciones:'5 secciones',tiempo:'1 semana',precio:'Gratis',precio_usd:0,features:['Tipografía editorial','Sistema de categorías','Búsqueda integrada','Newsletter signup','Tabla de contenidos','Tiempo de lectura','Compartir en redes','Modo lectura limpia']},
+  'boutique-fashion':{name:'Boutique Fashion',desc:'Tienda de moda con estética editorial y de lujo. Grid de productos tipo lookbook, páginas de producto inmersivas con zoom, wishlist y recomendaciones personalizadas.',categoria:'E-Commerce / Moda',secciones:'9 secciones',tiempo:'4–5 semanas',precio:'Desde $550 USD',precio_usd:550,features:['Grid lookbook editorial','Zoom de producto','Wishlist / favoritos','Recomendaciones AI','Tallas y variantes','Video de producto','Colecciones estacionales','Loyalty program']},
+  'agency-pro':{name:'Agency Pro',desc:'Landing para agencias digitales y estudios creativos. Portafolio de casos de éxito con métricas reales, equipo con cards interactivas y calculadora de presupuesto.',categoria:'Landing Page',secciones:'8 secciones',tiempo:'2–3 semanas',precio:'Desde $400 USD',precio_usd:400,features:['Portafolio con métricas','Casos de éxito','Team cards interactivas','Calculadora de presupuesto','Proceso animado','Logos de clientes','Contador de stats','Formulario multi-paso']}
 };
 
 function mtApply(t){
@@ -711,31 +899,44 @@ function mtApply(t){
 (function(){mtApply(localStorage.getItem('mt-theme')||'beige');})();
 
 document.addEventListener('click',e=>{
-  if(!document.querySelector('.theme-switcher').contains(e.target))
+  if(false)
     document.getElementById('tsPanel').classList.remove('open');
   if(!document.getElementById('userBtnWrap').contains(e.target))
     document.getElementById('userDropdown').classList.remove('open');
-  const ns=document.getElementById('navServicios');
-  if(ns&&!ns.contains(e.target)) ns.classList.remove('dd-open');
 });
 
 function toggleServicios(e){
   e.stopPropagation();
-  if(window.innerWidth<=900||matchMedia('(max-width:900px)').matches){window.location.href='multitech-servicios.html';return}
+  if(window.innerWidth<=900){window.location.href='multitech-servicios.html';return}
   const dd=document.getElementById('serviciosDropdown');
-  const chv=dd?.previousElementSibling?.querySelector('.nav-chevron')||document.getElementById('serviciosChevron');
+  const chv=document.getElementById('serviciosChevron');
   if(!dd)return;
   const isOpen=dd.classList.contains('open');
-  document.querySelectorAll('.dropdown.open').forEach(el=>{el.classList.remove('open');el.closest('.nav-item')?.querySelector('.nav-chevron')?.classList.remove('open');});
+  document.querySelectorAll('.dropdown.open').forEach(el=>el.classList.remove('open'));
   if(!isOpen){dd.classList.add('open');if(chv)chv.classList.add('open');}
 }
-document.addEventListener('click',()=>{
-  document.querySelectorAll('.dropdown.open').forEach(el=>{el.classList.remove('open');el.closest('.nav-item')?.querySelector('.nav-chevron')?.classList.remove('open');});
+document.addEventListener('click',()=>document.querySelectorAll('.dropdown.open').forEach(el=>el.classList.remove('open')));
+document.querySelectorAll('.dropdown').forEach(dd=>dd.addEventListener('click',e=>e.stopPropagation()));
+
+function toggleMenu(){
+  var n=document.getElementById("navCenter"),h=document.getElementById("hamburger");
+  var open=n.classList.toggle("open");
+  h.classList.toggle("open",open);
+  document.body.style.overflow=open?"hidden":"";
+}
+document.addEventListener('click',function(e){
+  var n=document.getElementById('navCenter');
+  if(n.classList.contains('open')&&!n.contains(e.target)&&!document.getElementById('hamburger').contains(e.target)){
+    n.classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow="";
+  }
 });
-document.querySelectorAll('.dropdown').forEach(dd=>{dd.addEventListener('click',e=>e.stopPropagation());});
-function toggleMenu(){var n=document.getElementById("navCenter"),h=document.getElementById("hamburger");var open=n.classList.toggle("open");h.classList.toggle("open",open);document.body.style.overflow=open?"hidden":""}
-document.addEventListener('click',function(e){var n=document.getElementById('navCenter');if(n.classList.contains('open')&&!n.contains(e.target)&&!document.getElementById('hamburger').contains(e.target)){n.classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow=""}})
-document.querySelectorAll('.nav-center .nav-link:not(#serviciosBtn)').forEach(function(l){l.addEventListener('click',function(){document.getElementById('navCenter').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow=""})})
+document.querySelectorAll('.nav-center .nav-link:not(#serviciosBtn)').forEach(function(l){
+  l.addEventListener('click',function(){
+    document.getElementById('navCenter').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow="";
+  });
+});
 
 function triggerLockAnim(e){
   const btn=document.getElementById('adminNavBtn');
@@ -750,24 +951,21 @@ function triggerLockAnim(e){
 function filterT(cat,btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  let any=false;
   document.querySelectorAll('.t-card').forEach(c=>{
-    const show=cat==='all'||c.dataset.cat===cat;
-    c.style.display=show?'':'none';
-    if(show)any=true;
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';
   });
 }
 
 function openModal(slug){
   const t=TEMPLATES[slug];if(!t)return;
   document.getElementById('modalTitle').textContent=t.name;
-  document.getElementById('modalPreview').innerHTML=t.preview;
+  document.getElementById('modalPreview').innerHTML='<div style="font-family:var(--ff-head);font-size:2rem;font-weight:700;color:var(--accent-txt);opacity:.25;letter-spacing:-.02em;font-style:italic">'+t.name+'</div>';
   document.getElementById('modalDesc').textContent=t.desc;
   document.getElementById('modalMeta').innerHTML=`
     <div class="mm-item"><div class="mm-label">Categoría</div><div class="mm-val">${t.categoria}</div></div>
     <div class="mm-item"><div class="mm-label">Secciones</div><div class="mm-val">${t.secciones}</div></div>
     <div class="mm-item"><div class="mm-label">Tiempo est.</div><div class="mm-val">${t.tiempo}</div></div>
-    <div class="mm-item"><div class="mm-label">Precio base</div><div class="mm-val">${t.precio_usd>0&&typeof formatPrice==='function'?formatPrice(t.precio_usd):t.precio}</div></div>`;
+    <div class="mm-item"><div class="mm-label">Precio base</div><div class="mm-val">${t.precio}</div></div>`;
   document.getElementById('modalFeats').innerHTML=t.features.map(f=>`<span class="feat-chip">${f}</span>`).join('');
   document.getElementById('modalCTA').href=`multitech-contacto.html?plantilla=${encodeURIComponent(t.name)}`;
   document.getElementById('modalOverlay').classList.add('open');
@@ -780,7 +978,7 @@ function closeModal(){
 function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-/* ══ PERSONALIZADOR: palabras flotantes + esfera 3D ══ */
+/* ══ PERSONALIZADOR ══ */
 (function(){
   const WORDS=['E-Commerce','App móvil','Dashboard','Reservas online','CRM a medida','Portal clientes','Landing page','Pagos integrados','Login seguro','ERP propio','Catálogo','iOS & Android','Inventario','SEO','Reportes','Menú digital','Notificaciones','Checkout','Multi-idioma','API propia','Geolocalización','Tienda online','Blog editorial','Automatizaciones','Formularios','Facturación','Chat en vivo','Gestión de roles'];
   const bg=document.getElementById('bgCanvas');
@@ -819,10 +1017,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
     else{x=-24;y=Math.random()*BH;}
     return{w:WORDS[Math.floor(Math.random()*WORDS.length)],x,y,size:10+Math.random()*6,speed:0.18+Math.random()*0.22,born:Date.now(),delay:Math.random()*3000,alpha:0,dead:false};
   }
-  function initParticles(){
-    particles=[];
-    for(let i=0;i<22;i++){const p=makeParticle();p.x=Math.random()*BW;p.y=Math.random()*BH;p.delay=0;p.born=Date.now()-Math.random()*4000;particles.push(p);}
-  }
+  function initParticles(){particles=[];for(let i=0;i<22;i++){const p=makeParticle();p.x=Math.random()*BW;p.y=Math.random()*BH;p.delay=0;p.born=Date.now()-Math.random()*4000;particles.push(p);}}
   function updateParticles(now){
     particles.forEach(p=>{
       if(now-p.born<p.delay)return;

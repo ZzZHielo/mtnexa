@@ -90,23 +90,116 @@
     MTAuth._applyUserUI(u || null);
   }
 
+  var API = 'http://localhost:3001/api';
+
+  function formatNotifTime(dateStr) {
+    var d = new Date(dateStr);
+    var now = new Date();
+    var diff = (now - d) / 1000;
+    if (diff < 60) return 'ahora';
+    if (diff < 3600) return Math.floor(diff/60) + 'm';
+    if (diff < 86400) return Math.floor(diff/3600) + 'h';
+    if (diff < 172800) return 'ayer';
+    return d.toLocaleDateString('es-DO', { day:'numeric', month:'short' });
+  }
+
+  function renderNotifList(notifs) {
+    var list = document.getElementById('notifList');
+    if (!list) return;
+    if (!notifs || notifs.length === 0) {
+      list.innerHTML = '<div class="nt-empty"><span class="ms" style="font-size:1.6rem;opacity:.2">notifications_off</span><p>No hay notificaciones</p></div>';
+      return;
+    }
+    var icons = { cotizacion:'request_quote', consulta:'help', proyecto:'folder_open', lead:'person_add', conversacion:'chat', transaccion:'payments', cliente:'group', mensaje:'mail' };
+    list.innerHTML = notifs.map(function (n) {
+      var ico = icons[n.tipo] || 'circle';
+      return '<div class="nt-item' + (n.leida ? '' : ' nt-unread') + '" data-id="' + n.id + '" onclick="marcarLeida(' + n.id + ',this)">' +
+        '<div class="nt-ico"><span class="ms">' + ico + '</span></div>' +
+        '<div class="nt-body"><div class="nt-titulo">' + n.titulo + '</div>' +
+        (n.mensaje ? '<div class="nt-msg">' + n.mensaje + '</div>' : '') +
+        '<div class="nt-time">' + formatNotifTime(n.created_at) + '</div></div></div>';
+    }).join('');
+  }
+
+  function fetchNotifs() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', API + '/notificaciones/no-leidas', true);
+    xhr.setRequestHeader('X-Admin-Key', window.ADMIN_KEY || 'multitech-admin-2025');
+    xhr.onload = function () {
+      if (xhr.status !== 200) return;
+      var r;
+      try { r = JSON.parse(xhr.responseText); } catch(e) { return; }
+      if (!r.success) return;
+      var total = r.total || 0;
+      var dot = document.getElementById('notifDot');
+      if (dot) {
+        if (total > 0) {
+          dot.style.display = '';
+          if (typeof gsap !== 'undefined') {
+            if (!window._notifPulse) {
+              window._notifPulse = gsap.to(dot, { scale: 1.6, opacity: 0.4, duration: 0.95, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+            }
+          }
+        } else {
+          dot.style.display = 'none';
+          if (window._notifPulse) { window._notifPulse.kill(); window._notifPulse = null; }
+        }
+      }
+      if (document.getElementById('notifDropdown') && document.getElementById('notifDropdown').classList.contains('open')) {
+        renderNotifList(r.data);
+      }
+      window._notifCache = r;
+    };
+    xhr.send();
+  }
+
+  function openNotifDropdown() {
+    var dd = document.getElementById('notifDropdown');
+    if (!dd) return;
+    var isOpen = dd.classList.contains('open');
+    document.querySelectorAll('.notif-dropdown.open').forEach(function (el) { el.classList.remove('open'); });
+    if (!isOpen) {
+      dd.classList.add('open');
+      if (window._notifCache) renderNotifList(window._notifCache.data);
+      else fetchNotifs();
+    }
+  }
+
+  window.marcarLeida = function (id, el) {
+    if (el) el.classList.remove('nt-unread');
+    var xhr = new XMLHttpRequest();
+    xhr.open('PATCH', API + '/notificaciones/' + id + '/leer', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-Admin-Key', window.ADMIN_KEY || 'multitech-admin-2025');
+    xhr.onload = function () { fetchNotifs(); };
+    xhr.send();
+  };
+
+  window.marcarTodasLeidas = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('PATCH', API + '/notificaciones/leer-todas', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-Admin-Key', window.ADMIN_KEY || 'multitech-admin-2025');
+    xhr.onload = function () {
+      document.querySelectorAll('.nt-unread').forEach(function (el) { el.classList.remove('nt-unread'); });
+      fetchNotifs();
+    };
+    xhr.send();
+  };
+
   function wireNotif() {
     document.addEventListener('click', function (e) {
-      if (e.target.closest('#notifBtn') && typeof showToast === 'function') {
-        showToast({
-          icon: 'notifications',
-          bg: 'var(--accent-bg)',
-          tc: 'var(--accent)',
-          title: 'Notificaciones',
-          msg: 'No tienes notificaciones nuevas'
-        });
+      var dd = document.getElementById('notifDropdown');
+      var wrap = document.getElementById('notifWrap');
+      if (e.target.closest('#notifBtn')) {
+        openNotifDropdown();
+      } else if (dd && wrap && !wrap.contains(e.target)) {
+        dd.classList.remove('open');
       }
     });
 
-    var dot = document.getElementById('notifDot');
-    if (dot && typeof gsap !== 'undefined') {
-      gsap.to(dot, { scale: 1.6, opacity: 0.4, duration: 0.95, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-    }
+    fetchNotifs();
+    setInterval(fetchNotifs, 15000);
   }
 
   window.toggleDropdown = function (id, e) {

@@ -30,12 +30,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-weig
 .logo-svg{display:inline-block;height:50px;width:auto;color:var(--text);padding-left:20px;transition:color .3s}
 
 /* ══ THEME SWITCHER ══ */
-.theme-switcher{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.ts-toggle{width:46px;height:46px;border-radius:50%;background:var(--btn-bg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:transform .2s,background .3s}
-.ts-toggle:hover{transform:scale(1.08)}
-.ts-panel{display:none;flex-direction:column;gap:4px;align-items:stretch;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:0 8px 32px rgba(0,0,0,.13);min-width:170px}
-.ts-panel.open{display:flex}
-.ts-panel-label{font-size:.65rem;font-weight:500;color:var(--text-muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px;padding:0 4px}
+
 .mt-theme-btn{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:var(--ff-body);font-size:.82rem;color:var(--text-soft);transition:all .2s;text-align:left}
 .mt-theme-btn:hover{background:var(--bg2);color:var(--text)}
 .mt-theme-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500}
@@ -283,7 +278,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:52px 56px
   .faq-layout{grid-template-columns:1fr;gap:36px}
   #cta-serv{grid-template-columns:1fr;gap:28px}
   .footer-top{grid-template-columns:1fr 1fr}
-  .theme-switcher{bottom:16px;right:16px}
   .user-dropdown{right:-8px;width:280px}
 }
 @media(max-width:560px){
@@ -349,18 +343,7 @@ footer{padding:32px 20px 18px}
   </symbol>
 </svg>
 
-<!-- ══ THEME SWITCHER ══ -->
-<div class="theme-switcher">
-  <div class="ts-panel" id="tsPanel">
-    <span class="ts-panel-label" data-i18n="theme.title">Estilo visual</span>
-    <button class="mt-theme-btn" data-theme="beige" onclick="mtApply('beige')"><span class="ts-swatch" style="background:#f5f0e8"></span><span data-i18n="theme.beige">Beige</span></button>
-    <button class="mt-theme-btn" data-theme="dark"  onclick="mtApply('dark')"><span class="ts-swatch" style="background:#111010;border-color:#444"></span><span data-i18n="theme.dark">Dark</span></button>
-    <button class="mt-theme-btn" data-theme="blanc" onclick="mtApply('blanc')"><span class="ts-swatch" style="background:#fff"></span><span data-i18n="theme.blanc">Blanc</span></button>
-    <button class="mt-theme-btn" data-theme="slate" onclick="mtApply('slate')"><span class="ts-swatch" style="background:#1a2332;border-color:#445"></span><span data-i18n="theme.slate">Slate</span></button>
-    <button class="mt-theme-btn" data-theme="sage"  onclick="mtApply('sage')"><span class="ts-swatch" style="background:#f2f4ef"></span><span data-i18n="theme.sage">Sage</span></button>
-  </div>
 
-</div>
 
 <!-- ══ NAV ══ -->
 <nav>
@@ -609,7 +592,7 @@ function mtApply(t){document.documentElement.setAttribute('data-theme',t);localS
 (function(){mtApply(localStorage.getItem('mt-theme')||'beige')})();
 
 document.addEventListener('click',e=>{
-  var ts=document.querySelector('.theme-switcher');if(ts&&!ts.contains(e.target))document.getElementById('tsPanel').classList.remove('open');
+  if(false)
   var uw=document.getElementById('userBtnWrap');if(uw&&!uw.contains(e.target))document.getElementById('userDropdown').classList.remove('open');
 });
 

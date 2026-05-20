@@ -175,10 +175,6 @@ tbody tr:hover{background:var(--bg2);}
 .toast-msg{font-size:.69rem;color:var(--text-muted);margin-top:1px;line-height:1.4;}
 
 /* ══ THEME SWITCHER ══ */
-.theme-switcher{position:fixed;bottom:26px;right:26px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-.ts-panel{display:none;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--border-s);border-radius:14px;padding:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);min-width:162px;}
-.ts-panel.open{display:flex;}
-.ts-panel-label{font-size:.59rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;padding:0 4px;}
 .mt-theme-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 9px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:var(--ff-body);font-size:.79rem;color:var(--text-soft);transition:all .15s;text-align:left;}
 .mt-theme-btn:hover{background:var(--bg2);color:var(--text);}
 .mt-theme-btn.active{background:var(--accent-bg);border-color:var(--border);color:var(--accent-txt);font-weight:500;}
@@ -248,21 +244,6 @@ tbody tr:hover{background:var(--bg2);}
 
 <!-- TOASTS -->
 <div class="toast-wrap" id="toastWrap"></div>
-
-<!-- THEME SWITCHER -->
-<div class="theme-switcher">
-  <div class="ts-panel" id="tsPanel">
-    <span class="ts-panel-label">Estilo visual</span>
-    <button class="mt-theme-btn" data-theme="beige" onclick="applyTheme('beige')"><span class="ts-swatch" style="background:#f5f0e8"></span>Beige</button>
-    <button class="mt-theme-btn" data-theme="dark"  onclick="applyTheme('dark')"><span class="ts-swatch" style="background:#111010;border-color:#444"></span>Dark</button>
-    <button class="mt-theme-btn" data-theme="blanc" onclick="applyTheme('blanc')"><span class="ts-swatch" style="background:#fff"></span>Blanc</button>
-    <button class="mt-theme-btn" data-theme="slate" onclick="applyTheme('slate')"><span class="ts-swatch" style="background:#1a2332;border-color:#445"></span>Slate</button>
-    <button class="mt-theme-btn" data-theme="sage"  onclick="applyTheme('sage')"><span class="ts-swatch" style="background:#f2f4ef"></span>Sage</button>
-  </div>
-  <button class="ts-fab" onclick="document.getElementById('tsPanel').classList.toggle('open')">
-    <span class="ms" style="font-size:1rem;color:var(--btn-txt)">palette</span>
-  </button>
-</div>
 
 <!-- MAIN -->
 <div class="wrap">
@@ -387,9 +368,7 @@ function applyTheme(t){
   document.querySelectorAll('.mt-theme-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === t));
 }
 applyTheme(localStorage.getItem('mt-theme') || 'beige');
-document.addEventListener('click', e => {
-  if (!e.target.closest('.theme-switcher')) document.getElementById('tsPanel').classList.remove('open');
-});
+
 
 /* ══ STATE ══ */
 let filterSt = 'all', searchQ = '';
