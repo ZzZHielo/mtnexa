@@ -30,6 +30,9 @@ function createPool() {
   } else {
     config.host = process.env.DB_HOST || 'localhost';
     config.port = parseInt(process.env.DB_PORT || '3306');
+    if (process.env.DB_SSL === 'true') {
+      config.ssl = { rejectUnauthorized: false };
+    }
   }
   pool = mysql.createPool(config);
   return pool;
