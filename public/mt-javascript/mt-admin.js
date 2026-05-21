@@ -201,4 +201,42 @@ router.patch('/usuarios/:id', async (req, res) => {
   }
 });
 
+/* ── GET /api/admin/usuarios-sistema ── */
+router.get('/usuarios-sistema', async (req, res) => {
+  try {
+    const rows = await query(
+      `SELECT id, nombre, apellido, correo, rol, activo, email_verified, last_login, created_at
+       FROM usuarios ORDER BY FIELD(rol,'admin','editor','cliente'), nombre ASC`
+    );
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error('[admin/usuarios-sistema] Error:', err.message);
+    res.status(500).json({ success: false, message: 'Error interno' });
+  }
+});
+
+/* ── PATCH /api/admin/usuarios-sistema/:id ── */
+router.patch('/usuarios-sistema/:id', async (req, res) => {
+  try {
+    const allowed = ['nombre', 'apellido', 'rol', 'activo'];
+    const sets = []; const vals = [];
+    for (const k of allowed) {
+      if (req.body[k] !== undefined) { sets.push(`${k} = ?`); vals.push(req.body[k]); }
+    }
+    if (!sets.length) return res.status(400).json({ success: false, message: 'Sin campos para actualizar' });
+    vals.push(req.params.id);
+    const { affectedRows } = await run(`UPDATE usuarios SET ${sets.join(', ')} WHERE id = ?`, vals);
+    if (!affectedRows) return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
+    const user = await get(
+      `SELECT id, nombre, apellido, correo, rol, activo, email_verified, last_login, created_at
+       FROM usuarios WHERE id = ?`,
+      [req.params.id]
+    );
+    res.json({ success: true, message: 'Usuario actualizado', data: user });
+  } catch (err) {
+    console.error('[admin/usuarios-sistema] Error:', err.message);
+    res.status(500).json({ success: false, message: 'Error interno' });
+  }
+});
+
 module.exports = router;

@@ -90,7 +90,9 @@
     MTAuth._applyUserUI(u || null);
   }
 
-  var API = 'http://localhost:3001/api';
+  var API = window.location.hostname === 'localhost'
+    ? 'http://localhost:3001/api'
+    : window.location.origin + '/api';
 
   function formatNotifTime(dateStr) {
     var d = new Date(dateStr);

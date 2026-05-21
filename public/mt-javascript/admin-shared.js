@@ -1,6 +1,8 @@
 /* ══ admin-shared.js — Multitech Admin ══ */
 
-const API = 'http://localhost:3001/api';
+const API = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001/api'
+  : window.location.origin + '/api';
 const ADMIN_KEY = 'multitech-admin-2025';
 const H = {'Content-Type':'application/json','X-Admin-Key':ADMIN_KEY};
 

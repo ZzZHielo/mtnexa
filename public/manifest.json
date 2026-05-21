@@ -1,6 +1,6 @@
 {
-  "name": "Multitech — Soluciones Digitales",
-  "short_name": "Multitech",
+  "name": "Nexa",
+  "short_name": "Nexa",
   "description": "Aplicaciones, páginas web y sistemas a medida para negocios que quieren crecer.",
   "start_url": "/index.html",
   "display": "standalone",
@@ -11,15 +11,15 @@
   "lang": "es",
   "icons": [
     {
-      "src": "/assets/iconos/pwa-icon.svg",
+      "src": "/assets/iconos/pwa-icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/iconos/pwa-icon.svg",
+      "src": "/assets/iconos/pwa-icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],

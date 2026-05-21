@@ -1,4 +1,4 @@
-const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
+const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3001' : window.location.origin;
 const API_H = {'Content-Type':'application/json','X-Admin-Key':ADMIN_KEY};
 const mFull = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Sept.','Octubre','Nov.','Dic.'];
 

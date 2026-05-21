@@ -57,7 +57,7 @@ const notificacionesRouter  = require('./public/mt-javascript/mt-notificaciones'
 
 const PORT      = parseInt(process.env.PORT  || '3001');
 const ADMIN_KEY = process.env.ADMIN_KEY       || 'multitech-admin-2025';
-const CORS_ORIG = (process.env.CORS_ORIGIN   || 'http://localhost:3001,http://localhost:5500').split(',').map(s => s.trim());
+const CORS_ORIG = (process.env.CORS_ORIGIN   || 'http://localhost:3001,http://localhost:5500,https://mtnexa.onrender.com').split(',').map(s => s.trim());
 
 /* ════════════════════════════════════════
    APP

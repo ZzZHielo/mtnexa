@@ -27,6 +27,7 @@
     "mysql2": "^3.22.3",
     "nodemailer": "^8.0.7",
     "qrcode": "^1.5.4",
+    "sharp": "^0.34.5",
     "speakeasy": "^2.0.0"
   },
   "devDependencies": {

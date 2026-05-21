@@ -152,11 +152,11 @@ router.get('/google/callback', async (req, res) => {
       [usuario.id, req.ip || '', ua]
     );
 
-    // Establecer cookie con el token y redirigir al frontend
+    // Cookie compatible con dominios cruzados (Bluehost frontend + Render backend)
     res.cookie('mt_token', token, {
       httpOnly: false,
-      secure: false,
-      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'none',
       maxAge: 7 * 24 * 60 * 60 * 1000,
       path: '/',
     });

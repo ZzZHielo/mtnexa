@@ -11,7 +11,9 @@
  */
 
 const MultitechAPI = (() => {
-  const BASE_URL = 'http://localhost:3001/api'; // Cambiar en producción
+  const BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3001/api'
+    : window.location.origin + '/api';
 
   /* ── Utilidad fetch ── */
   async function apiFetch(endpoint, options = {}) {
