@@ -1124,11 +1124,11 @@ let facturaClientes=[], facturaProyectos=[];
 async function loadFacturaData(){
   try{
     const [cRes,pRes]=await Promise.all([
-      fetch(API_BASE+'/api/factura/clientes',{headers:API_H}).then(r=>r.json()).catch(()=>({data:[]})),
-      fetch(API_BASE+'/api/factura/proyectos',{headers:API_H}).then(r=>r.json()).catch(()=>({data:[]}))
+      fetch(API_BASE+'/api/clientes?limit=250',{headers:API_H}).then(r=>r.json()).catch(()=>({success:false,data:[]})),
+      fetch(API_BASE+'/api/proyectos?estado=pendiente&limit=100',{headers:API_H}).then(r=>r.json()).catch(()=>({success:false,data:[]}))
     ]);
-    facturaClientes=cRes.data||[];
-    facturaProyectos=pRes.data||[];
+    facturaClientes=(cRes.data||[]).map(c=>({id:c.id,nombre:c.nombre||'',apellido:c.apellido||'',email:c.email||'',empresa:c.empresa||'',servicio:c.servicio||''}));
+    facturaProyectos=(pRes.data||[]).map(p=>({id:p.id,nombre:p.nombre||'',apellido:p.apellido||'',empresa:p.empresa||'',tipo_proyecto:p.tipo_proyecto||'',monto:p.monto||null,moneda:p.moneda||'USD',descripcion:p.descripcion||''}));
   }catch(e){facturaClientes=[];facturaProyectos=[];}
 }
 function populateClienteSelect(){
