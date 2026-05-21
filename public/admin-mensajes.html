@@ -1301,17 +1301,26 @@ async function crearProyectoDesdeCotizacion(){
   const telefono = d.cot_whatsapp||'';
   try {
     let clienteId = null;
-    const busqueda = await fetch(API_BASE+'/api/clientes?limit=1&email='+encodeURIComponent(email), {headers:API_H});
-    const bJson = await busqueda.json();
-    if (bJson.success && bJson.data && bJson.data.length) {
-      clienteId = bJson.data[0].id;
-    } else {
-      const creacion = await fetch(API_BASE+'/api/clientes', {method:'POST', headers:API_H, body:JSON.stringify({nombre, apellido, email, telefono, empresa:''})});
+    if (email) {
+      const busqueda = await fetch(API_BASE+'/api/clientes?limit=1&email='+encodeURIComponent(email), {headers:API_H});
+      const bJson = await busqueda.json();
+      if (bJson.success && bJson.data && bJson.data.length) {
+        clienteId = bJson.data[0].id;
+      }
+    }
+    if (!clienteId) {
+      const clientePayload = {nombre, apellido, telefono, empresa:''};
+      if (email) clientePayload.email = email;
+      const creacion = await fetch(API_BASE+'/api/clientes', {method:'POST', headers:API_H, body:JSON.stringify(clientePayload)});
       const cJson = await creacion.json();
-      if (cJson.success) clienteId = cJson.id;
+      if (cJson.success) {
+        clienteId = cJson.id;
+      } else {
+        console.warn('Cliente no creado:', cJson);
+      }
     }
     const payload = {
-      nombre, apellido, empresa: '', email, telefono,
+      nombre, apellido, empresa: '', telefono,
       tipo_proyecto: d.cot_tipo||'',
       presupuesto: '',
       monto: d.cot_monto||null,
@@ -1319,6 +1328,7 @@ async function crearProyectoDesdeCotizacion(){
       descripcion: d.cot_descripcion||'',
       _src: 'cot',
     };
+    if (email) payload.email = email;
     const r = await fetch(API_BASE+'/api/proyectos', {method:'POST', headers:API_H, body:JSON.stringify(payload)});
     const j = await r.json();
     if (j.success) {
