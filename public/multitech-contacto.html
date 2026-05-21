@@ -217,6 +217,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .preset-extra{display:none;margin-top:8px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.78rem;color:var(--text-soft);line-height:1.6}
 
 /* Success */
+.guest-blocker{display:none;text-align:center;padding:60px 24px;animation:fadeUp .5s ease both;flex-direction:column;align-items:center}
+.guest-blocker.show{display:flex}
 .success-wrap{display:none;text-align:center;padding:60px 24px;animation:fadeUp .5s ease both}
 .success-icon-wrap{width:68px;height:68px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
 .success-icon-wrap .material-symbols-outlined{font-size:2rem;color:var(--accent);font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48}
@@ -688,6 +690,13 @@ footer{padding:32px 20px 18px}
         </button>
         <p class="form-legal">Respondemos en menos de 24 horas</p>
       </div>
+    <!-- Guest blocker -->
+    <div class="guest-blocker" id="guestBlocker">
+      <span class="material-symbols-outlined" style="font-size:2.4rem;color:var(--accent);margin-bottom:12px">lock</span>
+      <h3 style="font-family:var(--ff-head);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:6px">Crea una cuenta</h3>
+      <p style="font-size:.82rem;color:var(--text-soft);margin-bottom:18px;max-width:260px;text-align:center">Crea una cuenta para poder cotizar o hacernos preguntas</p>
+      <a href="mt-signup.html" class="btn-submit" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:10px 24px"><span class="material-symbols-outlined" style="font-size:.95rem;color:var(--btn-txt)">person_add</span>Crear cuenta</a>
+      <p style="font-size:.72rem;color:var(--text-muted);margin-top:14px">¿Ya tienes cuenta? <a href="mt-login.html" style="color:var(--accent);text-decoration:none;font-weight:500">Inicia sesión</a></p>
     </div>
 
     <!-- Success -->
@@ -1029,12 +1038,19 @@ document.addEventListener('click', function(e) {
 </script>
 <script src="/mt-javascript/mt-auth-client.js"></script>
 <script>
-/* Require login for contact page */
+/* Guest: block form, show signup prompt */
 document.addEventListener('mt:userGuest', function() {
-  window.location.href = 'mt-signup.html?redirect=' + encodeURIComponent(window.location.pathname);
+  const gb = document.getElementById('guestBlocker');
+  const fc = document.getElementById('formContainer');
+  if (gb) gb.classList.add('show');
+  if (fc) fc.style.display = 'none';
 });
 /* Sync inline admin nav with MTAuth */
 document.addEventListener('mt:userReady', function(e) {
+  const gb = document.getElementById('guestBlocker');
+  const fc = document.getElementById('formContainer');
+  if (gb) gb.classList.remove('show');
+  if (fc) fc.style.display = '';
   if (document.getElementById('adminNavItem')) {
     document.getElementById('adminNavItem').style.display = (e.detail.rol === 'admin' || e.detail.rol === 'editor') ? '' : 'none';
   }
