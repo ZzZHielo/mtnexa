@@ -672,14 +672,7 @@ async function loadClientesData() {
       }));
     }
   } catch(e) {
-    console.warn('API no disponible, usando datos de ejemplo');
-    CLIENTES = [
-      {id:1,nombre:'Ana',apellido:'Martínez',empresa:'TechStart RD',email:'ana@techstart.do',tel:'809-555-0101',sector:'Tecnología',servicio:'App Móvil',valor:45000,proyectos:3,proyectosList:[{nombre:'App de inventario',valor:20000,estado:'entregado'},{nombre:'Panel admin',valor:15000,estado:'activo'},{nombre:'API REST',valor:10000,estado:'activo'}],estado:'activo',vip:true,ultimoContacto:'2026-05-10',color:'#1a3d72',notas:'Cliente prioritario. Prefiere reuniones los lunes.'},
-      {id:2,nombre:'Carlos',apellido:'Pérez',empresa:'Boutique Digital',email:'carlos@boutique.do',tel:'809-555-0202',sector:'Retail / Moda',servicio:'E-Commerce / Tienda Online',valor:18500,proyectos:1,proyectosList:[{nombre:'Tienda online',valor:18500,estado:'activo'}],estado:'activo',vip:false,ultimoContacto:'2026-05-05',color:'#165c2e',notas:''},
-      {id:3,nombre:'Laura',apellido:'Gómez',empresa:'InnoSoft',email:'laura@innosoft.do',tel:'809-555-0303',sector:'Tecnología',servicio:'ERP / Sistema a Medida',valor:72000,proyectos:2,proyectosList:[{nombre:'ERP corporativo',valor:60000,estado:'activo'},{nombre:'Módulo RRHH',valor:12000,estado:'activo'}],estado:'activo',vip:true,ultimoContacto:'2026-05-14',color:'#6b3d08',notas:'Requiere soporte 24/7.'},
-      {id:4,nombre:'Roberto',apellido:'Santos',empresa:'Grupo Empresarial',email:'roberto@grupo.do',tel:'809-555-0404',sector:'Finanzas',servicio:'Consultoría Digital',valor:9800,proyectos:1,proyectosList:[{nombre:'Consultoría Q1',valor:9800,estado:'entregado'}],estado:'pausado',vip:false,ultimoContacto:'2026-04-20',color:'#7f1d1d',notas:'En pausa por presupuesto.'},
-      {id:5,nombre:'María',apellido:'López',empresa:'EduFutura',email:'maria@edufutura.do',tel:'809-555-0505',sector:'Educación',servicio:'Página Web Corporativa',valor:6500,proyectos:1,proyectosList:[{nombre:'Web institucional',valor:6500,estado:'activo'}],estado:'activo',vip:false,ultimoContacto:'2026-05-08',color:'#3d6030',notas:''},
-    ];
+    CLIENTES = [];
   }
   updateCounters();
   renderTabla();
