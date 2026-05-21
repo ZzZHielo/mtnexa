@@ -392,8 +392,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <p class="page-sub" id="pageSub">Base de datos de Usuarios Activados</p>
       </div>
       <div class="head-actions">
-        <button class="btn" onclick="exportarUsuarios()"><span class="ms">download</span>Exportar</button>
-        <button class="btn btn-primary" onclick="abrirNuevoUsuario()"><span class="ms">person_add</span>Nuevo usuario</button>
+        <button class="btn" id="btnExportar" onclick="exportarUsuarios()"><span class="ms">download</span>Exportar</button>
+        <button class="btn btn-primary" id="btnNuevoCliente" onclick="abrirNuevoUsuario()"><span class="ms">person_add</span>Nuevo usuario</button>
+        <button class="btn btn-primary" id="btnNuevoSistemaTop" style="display:none" onclick="abrirNuevoSistema()"><span class="ms">admin_panel_settings</span>Nuevo sistema</button>
       </div>
     </div>
   </div>
@@ -620,7 +621,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       <div class="panel">
         <div class="panel-head">
           <div class="panel-title">Usuarios del <em>sistema</em></div>
-          <span id="sistTableCount" style="font-size:.72rem;color:var(--text-muted)">0 usuarios</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span id="sistTableCount" style="font-size:.72rem;color:var(--text-muted)">0 usuarios</span>
+            <button class="btn btn-primary" style="padding:4px 10px;font-size:.75rem;gap:4px" onclick="abrirNuevoSistema()"><span class="ms" style="font-size:.85rem">person_add</span>Nuevo</button>
+          </div>
         </div>
         <div class="search-bar" style="padding:0 14px 10px">
           <span class="ms" style="font-size:1rem;color:var(--text-muted);margin-right:6px">search</span>
@@ -761,7 +765,9 @@ function switchView(view,btn){
   document.getElementById('clientesView').style.display=view==='clientes'?'':'none';
   document.getElementById('sistemaView').style.display=view==='sistema'?'':'none';
   document.getElementById('pageSub').textContent=view==='sistema'?'Gestión de roles y usuarios del sistema':'Base de datos de Usuarios Activados';
-  document.querySelectorAll('.head-actions .btn').forEach(b=>b.style.display=view==='sistema'?'none':'');
+  document.getElementById('btnExportar').style.display=view==='sistema'?'none':'';
+  document.getElementById('btnNuevoCliente').style.display=view==='sistema'?'none':'';
+  document.getElementById('btnNuevoSistemaTop').style.display=view==='sistema'?'':'none';
   if(view==='sistema' && !SISTEMA_USUARIOS.length) loadSistemaUsuarios();
 }
 
@@ -1099,6 +1105,56 @@ async function guardarNuevoUsuario(){
   st.textContent=`.nl-field{display:flex;flex-direction:column;gap:4px}.nl-field label{font-size:.72rem;color:var(--text-soft);font-weight:500}.nl-field input,.nl-field select,.nl-field textarea{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:.82rem;color:var(--text);font-family:var(--ff-body);outline:none;transition:border-color .2s}.nl-field input:focus,.nl-field select:focus,.nl-field textarea:focus{border-color:var(--accent)}.nl-field textarea{min-height:60px;resize:vertical}.nl-field.full{grid-column:1/-1}.cols2{grid-template-columns:1fr 1fr!important}.hidden{display:none!important}`;
   document.head.appendChild(st);
 })();
+
+/* ══ modal: nuevo usuario del sistema ══ */
+(function(){
+  const div=document.createElement('div');div.id='nuevoSistemaHTML';
+  div.innerHTML=`<div id="modalSistemaOverlay" class="modal-overlay close-modal" onclick="if(event.target===this)cerrarNuevoSistema()">
+    <div class="modal-box">
+      <div class="modal-head"><span class="modal-head-title">Nuevo usuario del sistema</span><button class="modal-close close-modal" onclick="cerrarNuevoSistema()"><span class="ms">close</span></button></div>
+      <div class="modal-scroll">
+        <div class="modal-grid cols2">
+          <div class="nl-field"><label>Nombre *</label><input id="nsNombre" placeholder="Nombre"></div>
+          <div class="nl-field"><label>Apellido</label><input id="nsApellido" placeholder="Apellido"></div>
+          <div class="nl-field full"><label>Correo *</label><input id="nsCorreo" type="email" placeholder="correo@ejemplo.com"></div>
+          <div class="nl-field"><label>Rol</label><select id="nsRol"><option value="cliente">Cliente</option><option value="editor">Editor</option><option value="admin">Admin</option></select></div>
+          <div class="nl-field"><label>Contraseña *</label><input id="nsPassword" type="password" placeholder="Mín. 8 caracteres"></div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn" onclick="cerrarNuevoSistema()">Cancelar</button>
+        <button class="btn btn-primary" onclick="guardarNuevoSistema()"><span class="ms">add</span>Crear usuario</button>
+      </div>
+    </div>
+  </div>`;
+  document.body.appendChild(div);
+})();
+
+function abrirNuevoSistema(){document.getElementById('modalSistemaOverlay').classList.add('open');}
+function cerrarNuevoSistema(){document.getElementById('modalSistemaOverlay').classList.remove('open');}
+
+async function guardarNuevoSistema(){
+  const nombre=document.getElementById('nsNombre').value.trim();
+  const apellido=document.getElementById('nsApellido').value.trim();
+  const correo=document.getElementById('nsCorreo').value.trim();
+  const rol=document.getElementById('nsRol').value;
+  const password=document.getElementById('nsPassword').value;
+  if(!nombre||!correo||!password){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Validación',msg:'Nombre, correo y contraseña son requeridos'});return;}
+  if(password.length<8){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Validación',msg:'La contraseña debe tener al menos 8 caracteres'});return;}
+  try{
+    const r=await fetch(API_BASE+'/api/config/usuarios',{method:'POST',headers:API_H,body:JSON.stringify({nombre,apellido,correo,rol,password})});
+    const j=await r.json();
+    if(!j.success)throw new Error(j.message||'Error');
+    showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Usuario creado',msg:`${nombre} ${apellido} — ${rol}`});
+    cerrarNuevoSistema();
+    document.getElementById('nsNombre').value='';
+    document.getElementById('nsApellido').value='';
+    document.getElementById('nsCorreo').value='';
+    document.getElementById('nsRol').value='cliente';
+    document.getElementById('nsPassword').value='';
+    await loadSistemaUsuarios();
+  }catch(e){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:e.message||'No se pudo crear el usuario'});}
+}
 
 /* ══ initial load after stats panel animation ══ */
 let _usuariosLoaded=false;
