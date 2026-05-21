@@ -152,6 +152,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
 /* ── LOG LIST ── */
 .log-item{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+@keyframes spin{to{transform:rotate(360deg)}}
 .log-item:last-child{border-bottom:none;}
 .log-body{flex:1;}
 .log-line{font-size:.8rem;color:var(--text);line-height:1.5;}
@@ -1010,49 +1011,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
               <div class="panel-title">Registro de <em>actividad</em></div>
               <button class="btn btn-secondary btn-sm" onclick="exportLogs()"><span class="ms" style="font-size:.85rem">download</span>Exportar</button>
             </div>
-            <div class="panel-body" style="padding-bottom:0" id="logsBody">
-              <div class="log-item" data-static-placeholder>
-                <div class="ico-circle ico-acc" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">login</span></div>
-                <div class="log-body">
-                  <div class="log-line"><strong>Miguel Ángel</strong> inició sesión en el panel</div>
-                  <div class="log-meta"><span class="log-time">Hoy, 9:42 AM</span><span class="log-ip">192.168.1.10</span></div>
-                </div>
-              </div>
-              <div class="log-item">
-                <div class="ico-circle ico-green" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">person_add</span></div>
-                <div class="log-body">
-                  <div class="log-line"><strong>Laura Reyes</strong> creó el cliente <strong>TechStart RD</strong></div>
-                  <div class="log-meta"><span class="log-time">Ayer, 3:15 PM</span><span class="log-ip">10.0.0.5</span></div>
-                </div>
-              </div>
-              <div class="log-item">
-                <div class="ico-circle ico-blue" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">edit</span></div>
-                <div class="log-body">
-                  <div class="log-line"><strong>Carlos Pujols</strong> actualizó el proyecto <strong>FitPro App</strong></div>
-                  <div class="log-meta"><span class="log-time">Hace 3 días</span><span class="log-ip">10.0.0.8</span></div>
-                </div>
-              </div>
-              <div class="log-item">
-                <div class="ico-circle ico-amber" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">settings</span></div>
-                <div class="log-body">
-                  <div class="log-line"><strong>Miguel Ángel</strong> modificó configuración de <strong>notificaciones</strong></div>
-                  <div class="log-meta"><span class="log-time">Hace 5 días</span><span class="log-ip">192.168.1.10</span></div>
-                </div>
-              </div>
-              <div class="log-item">
-                <div class="ico-circle ico-red" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">lock</span></div>
-                <div class="log-body">
-                  <div class="log-line">Intento de login fallido para <strong>sofia@multitech.com</strong></div>
-                  <div class="log-meta"><span class="log-time">Hace 1 semana</span><span class="log-ip">45.33.12.88</span></div>
-                </div>
-              </div>
-              <div class="log-item">
-                <div class="ico-circle ico-green" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"><span class="ms" style="font-size:.88rem">payments</span></div>
-                <div class="log-body">
-                  <div class="log-line">Pago de <strong>$1,800</strong> registrado para <strong>Boutique Digital</strong></div>
-                  <div class="log-meta"><span class="log-time">Hace 1 semana</span><span class="log-ip">192.168.1.10</span></div>
-                </div>
-              </div>
+            <div class="panel-body" style="padding-bottom:0;min-height:80px;display:flex;align-items:center;justify-content:center" id="logsBody">
+              <span class="ms" style="font-size:1.2rem;color:var(--text-muted);animation:spin 1s linear infinite">sync</span>
             </div>
           </div>
         </div><!-- /tab-logs -->
