@@ -89,7 +89,7 @@ router.post('/restaurar-defaults', async (req, res) => {
 router.get('/usuarios', async (req, res) => {
   try {
     const rows = await query(
-      `SELECT id, nombre, apellido, correo, rol, activo, last_login, created_at
+       `SELECT id, nombre, apellido, correo, rol, activo, avatar_url, last_login, created_at
        FROM usuarios ORDER BY FIELD(rol,'admin','editor','cliente'), nombre ASC`
     );
     res.json({ success: true, data: rows });

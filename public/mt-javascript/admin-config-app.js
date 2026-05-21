@@ -251,7 +251,10 @@
     return fmt(d);
   }
 
-  window.renderUsersTable = function () {
+  let userPage = 1;
+  const PER_PAGE = 15;
+
+  window.renderUsersTable = function (page) {
     const tb = document.getElementById('tableBody');
     if (!tb) return;
     const q = (document.getElementById('userSearch')?.value||'').toLowerCase().trim();
@@ -263,10 +266,18 @@
     );
     if (!items.length) {
       tb.innerHTML = '<tr><td colspan="5" class="td-muted" style="text-align:center;padding:28px">'+(q?'Sin resultados para «'+q+'»':'No hay usuarios del panel')+'</td></tr>';
+      document.getElementById('userPagination')&&(document.getElementById('userPagination').innerHTML='');
       return;
     }
+    const total = items.length;
+    if (page) userPage = page;
+    if (!page && q) userPage = 1;
+    const maxPage = Math.ceil(total / PER_PAGE);
+    if (userPage > maxPage) userPage = maxPage;
+    const start = (userPage - 1) * PER_PAGE;
+    const pageItems = q ? items : items.slice(start, start + PER_PAGE);
     const rolMap = {admin:{label:'Admin',cls:'pill-admin'},editor:{label:'Editor',cls:'pill-editor'},cliente:{label:'Cliente',cls:'pill-cliente'}};
-    tb.innerHTML = items.map((u, i) => {
+    tb.innerHTML = pageItems.map((u, i) => {
       const ini = initials(u.nombre, u.apellido).toUpperCase();
       const color = COLORS[i % COLORS.length];
       const r = rolMap[u.rol] || {label:u.rol,cls:'pill-editor'};
@@ -275,14 +286,27 @@
         ? '<span class="pill pill-activo" style="cursor:pointer" onclick="toggleUserActive('+u.id+',0)"><span class="pill-dot"></span>Activo</span>'
         : '<span class="pill pill-inactivo" style="cursor:pointer" onclick="toggleUserActive('+u.id+',1)"><span class="pill-dot"></span>Inactivo</span>';
       const nombre = [u.nombre, u.apellido].filter(Boolean).join(' ');
+      const avatar = u.avatar_url
+        ? '<div class="client-av" style="background:transparent;overflow:hidden"><img src="'+u.avatar_url+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>'
+        : '<div class="client-av" style="background:'+color+'">'+ini+'</div>';
       return `<tr data-id="${u.id}">
-        <td><div class="client-av-cell"><div class="client-av" style="background:${color}">${ini}</div><div><div class="td-name">${nombre}</div><div class="td-muted" style="font-size:.7rem">${u.correo}</div></div></div></div></td>
+        <td><div class="client-av-cell">${avatar}<div><div class="td-name">${nombre}</div><div class="td-muted" style="font-size:.7rem">${u.correo}</div></div></div></div></td>
         <td>${rolPill}</td>
         <td>${estadoPill}</td>
         <td><span class="td-muted">${fmtRelative(u.last_login)}</span></td>
         <td><button type="button" class="btn btn-secondary btn-sm" onclick="editPanelUser(${u.id})">Editar</button></td>
       </tr>`;
     }).join('');
+
+    const pag = document.getElementById('userPagination');
+    if (pag) {
+      if (q || maxPage <= 1) { pag.innerHTML = ''; return; }
+      pag.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 0">'+
+        '<button class="btn btn-secondary btn-sm" onclick="renderUsersTable('+(userPage-1)+')"'+(userPage<=1?' disabled':'')+'><span class="ms" style="font-size:.8rem">chevron_left</span></button>'+
+        '<span style="font-size:.78rem;color:var(--text-muted)">'+(start+1)+'–'+Math.min(start+PER_PAGE,total)+' de '+total+'</span>'+
+        '<button class="btn btn-secondary btn-sm" onclick="renderUsersTable('+(userPage+1)+')"'+(userPage>=maxPage?' disabled':'')+'><span class="ms" style="font-size:.8rem">chevron_right</span></button>'+
+        '</div>';
+    }
 
     if (typeof gsap !== 'undefined') {
       gsap.fromTo('#tableBody tr', { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, duration: 0.32, stagger: 0.05, ease: 'power2.out' });
