@@ -186,24 +186,14 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .dt tbody tr:hover td{background:var(--bg2);}
 .td-name{font-weight:500;color:var(--text);}
 .td-muted{color:var(--text-muted);}
-.td-val{font-weight:500;color:var(--text);}
 .usr-av{width:30px;height:30px;border-radius:50%;background:var(--btn);color:var(--btn-txt);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;font-family:var(--ff-head);flex-shrink:0;}
 .usr-av-cell{display:flex;align-items:center;gap:10px;}
 .pill{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:500;padding:3px 9px;border-radius:100px;}
 .pill-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;}
-.pill-nuevo{background:var(--accent-bg);color:var(--accent-txt);}
 .pill-activo{background:var(--green-bg);color:var(--green-txt);}
 .pill-inactivo{background:var(--red-bg);color:var(--red-txt);}
-.pill-desarrollando{background:var(--blue-bg);color:var(--blue-txt);}
-.pill-calificado{background:var(--green-bg);color:var(--green-txt);}
-.pill-perdido{background:var(--red-bg);color:var(--red-txt);}
-.pill-propuesta{background:var(--amber-bg);color:var(--amber-txt);}
 .src-tag{display:inline-flex;align-items:center;gap:4px;font-size:.66rem;padding:2px 8px;border-radius:100px;background:var(--bg3);color:var(--text-muted);}
 .src-tag .ms{font-size:.72rem;}
-.score-bar{display:flex;align-items:center;gap:7px;}
-.score-dots{display:flex;gap:3px;}
-.score-dot{width:8px;height:8px;border-radius:50%;background:var(--bg3);border:1.5px solid var(--border);}
-.score-dot.filled{background:var(--accent);border-color:var(--accent);}
 
 /* ── SIDEBAR LAYOUT ── */
 .main-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;}
@@ -406,12 +396,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       </div>
       <div class="stat-card" id="sc2">
         <div class="stat-top">
-          <div class="stat-icon" style="background:var(--amber-bg)"><span class="ms" style="color:var(--amber-txt)">pause_circle</span></div>
-          <span class="stat-tag tag-amb">pausados</span>
+          <div class="stat-icon" style="background:var(--accent-bg)"><span class="ms" style="color:var(--accent)">admin_panel_settings</span></div>
+          <span class="stat-tag tag-neu">admin</span>
         </div>
-        <div class="stat-num" id="sn2" style="color:var(--amber-txt)">0</div>
-        <div class="stat-label">Usuarios pausados</div>
-        <svg class="mini-spark" viewBox="0 0 80 26"><path style="stroke:var(--amber)" d="M0,20 C8,17 14,18 20,14 C26,10 32,12 38,7 C44,2 50,5 56,2 C62,0 70,1 80,0"/></svg>
+        <div class="stat-num" id="sn2" style="color:var(--accent)">0</div>
+        <div class="stat-label">Admins</div>
+        <svg class="mini-spark" viewBox="0 0 80 26"><path style="stroke:var(--accent)" d="M0,18 C8,15 14,16 20,12 C26,8 32,10 38,6 C44,2 50,4 56,2 C62,0 70,1 80,0"/></svg>
       </div>
       <div class="stat-card" id="sc3">
         <div class="stat-top">
@@ -437,9 +427,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
           <button class="filter-pill" data-filter="activo" onclick="setFilter('activo',this)">
             <span class="ms">check_circle</span>Activos
           </button>
-          <button class="filter-pill" data-filter="pausado" onclick="setFilter('pausado',this)">
-            <span class="ms">pause_circle</span>Pausados
-          </button>
           <button class="filter-pill" data-filter="inactivo" onclick="setFilter('inactivo',this)">
             <span class="ms">cancel</span>Inactivos
           </button>
@@ -460,12 +447,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
               <thead>
                 <tr>
                   <th>Usuario</th>
-                  <th>Servicio</th>
-                  <th>Fuente</th>
+                  <th>Correo</th>
+                  <th>Rol</th>
                   <th>Estado</th>
-                  <th>Score</th>
-                  <th>Valor</th>
-                  <th>Fecha</th>
+                  <th>Último login</th>
+                  <th>Creado</th>
                 </tr>
               </thead>
               <tbody id="tableBody"></tbody>
@@ -482,12 +468,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
           <div class="panel-head">
             <div class="panel-title">Actividad <em>reciente</em></div>
           </div>
-          <div>
-            <div class="act-item"><div class="act-ico ico-green"><span class="ms">verified</span></div><div class="act-body"><div class="act-line"><strong>Roberto López</strong> calificado como usuario activo</div><div class="act-time">hace 12 min</div></div></div>
-            <div class="act-item"><div class="act-ico ico-blue"><span class="ms">call</span></div><div class="act-body"><div class="act-line">Llamada agendada con <strong>Sara Torres</strong></div><div class="act-time">hace 45 min</div></div></div>
-            <div class="act-item"><div class="act-ico ico-amber"><span class="ms">description</span></div><div class="act-body"><div class="act-line">Propuesta enviada a <strong>José Pérez</strong></div><div class="act-time">hace 2 h</div></div></div>
-            <div class="act-item"><div class="act-ico ico-acc"><span class="ms">person_add</span></div><div class="act-body"><div class="act-line">Nuevo usuario: <strong>Laura Jiménez</strong> vía Instagram</div><div class="act-time">hace 3 h</div></div></div>
-            <div class="act-item"><div class="act-ico ico-blue"><span class="ms">mail</span></div><div class="act-body"><div class="act-line">Follow-up enviado a <strong>Carlos Núñez</strong></div><div class="act-time">ayer</div></div></div>
+          <div id="actBody">
           </div>
         </div>
       </div>
@@ -506,35 +487,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         </div>
 
         <!-- TOP SOURCES -->
-        <div class="pipe-card" id="sourceCard">
+          <div class="pipe-card" id="sourceCard">
           <div class="pipe-head">
-            <div class="pipe-title">Fuentes <em>principales</em></div>
+            <div class="pipe-title">Roles <em>del sistema</em></div>
           </div>
-          <div class="source-list">
-            <div class="source-row">
-              <div class="source-ico" style="background:var(--blue-bg)"><span class="ms" style="color:var(--blue-txt)">language</span></div>
-              <span class="source-label">Página web</span>
-              <span class="source-count">5</span>
-              <span class="source-pct">42%</span>
-            </div>
-            <div class="source-row">
-              <div class="source-ico" style="background:var(--accent-bg)"><span class="ms" style="color:var(--accent-txt)">photo_camera</span></div>
-              <span class="source-label">Instagram</span>
-              <span class="source-count">3</span>
-              <span class="source-pct">25%</span>
-            </div>
-            <div class="source-row">
-              <div class="source-ico" style="background:var(--green-bg)"><span class="ms" style="color:var(--green-txt)">chat</span></div>
-              <span class="source-label">WhatsApp</span>
-              <span class="source-count">2</span>
-              <span class="source-pct">17%</span>
-            </div>
-            <div class="source-row">
-              <div class="source-ico" style="background:var(--amber-bg)"><span class="ms" style="color:var(--amber-txt)">people</span></div>
-              <span class="source-label">Referido</span>
-              <span class="source-count">2</span>
-              <span class="source-pct">17%</span>
-            </div>
+          <div id="rolesBody" class="source-list">
+            <!-- rendered by JS -->
           </div>
         </div>
 
@@ -651,35 +609,82 @@ let currentFilter = 'todos';
 
 function initials(n,a){return ((n||'?').charAt(0)+(a||'').charAt(0)).toUpperCase();}
 function fmtDate(d){if(!d)return '—';if(typeof formatDateInTZ==='function')return formatDateInTZ(d,'date');const dt=new Date(d);return dt.toLocaleDateString('es-DO',{day:'numeric',month:'short'});}
-function fmtVal(v){if(typeof formatCurrency==='function')return formatCurrency(v);return v>=1000?'$'+(v/1000).toFixed(1).replace(/\.0$/,'')+'k':'$'+v;}
+
+function timeAgo(d){
+  if(!d)return '—';
+  const n=Date.now(),t=new Date(d).getTime(),s=Math.floor((n-t)/1000);
+  if(s<60)return 'ahora';
+  if(s<3600)return `hace ${Math.floor(s/60)} min`;
+  if(s<86400)return `hace ${Math.floor(s/3600)} h`;
+  if(s<2592000)return `hace ${Math.floor(s/86400)} d`;
+  return fmtDate(d);
+}
 
 const estadoMap={
   activo:   {label:'Activo',   pill:'pill-activo',   cls:'s-activo'},
-  pausado:  {label:'Pausado',  pill:'pill-inactivo', cls:'s-inactivo'},
   inactivo: {label:'Inactivo', pill:'pill-inactivo', cls:'s-inactivo'},
 };
-const fuenteIcons={Web:'language', WhatsApp:'chat', Instagram:'photo_camera', Referido:'people'};
 
 async function loadUsuarios(){
   try{
-    const r=await fetch(API_BASE+'/api/clientes?limit=200',{headers:API_H});
+    const r=await fetch(API_BASE+'/api/admin/usuarios-sistema',{headers:API_H});
     const j=await r.json();
     if(!j.success)return;
     USUARIOS=(j.data||[]).map(l=>({
       id:l.id,nombre:l.nombre,apellido:l.apellido||'',
-      empresa:l.empresa||'',email:l.email||'',
-      telefono:l.telefono||'',servicio:l.servicio||'',
-      fuente:l.servicio||'Web',estado:l.estado||'activo',
-      score:3,      valor:Number(l.valor_pagado||l.valor_total||0),
-      fecha:l.created_at,notas:l.notas||''
+      correo:l.correo||'',rol:l.rol||'cliente',
+      activo:l.activo,
+      email_verificado:l.email_verified?1:0,
+      last_login:l.last_login,
+      created_at:l.created_at,
+      estado:l.activo?'activo':'inactivo'
     }));
   }catch(e){console.error('Error loading usuarios:',e);}
   afterLoad();
+  loadActividad();
+}
+
+function loadActividad(){
+  const items=[];
+  USUARIOS.forEach(u=>{
+    if(u.created_at) items.push({
+      name:`${u.nombre} ${u.apellido}`,
+      action:'fue añadido',
+      icon:'person_add',
+      color:'ico-acc',
+      time:u.created_at
+    });
+    if(u.last_login) items.push({
+      name:`${u.nombre} ${u.apellido}`,
+      action:'inició sesión',
+      icon:'login',
+      color:'ico-blue',
+      time:u.last_login
+    });
+  });
+  items.sort((a,b)=>new Date(b.time)-new Date(a.time));
+  const html=items.slice(0,20).map(i=>{
+    return `<div class="act-item" style="opacity:0;transform:translateY(8px)"><div class="act-ico ${i.color}"><span class="ms">${i.icon}</span></div><div class="act-body"><div class="act-line"><strong>${i.name}</strong> ${i.action}</div><div class="act-time">${timeAgo(i.time)}</div></div></div>`;
+  }).join('');
+  const c=document.getElementById('actBody');
+  if(c) c.innerHTML=html;
+  gsap.to('.act-item',{autoAlpha:1,y:0,duration:.38,stagger:.04,ease:'power2.out',delay:.1});
 }
 
 function afterLoad(){
-  animateStats(); renderTable(); renderPipeline();
+  animateStats(); renderTable(); renderPipeline(); renderRoles();
   document.getElementById('usuariosLoader')?.classList.add('hidden');
+}
+
+function renderRoles(){
+  const roles={admin:{label:'Admin',ico:'admin_panel_settings',bg:'var(--accent-bg)',tc:'var(--accent)'},editor:{label:'Editor',ico:'edit_note',bg:'var(--blue-bg)',tc:'var(--blue-txt)'},cliente:{label:'Cliente',ico:'person',bg:'var(--green-bg)',tc:'var(--green-txt)'}};
+  const total=USUARIOS.length||1;
+  const html=Object.entries(roles).map(([k,v])=>{
+    const cnt=USUARIOS.filter(u=>u.rol===k).length;
+    const pct=Math.round(cnt/total*100);
+    return `<div class="source-row"><div class="source-ico" style="background:${v.bg}"><span class="ms" style="color:${v.tc}">${v.ico}</span></div><span class="source-label">${v.label}</span><span class="source-count">${cnt}</span><span class="source-pct">${pct}%</span></div>`;
+  }).join('');
+  document.getElementById('rolesBody').innerHTML=html;
 }
 
 /* ══ FILTER ══ */
@@ -698,8 +703,8 @@ function renderTable(){
     if(q && !(
       l.nombre.toLowerCase().includes(q)||
       l.apellido.toLowerCase().includes(q)||
-      l.empresa.toLowerCase().includes(q)||
-      l.servicio.toLowerCase().includes(q)
+      l.correo.toLowerCase().includes(q)||
+      l.rol.toLowerCase().includes(q)
     )) return false;
     return true;
   });
@@ -716,25 +721,23 @@ function renderTable(){
   empty.style.display='none';
 
   body.innerHTML=items.map(l=>{
-    const st=estadoMap[l.estado]||estadoMap.nuevo;
-    const dotsFilled=l.score;
-    const dots=Array.from({length:5},(_,i)=>`<div class="score-dot${i<dotsFilled?' filled':''}"></div>`).join('');
+    const st=estadoMap[l.estado]||estadoMap.activo;
+    const rolLabel={admin:'Admin',editor:'Editor',cliente:'Cliente'}[l.rol]||l.rol;
+    const rolIcon={admin:'admin_panel_settings',editor:'edit_note',cliente:'person'}[l.rol]||'person';
     return `<tr onclick="openModal(${l.id})">
       <td>
         <div class="usr-av-cell">
           <div class="usr-av">${initials(l.nombre,l.apellido)}</div>
           <div>
             <div class="td-name">${l.nombre} ${l.apellido}</div>
-            <div class="td-muted" style="font-size:.7rem">${l.empresa}</div>
           </div>
         </div>
       </td>
-      <td><span class="td-muted">${l.servicio}</span></td>
-      <td><span class="src-tag"><span class="ms">${fuenteIcons[l.fuente]||'language'}</span>${l.fuente}</span></td>
+      <td><span class="td-muted">${l.correo}</span></td>
+      <td><span class="src-tag"><span class="ms" style="font-size:.75rem">${rolIcon}</span>${rolLabel}</span></td>
       <td><span class="pill ${st.pill}"><span class="pill-dot"></span>${st.label}</span></td>
-      <td><div class="score-bar"><div class="score-dots">${dots}</div></div></td>
-      <td><span class="td-val">${fmtVal(l.valor)}</span></td>
-      <td><span class="td-muted">${fmtDate(l.fecha)}</span></td>
+      <td><span class="td-muted">${timeAgo(l.last_login)}</span></td>
+      <td><span class="td-muted">${fmtDate(l.created_at)}</span></td>
     </tr>`;
   }).join('');
 
@@ -744,9 +747,8 @@ function renderTable(){
 /* ══ PIPELINE ══ */
 function renderPipeline(){
   const stages=[
-    {key:'activo',   label:'Activo',   color:'var(--green)',   dotColor:'var(--green)'},
-    {key:'pausado',  label:'Pausado',  color:'var(--amber)',   dotColor:'var(--amber)'},
-    {key:'inactivo', label:'Inactivo', color:'var(--red-txt)', dotColor:'var(--red-txt)'},
+    {key:'activo',   label:'Activos',  color:'var(--green)',   dotColor:'var(--green)'},
+    {key:'inactivo', label:'Inactivos',color:'var(--red-txt)', dotColor:'var(--red-txt)'},
   ];
   const total=USUARIOS.length;
   const body=document.getElementById('pipeBody');
@@ -769,10 +771,10 @@ function renderPipeline(){
 function animateStats(){
   const total=USUARIOS.length;
   const activos=USUARIOS.filter(l=>l.estado==='activo').length;
-  const nuevos=USUARIOS.filter(l=>l.estado==='pausado').length;
+  const admins=USUARIOS.filter(l=>l.rol==='admin').length;
   gsap.to({v:0},{v:total,duration:1.1,ease:'power2.out',onUpdate(){document.getElementById('sn0').textContent=Math.round(this.targets()[0].v);}});
   gsap.to({v:0},{v:activos,duration:1.1,ease:'power2.out',onUpdate(){document.getElementById('sn1').textContent=Math.round(this.targets()[0].v);}});
-  gsap.to({v:0},{v:nuevos,duration:1.1,ease:'power2.out',onUpdate(){document.getElementById('sn2').textContent=Math.round(this.targets()[0].v);}});
+  gsap.to({v:0},{v:admins,duration:1.1,ease:'power2.out',onUpdate(){document.getElementById('sn2').textContent=Math.round(this.targets()[0].v);}});
   gsap.to({v:0},{v:total,duration:1.2,ease:'power2.out',onUpdate(){document.getElementById('sn3').textContent=Math.round(this.targets()[0].v);}});
 }
 
@@ -780,23 +782,22 @@ function animateStats(){
 function openModal(id){
   const l=USUARIOS.find(i=>i.id===id);
   if(!l) return;
-  const dotsFilled=l.score;
-  const dotsHtml=Array.from({length:5},(_,i)=>`<div class="score-dot${i<dotsFilled?' filled':''}" style="width:12px;height:12px"></div>`).join('');
+  const rolLabel={admin:'Admin',editor:'Editor',cliente:'Cliente'}[l.rol]||l.rol;
+  const rolIcon={admin:'admin_panel_settings',editor:'edit_note',cliente:'person'}[l.rol]||'person';
   document.getElementById('modalBody').innerHTML=`
     <div class="modal-user-hero">
       <div class="modal-av">${initials(l.nombre,l.apellido)}</div>
       <div>
         <div class="modal-user-name">${l.nombre} ${l.apellido}</div>
-        <div class="modal-user-sub">${l.empresa} · <span class="src-tag" style="display:inline-flex"><span class="ms" style="font-size:.7rem">${fuenteIcons[l.fuente]||'language'}</span>${l.fuente}</span></div>
+        <div class="modal-user-sub"><span class="src-tag" style="display:inline-flex"><span class="ms" style="font-size:.7rem">${rolIcon}</span>${rolLabel}</span></div>
       </div>
     </div>
     <div class="modal-grid">
-      <div><div class="modal-field-label">Correo electrónico</div><div class="modal-field-val">${l.email}</div></div>
-      <div><div class="modal-field-label">Teléfono</div><div class="modal-field-val">${l.telefono}</div></div>
-      <div><div class="modal-field-label">Servicio de interés</div><div class="modal-field-val">${l.servicio}</div></div>
-      <div><div class="modal-field-label">Valor estimado</div><div class="modal-field-val" style="color:var(--accent);font-weight:500">${fmtVal(l.valor)}</div></div>
-      <div><div class="modal-field-label">Fecha de entrada</div><div class="modal-field-val">${fmtDate(l.fecha)}</div></div>
-      <div><div class="modal-field-label">Score</div><div class="modal-field-val"><div class="score-bar" style="margin-top:4px"><div class="score-dots">${dotsHtml}</div><span style="font-size:.72rem;color:var(--text-muted);margin-left:6px">${l.score}/5</span></div></div></div>
+      <div><div class="modal-field-label">Correo electrónico</div><div class="modal-field-val">${l.correo}</div></div>
+      <div><div class="modal-field-label">Email verificado</div><div class="modal-field-val">${l.email_verificado?'Sí':'No'}</div></div>
+      <div><div class="modal-field-label">Rol</div><div class="modal-field-val">${rolLabel}</div></div>
+      <div><div class="modal-field-label">Último login</div><div class="modal-field-val">${timeAgo(l.last_login)}</div></div>
+      <div><div class="modal-field-label">Creado</div><div class="modal-field-val">${fmtDate(l.created_at)}</div></div>
     </div>
     <div class="modal-divider"></div>
     <div><div class="modal-field-label">Estado del usuario</div>
@@ -805,13 +806,15 @@ function openModal(id){
         <button class="status-btn${l.estado===k?' '+v.cls:''}" onclick="changeEstado(${id},'${k}',this)">${v.label}</button>
       `).join('')}
     </div></div>
-    ${l.notas?`<div class="modal-divider"></div><div><div class="modal-field-label">Notas</div><div class="modal-field-val" style="font-size:.82rem;line-height:1.55;margin-top:4px">${l.notas}</div></div>`:''}
     <div class="modal-divider"></div>
-    <div><div class="modal-field-label" style="margin-bottom:6px">Agregar nota</div>
-    <textarea class="modal-notes" id="notaInput" placeholder="Escribe una nota sobre este usuario…">${l.notas||''}</textarea></div>
+    <div><div class="modal-field-label" style="margin-bottom:6px">Rol</div>
+    <div class="status-select">
+      ${['admin','editor','cliente'].map(r=>`
+        <button class="status-btn${l.rol===r?' s-activo':''}" onclick="cambiarRol(${id},'${r}',this)">${r.charAt(0).toUpperCase()+r.slice(1)}</button>
+      `).join('')}
+    </div></div>
     <div class="modal-actions">
       <button class="btn btn-primary" onclick="contactarUsuario(${id})"><span class="ms">mail</span>Contactar</button>
-      <button class="btn btn-green" onclick="guardarNota(${id})"><span class="ms">save</span>Guardar nota</button>
       <button class="btn" style="margin-left:auto" onclick="closeModal()"><span class="ms">close</span>Cerrar</button>
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
@@ -821,33 +824,37 @@ async function changeEstado(id,newSt,btn){
   const l=USUARIOS.find(i=>i.id===id);
   if(!l) return;
   try{
-    await fetch(API_BASE+'/api/clientes/'+id,{method:'PATCH',headers:API_H,body:JSON.stringify({estado:newSt})});
+    await fetch(API_BASE+'/api/admin/usuarios-sistema/'+id,{method:'PATCH',headers:API_H,body:JSON.stringify({activo:newSt==='activo'?1:0})});
     l.estado=newSt;
+    l.activo=newSt==='activo'?1:0;
   }catch(e){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo actualizar el estado'});return;}
   const v=estadoMap[newSt];
   btn.closest('.status-select').querySelectorAll('.status-btn').forEach(b=>{
     const match=b===btn;
     b.className='status-btn'+(match?' '+v.cls:'');
   });
-  renderTable();renderPipeline();animateStats();
+  renderTable();renderPipeline();animateStats();renderRoles();
   showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Estado actualizado',msg:`${l.nombre} ${l.apellido} → ${v.label}`});
+}
+
+async function cambiarRol(id,newRol,btn){
+  const l=USUARIOS.find(i=>i.id===id);
+  if(!l) return;
+  try{
+    await fetch(API_BASE+'/api/admin/usuarios-sistema/'+id,{method:'PATCH',headers:API_H,body:JSON.stringify({rol:newRol})});
+    l.rol=newRol;
+  }catch(e){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo actualizar el rol'});return;}
+  btn.closest('.status-select').querySelectorAll('.status-btn').forEach(b=>{
+    b.className='status-btn';
+    if(b===btn) b.classList.add('s-activo');
+  });
+  showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Rol actualizado',msg:`${l.nombre} ${l.apellido} → ${newRol}`});
 }
 
 function contactarUsuario(id){
   const l=USUARIOS.find(i=>i.id===id);
-  if(l?.email) window.open('mailto:'+l.email);
+  if(l?.correo) window.open('mailto:'+l.correo);
   else showToast({icon:'mail',bg:'var(--blue-bg)',tc:'var(--blue-txt)',title:'Sin correo',msg:'Este usuario no tiene correo registrado'});
-}
-
-async function guardarNota(id){
-  const l=USUARIOS.find(i=>i.id===id);
-  if(!l) return;
-  const nota=document.getElementById('notaInput')?.value||'';
-  try{
-    await fetch(API_BASE+'/api/clientes/'+id,{method:'PATCH',headers:API_H,body:JSON.stringify({notas:nota})});
-    l.notas=nota;
-    showToast({icon:'save',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Nota guardada',msg:`Usuario: ${l.nombre} ${l.apellido}`});
-  }catch(e){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo guardar la nota'});}
 }
 
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
@@ -855,9 +862,9 @@ function closeModalOutside(e){if(e.target===document.getElementById('modalOverla
 
 function exportarUsuarios(){
   if(!USUARIOS.length){showToast({icon:'info',bg:'var(--accent-bg)',tc:'var(--accent)',title:'Sin datos',msg:'No hay usuarios para exportar'});return;}
-  const cab='Nombre,Apellido,Empresa,Correo,Teléfono,Servicio,Fuente,Estado,Score,Valor,Notas\n';
-  const csv=cab+USUARIOS.map(l=>[l.nombre,l.apellido,l.empresa,l.email,l.telefono,l.servicio,l.fuente,l.estado,l.score,l.valor,'"'+(l.notas||'').replace(/"/g,'""')+'"'].join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='usuarios-multitech.csv';a.click();
+  const cab='Nombre,Apellido,Correo,Rol,Activo,Último Login,Creado\n';
+  const csv=cab+USUARIOS.map(l=>[l.nombre,l.apellido,l.correo,l.rol,l.estado,l.last_login||'',l.created_at||''].join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='usuarios-sistema.csv';a.click();
   showToast({icon:'download',bg:'var(--accent-bg)',tc:'var(--accent)',title:'Exportación lista',msg:`${USUARIOS.length} usuarios exportados`});
 }
 
@@ -869,14 +876,16 @@ function cerrarNuevoUsuario(){document.getElementById('modalNuevoOverlay').class
 async function guardarNuevoUsuario(){
   const f=id=>document.getElementById(id)?.value||'';
   const nombre=f('nlNombre').trim();
+  const apellido=f('nlApellido').trim();
+  const correo=f('nlEmail').trim();
   if(!nombre){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Validación',msg:'El nombre es requerido'});return;}
+  if(!correo){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Validación',msg:'El correo es requerido'});return;}
   const body={
-    nombre,apellido:f('nlApellido'),email:f('nlEmail'),telefono:f('nlTelefono'),
-    empresa:f('nlEmpresa'),servicio:f('nlServicio'),
-    valor_total:parseFloat(f('nlValor'))||0,notas:f('nlNotas'),
+    nombre,apellido,correo,rol:f('nlRol')||'editor',
+    password:f('nlPassword')||'Multitech2024'
   };
   try{
-    const r=await fetch(API_BASE+'/api/clientes',{method:'POST',headers:API_H,body:JSON.stringify(body)});
+    const r=await fetch(API_BASE+'/api/config/usuarios',{method:'POST',headers:API_H,body:JSON.stringify(body)});
     const j=await r.json();
     if(!j.success)throw new Error(j.message||'Error');
     showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Usuario creado',msg:`${nombre} agregado correctamente`});
@@ -890,17 +899,14 @@ async function guardarNuevoUsuario(){
   const div=document.createElement('div');div.id='nuevoUsuarioHTML';
   div.innerHTML=`<div id="modalNuevoOverlay" class="modal-overlay close-modal" onclick="if(event.target===this)cerrarNuevoUsuario()">
     <div class="modal-box">
-      <div class="modal-head"><span class="modal-head-title">Nuevo usuario</span><button class="modal-close close-modal" onclick="cerrarNuevoUsuario()"><span class="ms">close</span></button></div>
+      <div class="modal-head"><span class="modal-head-title">Nuevo usuario del sistema</span><button class="modal-close close-modal" onclick="cerrarNuevoUsuario()"><span class="ms">close</span></button></div>
       <div class="modal-scroll">
         <div class="modal-grid cols2">
           <div class="nl-field"><label>Nombre *</label><input id="nlNombre" placeholder="Nombre"></div>
           <div class="nl-field"><label>Apellido</label><input id="nlApellido" placeholder="Apellido"></div>
-          <div class="nl-field"><label>Correo</label><input id="nlEmail" type="email" placeholder="correo@ejemplo.com"></div>
-          <div class="nl-field"><label>Teléfono</label><input id="nlTelefono" placeholder="809-555-0000"></div>
-          <div class="nl-field"><label>Empresa</label><input id="nlEmpresa" placeholder="Empresa"></div>
-          <div class="nl-field"><label>Servicio</label><input id="nlServicio" placeholder="Ej: Página Web"></div>
-          <div class="nl-field"><label>Valor estimado ($)</label><input id="nlValor" type="number" min="0" step="0.01" placeholder="0.00"></div>
-          <div class="nl-field full"><label>Notas</label><textarea id="nlNotas" placeholder="Notas iniciales…"></textarea></div>
+          <div class="nl-field"><label>Correo *</label><input id="nlEmail" type="email" placeholder="correo@ejemplo.com"></div>
+          <div class="nl-field"><label>Contraseña</label><input id="nlPassword" type="password" placeholder="Default: Multitech2024"></div>
+          <div class="nl-field"><label>Rol</label><select id="nlRol"><option value="editor">Editor</option><option value="admin">Admin</option><option value="cliente">Cliente</option></select></div>
         </div>
       </div>
       <div class="modal-actions">
@@ -932,7 +938,7 @@ mm.add('(prefers-reduced-motion: no-preference)',()=>{
 });
 mm.add('(prefers-reduced-motion: reduce)',()=>{
   gsap.set(['#pageHead','.stat-card','#panelTable','#panelAct','#pipeCard','#sourceCard','#qaCard','.act-item'],{autoAlpha:1,y:0,x:0});
-  animateStats();renderTable();renderPipeline();
+  animateStats();renderTable();renderPipeline();renderRoles();
 });
 
 if(!_usuariosLoaded){_usuariosLoaded=true;loadUsuarios();}
