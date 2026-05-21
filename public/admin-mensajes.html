@@ -1295,25 +1295,35 @@ async function marcarPagada(id){
 async function crearProyectoDesdeCotizacion(){
   const d = window._cotizacionData;
   if (!d) return;
-  const payload = {
-    nombre: d.cot_nombre||'',
-    apellido: d.cot_apellido||'',
-    empresa: '',
-    email: d.cot_correo||'',
-    telefono: d.cot_whatsapp||'',
-    tipo_proyecto: d.cot_tipo||'',
-    presupuesto: '',
-    monto: d.cot_monto||null,
-    moneda: d.cot_moneda||'USD',
-    descripcion: d.cot_descripcion||'',
-    _src: 'cot',
-  };
+  const nombre = d.cot_nombre||'';
+  const apellido = d.cot_apellido||'';
+  const email = d.cot_correo||'';
+  const telefono = d.cot_whatsapp||'';
   try {
+    let clienteId = null;
+    const busqueda = await fetch(API_BASE+'/api/clientes?limit=1&email='+encodeURIComponent(email), {headers:API_H});
+    const bJson = await busqueda.json();
+    if (bJson.success && bJson.data && bJson.data.length) {
+      clienteId = bJson.data[0].id;
+    } else {
+      const creacion = await fetch(API_BASE+'/api/clientes', {method:'POST', headers:API_H, body:JSON.stringify({nombre, apellido, email, telefono, empresa:''})});
+      const cJson = await creacion.json();
+      if (cJson.success) clienteId = cJson.id;
+    }
+    const payload = {
+      nombre, apellido, empresa: '', email, telefono,
+      tipo_proyecto: d.cot_tipo||'',
+      presupuesto: '',
+      monto: d.cot_monto||null,
+      moneda: d.cot_moneda||'USD',
+      descripcion: d.cot_descripcion||'',
+      _src: 'cot',
+    };
     const r = await fetch(API_BASE+'/api/proyectos', {method:'POST', headers:API_H, body:JSON.stringify(payload)});
     const j = await r.json();
     if (j.success) {
       await fetch(API_BASE+'/api/conversaciones/'+activeConvId, {method:'PATCH', headers:API_H, body:JSON.stringify({proyecto_id: j.id})});
-      showToast({icon:'check',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Proyecto creado',msg:'#ID '+j.id+' desde cotización'});
+      showToast({icon:'check',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Proyecto creado',msg:'Cliente #'+(clienteId||'?')+' / Proyecto #'+j.id});
       closeModal();
       renderProyectoPanel(activeConvId);
     }

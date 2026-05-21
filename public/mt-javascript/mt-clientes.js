@@ -47,7 +47,7 @@ router.post('/', validateCliente, async (req, res) => {
 
 /* GET /api/clientes */
 router.get('/', async (req, res) => {
-  const { estado, sector, vip } = req.query;
+  const { estado, sector, vip, email } = req.query;
   const limit  = Math.min(parseInt(req.query.limit) || 50, 200);
   const offset = parseInt(req.query.offset) || 0;
   try {
@@ -61,6 +61,7 @@ router.get('/', async (req, res) => {
     if (estado && ESTADOS.includes(estado)) { sql += ' AND c.estado = ?'; params.push(estado); countParams.push(estado); }
     if (sector) { sql += ' AND c.sector = ?'; params.push(sector); countParams.push(sector); }
     if (vip !== undefined) { sql += ' AND c.vip = ?'; params.push(vip === 'true' || vip === '1' ? 1 : 0); countParams.push(vip === 'true' || vip === '1' ? 1 : 0); }
+    if (email) { sql += ' AND LOWER(TRIM(c.email)) = LOWER(TRIM(?))'; params.push(email); countParams.push(email); }
     sql += ' ORDER BY c.created_at DESC LIMIT ? OFFSET ?';
     params.push(limit, offset);
     const rows = await query(sql, params);
@@ -80,7 +81,7 @@ router.get('/', async (req, res) => {
       });
     }
 
-    const countSql = 'SELECT COUNT(*) AS total FROM clientes WHERE 1=1' + (estado && ESTADOS.includes(estado)?' AND estado = ?':'') + (sector?' AND sector = ?':'') + (vip!==undefined?' AND vip = ?':'');
+    const countSql = 'SELECT COUNT(*) AS total FROM clientes WHERE 1=1' + (estado && ESTADOS.includes(estado)?' AND estado = ?':'') + (sector?' AND sector = ?':'') + (vip!==undefined?' AND vip = ?':'') + (email?' AND LOWER(TRIM(email)) = LOWER(TRIM(?))':'');
     const { total } = await get(countSql, countParams);
     res.json({ success: true, total, data: rows });
   } catch (err) {
