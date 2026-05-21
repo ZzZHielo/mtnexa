@@ -622,6 +622,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
           <div class="panel-title">Usuarios del <em>sistema</em></div>
           <span id="sistTableCount" style="font-size:.72rem;color:var(--text-muted)">0 usuarios</span>
         </div>
+        <div class="search-bar" style="padding:0 14px 10px">
+          <span class="ms" style="font-size:1rem;color:var(--text-muted);margin-right:6px">search</span>
+          <input id="sistSearch" type="text" placeholder="Buscar por nombre, correo o rol…" style="flex:1;border:0;outline:0;background:0;color:inherit;font-size:.82rem" oninput="renderSistemaTable()">
+        </div>
         <div style="overflow-x:auto">
           <table class="dt">
             <thead>
@@ -772,8 +776,15 @@ async function loadSistemaUsuarios(){
   renderSistemaTable();
 }
 
+let sistSearchTerm='';
 function renderSistemaTable(){
-  const items=SISTEMA_USUARIOS;
+  sistSearchTerm=(document.getElementById('sistSearch')?.value||'').toLowerCase().trim();
+  let items=SISTEMA_USUARIOS;
+  if(sistSearchTerm) items=items.filter(u=>
+    (u.nombre+' '+u.apellido).toLowerCase().includes(sistSearchTerm)||
+    (u.correo||'').toLowerCase().includes(sistSearchTerm)||
+    (u.rol||'').toLowerCase().includes(sistSearchTerm)
+  );
   document.getElementById('sistTotal').textContent=items.length;
   document.getElementById('sistAdmins').textContent=items.filter(u=>u.rol==='admin').length;
   document.getElementById('sistEditores').textContent=items.filter(u=>u.rol==='editor').length;
@@ -792,7 +803,7 @@ function renderSistemaTable(){
       <td><select class="rol-select ${rolClasses[u.rol]||''}" onchange="changeRol(${u.id},this.value)">
         ${['admin','editor','cliente'].map(r=>`<option value="${r}"${r===u.rol?' selected':''}>${rolLabels[r]}</option>`).join('')}
       </select></td>
-      <td><span class="pill ${u.activo?'pill-activo':'pill-inactivo'}"><span class="pill-dot"></span>${u.activo?'Activo':'Inactivo'}</span></td>
+      <td><span class="pill ${u.activo?'pill-activo':'pill-inactivo'}" style="cursor:pointer" onclick="toggleActivo(${u.id})"><span class="pill-dot"></span>${u.activo?'Activo':'Inactivo'}</span></td>
       <td>${u.email_verified?`<span class="sist-verificado"><span class="ms" style="font-size:.75rem">verified</span>Sí</span>`:`<span class="sist-no-verificado">No</span>`}</td>
       <td><span class="td-muted">${u.last_login?fmtDate(u.last_login):'—'}</span></td>
       <td><span class="td-muted">${fmtDate(u.created_at)}</span></td>
@@ -814,6 +825,23 @@ async function changeRol(id,nuevoRol){
   }catch(e){
     renderSistemaTable();
     showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo actualizar el rol'});
+  }
+}
+
+async function toggleActivo(id){
+  const u=SISTEMA_USUARIOS.find(i=>i.id===id);
+  if(!u)return;
+  const nuevo=u.activo?0:1;
+  try{
+    const r=await fetch(API_BASE+'/api/admin/usuarios-sistema/'+id,{method:'PATCH',headers:API_H,body:JSON.stringify({activo:nuevo})});
+    const j=await r.json();
+    if(!j.success)throw new Error(j.message||'Error');
+    u.activo=nuevo;
+    renderSistemaTable();
+    showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Estado actualizado',msg:`${u.nombre} ${u.apellido}: ${nuevo?'Activo':'Inactivo'}`});
+  }catch(e){
+    renderSistemaTable();
+    showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo actualizar el estado'});
   }
 }
 
