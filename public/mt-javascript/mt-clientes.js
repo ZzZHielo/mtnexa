@@ -51,11 +51,7 @@ router.get('/', async (req, res) => {
   const limit  = Math.min(parseInt(req.query.limit) || 50, 200);
   const offset = parseInt(req.query.offset) || 0;
   try {
-    let sql = 'SELECT c.*, ' +
-      '(SELECT COALESCE(SUM(monto),0) FROM transacciones WHERE cliente_id = c.id AND tipo = "ingreso" AND estado = "cobrado") AS valor_pagado, ' +
-      '(SELECT COUNT(*) FROM proyectos p WHERE ' + MATCH + ') AS proyectos_count, ' +
-      '(SELECT COALESCE(SUM(COALESCE(p.monto, 0)), 0) FROM proyectos p WHERE ' + MATCH + ') AS proyectos_valor_total ' +
-      'FROM clientes c WHERE 1=1';
+    let sql = 'SELECT c.* FROM clientes c WHERE 1=1';
     let params = [];
     let countParams = [];
     if (estado && ESTADOS.includes(estado)) { sql += ' AND c.estado = ?'; params.push(estado); countParams.push(estado); }
@@ -66,24 +62,41 @@ router.get('/', async (req, res) => {
     params.push(limit, offset);
     const rows = await query(sql, params);
 
-    if (req.query.include === 'proyectos' && rows.length) {
-      try {
-        const allProyectos = await query(
-          'SELECT id, nombre, apellido, empresa, email, tipo_proyecto, presupuesto, monto, moneda, estado, fecha_entrega, created_at FROM proyectos'
-        );
+    try {
+      const totals = await query(
+        'SELECT cliente_id, SUM(CASE WHEN tipo="ingreso" AND estado="cobrado" THEN monto ELSE 0 END) AS valor_pagado FROM transacciones GROUP BY cliente_id'
+      );
+      const payMap = {};
+      totals.forEach(t => { payMap[t.cliente_id] = parseFloat(t.valor_pagado) || 0; });
+      rows.forEach(c => { c.valor_pagado = payMap[c.id] || 0; });
+    } catch (e) { console.warn('[clientes] transacciones no disponible:', e.message); }
+
+    try {
+      const proyAgg = await query(
+        'SELECT email, empresa, nombre, apellido, COALESCE(monto,0) AS monto, moneda, tipo_proyecto, estado FROM proyectos'
+      ).catch(() => []);
+      if (req.query.include === 'proyectos' && rows.length && proyAgg.length) {
         rows.forEach(c => {
-          c.proyectos = allProyectos.filter(p =>
+          c.proyectos = proyAgg.filter(p =>
             (c.email && p.email && p.email.trim().toLowerCase() === c.email.trim().toLowerCase()) ||
             (c.empresa && p.empresa &&
               p.empresa.trim().toLowerCase() === c.empresa.trim().toLowerCase() &&
               p.nombre.trim().toLowerCase() === c.nombre.trim().toLowerCase() &&
               (p.apellido || '').trim().toLowerCase() === (c.apellido || '').trim().toLowerCase())
           );
+          c.proyectos_count = c.proyectos.length;
+          c.proyectos_valor_total = c.proyectos.reduce((s, p) => s + (parseFloat(p.monto) || 0), 0);
         });
-      } catch (e) {
-        console.warn('[clientes] include=proyectos falló:', e.message);
+      } else {
+        rows.forEach(c => { c.proyectos_count = (proyAgg || []).filter(p =>
+          (c.email && p.email && p.email.trim().toLowerCase() === c.email.trim().toLowerCase()) ||
+          (c.empresa && p.empresa && p.empresa.trim().toLowerCase() === c.empresa.trim().toLowerCase() &&
+            p.nombre.trim().toLowerCase() === c.nombre.trim().toLowerCase() &&
+            (p.apellido||'').trim().toLowerCase() === (c.apellido||'').trim().toLowerCase())
+        ).length; });
+        rows.forEach(c => { c.proyectos_valor_total = 0; });
       }
-    }
+    } catch (e) { console.warn('[clientes] proyectos no disponible:', e.message); }
 
     const countSql = 'SELECT COUNT(*) AS total FROM clientes WHERE 1=1' + (estado && ESTADOS.includes(estado)?' AND estado = ?':'') + (sector?' AND sector = ?':'') + (vip!==undefined?' AND vip = ?':'') + (email?' AND LOWER(TRIM(email)) = LOWER(TRIM(?))':'');
     const { total } = await get(countSql, countParams);
