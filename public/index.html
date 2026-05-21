@@ -306,21 +306,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:52px 56px
   <svg class="logo-svg" viewBox="0 0 3840 2160"><use href="#nexalogo"/></svg>
   <h2>Instala Nexa</h2>
   <p>Para una mejor experiencia, agrega esta aplicación a tu pantalla de inicio.</p>
-  <div class="pwa-steps">
-    <div class="pwa-step">
-      <div class="pwa-step-num">1</div>
-      <div class="pwa-step-text">Toca <span class="pwa-share-icon"><span class="material-symbols-outlined">ios_share</span> Compartir</span> en Safari</div>
-    </div>
-    <div class="pwa-step">
-      <div class="pwa-step-num">2</div>
-      <div class="pwa-step-text">Desplázate y selecciona <strong>Agregar a Inicio</strong></div>
-    </div>
-    <div class="pwa-step">
-      <div class="pwa-step-num">3</div>
-      <div class="pwa-step-text">Toca <strong>Agregar</strong> en la esquina superior derecha</div>
-    </div>
-  </div>
-  <div class="pwa-badge"><span class="material-symbols-outlined">check_circle</span> App lista para instalar</div>
+  <div class="pwa-steps" id="pwaStepsContainer"></div>
+  <div class="pwa-badge" id="pwaBadge"><span class="material-symbols-outlined">check_circle</span> App lista para instalar</div>
+  <button class="btn-primary" id="pwaInstallBtn" style="display:none;margin-top:16px" onclick="triggerPwaInstall()"><span class="material-symbols-outlined" style="color:var(--btn-txt);font-size:1.1rem">install_mobile</span> Descargar Nexa</button>
 </div>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
@@ -669,7 +657,7 @@ document.addEventListener('click', e => {
   });
 })();
 </script>
-<script>(function(){var o=document.getElementById('pwaOverlay');if(o&&!window.matchMedia('(display-mode:standalone)').matches&&!window.navigator.standalone&&window.innerWidth<768){o.classList.add('show')}})()</script>
+<script src="/mt-javascript/mt-pwa.js"></script>
 <script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}</script>
 </body>
 </html>
