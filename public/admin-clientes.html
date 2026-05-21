@@ -670,8 +670,11 @@ async function loadClientesData() {
         color:         c.color||'#7a5c3a',
         notas:         c.notas||''
       }));
+      console.log('[clientes] Cargados:', CLIENTES.length, 'clientes');
     }
   } catch(e) {
+    console.error('[clientes] Error al cargar:', e);
+    showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error al cargar clientes',msg:e.message||'Error de conexión'});
     CLIENTES = [];
   }
   updateCounters();

@@ -67,18 +67,22 @@ router.get('/', async (req, res) => {
     const rows = await query(sql, params);
 
     if (req.query.include === 'proyectos' && rows.length) {
-      const allProyectos = await query(
-        'SELECT id, nombre, apellido, empresa, email, tipo_proyecto, presupuesto, monto, moneda, estado, fecha_entrega, created_at FROM proyectos'
-      );
-      rows.forEach(c => {
-        c.proyectos = allProyectos.filter(p =>
-          (c.email && p.email && p.email.trim().toLowerCase() === c.email.trim().toLowerCase()) ||
-          (c.empresa && p.empresa &&
-            p.empresa.trim().toLowerCase() === c.empresa.trim().toLowerCase() &&
-            p.nombre.trim().toLowerCase() === c.nombre.trim().toLowerCase() &&
-            (p.apellido || '').trim().toLowerCase() === (c.apellido || '').trim().toLowerCase())
+      try {
+        const allProyectos = await query(
+          'SELECT id, nombre, apellido, empresa, email, tipo_proyecto, presupuesto, monto, moneda, estado, fecha_entrega, created_at FROM proyectos'
         );
-      });
+        rows.forEach(c => {
+          c.proyectos = allProyectos.filter(p =>
+            (c.email && p.email && p.email.trim().toLowerCase() === c.email.trim().toLowerCase()) ||
+            (c.empresa && p.empresa &&
+              p.empresa.trim().toLowerCase() === c.empresa.trim().toLowerCase() &&
+              p.nombre.trim().toLowerCase() === c.nombre.trim().toLowerCase() &&
+              (p.apellido || '').trim().toLowerCase() === (c.apellido || '').trim().toLowerCase())
+          );
+        });
+      } catch (e) {
+        console.warn('[clientes] include=proyectos falló:', e.message);
+      }
     }
 
     const countSql = 'SELECT COUNT(*) AS total FROM clientes WHERE 1=1' + (estado && ESTADOS.includes(estado)?' AND estado = ?':'') + (sector?' AND sector = ?':'') + (vip!==undefined?' AND vip = ?':'') + (email?' AND LOWER(TRIM(email)) = LOWER(TRIM(?))':'');
