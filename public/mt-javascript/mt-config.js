@@ -90,7 +90,7 @@ router.get('/usuarios', async (req, res) => {
   try {
     const rows = await query(
       `SELECT id, nombre, apellido, correo, rol, activo, last_login, created_at
-       FROM usuarios WHERE rol IN ('admin','editor') ORDER BY nombre ASC`
+       FROM usuarios ORDER BY FIELD(rol,'admin','editor','cliente'), nombre ASC`
     );
     res.json({ success: true, data: rows });
   } catch (err) {
