@@ -229,7 +229,7 @@
     try {
       const res = await cfgApi('/config/usuarios');
       panelUsers = res.data || [];
-      renderUsersTable();
+      window.renderUsersTable();
       updateRoleStats();
     } catch (e) {
       console.warn('[config] usuarios:', e.message);
@@ -251,7 +251,7 @@
     return fmt(d);
   }
 
-  function renderUsersTable() {
+  window.renderUsersTable = function () {
     const tb = document.getElementById('tableBody');
     if (!tb) return;
     const q = (document.getElementById('userSearch')?.value||'').toLowerCase().trim();
