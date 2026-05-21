@@ -276,23 +276,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .modal-notes{width:100%;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--bg2);font-family:var(--ff-body);font-size:.8rem;color:var(--text);resize:vertical;min-height:72px;outline:none;transition:border-color .18s;}
 .modal-notes:focus{border-color:var(--accent);}
 
-/* ── VIEW TOGGLE ── */
-.view-tabs{display:flex;gap:0;padding:0 56px;border-bottom:1px solid var(--border);background:var(--bg2);}
-.view-tab{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:none;background:transparent;font-family:var(--ff-body);font-size:.82rem;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px;}
-.view-tab:hover{color:var(--text-soft);}
-.view-tab.active{color:var(--text);border-bottom-color:var(--accent);background:var(--surface);}
-.view-tab .ms{font-size:.95rem;}
-@media(max-width:900px){.view-tabs{padding:0 20px;}}
 
-/* ── SISTEMA VIEW ── */
-.rol-select{padding:4px 8px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);font-family:var(--ff-body);font-size:.78rem;color:var(--text);cursor:pointer;outline:none;transition:border-color .15s;}
-.rol-select:hover,.rol-select:focus{border-color:var(--accent);}
-.rol-admin{color:#7a5c3a;font-weight:500;}
-.rol-editor{color:#3b82f6;font-weight:500;}
-.rol-cliente{color:var(--text-muted);}
-.sist-user-row{cursor:default!important;}
-.sist-verificado{font-size:.7rem;color:var(--green-txt);display:inline-flex;align-items:center;gap:3px;}
-.sist-no-verificado{font-size:.7rem;color:var(--text-muted);}
 
 /* ── THEME SWITCHER ── */
 
@@ -392,27 +376,13 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <p class="page-sub" id="pageSub">Base de datos de Usuarios Activados</p>
       </div>
       <div class="head-actions">
-        <button class="btn" id="btnExportar" onclick="exportarUsuarios()"><span class="ms">download</span>Exportar</button>
-        <button class="btn btn-primary" id="btnNuevoCliente" onclick="abrirNuevoUsuario()"><span class="ms">person_add</span>Nuevo usuario</button>
-        <button class="btn btn-primary" id="btnNuevoSistemaTop" style="display:none" onclick="abrirNuevoSistema()"><span class="ms">admin_panel_settings</span>Nuevo sistema</button>
+        <button class="btn" onclick="exportarUsuarios()"><span class="ms">download</span>Exportar</button>
+        <button class="btn btn-primary" onclick="abrirNuevoUsuario()"><span class="ms">person_add</span>Nuevo usuario</button>
       </div>
     </div>
   </div>
 
-  <!-- VIEW TOGGLE -->
-  <div class="view-tabs">
-    <button class="view-tab active" data-view="clientes" onclick="switchView('clientes',this)">
-      <span class="ms">group</span>Clientes
-    </button>
-    <button class="view-tab" data-view="sistema" onclick="switchView('sistema',this)">
-      <span class="ms">admin_panel_settings</span>Sistema
-    </button>
-  </div>
-
   <div class="content">
-
-    <!-- CLIENTES VIEW -->
-    <div id="clientesView">
 
     <!-- STATS -->
     <div class="stats-grid">
@@ -589,71 +559,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       </div>
     </div><!-- /main-grid -->
 
-    </div><!-- /clientesView -->
-
-    <!-- SISTEMA VIEW -->
-    <div id="sistemaView" style="display:none">
-
-      <!-- STATS -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-top"><div class="stat-icon"><span class="ms">people</span></div><span class="stat-tag tag-up" id="sistTotalTag">total</span></div>
-          <div class="stat-num" id="sistTotal">0</div>
-          <div class="stat-label">Total usuarios del sistema</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-top"><div class="stat-icon" style="background:var(--green-bg)"><span class="ms" style="color:var(--green-txt)">admin_panel_settings</span></div><span class="stat-tag tag-up">admin</span></div>
-          <div class="stat-num" id="sistAdmins" style="color:var(--accent)">0</div>
-          <div class="stat-label">Administradores</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-top"><div class="stat-icon" style="background:var(--blue-bg)"><span class="ms" style="color:var(--blue-txt)">edit_note</span></div><span class="stat-tag tag-blue">editores</span></div>
-          <div class="stat-num" id="sistEditores" style="color:var(--blue-txt)">0</div>
-          <div class="stat-label">Editores</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-top"><div class="stat-icon" style="background:var(--accent-bg)"><span class="ms" style="color:var(--accent)">person</span></div><span class="stat-tag tag-neu">clientes</span></div>
-          <div class="stat-num" id="sistClientes">0</div>
-          <div class="stat-label">Clientes registrados</div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <div class="panel-title">Usuarios del <em>sistema</em></div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <span id="sistTableCount" style="font-size:.72rem;color:var(--text-muted)">0 usuarios</span>
-            <button class="btn btn-primary" style="padding:4px 10px;font-size:.75rem;gap:4px" onclick="abrirNuevoSistema()"><span class="ms" style="font-size:.85rem">person_add</span>Nuevo</button>
-          </div>
-        </div>
-        <div class="search-bar" style="padding:0 14px 10px">
-          <span class="ms" style="font-size:1rem;color:var(--text-muted);margin-right:6px">search</span>
-          <input id="sistSearch" type="text" placeholder="Buscar por nombre, correo o rol…" style="flex:1;border:0;outline:0;background:0;color:inherit;font-size:.82rem" oninput="renderSistemaTable()">
-        </div>
-        <div style="overflow-x:auto">
-          <table class="dt">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Estado</th>
-                <th>Verificado</th>
-                <th>Último acceso</th>
-                <th>Registro</th>
-              </tr>
-            </thead>
-            <tbody id="sistTableBody"></tbody>
-          </table>
-        </div>
-        <div id="sistEmptyState" class="empty-state" style="display:none">
-          <span class="ms">person_search</span>
-          <p>No hay usuarios del sistema</p>
-        </div>
-      </div>
-
-    </div><!-- /sistemaView -->
-
   </div><!-- /content -->
 </div><!-- /wrap -->
 
@@ -742,9 +647,7 @@ const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:30
 const API_H = {'Content-Type':'application/json','X-Admin-Key':ADMIN_KEY};
 
 let USUARIOS = [];
-let SISTEMA_USUARIOS = [];
 let currentFilter = 'todos';
-let currentView = 'clientes';
 
 function initials(n,a){return ((n||'?').charAt(0)+(a||'').charAt(0)).toUpperCase();}
 function fmtDate(d){if(!d)return '—';if(typeof formatDateInTZ==='function')return formatDateInTZ(d,'date');const dt=new Date(d);return dt.toLocaleDateString('es-DO',{day:'numeric',month:'short'});}
@@ -756,100 +659,6 @@ const estadoMap={
   inactivo: {label:'Inactivo', pill:'pill-inactivo', cls:'s-inactivo'},
 };
 const fuenteIcons={Web:'language', WhatsApp:'chat', Instagram:'photo_camera', Referido:'people'};
-
-/* ══ VIEW TOGGLE ══ */
-function switchView(view,btn){
-  currentView=view;
-  document.querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('clientesView').style.display=view==='clientes'?'':'none';
-  document.getElementById('sistemaView').style.display=view==='sistema'?'':'none';
-  document.getElementById('pageSub').textContent=view==='sistema'?'Gestión de roles y usuarios del sistema':'Base de datos de Usuarios Activados';
-  document.getElementById('btnExportar').style.display=view==='sistema'?'none':'';
-  document.getElementById('btnNuevoCliente').style.display=view==='sistema'?'none':'';
-  document.getElementById('btnNuevoSistemaTop').style.display=view==='sistema'?'':'none';
-  if(view==='sistema' && !SISTEMA_USUARIOS.length) loadSistemaUsuarios();
-}
-
-/* ══ SISTEMA ══ */
-async function loadSistemaUsuarios(){
-  try{
-    const r=await fetch(API_BASE+'/api/admin/usuarios-sistema',{headers:API_H});
-    const j=await r.json();
-    if(!j.success)return;
-    SISTEMA_USUARIOS=j.data||[];
-  }catch(e){console.error('Error loading sistema usuarios:',e);}
-  renderSistemaTable();
-}
-
-let sistSearchTerm='';
-function renderSistemaTable(){
-  sistSearchTerm=(document.getElementById('sistSearch')?.value||'').toLowerCase().trim();
-  let items=SISTEMA_USUARIOS;
-  if(sistSearchTerm) items=items.filter(u=>
-    (u.nombre+' '+u.apellido).toLowerCase().includes(sistSearchTerm)||
-    (u.correo||'').toLowerCase().includes(sistSearchTerm)||
-    (u.rol||'').toLowerCase().includes(sistSearchTerm)
-  );
-  document.getElementById('sistTotal').textContent=items.length;
-  document.getElementById('sistAdmins').textContent=items.filter(u=>u.rol==='admin').length;
-  document.getElementById('sistEditores').textContent=items.filter(u=>u.rol==='editor').length;
-  document.getElementById('sistClientes').textContent=items.filter(u=>u.rol==='cliente').length;
-  document.getElementById('sistTableCount').textContent=items.length+' usuario'+(items.length!==1?'s':'');
-  const body=document.getElementById('sistTableBody');
-  const empty=document.getElementById('sistEmptyState');
-  if(!items.length){body.innerHTML='';empty.style.display='';return;}
-  empty.style.display='none';
-  const rolLabels={admin:'Admin',editor:'Editor',cliente:'Cliente'};
-  const rolClasses={admin:'rol-admin',editor:'rol-editor',cliente:'rol-cliente'};
-  body.innerHTML=items.map(u=>`
-    <tr class="sist-user-row">
-      <td><div class="usr-av-cell"><div class="usr-av">${initials(u.nombre,u.apellido)}</div><div><div class="td-name">${u.nombre} ${u.apellido}</div></div></div></td>
-      <td><span class="td-muted">${u.correo}</span></td>
-      <td><select class="rol-select ${rolClasses[u.rol]||''}" onchange="changeRol(${u.id},this.value)">
-        ${['admin','editor','cliente'].map(r=>`<option value="${r}"${r===u.rol?' selected':''}>${rolLabels[r]}</option>`).join('')}
-      </select></td>
-      <td><span class="pill ${u.activo?'pill-activo':'pill-inactivo'}" style="cursor:pointer" onclick="toggleActivo(${u.id})"><span class="pill-dot"></span>${u.activo?'Activo':'Inactivo'}</span></td>
-      <td>${u.email_verified?`<span class="sist-verificado"><span class="ms" style="font-size:.75rem">verified</span>Sí</span>`:`<span class="sist-no-verificado">No</span>`}</td>
-      <td><span class="td-muted">${u.last_login?fmtDate(u.last_login):'—'}</span></td>
-      <td><span class="td-muted">${fmtDate(u.created_at)}</span></td>
-    </tr>
-  `).join('');
-}
-
-async function changeRol(id,nuevoRol){
-  const u=SISTEMA_USUARIOS.find(i=>i.id===id);
-  if(!u)return;
-  const oldRol=u.rol;
-  try{
-    const r=await fetch(API_BASE+'/api/admin/usuarios-sistema/'+id,{method:'PATCH',headers:API_H,body:JSON.stringify({rol:nuevoRol})});
-    const j=await r.json();
-    if(!j.success)throw new Error(j.message||'Error');
-    u.rol=nuevoRol;
-    renderSistemaTable();
-    showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Rol actualizado',msg:`${u.nombre} ${u.apellido}: ${oldRol} → ${nuevoRol}`});
-  }catch(e){
-    renderSistemaTable();
-    showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo actualizar el rol'});
-  }
-}
-
-async function toggleActivo(id){
-  const u=SISTEMA_USUARIOS.find(i=>i.id===id);
-  if(!u)return;
-  const nuevo=u.activo?0:1;
-  try{
-    const r=await fetch(API_BASE+'/api/admin/usuarios-sistema/'+id,{method:'PATCH',headers:API_H,body:JSON.stringify({activo:nuevo})});
-    const j=await r.json();
-    if(!j.success)throw new Error(j.message||'Error');
-    u.activo=nuevo;
-    renderSistemaTable();
-    showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Estado actualizado',msg:`${u.nombre} ${u.apellido}: ${nuevo?'Activo':'Inactivo'}`});
-  }catch(e){
-    renderSistemaTable();
-    showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:'No se pudo actualizar el estado'});
-  }
-}
 
 async function loadUsuarios(){
   try{
@@ -1105,56 +914,6 @@ async function guardarNuevoUsuario(){
   st.textContent=`.nl-field{display:flex;flex-direction:column;gap:4px}.nl-field label{font-size:.72rem;color:var(--text-soft);font-weight:500}.nl-field input,.nl-field select,.nl-field textarea{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:.82rem;color:var(--text);font-family:var(--ff-body);outline:none;transition:border-color .2s}.nl-field input:focus,.nl-field select:focus,.nl-field textarea:focus{border-color:var(--accent)}.nl-field textarea{min-height:60px;resize:vertical}.nl-field.full{grid-column:1/-1}.cols2{grid-template-columns:1fr 1fr!important}.hidden{display:none!important}`;
   document.head.appendChild(st);
 })();
-
-/* ══ modal: nuevo usuario del sistema ══ */
-(function(){
-  const div=document.createElement('div');div.id='nuevoSistemaHTML';
-  div.innerHTML=`<div id="modalSistemaOverlay" class="modal-overlay close-modal" onclick="if(event.target===this)cerrarNuevoSistema()">
-    <div class="modal-box">
-      <div class="modal-head"><span class="modal-head-title">Nuevo usuario del sistema</span><button class="modal-close close-modal" onclick="cerrarNuevoSistema()"><span class="ms">close</span></button></div>
-      <div class="modal-scroll">
-        <div class="modal-grid cols2">
-          <div class="nl-field"><label>Nombre *</label><input id="nsNombre" placeholder="Nombre"></div>
-          <div class="nl-field"><label>Apellido</label><input id="nsApellido" placeholder="Apellido"></div>
-          <div class="nl-field full"><label>Correo *</label><input id="nsCorreo" type="email" placeholder="correo@ejemplo.com"></div>
-          <div class="nl-field"><label>Rol</label><select id="nsRol"><option value="cliente">Cliente</option><option value="editor">Editor</option><option value="admin">Admin</option></select></div>
-          <div class="nl-field"><label>Contraseña *</label><input id="nsPassword" type="password" placeholder="Mín. 8 caracteres"></div>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn" onclick="cerrarNuevoSistema()">Cancelar</button>
-        <button class="btn btn-primary" onclick="guardarNuevoSistema()"><span class="ms">add</span>Crear usuario</button>
-      </div>
-    </div>
-  </div>`;
-  document.body.appendChild(div);
-})();
-
-function abrirNuevoSistema(){document.getElementById('modalSistemaOverlay').classList.add('open');}
-function cerrarNuevoSistema(){document.getElementById('modalSistemaOverlay').classList.remove('open');}
-
-async function guardarNuevoSistema(){
-  const nombre=document.getElementById('nsNombre').value.trim();
-  const apellido=document.getElementById('nsApellido').value.trim();
-  const correo=document.getElementById('nsCorreo').value.trim();
-  const rol=document.getElementById('nsRol').value;
-  const password=document.getElementById('nsPassword').value;
-  if(!nombre||!correo||!password){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Validación',msg:'Nombre, correo y contraseña son requeridos'});return;}
-  if(password.length<8){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Validación',msg:'La contraseña debe tener al menos 8 caracteres'});return;}
-  try{
-    const r=await fetch(API_BASE+'/api/config/usuarios',{method:'POST',headers:API_H,body:JSON.stringify({nombre,apellido,correo,rol,password})});
-    const j=await r.json();
-    if(!j.success)throw new Error(j.message||'Error');
-    showToast({icon:'check_circle',bg:'var(--green-bg)',tc:'var(--green-txt)',title:'Usuario creado',msg:`${nombre} ${apellido} — ${rol}`});
-    cerrarNuevoSistema();
-    document.getElementById('nsNombre').value='';
-    document.getElementById('nsApellido').value='';
-    document.getElementById('nsCorreo').value='';
-    document.getElementById('nsRol').value='cliente';
-    document.getElementById('nsPassword').value='';
-    await loadSistemaUsuarios();
-  }catch(e){showToast({icon:'error',bg:'var(--red-bg)',tc:'var(--red-txt)',title:'Error',msg:e.message||'No se pudo crear el usuario'});}
-}
 
 /* ══ initial load after stats panel animation ══ */
 let _usuariosLoaded=false;

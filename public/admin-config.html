@@ -136,6 +136,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .pill-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;}
 .pill-admin{background:var(--accent-bg);color:var(--accent-txt);}
 .pill-editor{background:var(--blue-bg);color:var(--blue-txt);}
+.pill-cliente{background:var(--bg3);color:var(--text-soft);}
 .pill-viewer{background:var(--bg3);color:var(--text-muted);}
 .pill-activo{background:var(--green-bg);color:var(--green-txt);}
 .pill-inactivo{background:var(--bg3);color:var(--text-muted);}
@@ -346,6 +347,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <select class="form-select" id="mu_rol">
           <option value="admin">Administrador</option>
           <option value="editor" selected>Editor</option>
+          <option value="cliente">Cliente</option>
         </select>
       </div>
       <div class="form-group" id="mu_password_wrap">
@@ -533,6 +535,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
               <button type="button" class="btn btn-primary btn-sm" onclick="openNewUserModal()">
                 <span class="ms" style="font-size:.85rem;color:var(--btn-txt)">person_add</span>Nuevo usuario
               </button>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:0 22px 12px">
+              <span class="ms" style="font-size:1rem;color:var(--text-muted)">search</span>
+              <input id="userSearch" type="text" placeholder="Buscar por nombre, correo o rol…" style="flex:1;border:0;outline:0;background:0;color:inherit;font-size:.82rem" oninput="renderUsersTable()">
             </div>
             <div style="padding:0">
               <table class="dt">

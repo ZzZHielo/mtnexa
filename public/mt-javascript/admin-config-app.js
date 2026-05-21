@@ -254,19 +254,26 @@
   function renderUsersTable() {
     const tb = document.getElementById('tableBody');
     if (!tb) return;
-    if (!panelUsers.length) {
-      tb.innerHTML = '<tr><td colspan="5" class="td-muted" style="text-align:center;padding:28px">No hay usuarios del panel</td></tr>';
+    const q = (document.getElementById('userSearch')?.value||'').toLowerCase().trim();
+    let items = panelUsers;
+    if (q) items = items.filter(u =>
+      (u.nombre+' '+u.apellido).toLowerCase().includes(q) ||
+      (u.correo||'').toLowerCase().includes(q) ||
+      (u.rol||'').toLowerCase().includes(q)
+    );
+    if (!items.length) {
+      tb.innerHTML = '<tr><td colspan="5" class="td-muted" style="text-align:center;padding:28px">'+(q?'Sin resultados para «'+q+'»':'No hay usuarios del panel')+'</td></tr>';
       return;
     }
-    tb.innerHTML = panelUsers.map((u, i) => {
+    const rolMap = {admin:{label:'Admin',cls:'pill-admin'},editor:{label:'Editor',cls:'pill-editor'},cliente:{label:'Cliente',cls:'pill-cliente'}};
+    tb.innerHTML = items.map((u, i) => {
       const ini = initials(u.nombre, u.apellido).toUpperCase();
       const color = COLORS[i % COLORS.length];
-      const rolPill = u.rol === 'admin'
-        ? '<span class="pill pill-admin"><span class="pill-dot"></span>Admin</span>'
-        : '<span class="pill pill-editor"><span class="pill-dot"></span>Editor</span>';
+      const r = rolMap[u.rol] || {label:u.rol,cls:'pill-editor'};
+      const rolPill = '<span class="pill '+r.cls+'"><span class="pill-dot"></span>'+r.label+'</span>';
       const estadoPill = u.activo
-        ? '<span class="pill pill-activo"><span class="pill-dot"></span>Activo</span>'
-        : '<span class="pill pill-inactivo"><span class="pill-dot"></span>Inactivo</span>';
+        ? '<span class="pill pill-activo" style="cursor:pointer" onclick="toggleUserActive('+u.id+',0)"><span class="pill-dot"></span>Activo</span>'
+        : '<span class="pill pill-inactivo" style="cursor:pointer" onclick="toggleUserActive('+u.id+',1)"><span class="pill-dot"></span>Inactivo</span>';
       const nombre = [u.nombre, u.apellido].filter(Boolean).join(' ');
       return `<tr data-id="${u.id}">
         <td><div class="client-av-cell"><div class="client-av" style="background:${color}">${ini}</div><div><div class="td-name">${nombre}</div><div class="td-muted" style="font-size:.7rem">${u.correo}</div></div></div></div></td>
@@ -363,6 +370,7 @@
         body: JSON.stringify({ activo }),
       });
       await loadPanelUsers();
+      toast('Estado actualizado', activo?'Usuario activado':'Usuario desactivado', 'check_circle', 'var(--green-bg)', 'var(--green-txt)');
     } catch (e) {
       toast('Error', e.message, 'error', 'var(--red-bg)', 'var(--red-txt)');
     }
