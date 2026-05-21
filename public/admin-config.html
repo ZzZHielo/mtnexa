@@ -1114,7 +1114,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
           <div class="panel" id="p-def-idioma">
             <div class="panel-head">
               <div class="panel-title">Idioma y <em>región</em> por defecto</div>
-              <button class="btn btn-secondary btn-sm" onclick="toast('Guardado','Idioma y región actualizados','check_circle','var(--green-bg)','var(--green-txt)')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+              <button class="btn btn-secondary btn-sm" onclick="saveConfigSection('defaults')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
             </div>
             <div class="panel-body">
               <div class="setting-row">
@@ -1123,11 +1123,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
                   <div class="setting-desc">Idioma que verán los usuarios sin preferencia personal guardada.</div>
                 </div>
                 <div class="setting-ctrl">
-                  <select class="form-select" style="width:180px" onchange="toast('Idioma','Default de idioma actualizado','language','var(--blue-bg)','var(--blue-txt)')">
-                    <option selected>Español (RD)</option>
-                    <option>English (US)</option>
-                    <option>Français</option>
-                    <option>Português (BR)</option>
+                  <select class="form-select" id="cfgDefIdioma" style="width:180px">
+                    <option value="es">Español (RD)</option>
+                    <option value="en">English (US)</option>
+                    <option value="fr">Français</option>
+                    <option value="pt">Português (BR)</option>
                   </select>
                 </div>
               </div>
@@ -1137,11 +1137,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
                   <div class="setting-desc">Zona horaria predeterminada para fechas y timestamps.</div>
                 </div>
                 <div class="setting-ctrl">
-                  <select class="form-select" style="width:210px">
-                    <option selected>America/Santo_Domingo (AST)</option>
-                    <option>America/New_York (EST/EDT)</option>
-                    <option>America/Los_Angeles (PST)</option>
-                    <option>UTC</option>
+                  <select class="form-select" id="cfgDefTz" style="width:210px">
+                    <option value="America/Santo_Domingo">America/Santo_Domingo (AST)</option>
+                    <option value="America/New_York">America/New_York (EST/EDT)</option>
+                    <option value="America/Los_Angeles">America/Los_Angeles (PST)</option>
+                    <option value="UTC">UTC</option>
                   </select>
                 </div>
               </div>
@@ -1186,77 +1186,42 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
           <div class="panel" id="p-def-notif">
             <div class="panel-head">
               <div class="panel-title">Notificaciones <em>predeterminadas</em></div>
-              <button class="btn btn-secondary btn-sm" onclick="toast('Guardado','Defaults de notificaciones actualizados','check_circle','var(--green-bg)','var(--green-txt)')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+              <button class="btn btn-secondary btn-sm" onclick="saveConfigSection('defaults')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
             </div>
             <div class="panel-body">
               <p style="font-size:.76rem;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">Estos son los canales y tipos de notificación que estarán activados para un usuario nuevo. Cada usuario puede ajustar esto desde <em>Ajustes → Notificaciones</em>.</p>
 
-              <!-- Canales por defecto -->
-              <div style="margin-bottom:18px;">
-                <div style="font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Canales activos por defecto</div>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                  <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
-                  <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push navegador</div>
-                  <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
-                  <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">circle_notifications</span>Panel</div>
+              <div class="setting-row" style="padding:0;margin-bottom:14px">
+                <div class="setting-info">
+                  <div class="setting-label">Nueva cotización recibida</div>
+                  <div class="setting-desc">Notificar cuando un cliente envía una solicitud.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togDefNotCot"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
                 </div>
               </div>
-
-              <!-- Tipos por defecto -->
-              <div style="font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Eventos activos por defecto</div>
-
-              <div class="def-notif-item">
-                <div class="def-notif-info">
-                  <div class="def-notif-label">Nueva cotización recibida</div>
-                  <div class="def-notif-desc">Cuando un cliente envía una solicitud desde el sitio.</div>
-                  <div class="def-notif-channels">
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
-                    <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
-                  </div>
+              <div class="setting-row" style="padding:0;margin-bottom:14px">
+                <div class="setting-info">
+                  <div class="setting-label">Nuevo mensaje de contacto</div>
+                  <div class="setting-desc">Notificar mensajes del formulario de contacto.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togDefNotMsg"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
                 </div>
               </div>
-
-              <div class="def-notif-item">
-                <div class="def-notif-info">
-                  <div class="def-notif-label">Nuevo mensaje de contacto</div>
-                  <div class="def-notif-desc">Mensajes del formulario de contacto del sitio público.</div>
-                  <div class="def-notif-channels">
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
-                    <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
-                    <div class="channel-tag" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
-                  </div>
+              <div class="setting-row" style="padding:0;margin-bottom:14px">
+                <div class="setting-info">
+                  <div class="setting-label">Pago registrado</div>
+                  <div class="setting-desc">Notificar confirmación de pago en finanzas.</div>
+                </div>
+                <div class="setting-ctrl">
+                  <label class="toggle"><input type="checkbox" id="togDefNotPago"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
                 </div>
               </div>
-
-              <div class="def-notif-item">
-                <div class="def-notif-info">
-                  <div class="def-notif-label">Pago registrado</div>
-                  <div class="def-notif-desc">Confirmación cuando se registra un pago en finanzas.</div>
-                  <div class="def-notif-channels">
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="def-notif-item">
-                <div class="def-notif-info">
-                  <div class="def-notif-label">Inicio de sesión desde dispositivo nuevo</div>
-                  <div class="def-notif-desc">Alerta de seguridad cuando el usuario accede desde un equipo no reconocido.</div>
-                  <div class="def-notif-channels">
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">mail</span>Email</div>
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">notifications</span>Push</div>
-                    <div class="channel-tag active" onclick="this.classList.toggle('active')"><span class="ms">chat</span>WhatsApp</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="def-notif-item">
-                <div class="def-notif-info">
-                  <div class="def-notif-label">Modo «No molestar» por defecto</div>
-                  <div class="def-notif-desc">Silencia notificaciones fuera de horario laboral para nuevos usuarios.</div>
+              <div class="setting-row" style="padding:0">
+                <div class="setting-info">
+                  <div class="setting-label">Modo «No molestar» por defecto</div>
+                  <div class="setting-desc">Silencia notificaciones fuera de horario laboral para nuevos usuarios.</div>
                 </div>
                 <div class="setting-ctrl">
                   <label class="toggle"><input type="checkbox" id="togNotMsg" onchange="toggleChange(this,'No molestar por defecto')"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
@@ -1291,7 +1256,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
           <div class="panel" id="p-def-privacidad">
             <div class="panel-head">
               <div class="panel-title">Privacidad <em>predeterminada</em></div>
-              <button class="btn btn-secondary btn-sm" onclick="toast('Guardado','Defaults de privacidad actualizados','check_circle','var(--green-bg)','var(--green-txt)')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
+              <button class="btn btn-secondary btn-sm" onclick="saveConfigSection('defaults')"><span class="ms" style="font-size:.85rem">save</span>Guardar</button>
             </div>
             <div class="panel-body">
               <div class="setting-row">
