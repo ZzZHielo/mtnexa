@@ -366,6 +366,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:52px 56px
   .test-grid{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr 1fr}
   .user-dropdown{right:-8px;width:280px}
+  .chat-overlay{width:100%;height:100%;bottom:0;right:0;border-radius:0}
+  .chat-sidebar{width:180px}
+  .nav-link-admin{display:none !important}
 }
 @media(max-width:560px){
   .form-row{grid-template-columns:1fr}
@@ -383,6 +386,11 @@ footer{padding:32px 20px 18px}
   .footer-col h4{font-size:.9rem}
   .footer-col ul li a{font-size:.8rem}
   .footer-bottom span{font-size:.72rem}
+  .chat-overlay{width:100%;height:100%;bottom:0;right:0;border-radius:0}
+  .chat-layout{flex-direction:column}
+  .chat-sidebar{width:100%;height:auto;max-height:35%;border-right:none;border-bottom:1px solid var(--border)}
+  .chat-sidebar-head{font-size:.72rem}
+  .chat-main{height:65%}
 }
 /* Dropdown Servicios — click-toggle */
 #serviciosDropdown {
