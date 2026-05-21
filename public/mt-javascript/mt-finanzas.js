@@ -205,12 +205,13 @@ router.get('/factura/clientes', async (req, res) => {
 router.get('/factura/proyectos', async (req, res) => {
   try {
     const rows = await query(
-      `SELECT p.id, p.nombre, p.apellido, p.empresa, p.tipo_proyecto, p.monto, p.moneda, p.descripcion,
+      `SELECT p.id, p.nombre, p.apellido, p.empresa, p.tipo_proyecto, p.descripcion,
               CONCAT(p.nombre, ' ', p.apellido) AS cliente_nombre
        FROM proyectos p
        WHERE p.estado IN ('pendiente','revisado','desarrollando')
        ORDER BY p.created_at DESC`
     );
+    rows.forEach(r => { r.monto = null; r.moneda = 'USD'; });
     res.json({ success: true, data: rows });
   } catch (err) {
     console.error('[factura/proyectos] Error:', err.message);
