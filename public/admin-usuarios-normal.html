@@ -457,6 +457,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
               <tbody id="tableBody"></tbody>
             </table>
           </div>
+          <button id="showMoreBtn" class="btn" style="width:100%;border-radius:0;justify-content:center;padding:12px;display:none" onclick="showMoreTable()">
+            <span class="ms">expand_more</span>Ver más
+          </button>
           <div id="emptyState" class="empty-state" style="display:none">
             <span class="ms">person_search</span>
             <p>No se encontraron usuarios con ese criterio</p>
@@ -606,6 +609,7 @@ const API_H = {'Content-Type':'application/json','X-Admin-Key':ADMIN_KEY};
 
 let USUARIOS = [];
 let currentFilter = 'todos';
+let tableLimit = 10;
 
 function initials(n,a){return ((n||'?').charAt(0)+(a||'').charAt(0)).toUpperCase();}
 function fmtDate(d){if(!d)return '—';if(typeof formatDateInTZ==='function')return formatDateInTZ(d,'date');const dt=new Date(d);return dt.toLocaleDateString('es-DO',{day:'numeric',month:'short'});}
@@ -663,7 +667,7 @@ function loadActividad(){
     });
   });
   items.sort((a,b)=>new Date(b.time)-new Date(a.time));
-  const html=items.slice(0,20).map(i=>{
+  const html=items.slice(0,10).map(i=>{
     return `<div class="act-item" style="opacity:0;transform:translateY(8px)"><div class="act-ico ${i.color}"><span class="ms">${i.icon}</span></div><div class="act-body"><div class="act-line"><strong>${i.name}</strong> ${i.action}</div><div class="act-time">${timeAgo(i.time)}</div></div></div>`;
   }).join('');
   const c=document.getElementById('actBody');
@@ -712,15 +716,20 @@ function renderTable(){
   document.getElementById('tableCount').textContent=items.length+' usuario'+(items.length!==1?'s':'');
   const body=document.getElementById('tableBody');
   const empty=document.getElementById('emptyState');
+  const showMoreBtn=document.getElementById('showMoreBtn');
 
   if(!items.length){
     body.innerHTML='';
     empty.style.display='';
+    if(showMoreBtn)showMoreBtn.style.display='none';
     return;
   }
   empty.style.display='none';
 
-  body.innerHTML=items.map(l=>{
+  const show=items.length>tableLimit?items.slice(0,tableLimit):items;
+  const hasMore=items.length>tableLimit;
+
+  body.innerHTML=show.map(l=>{
     const st=estadoMap[l.estado]||estadoMap.activo;
     const rolLabel={admin:'Admin',editor:'Editor',cliente:'Cliente'}[l.rol]||l.rol;
     const rolIcon={admin:'admin_panel_settings',editor:'edit_note',cliente:'person'}[l.rol]||'person';
@@ -741,7 +750,13 @@ function renderTable(){
     </tr>`;
   }).join('');
 
+  if(showMoreBtn)showMoreBtn.style.display=hasMore?'':'none';
   gsap.fromTo(body.querySelectorAll('tr'),{autoAlpha:0,x:-8},{autoAlpha:1,x:0,duration:.3,stagger:.03,ease:'power2.out'});
+}
+
+function showMoreTable(){
+  tableLimit+=10;
+  renderTable();
 }
 
 /* ══ PIPELINE ══ */
