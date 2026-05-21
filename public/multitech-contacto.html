@@ -217,7 +217,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .preset-extra{display:none;margin-top:8px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.78rem;color:var(--text-soft);line-height:1.6}
 
 /* Success */
-.guest-blocker{display:none;text-align:center;padding:60px 24px;animation:fadeUp .5s ease both;flex-direction:column;align-items:center}
+.guest-blocker{display:none;text-align:center;padding:28px 20px;margin-bottom:24px;animation:fadeUp .5s ease both;flex-direction:column;align-items:center;border:1px dashed var(--border);border-radius:var(--radius);background:var(--surface)}
 .guest-blocker.show{display:flex}
 .success-wrap{display:none;text-align:center;padding:60px 24px;animation:fadeUp .5s ease both}
 .success-icon-wrap{width:68px;height:68px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
@@ -603,6 +603,17 @@ footer{padding:32px 20px 18px}
   <!-- RIGHT: Form -->
   <div class="contact-form-wrap reveal">
     <div id="formContainer">
+      <!-- Guest blocker -->
+      <div class="guest-blocker" id="guestBlocker">
+        <span class="material-symbols-outlined" style="font-size:1.6rem;color:var(--accent);margin-bottom:6px">lock</span>
+        <h3 style="font-family:var(--ff-head);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px">Inicia sesión</h3>
+        <p style="font-size:.8rem;color:var(--text-soft);line-height:1.5;max-width:280px">Debes iniciar sesión para poder cotizar o hacernos preguntas</p>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center">
+          <a href="mt-login.html" class="btn-back" style="padding:8px 18px;font-size:.82rem;background:var(--btn-bg);color:var(--btn-txt);text-decoration:none">Iniciar sesión</a>
+          <a href="mt-signup.html" class="btn-back" style="padding:8px 18px;font-size:.82rem;text-decoration:none">Crear cuenta</a>
+        </div>
+      </div>
+      <div id="formContent">
       <div class="cf-title">Solicita tu cotización</div>
       <p class="cf-sub">Elige cómo quieres contactarnos:</p>
       <div class="form-tabs">
@@ -690,14 +701,7 @@ footer{padding:32px 20px 18px}
         </button>
         <p class="form-legal">Respondemos en menos de 24 horas</p>
       </div>
-    </div>
-    <!-- Guest blocker -->
-    <div class="guest-blocker" id="guestBlocker">
-      <span class="material-symbols-outlined" style="font-size:2.4rem;color:var(--accent);margin-bottom:12px">lock</span>
-      <h3 style="font-family:var(--ff-head);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:6px">Crea una cuenta</h3>
-      <p style="font-size:.82rem;color:var(--text-soft);margin-bottom:18px;max-width:260px;text-align:center">Crea una cuenta para poder cotizar o hacernos preguntas</p>
-      <a href="mt-signup.html" class="btn-submit" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:10px 24px"><span class="material-symbols-outlined" style="font-size:.95rem;color:var(--btn-txt)">person_add</span>Crear cuenta</a>
-      <p style="font-size:.72rem;color:var(--text-muted);margin-top:14px">¿Ya tienes cuenta? <a href="mt-login.html" style="color:var(--accent);text-decoration:none;font-weight:500">Inicia sesión</a></p>
+      </div>
     </div>
 
     <!-- Success -->
@@ -746,6 +750,7 @@ footer{padding:32px 20px 18px}
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -857,11 +862,11 @@ function setLoading(btnId,loading){
   if(txt.nodeType===3)txt.textContent='Enviando...';
 }
 function showSuccess(){
-  document.getElementById('formContainer').style.display='none';
+  document.getElementById('formContent').style.display='none';
   document.getElementById('successWrap').style.display='block';
 }
 function resetForm(){
-  document.getElementById('formContainer').style.display='block';
+  document.getElementById('formContent').style.display='block';
   document.getElementById('successWrap').style.display='none';
   document.querySelectorAll('.preset-card.selected').forEach(c=>c.classList.remove('selected'));
   document.querySelectorAll('.func-chip.selected').forEach(c=>c.classList.remove('selected'));
@@ -1039,17 +1044,17 @@ document.addEventListener('click', function(e) {
 </script>
 <script src="/mt-javascript/mt-auth-client.js"></script>
 <script>
-/* Guest: block form, show signup prompt */
+/* Guest: block form, show signup banner */
 document.addEventListener('mt:userGuest', function() {
   const gb = document.getElementById('guestBlocker');
-  const fc = document.getElementById('formContainer');
+  const fc = document.getElementById('formContent');
   if (gb) gb.classList.add('show');
   if (fc) fc.style.display = 'none';
 });
 /* Sync inline admin nav with MTAuth */
 document.addEventListener('mt:userReady', function(e) {
   const gb = document.getElementById('guestBlocker');
-  const fc = document.getElementById('formContainer');
+  const fc = document.getElementById('formContent');
   if (gb) gb.classList.remove('show');
   if (fc) fc.style.display = '';
   if (document.getElementById('adminNavItem')) {
